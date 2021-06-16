@@ -1,0 +1,453 @@
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148357635-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-148357635-1');
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <title>Записки питониста - База знаний</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/base.css">
+
+    
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/knowledge-base.css">
+
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-static-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://aleksey925.github.io/knowledge-base/index.html">Записки питониста</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                
+    <li><a href="https://aleksey925.github.io/knowledge-base/index.html">Главная</a></li>
+    <li class="active"><a href="https://aleksey925.github.io/knowledge-base/knowledge_base/index.html">База знаний</a></li>
+
+            </ul>
+        </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+</nav><!-- /.navbar -->
+
+<div class="container">
+
+    
+    <div class="row row-content">
+
+        <div class="col-xs-12 col-sm-12">
+            <h1>Golang</h1>
+<h1>Оглавление</h1>
+<ol>
+<li>
+<p><h3><a href="#Настройка-системы">Настройка системы</a></h3></p>
+<ul>
+<li><a href="#Установка/удаление">Установка/удаление</a></li>
+<li><a href="#Настройка-окружения">Настройка окружения</a></li>
+<li><a href="#Управление-зависимостями">Управление зависимостями</a></li>
+</ul>
+</li>
+<li>
+<p><h3><a href="#Основы">Основы</a></h3></p>
+<ul>
+<li><a href="#Общие-понятия">Общие понятия</a></li>
+<li><a href="#Автоматическое-определение-размера-массива">Автоматическое определение размера массива</a></li>
+<li><a href="#Кросс-компиляция">Кросс компиляция</a></li>
+<li><a href="#Создание-shared-library">Создание shared library</a></li>
+</ul>
+</li>
+<li>
+<p><h3><a href="#Сборщик-мусора">Сборщик мусора</a></h3></p>
+<ul>
+<li><a href="#Реализация-GC">Реализация GC</a></li>
+<li><a href="#Логирование-данных-о-потребляемой-памяти">Логирование данных о потребляемой памяти</a></li>
+</ul>
+</li>
+<li>
+<p><h3><a href="#Реализация-интересных-заданий">Реализация интересных заданий</a></h3></p>
+<ul>
+<li><a href="#Подсчет-сколько-раз-какой-символ-встретился-в-строке">Подсчет сколько раз какой символ встретился в строке</a></li>
+</ul>
+</li>
+</ol>
+<p><a name='Настройка-системы'></a></p>
+<h2>Настройка системы</h2>
+<p><a name='Установка/удаление'></a></p>
+<h3>Установка/удаление</h3>
+<p><strong>Установка</strong></p>
+<p>Самый лучший способ установить последнюю версию компилятора на linux это 
+использовать менеджер версий GVM. Перед установкой GVM надо установить 
+зависимости:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code>sudo apt-get install curl git mercurial make binutils bison gcc
+</code></pre></div>
+
+<p>Теперь можно установить сам GVM:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code>bash &lt; &lt;<span style="color: #666666">(</span>curl -s https://raw.github.com/moovweb/gvm/master/binscripts/gvm-installer<span style="color: #666666">)</span>
+</code></pre></div>
+
+<p>После того как менеджер версий установлен, необходимо перезапустить консоль 
+и можно приступать к установке go. Для этого необходимо выполнить следующие
+команды:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code>gvm install go1.7.1
+gvm use go1.7.1 —default
+</code></pre></div>
+
+<p>Для того, чтобы проверить, что установка прошла успешно, необходимо выполнить:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code>go version
+</code></pre></div>
+
+<p>Если команда выполняется без ошибок, то значит установка прошла без проблем.</p>
+<p><strong>Удаление</strong></p>
+<p>Для удаления GVM и установленных версий Go нужно просто выполнить</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code>rm -rf ~/.gvm
+</code></pre></div>
+
+<p><a name='Настройка-окружения'></a></p>
+<h3>Настройка окружения</h3>
+<p>Для того, чтобы приступить к разработке необходимо сначала настроить окружение.
+Разработка на go предпогает, что у вас есть 1 папка, в которой располагаются 
+все проекты. Структура данной папки следующая:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code>Golang
+├── bin
+├── pkg
+└── src
+</code></pre></div>
+
+<p>Теперь нужно создать переменные окружения и описать их в файле .bash_profile</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code>export GOPATH=~/Golang
+export GOBIN=${GOPATH}/bin
+export PATH=${PATH}:${GOPATH}/:${GOBIN}
+</code></pre></div>
+
+<p><strong>Описание переменных окружения</strong></p>
+<ul>
+<li>
+<p>GOROOT - указывает на папку где лежат исходные коды go, стандартная 
+    библиотека и т д. Это, что-то вроде JAVA_HOME. Задавать эту переменную 
+    нужно только в случае, если устанавливаете go из исходников.</p>
+<p>Раньше (до версии 1.0) эта переменная была нужна — её использовали скрипты 
+сборки, равно как и GOARCH и GOOS. Но после Go 1.0 немного изменилась 
+внутренняя логика работы go tool и сейчас значение GOROOT хардкодится на 
+этапе сборки или инсталляции. Тоесть, go — дефолтно проинсталлированный — 
+знает это значение и так. Его можно посмотреть с помощью команды:
+<code>go env GOROOT</code> </p>
+</li>
+<li>
+<p>GOPATH - указывает на папку, которая служит «рабочим пространством», то есть 
+    там располагаются исходники всех проектов, скомпилированные версии 
+    проектов и т д</p>
+<p>Переменная должна задаваться обязательно!</p>
+</li>
+<li>
+<p>GOBIN - указывает на папку в которую складываются скомпилированные бинарники.</p>
+</li>
+</ul>
+<p><a name='Управление-зависимостями'></a></p>
+<h3>Управление зависимостями</h3>
+<p>Полезные ссылки:</p>
+<ul>
+<li><a href="https://blog.gelin.ru/2019/08/gomod.html">О Go modules - тут блог</a></li>
+<li><a href="https://habr.com/ru/post/421411/">Введение в систему модулей Go - habr</a></li>
+<li><a href="https://eax.me/go-mod/">Некоторые тонкости управления зависимостями в Go - eax.me</a></li>
+<li><a href="https://habr.com/ru/company/oleg-bunin/blog/467697/">Правда ли, что GOPATH и GOROOT больше не нужны? - habr</a></li>
+<li><a href="https://habr.com/ru/post/442272/">Go += управление версиями пакетов - habr</a></li>
+</ul>
+<p><a name='Основы'></a></p>
+<h2>Основы</h2>
+<p><a name='Общие-понятия'></a></p>
+<h3>Общие понятия</h3>
+<p>Файлы с кодом go, имеют расширение go.
+Программа на go состоят из пакетов. Пакет можно разбить на любое количество 
+файлов, и если все они будут иметь одинаковое объявление пакета, с точки
+зрения языка Go все они будут являться частями одного и того же пакета, как 
+если бы все их содержимое находилось в единственном файле.</p>
+<p>Каждая программа должна иметь пакет main c функцией main, которая является 
+точкой входа в программу. Так же пакет main может ещё иметь функцию init, 
+которая выполняется перед функцией main.</p>
+<p>Запуск</p>
+<ul>
+<li><code>go run hello.go</code> — запускает программу на go;</li>
+<li><code>go install</code> — компилирует файлы из текущего рабочего каталога и кладёт в 
+папку bin. Для корректного выполнения команды нужно установить переменную 
+окружения GOBIN;</li>
+<li><code>go build</code> — делает тоже самое, что и предыдущая команда, но собранный файл 
+помещается в текущую директорию.</li>
+</ul>
+<p><a name='Автоматическое-определение-размера-массива'></a></p>
+<h3>Автоматическое определение размера массива</h3>
+<p>Обычно при объявлении или создании массива нужно объявлять его длину.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code><span style="color: #007020; font-weight: bold">var</span> array1 [<span style="color: #40a070">5</span>]<span style="color: #902000">int</span>  <span style="color: #60a0b0; font-style: italic">// Объявление массива длиной 5</span>
+array2 <span style="color: #666666">:=</span> [<span style="color: #40a070">2</span>]<span style="color: #902000">int</span>{<span style="color: #40a070">1</span>, <span style="color: #40a070">2</span>}  <span style="color: #60a0b0; font-style: italic">// Объявление и инициализация массива длиной 2</span>
+</code></pre></div>
+
+<p>Но если при объявлении массива мы его сразу инициализируем, то можно не 
+указывать точную длину, а просто написать три точки. В этом случае компилятор 
+сам вычислит длину массива исходя из количества заносимых элементов.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code><span style="color: #007020; font-weight: bold">func</span> main() {
+    array <span style="color: #666666">:=</span> [<span style="color: #666666">...</span>]<span style="color: #902000">int</span>{<span style="color: #40a070">1</span>, <span style="color: #40a070">2</span>, <span style="color: #40a070">3</span>, <span style="color: #40a070">4</span>} <span style="color: #60a0b0; font-style: italic">// Объявление и инициализация массива</span>
+    fmt.Println(<span style="color: #007020">cap</span>(array))
+}
+</code></pre></div>
+
+<p><a name='Кросс-компиляция'></a></p>
+<h3>Кросс-компиляция</h3>
+<p>Сначала нужно собрать toolchane для целевой платформы. Для этого переходим в 
+директорию с исходным кодом Go (она же $GOROOT/src, она же всегда есть у вас 
+на машине) и пересобираем под нужную платформу, скажем Windows/amd64:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code><span style="color: #007020">cd</span> <span style="color: #007020; font-weight: bold">$(</span>go env GOROOT<span style="color: #007020; font-weight: bold">)</span>/src
+sudo <span style="color: #bb60d5">GOOS</span><span style="color: #666666">=</span>windows <span style="color: #bb60d5">GOARCH</span><span style="color: #666666">=</span>amd64 <span style="color: #bb60d5">CGO_ENABLED</span><span style="color: #666666">=</span><span style="color: #40a070">0</span> ./make.bash —no-clean
+</code></pre></div>
+
+<p>Скрипт make.bash — это стандартный скрипт сборки Go, которым бы вы 
+инсталлировали Go, если бы ставили из исходников. Он собирает, собственно, 
+Go, и всю стандартную библиотеку, только в этот раз — для платформы 
+windows/amd64.</p>
+<p>Также, по упомянутой выше причине, мы отключили поддержку CGO.</p>
+<p><strong>Значения GOOS и GOARCH</strong></p>
+<table>
+<thead>
+<tr>
+<th>OS</th>
+<th>$GOOS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Linux</td>
+<td>linux</td>
+</tr>
+<tr>
+<td>MacOS X</td>
+<td>darwin</td>
+</tr>
+<tr>
+<td>Windows</td>
+<td>windows</td>
+</tr>
+<tr>
+<td>FreeBSD</td>
+<td>freebsd</td>
+</tr>
+<tr>
+<td>NetBSD</td>
+<td>netbsd</td>
+</tr>
+<tr>
+<td>OpenBSD</td>
+<td>openbsd</td>
+</tr>
+<tr>
+<td>DragonFly BSD</td>
+<td>dragonfly</td>
+</tr>
+<tr>
+<td>Plan 9</td>
+<td>plan9</td>
+</tr>
+<tr>
+<td>Native Client</td>
+<td>nacl</td>
+</tr>
+<tr>
+<td>Android</td>
+<td>android</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Architecture</th>
+<th>$GOARCH</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x386</td>
+<td>386</td>
+</tr>
+<tr>
+<td>AMD64</td>
+<td>amd64</td>
+</tr>
+<tr>
+<td>AMD64 с 32 разр. указ.</td>
+<td>amd64p32</td>
+</tr>
+<tr>
+<td>ARM</td>
+<td>arm</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Сборка проекта</strong></p>
+<p>Переходим в папку проекта и собираем его командой:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code><span style="color: #bb60d5">GOOS</span><span style="color: #666666">=</span>windows <span style="color: #bb60d5">GOARCH</span><span style="color: #666666">=</span>amd64 go build ./test.go
+</code></pre></div>
+
+<p>При выполнении данной команды может возникнуть ошибка</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code>ERROR: Cannot find /Users/alex/go1.4/bin/go.
+Set $GOROOT_BOOTSTRAP to a working Go tree &gt;= Go 1.4.
+</code></pre></div>
+
+<p>Решить ее заданием переменной окружения GOROOT_BOOTSTRAP может не получиться. 
+В этом случае можно создать в папке /Users/alex/ символьную ссылку на папку 
+GOROOT. Для того, чтобы это исправить надо выполнить в консоли:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code>ln -s <span style="color: #007020; font-weight: bold">$(</span>go env GOROOT<span style="color: #007020; font-weight: bold">)</span> ~/go1.4
+</code></pre></div>
+
+<p>После этого все должно успешно собраться.</p>
+<p>Заметка основана на <a href="https://habrahabr.ru/post/249449/">статье</a>.</p>
+<p><a name='Создание-shared-library'></a></p>
+<h3>Создание shared library</h3>
+<p>Начиная с go 1.5.1 можно на go создавать библиотеки, для других языках 
+программирования.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code><span style="color: #007020; font-weight: bold">package</span> main
+
+<span style="color: #007020; font-weight: bold">import</span> <span style="color: #4070a0">&quot;C&quot;</span>
+
+<span style="color: #60a0b0; font-style: italic">//export add</span>
+<span style="color: #007020; font-weight: bold">func</span> add(left, right <span style="color: #902000">int</span>) <span style="color: #902000">int</span> {
+   <span style="color: #007020; font-weight: bold">return</span> left <span style="color: #666666">+</span> right
+}
+
+<span style="color: #007020; font-weight: bold">func</span> main() {}
+</code></pre></div>
+
+<p>Перед функциями, которые можно импортировать нужно объявлять комментарий
+<code>export &lt;имя функции&gt;</code>.</p>
+<p>Компиляция должна выполняться с помощью команды:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code>go build -buildmode<span style="color: #666666">=</span>c-shared -o ./out.so .inp.go
+</code></pre></div>
+
+<p>После этого скомпилированную библиотеку можно использовать в python следующим 
+образом:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code><span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">ctypes</span> <span style="color: #007020; font-weight: bold">import</span> cdll
+
+lib <span style="color: #666666">=</span> cdll<span style="color: #666666">.</span>LoadLibrary(<span style="color: #4070a0">&#39;./out.so&#39;</span>)
+result <span style="color: #666666">=</span> lib<span style="color: #666666">.</span>add(<span style="color: #40a070">2</span>, <span style="color: #40a070">3</span>)
+<span style="color: #007020">print</span>(result)
+</code></pre></div>
+
+<p>Полезные ссылки:</p>
+<ul>
+<li><a href="https://github.com/golang/go/wiki/cgo">cgo - github</a></li>
+<li><a href="https://stackoverflow.com/questions/24640817/python-ctypes-definition-for-c-struct">Python ctypes definition for c struct - stackoverflow</a></li>
+<li><a href="https://blog.heroku.com/see_python_see_python_go_go_python_go">See Python, See Python Go, Go Python Go - heroku</a></li>
+<li><a href="https://github.com/jbuberel/buildmodeshared/tree/master/gofrompython">Go from Python - github</a></li>
+<li><a href="https://blog.filippo.io/building-python-modules-with-go-1-5/">BUILDING PYTHON MODULES WITH GO 1.5 - blog.filippo</a></li>
+<li><a href="https://www.darkcoding.net/software/building-shared-libraries-in-go-part-1/">Building shared libraries in Go: Part 1</a></li>
+<li><a href="http://snowsyn.net/2016/09/11/creating-shared-libraries-in-go/">Creating shared libraries in Go</a></li>
+<li><a href="https://stackoverflow.com/questions/14883853/ctypes-return-a-string-from-c-function">ctypes return a string from c function</a></li>
+<li><a href="https://habr.com/ru/company/mailru/blog/324250/">Вызов функций Go из других языков</a></li>
+</ul>
+<p><a name='Сборщик-мусора'></a></p>
+<h2>Сборщик мусора</h2>
+<p><a name='Реализация-GC'></a></p>
+<h3>Реализация GC</h3>
+<ul>
+<li><a href="https://www.youtube.com/watch?time_continue=2&amp;v=CX4GSErFenI">Как устроен garbage collector в Go 1.9 - Андрей Дроздов, Avito</a></li>
+<li><a href="https://habr.com/ru/company/ruvds/blog/442648/">Механизмы выделения памяти в Go - habr</a></li>
+</ul>
+<p><a name='Логирование-данных-о-потребляемой-памяти'></a></p>
+<h3>Логирование данных о потребляемой памяти</h3>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code><span style="color: #007020; font-weight: bold">import</span> (
+    <span style="color: #4070a0">&quot;runtime&quot;</span>
+    <span style="color: #4070a0">&quot;time&quot;</span>
+)
+
+<span style="color: #666666">...</span>
+
+<span style="color: #007020; font-weight: bold">go</span> <span style="color: #007020; font-weight: bold">func</span>() {
+    <span style="color: #007020; font-weight: bold">for</span> {
+        <span style="color: #007020; font-weight: bold">var</span> m runtime.MemStats
+        runtime.ReadMemStats(<span style="color: #666666">&amp;</span>m)
+        log.Printf(<span style="color: #4070a0">&quot;\nAlloc = %v\nTotalAlloc = %v\nSys = %v\nNumGC = %v\n\n&quot;</span>, m.Alloc <span style="color: #666666">/</span> <span style="color: #40a070">1024</span>, m.TotalAlloc <span style="color: #666666">/</span> <span style="color: #40a070">1024</span>, m.Sys <span style="color: #666666">/</span> <span style="color: #40a070">1024</span>, m.NumGC)
+        time.Sleep(<span style="color: #40a070">5</span> <span style="color: #666666">*</span> time.Second)
+    }
+}()
+</code></pre></div>
+
+<p><a name='Реализация-интересных-заданий'></a></p>
+<h2>Реализация интересных заданий</h2>
+<p><a name='Подсчет-сколько-раз-какой-символ-встретился-в-строке'></a></p>
+<h3>Подсчет сколько раз какой символ встретился в строке</h3>
+<p>Создаем массив байтов, размером 256 (размер ascii таблицы), он будет 
+использоваться для подсчета. Индекс массива будет представлять собой код 
+символа, а значение в массиве указывать, сколько раз каждый из символов 
+встретится при переборе строки.</p>
+<blockquote>
+<p>Данное задание можно реализовать с использованием словарей, но вариант 
+описанный в данной заметке будет работать значительно быстрее.</p>
+</blockquote>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code><span style="color: #007020; font-weight: bold">package</span> main
+
+<span style="color: #007020; font-weight: bold">import</span> (
+   <span style="color: #4070a0">&quot;fmt&quot;</span>
+)
+
+<span style="color: #007020; font-weight: bold">func</span> main() {
+   counter <span style="color: #666666">:=</span> <span style="color: #007020">make</span>([]<span style="color: #902000">int</span>, <span style="color: #40a070">256</span>)
+   str <span style="color: #666666">:=</span> <span style="color: #4070a0">&quot;hello&quot;</span>
+   <span style="color: #007020; font-weight: bold">for</span> _, char <span style="color: #666666">:=</span> <span style="color: #007020; font-weight: bold">range</span> str {
+      counter[char]<span style="color: #666666">++</span>
+   }
+   <span style="color: #007020; font-weight: bold">for</span> char, count <span style="color: #666666">:=</span> <span style="color: #007020; font-weight: bold">range</span> counter {
+      <span style="color: #007020; font-weight: bold">if</span> count &gt; <span style="color: #40a070">0</span> {
+         fmt.Println(<span style="color: #007020">string</span>(char), <span style="color: #4070a0">&quot;: &quot;</span>, count)
+      }
+   }
+}
+</code></pre></div>
+        </div><!--/.col-xs-12.col-sm-9-->
+
+    </div><!--/row-->
+
+
+    <hr>
+
+    <footer>
+        <p>
+            При копировании информации с данного сайта пожалуйста указывайте
+            ссылку на источник. © 2019 Записки питониста
+        </p>
+    </footer>
+
+</div><!--/.container-->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148357635-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-148357635-1');
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <title>Записки питониста - База знаний</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/base.css">
+
+    
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/knowledge-base.css">
+
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-static-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://aleksey925.github.io/knowledge-base/index.html">Записки питониста</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                
+    <li><a href="https://aleksey925.github.io/knowledge-base/index.html">Главная</a></li>
+    <li class="active"><a href="https://aleksey925.github.io/knowledge-base/knowledge_base/index.html">База знаний</a></li>
+
+            </ul>
+        </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+</nav><!-- /.navbar -->
+
+<div class="container">
+
+    
+    <div class="row row-content">
+
+        <div class="col-xs-12 col-sm-12">
+            <h1>Настройка VPN сервера IKEv2 StrongSwan</h1>
+<p>В данном мануале будет рассказано как настроить свой собственный VPN сервер.
+Все описываемые ниже действия производились на самом дешевом виртуальном 
+сервре digitalocean с Debian.</p>
+<p>Для того, чтобы иметь возможность быстро поднимать новые инстансы VPN сервера
+был написан скрипт, который производит настройку чистого виртуального сервера.</p>
+<p>Использование данного скрипта выглядит следующим образом:</p>
+<ol>
+<li>
+<p>Необходимо скачать скрипты
+    <a href="scripts/setup_vpn_server.sh">setup_vpn_server.sh</a>, 
+    <a href="scripts/mobileconfig.sh">mobileconfig.sh</a>, 
+    <a href="scripts/strongswan.sh">strongswan.sh</a>.</p>
+<p>Описание скриптов:</p>
+<ul>
+<li>setup_vpn_server.sh - гланый скрипт, который выполняет настройку сервера;</li>
+<li>mobileconfig.sh - генерирует профиль для настройки VPN подключения на 
+  apple устройствах;</li>
+<li>strongswan.sh - генерирует профиль для настройки VPN подключения в
+  программе StrongSwan на android устройствах.</li>
+</ul>
+</li>
+<li>
+<p>После того, как в личном кабинете digitalocean вы создали новый droplets с 
+    Debian и авторизацией по ssh ключу, необходимо на него скопировать скачанные 
+    скрипты. Сделать это можно следующей командой:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code>scp ~/setup_vpn_server.sh ~/mobileconfig.sh ~/strongswan.sh root@&lt;SERVER_IP&gt;:/root
+</code></pre></div>
+
+<p>Команда подразумевает, что вы скачали скрипты в корень вашей домашней 
+дирректории.</p>
+</li>
+<li>
+<p>Теперь можно подключиться по ssh в серверу и запустить его настройку.
+    Подключение выполняется командой:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code>ssh root@&lt;SERVER_IP&gt;
+</code></pre></div>
+
+<p>После подключения, необходимо открыть скрипт <code>setup_vpn_server.sh</code> и 
+прописать в переменных <code>NEW_USER</code>, <code>PROFILE_NAME</code>, <code>SSH_PORT</code> нужные вам 
+значения.</p>
+<p>P.S Так же можно просмотреть скрипты <code>mobileconfig.sh</code>, <code>strongswan.sh</code>, в
+них тоже есть параметры, которые вы можете захотеть изменить.</p>
+<p>После того как изменения были внесены, можно запустить скрипт 
+<code>setup_vpn_server.sh</code>:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code>chmod +x ./setup_vpn_server.sh <span style="color: #666666">&amp;&amp;</span> ./setup_vpn_server.sh
+</code></pre></div>
+
+<p>При выполнении скрипта несколько раз будет запрошен пользовательский ввод, 
+этого не нужно бояться.
+Сначала будет запрошен пароль для нового пользователя, а после, при 
+установке пакета <code>iptables-persistent</code> будет запрошено, сохранить ли текущие
+правила IPv4 и IPv6. Можно смело отвечать "Нет", так как у нас новая 
+система и сохранять нечего.</p>
+<p>После успешного завершения работы скрипта необходимо перезагрузить сервер</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code>reboot
+</code></pre></div>
+
+</li>
+</ol>
+<p>На этом настройка серверной части закочена. Стоит заметить, что после 
+пезагрузки подключаться к серверу старым способом (под пользователем root) не
+получится. Необходимо использовать немного модифицированную команду:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code>ssh -p &lt;SSH_PORT&gt; &lt;NEW_USER&gt;@&lt;SERVER_IP&gt;
+</code></pre></div>
+
+<p>Вместо значений записанных в <code>&lt;&gt;</code> необходимо использовать данные, которые
+вы указали при модификации скрипта <code>setup_vpn_server.sh</code>.</p>
+<p><strong>Настройка подключения к VPN</strong></p>
+<p>Для того, чтобы настроить подключение к только, что поднятому VPN серверу 
+необходимо скопировать себе на компьютер файлы <code>apple.mobileconfig</code> и
+<code>android.sswan</code> (это VPN профили, которые позволят в несколько кликов 
+подключиться к VPN).</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code>scp -P &lt;SSH_PORT&gt; &lt;NEW_USER&gt;@&lt;SERVER_IP&gt;:/home/&lt;NEW_USER&gt;/apple.mobileconfig ~/
+scp -P &lt;SSH_PORT&gt; &lt;NEW_USER&gt;@&lt;SERVER_IP&gt;:/home/&lt;NEW_USER&gt;/android.sswan ~/
+</code></pre></div>
+
+<p><strong>apple</strong></p>
+<p>Для подключения к VPN на устройствах apple, необходимо просто импортировать
+на устройстве профиль <code>apple.mobileconfig</code>, подключение к vpn поднимится 
+автоматически (устройства от apple из коробки поддерживают ipsec ikev2 VPN, по 
+этому ничего отдельно устанавливать не нужно).</p>
+<p><strong>android</strong></p>
+<p>Для подключения к VPN на android устройствах, необходимо установить 
+приложение <a href="https://play.google.com/store/apps/details?id=org.strongswan.android&amp;hl=ru">strongSwan VPN Client</a>
+и импортировать в него профиль <code>android.sswan</code>. Во время импорта профиля будет
+производиться установка пользоватеского сертификата и потребуется ввести пароль 
+для его расшифровки. Данный пароль записан в переменной <code>PKCS12PASSWORD</code>, 
+которая находится в скрипте <code>strongswan.sh</code>.</p>
+<p>Данный мануал основан на <a href="https://vc.ru/dev/66942-sozdaem-svoy-vpn-server-poshagovaya-instrukciya">статье</a>.</p>
+<p>DNS для блокировки рекламы:</p>
+<ul>
+<li><a href="https://adguard.com/ru/blog/adguard-dns-announcement.html">AdGuard DNS</a></li>
+</ul>
+<p>Полезные ссылки описывающие настройку vpn:</p>
+<ul>
+<li><a href="https://www.8host.com/blog/ustanovka-vpn-servera-ikev2-strongswan-v-ubuntu-18-04/">УСТАНОВКА VPN-СЕРВЕРА IKEV2 STRONGSWAN В UBUNTU 18.04</a></li>
+<li><a href="https://habr.com/ru/post/177453/">Обзор IPSEC демона StrongSwan</a></li>
+<li><a href="https://itsecforu.ru/2019/02/14/%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-ipsec-vpn-%D1%81-%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5%D0%BC-strongswan-%D0%B2-ubuntu-18-04/">Настройка IPSEC VPN с использованием StrongSwan в Ubuntu 18.04</a></li>
+<li><a href="https://krasovsky.me/it/2016/08/strongswan-ikev2/">Настройка чистого IPsec посредством strongSwan с максимальной совместимостью</a></li>
+<li><a href="https://habr.com/ru/post/250859/">VPN везде и всюду: IPsec без L2TP со strongSwan</a></li>
+<li><a href="https://eboyko.ru/blog/posts/strongswan-ipsec-vpn-late-2017">Собственный Strongswan IPsec VPN на базе Ubuntu 16.04 LTS</a></li>
+<li><a href="https://wiki.strongswan.org/projects/strongswan/wiki/AndroidVPNClientProfiles">VPN Profile Import for the Android VPN Client</a></li>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-an-ikev2-vpn-server-with-strongswan-on-ubuntu-16-04">How to Set Up an IKEv2 VPN Server with StrongSwan on Ubuntu 16.04</a></li>
+</ul>
+<p>Полезные ссылки описывающие настройку dns:</p>
+<ul>
+<li><a href="https://b4d.sablun.org/blog/2018-10-02-ad-blocking-for-vpn-clients-with-unbound/">Ad Blocking for VPN Clients With Unbound</a></li>
+<li><a href="https://superuser.com/questions/1362846/using-local-unbound-dns-server-for-strongswan-vpn-connections">Using local unbound DNS server for Strongswan VPN connections</a></li>
+<li><a href="https://daniiiil112.ru/archives/323">Блокировка рекламы с помощью UNBOUND в Debian GNU/Linux</a></li>
+<li><a href="https://android.rezvanov.pro/2019/08/07/android-bez-reklamy-ispolzuem-vpn-i-unbound-chtoby-ubrat-reklamu-iz-prilozhenij/">Android без рекламы. Используем VPN и Unbound, чтобы убрать рекламу из приложений</a></li>
+<li><a href="https://marvins.ru/administrirovanie/keshiruyushhij-dns-server.html">Устанавливаем и настраиваем unbound на FreeBSD 11.2</a></li>
+<li><a href="https://marvins.ru/administrirovanie/unbound-i-reklama.html">Блокировка рекламы в локальной сети с помощью Unbound</a></li>
+<li><a href="https://www.howtoforge.com/installing-using-unbound-nameserver-on-debian-etch">Installing And Using The Unbound Name Server On Debian Etch</a></li>
+<li><a href="https://calomel.org/unbound_dns.html">Unbound DNS Tutorial</a></li>
+</ul>
+<p>Полезные ссылки:</p>
+<ul>
+<li><a href="https://ru.stackoverflow.com/questions/241252/%D0%A7%D1%82%D0%BE-%D1%82%D0%B0%D0%BA%D0%BE%D0%B5-24-16-%D0%B2-ip-%D0%B0%D0%B4%D1%80%D0%B5%D1%81%D0%B0%D1%85">Что такое /24 /16 в ip-адресах?</a></li>
+<li><a href="https://superuser.com/questions/1089092/how-to-add-a-second-local-loop-back-address">How to add a second local loop_back address?</a></li>
+<li><a href="https://www.bentasker.co.uk/documentation/linux/255-creating-a-virtual-network-interface-in-debian">Creating a Virtual Network Interface in Debian</a></li>
+<li><a href="http://rus-linux.net/MyLDP/lvs/virt_net.html">Создание и настройка виртуальных сетевых интерфейсов в Linux</a></li>
+</ul>
+        </div><!--/.col-xs-12.col-sm-9-->
+
+    </div><!--/row-->
+
+
+    <hr>
+
+    <footer>
+        <p>
+            При копировании информации с данного сайта пожалуйста указывайте
+            ссылку на источник. © 2019 Записки питониста
+        </p>
+    </footer>
+
+</div><!--/.container-->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</body>
+</html>

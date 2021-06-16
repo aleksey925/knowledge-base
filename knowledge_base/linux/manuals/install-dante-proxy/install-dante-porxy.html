@@ -1,0 +1,177 @@
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148357635-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-148357635-1');
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <title>Записки питониста - База знаний</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/base.css">
+
+    
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/knowledge-base.css">
+
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-static-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://aleksey925.github.io/knowledge-base/index.html">Записки питониста</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                
+    <li><a href="https://aleksey925.github.io/knowledge-base/index.html">Главная</a></li>
+    <li class="active"><a href="https://aleksey925.github.io/knowledge-base/knowledge_base/index.html">База знаний</a></li>
+
+            </ul>
+        </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+</nav><!-- /.navbar -->
+
+<div class="container">
+
+    
+    <div class="row row-content">
+
+        <div class="col-xs-12 col-sm-12">
+            <h1>Установка dante proxy</h1>
+<p>В данном мануале будет рассказано как настроить свой собственный socks proxy 
+сервер. Все описываемые ниже действия производились на самом дешевом 
+виртуальном сервре digitalocean с Debian.</p>
+<p>Для того, чтобы иметь возможность быстро поднимать новые инстансы proxy сервера
+был написан скрипт, который производит настройку чистого виртуального сервера.</p>
+<p>Использование данного скрипта выглядит следующим образом:</p>
+<ol>
+<li>
+<p>Необходимо скачать скрипт
+    <a href="scripts/install_dante.sh">install_dante.sh</a>, </p>
+</li>
+<li>
+<p>После того, как в личном кабинете digitalocean вы создали новый droplets с 
+    Debian и авторизацией по ssh ключу, необходимо на него скопировать скачанный 
+    скрипт. Сделать это можно следующей командой:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code>scp ~/install_dante.sh root@&lt;SERVER_IP&gt;:~/
+</code></pre></div>
+
+<p>Команда подразумевает, что вы скачали скрипты в корень вашей домашней 
+дирректории.</p>
+</li>
+<li>
+<p>Теперь можно подключиться по ssh в серверу и запустить его настройку.
+    Подключение выполняется командой:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code>ssh root@&lt;SERVER_IP&gt;
+</code></pre></div>
+
+<p>После подключения, необходимо открыть скрипт <code>install_dante.sh</code> и 
+прописать в переменных <code>NEW_USER</code>, <code>IS_CLEAN_INSTALL</code>, <code>USE_IPTABLES</code>, 
+<code>SSH_PORT</code>, <code>DANTE_PORT</code> нужные вам значения.</p>
+<p>После того как изменения были внесены, можно запустить скрипт 
+<code>install_dante.sh</code>:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code>chmod +x ./install_dante.sh <span style="color: #666666">&amp;&amp;</span> ./install_dante.sh
+</code></pre></div>
+
+<p>При выполнении скрипта несколько раз будет запрошен пользовательский ввод, 
+этого не нужно бояться.
+Сначала будет запрошен пароль для нового пользователя, а после, при 
+установке пакета <code>iptables-persistent</code> будет запрошено, сохранить ли текущие
+правила IPv4 и IPv6. Можно смело отвечать "Нет", так как у нас новая 
+система и сохранять нечего.</p>
+<p>Если скрипт запускался с опцией <code>IS_CLEAN_INSTALL=true</code>, то после успешного
+завершения его работы необходимо перезагрузить сервер</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code>reboot
+</code></pre></div>
+
+</li>
+</ol>
+<p>На этом настройка серверной части закочена. Стоит заметить, что после 
+пезагрузки подключаться к серверу старым способом (под пользователем root) не
+получится. Необходимо использовать немного модифицированную команду:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code>ssh -p &lt;SSH_PORT&gt; &lt;NEW_USER&gt;@&lt;SERVER_IP&gt;
+</code></pre></div>
+
+<p>Вместо значений записанных в <code>&lt;&gt;</code> необходимо использовать данные, которые
+вы указали при модификации скрипта <code>install_dante.sh</code>.</p>
+<p><strong>Настройка подключения к proxy</strong></p>
+<p>Для управления подключением к proxy рекомендую установить в браузере расширение
+<a href="https://chrome.google.com/webstore/detail/proxy-switchyomega/padekgcemlokbadohgkifijomclgjgif">Proxy SwitchyOmega</a>.</p>
+<p><strong>Решение проблем</strong></p>
+<p>После включения proxy некоторые сайты могут перестать корректно работать. 
+Для того, чтобы исправить это необходимо добавить эти сайты в <code>Bypass List</code>. Ниже 
+представлены сервисы и списки адресов, которые необходимо добавить в Bypass List
+для корректной работы этих сервисов.</p>
+<p>Kinopoisk HD</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code>api.ott.kinopoisk.ru
+*.ott.yandex.net
+widevine-proxy.ott.yandex.ru
+kinopoisk.ru
+</code></pre></div>
+
+<p>fanserial</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code>*.toplay.biz
+toplay.biz
+</code></pre></div>
+
+<p>Полезные ссылки описывающие установку dante:</p>
+<ul>
+<li><a href="https://blog.xenot.ru/ustanovka-i-nastrojka-dante-socks5-proxy-servera-na-ubuntu-18-04-lts-godnaya-instruktsiya-po-obhodu-blokirovki-messendzhera-telegram-i-dr-sajtov-roskomnadzorom.fuck">Установка и настройка Dante SOCKS5 Proxy сервера на Ubuntu 18.04 LTS</a></li>
+<li><a href="https://community.hetzner.com/tutorials/install-and-configure-danted-proxy-socks5">Install and Configure Dante Socks5 Proxy on Debian/Ubuntu</a></li>
+<li><a href="https://www.inet.no/dante/doc/1.4.x/config/server.html">Minimal server configuration</a></li>
+<li><a href="https://weril.me/installation_and_using_dante_as_socks5_proxy_on_ubuntu_16/">Установка и использование Dante в качестве сервера Socks5 на Ubuntu 16</a></li>
+<li><a href="http://blogovo.net/administrirovanie/linux/4889-proxy_telegram.html">Поднимаем proxy для Telegram</a></li>
+<li><a href="https://habr.com/ru/company/aladdinrd/blog/353738/">Безопасный SOCKS5 прокси для Telegram за 1 Евро и 10 минут</a></li>
+<li><a href="https://medium.com/@deaf.btc/%D0%BA%D0%B0%D0%BA-%D0%BF%D0%BE%D0%B4%D0%BD%D1%8F%D1%82%D1%8C-%D1%81%D0%B2%D0%BE%D0%B9-%D1%81%D0%BE%D0%B1%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9-%D0%BF%D1%80%D0%BE%D0%BA%D1%81%D0%B8-%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80-89dd04cc91bb">Как поднять свой собственный прокси сервер</a></li>
+</ul>
+        </div><!--/.col-xs-12.col-sm-9-->
+
+    </div><!--/row-->
+
+
+    <hr>
+
+    <footer>
+        <p>
+            При копировании информации с данного сайта пожалуйста указывайте
+            ссылку на источник. © 2019 Записки питониста
+        </p>
+    </footer>
+
+</div><!--/.container-->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</body>
+</html>

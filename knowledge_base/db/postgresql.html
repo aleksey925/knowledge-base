@@ -1,0 +1,206 @@
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148357635-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-148357635-1');
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <title>Записки питониста - База знаний</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/base.css">
+
+    
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/knowledge-base.css">
+
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-static-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://aleksey925.github.io/knowledge-base/index.html">Записки питониста</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                
+    <li><a href="https://aleksey925.github.io/knowledge-base/index.html">Главная</a></li>
+    <li class="active"><a href="https://aleksey925.github.io/knowledge-base/knowledge_base/index.html">База знаний</a></li>
+
+            </ul>
+        </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+</nav><!-- /.navbar -->
+
+<div class="container">
+
+    
+    <div class="row row-content">
+
+        <div class="col-xs-12 col-sm-12">
+            <h1>PostgreSQL</h1>
+<h1>Оглавление</h1>
+<ul>
+<li><a href="#Установка-настройка">Установка/настройка</a><ul>
+<li><a href="#Установка-на-MacOS">Установка на MacOS</a></li>
+<li><a href="#Установка-утилит">Установка утилит</a></li>
+<li><a href="#Конфигурирование">Конфигурирование</a></li>
+<li><a href="#Импортирование-дампа-БД">Импортирование дампа БД</a></li>
+</ul>
+</li>
+<li><a href="#Туториалы">Туториалы</a></li>
+<li><a href="#Оптимизация-запросов">Оптимизация запросов</a></li>
+<li><a href="#Примеры-решения-задач">Примеры решения задач</a><ul>
+<li><a href="#Запрет-на-созадние-записей-пересекающихся-по-времени">Запрет на созадние записей пересекающихся по времени</a></li>
+</ul>
+</li>
+</ul>
+<p><a name='Установка-настройка'></a></p>
+<h2>Установка/настройка</h2>
+<p><a name='Установка-на-MacOS'></a></p>
+<h3>Установка на MacOS</h3>
+<p>Для того, чтобы установить postgres на macos можно воспользоваться 
+<a href="https://postgresapp.com">PostgresApp</a>. </p>
+<p>Данный дистрибутив представляет из себя стандартное Mac приложение. 
+Всвязи с этим установка не вызовает ни каких проблем + в комплекте<br />
+посталяется простой и удобный графический интейфейс для управления данной СУБД.</p>
+<p><a name='Установка-утилит'></a></p>
+<h3>Установка утилит</h3>
+<p>При установке дистрибутива postgres устанавливается не только сама СУБД, но 
+еще и разные вспомогательные утилиты. Иногда бывает так, что сама СУБД, не 
+нужна, а нужны только утилиты для работы с ней. В этом случае можно 
+воспользоваться специальными пакетами, которые установят только утилиты.</p>
+<p><strong>MacOS</strong></p>
+<p>В MacOS установить утилиты для работы с postgres можно при помощи brew</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code>brew install libpq
+</code></pre></div>
+
+<p>После установки пакета найти установленные утилиты можно в 
+<code>/usr/local/Cellar/libpq/&lt;версия-пакета&gt;/bin/</code>.</p>
+<p><a name='Конфигурирование'></a></p>
+<h3>Конфигурирование</h3>
+<p>http://pgconfigurator.cybertec.at/ - онлайн конфигуратор postgres</p>
+<p><a name='Импортирование-дампа-БД'></a></p>
+<h3>Импортирование дампа БД</h3>
+<p>Данная иструкция проверялась обкатывалась под ubuntu, будет она
+работать на других платформах или нет, не известно.</p>
+<p>Для того, чтобы импортировать дамп базы данных, необходимо:</p>
+<ol>
+<li>
+<p>Подключиться к СУБД через оболочку</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code>sudo -u postgres psql
+</code></pre></div>
+
+</li>
+<li>
+<p>Создать базу данных, пользователя и дать новому пользователю права на 
+   созданную БД</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code><span style="color: #007020; font-weight: bold">CREATE</span> <span style="color: #007020; font-weight: bold">DATABASE</span> <span style="color: #666666">&lt;</span>db_name<span style="color: #666666">&gt;</span>;
+<span style="color: #007020; font-weight: bold">CREATE</span> <span style="color: #007020; font-weight: bold">USER</span> <span style="color: #666666">&lt;</span>user_name<span style="color: #666666">&gt;</span> <span style="color: #007020; font-weight: bold">WITH</span> password <span style="color: #4070a0">&#39;&lt;you_password&gt;&#39;</span>;
+<span style="color: #007020; font-weight: bold">GRANT</span> <span style="color: #007020; font-weight: bold">ALL</span> <span style="color: #007020; font-weight: bold">ON</span> <span style="color: #007020; font-weight: bold">DATABASE</span> <span style="color: #666666">&lt;</span>db_name<span style="color: #666666">&gt;</span> <span style="color: #007020; font-weight: bold">TO</span> <span style="color: #666666">&lt;</span>user_name<span style="color: #666666">&gt;</span>;
+</code></pre></div>
+
+</li>
+<li>
+<p>Теперь можно выйти из оболочки, для этого введите команду <code>\q</code>. Оказавшись 
+   в терминале необходимо выполнить команду:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code>psql -h localhost -d &lt;db_name&gt; -U &lt;user_name&gt; -W -f &lt;/path/to/db_dump.sql&gt;
+</code></pre></div>
+
+<p>db_name и user_name это значения введеные Вами на предыдущем этапе.</p>
+</li>
+</ol>
+<p><a name='Туториалы'></a></p>
+<h2>Туториалы</h2>
+<ul>
+<li>https://metanit.com/sql/postgresql/1.1.php - простой и хорошо 
+структуризированный манул для начинающих. Есть описание установки сервера,
+примеры различных запросов и т д</li>
+</ul>
+<p><a name='Оптимизация-запросов'></a></p>
+<h3>Оптимизация запросов</h3>
+<ul>
+<li><a href="https://m.habr.com/ru/post/203320/">Оптимизация запросов. Основы EXPLAIN в PostgreSQL</a></li>
+<li><a href="https://m.habr.com/ru/post/203386/">Оптимизация запросов. Основы EXPLAIN в PostgreSQL (часть 2)</a></li>
+<li><a href="https://m.habr.com/ru/post/203484/">Оптимизация запросов. Основы EXPLAIN в PostgreSQL (часть 3</a></li>
+</ul>
+<p><a name='Примеры-решения-задач'></a></p>
+<h3>Примеры решения задач</h3>
+<p><a name='Запрет-на-созадние-записей-пересекающихся-по-времени'></a></p>
+<h4>Запрет на созадние записей пересекающихся по времени</h4>
+<p>Данный пример показывает как можно реализовать блокировку на одновременное 
+редактирование одного и тоже поста несколькими пользователями с проверкой на 
+стороне БД. </p>
+<p>Благодаря ограничению tstzrange_constraint в таблице нельзя создать
+несколько записей у которых post_id равен и значения timestamp_start_block и
+timestamp_end_block пересекаются.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code><span style="color: #007020; font-weight: bold">CREATE</span> <span style="color: #007020; font-weight: bold">TABLE</span> post (
+    id <span style="color: #007020">SERIAL</span> <span style="color: #007020; font-weight: bold">PRIMARY</span> <span style="color: #007020; font-weight: bold">KEY</span>,
+    name <span style="color: #007020">varchar</span>(<span style="color: #40a070">20</span>)
+);
+
+<span style="color: #007020; font-weight: bold">CREATE</span> <span style="color: #007020; font-weight: bold">TABLE</span> post_edit_block (
+    id <span style="color: #007020">SERIAL</span> <span style="color: #007020; font-weight: bold">PRIMARY</span> <span style="color: #007020; font-weight: bold">KEY</span>,
+    post_id <span style="color: #007020">INT</span> <span style="color: #007020; font-weight: bold">REFERENCES</span> post (id),
+    timestamp_start_block <span style="color: #007020; font-weight: bold">TIMESTAMP</span> <span style="color: #007020; font-weight: bold">WITH</span> <span style="color: #007020; font-weight: bold">TIME</span> <span style="color: #007020; font-weight: bold">ZONE</span>,
+    timestamp_end_block <span style="color: #007020; font-weight: bold">TIMESTAMP</span> <span style="color: #007020; font-weight: bold">WITH</span> <span style="color: #007020; font-weight: bold">TIME</span> <span style="color: #007020; font-weight: bold">ZONE</span>
+);
+
+<span style="color: #007020; font-weight: bold">CREATE</span> EXTENSION btree_gist;
+<span style="color: #007020; font-weight: bold">ALTER</span> <span style="color: #007020; font-weight: bold">TABLE</span> post_edit_block
+    <span style="color: #007020; font-weight: bold">ADD</span> <span style="color: #007020; font-weight: bold">CONSTRAINT</span> tstzrange_constraint
+        EXCLUDE <span style="color: #007020; font-weight: bold">USING</span> gist (
+            post_id <span style="color: #007020; font-weight: bold">WITH</span> <span style="color: #666666">=</span>,
+            tstzrange(timestamp_start_block, timestamp_end_block, <span style="color: #4070a0">&#39;[]&#39;</span>) <span style="color: #007020; font-weight: bold">WITH</span> <span style="color: #666666">&amp;&amp;</span>
+        );
+</code></pre></div>
+        </div><!--/.col-xs-12.col-sm-9-->
+
+    </div><!--/row-->
+
+
+    <hr>
+
+    <footer>
+        <p>
+            При копировании информации с данного сайта пожалуйста указывайте
+            ссылку на источник. © 2019 Записки питониста
+        </p>
+    </footer>
+
+</div><!--/.container-->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</body>
+</html>
