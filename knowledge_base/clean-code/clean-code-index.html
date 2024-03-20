@@ -1,0 +1,349 @@
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148357635-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-148357635-1');
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <title>Записки питониста - База знаний</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/base.css">
+
+    
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/knowledge-base.css">
+
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-static-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://aleksey925.github.io/knowledge-base/index.html">Записки питониста</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                
+    <li><a href="https://aleksey925.github.io/knowledge-base/index.html">Главная</a></li>
+    <li class="active"><a href="https://aleksey925.github.io/knowledge-base/knowledge_base/index.html">База знаний</a></li>
+
+            </ul>
+        </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+</nav><!-- /.navbar -->
+
+<div class="container">
+
+    
+    <div class="row row-content">
+
+        <div class="col-xs-12 col-sm-12">
+            <h1>Чистый код</h1>
+<h1>Оглавление</h1>
+<ol>
+<li>
+<p><h3><a href="#Принципы">Принципы проектирования</a></h3></p>
+<ul>
+<li><a href="#SOLID">SOLID</a></li>
+</ul>
+</li>
+<li>
+<p><h3><a href="#Работа-с-кодом">Работа с кодом</a></h3></p>
+<ul>
+<li><a href="#Версионирование-(библиотек,-программ-и-т-д)">Версионирование (библиотек, программ и т д)</a></li>
+<li><a href="#Логирование">Логирование</a></li>
+</ul>
+</li>
+</ol>
+<p><a name='Принципы'></a></p>
+<h2>Принципы</h2>
+<p><a name='SOLID'></a></p>
+<h3>SOLID</h3>
+<p>SOLID (сокр. от англ. single responsibility, open-closed, Liskov substitution, 
+interface segregation и dependency inversion) — мнемонический акроним, пяти 
+принципов объектно-ориентированного программирования и проектирования.</p>
+<ol>
+<li>
+<p><strong>Single Responsibility Principle</strong> (Принцип персональной ответственности) - 
+    должна существовать лишь одна причина, приводящая к изменению класса.</p>
+<p>То есть каждый класс должен отвечать только за одну конкретную вещь (он не 
+должен быть швейцарским ножом, он должен быть обычным ножом умеющим только 
+резать).</p>
+<p>Применяется если:</p>
+<ul>
+<li>код нужно сделать гибким и легко изменяемым</li>
+<li>заранее сложно определить какие изменения в проекте будут делаться в 
+  дальнейшем</li>
+<li>декомпозировать задачу с самого начала проще, чем потом разделять на 
+  несколько частей одну большую систему, по этому лучше с самого начала 
+  уделять внимание декомпозиции.</li>
+</ul>
+<p>Не стоит применять, когда:</p>
+<ul>
+<li>заранее известно о неизменяемости кода в конкретном месте</li>
+<li>решение сильно усложняет разработку и поддержку кода</li>
+<li>архитектурные решения, которые предопределяют реализацию, несмотря на 
+  каноны и принципы</li>
+</ul>
+</li>
+<li>
+<p><strong>The Open Closed Principle</strong> (Принцип открытости/закрытости) - программные 
+    сущности должны быть открыты для расширения, но закрыты для модификации.</p>
+<p>Цель принципа:</p>
+<ul>
+<li>разработчик всегда пишет новый код, а не переписывает старый</li>
+<li>тестирование кода происходит единожды</li>
+<li>практически не нужно тратить время на частый рефакторинг</li>
+</ul>
+<p>При добавлении новой логики мы не должны переписывать старый код (на 
+пример класс), мы должны его только расширять, на пример при помощи 
+наследования.</p>
+<p>Пример</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>// Проблемный код
+class Order {
+
+    func getTotalPrice() {
+        // получает все товары из корзины
+        // получает скидки пользователя
+        // расчитывает итоговую цену
+    }
+}
+</code></pre></div>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>// Правильное решение
+abstract class BaseOrderAlgoritm {
+    func getTotalPrice() {
+        products = this.getProducts()
+        discount = this.getDiscount()
+        return calculate(products, discount);
+    }
+
+    func calculate(products, discount) {
+        // Расчитывает итоговую цену 
+    }
+
+    abstract func getProducts() {}
+
+    abstract func getDiscount() {}
+}
+
+class SomeOrderStraegy extends BaseOrderAlgoritm {
+    func getProducts() {
+        // Получает все товары из корзины
+    }
+
+    func getDiscount() {
+        // Вычисляет скидки для конкретного пользователя
+    } 
+}
+</code></pre></div>
+<p>Как видно из примера для того, чтобы изменить логику подсчета стоимости 
+товара, не нужно переписывать старый код, нужно всего лишь наследоваться от
+базового класса и переопределять необходимые методы.</p>
+<p>Также, чтобы решить проблему описанную выше, можно применить принцип
+инверсии зависимостей.</p>
+<p>Следует использовать:</p>
+<ul>
+<li>в местах часто подвергаемых изменениям</li>
+<li>если в коде используются условия, то это служит сигналом к тому, что 
+  вероятнее всего в этих местах стоит использовать данный принцип</li>
+<li>невозможно придумать универсальную абстракцию</li>
+</ul>
+</li>
+<li>
+<p><strong>The Liskov Substitution Principle</strong> (Принцип подстановки Барбары Лисков) - 
+    наследующий класс должен дополнять, а не изменять базовый класс.</p>
+<p>Цель принципа - помогает реализовать правильное наследование классов.</p>
+<p>Данный принцип говорит о том, что не всегда можно наследоваться от 
+какого-то класса.</p>
+<p>Пример описывающий проблему:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>// Описывает 2d доску
+class Board {
+    integer x, y, tile
+
+    func getTile(x, y) {}
+
+    func addUnit(x, y) {}
+
+    func removeUnits(x, y) {}
+
+    func getUnits(x, y) {}
+}
+
+// Описывает 3d доску
+class Board3D extends Board {
+    integer z, tile3d
+
+    func getTile3d(x, y, z) {}
+
+    func addUnit3d(x, y, z) {}
+
+    func removeUnits3d(x, y, z) {}
+
+    func getUnits3d(x, y, z) {}
+}
+</code></pre></div>
+<p>Проблема данного кода в том, что наследующий класс не заменяет классы 
+родителя, а дополняет и в итоге полученный класс имеет конфликтующие друг с 
+другом методы. Это может привести к не правильному использованию класса и
+как следствие к ошибкам.</p>
+<p>Решается проблема просто. Нужно разделить классы и сделать их независимыми.</p>
+</li>
+<li>
+<p><strong>The Interface Segregation Principle</strong> (Принцип разделения интерфейса) - 
+    клиенты не должны попадать в зависимость от методов, которыми они не 
+    пользуются.</p>
+<p>Другая формулировка выглядит следующим образом: 
+Много интерфейсов, специально предназначенных для клиентов, лучше, чем один 
+интерфейс общего назначения.</p>
+<p>Цели принципа:</p>
+<ul>
+<li>принцип борется с "толстыми" интерфейсами</li>
+<li>по сути это принцип персональной ответственности, но для интерфейсов</li>
+<li>интерфейс должен быть абстрактным (иметь универсальное имя и ни кому не
+  принадлежать)</li>
+</ul>
+</li>
+<li>
+<p><strong>The Dependency Inversion Principle</strong> (Принцип инверсии зависимостей) - модули
+    высокого уровня не должны зависеть от модулей низкого уровня. Оба типа 
+    модулей должны зависеть от абстракций. Абстракции не должны зависеть от
+    подробностей. Подробностям следует зависеть абстракций.</p>
+<p>Пример</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>// Правильное решение проблемы
+class Order {
+    func Order(IProduct product, IDiscount discount) {
+        this.product = product
+        this.discount = discount
+    }
+
+    func getTotalPrice() {
+        products = this.product.getProducts()
+        discount = this.discount.getDiscount()
+
+        return calculate(products, discount)
+    }
+
+    func calculate(products, discount) {
+        // расчитывает итоговую цену
+    }
+}
+</code></pre></div>
+<p>Данный код хороший и гибкий, потому что product и discount создаются не в 
+самом классе, а где-то вне. Следовательно, если нам нужно будет поменять 
+логику работы программы, не нужно трогать реализацию класса Order.</p>
+</li>
+</ol>
+<blockquote>
+<p>Данная заметка основана <a href="https://www.youtube.com/watch?v=59tq5Fcgn7A">на видеоуроке</a>.</p>
+</blockquote>
+<p>Полезные ссылки:</p>
+<ul>
+<li><a href="https://github.com/heykarimoff/solid.python">SOLID Principles explained in Python with examples</a></li>
+<li><a href="https://m.habr.com/company/ruvds/blog/426413/">Принципы SOLID, о которых должен знать каждый разработчик | habr</a></li>
+<li><a href="https://www.youtube.com/watch?v=8Eo6bf-bPes">Александр Бармин - Практическое применение принципов SOLID</a></li>
+</ul>
+<p><a name='Работа-с-кодом'></a></p>
+<h2>Работа с кодом</h2>
+<p><a name='Версионирование-(библиотек,-программ-и-т-д)'></a></p>
+<h3>Версионирование (библиотек, программ и т д)</h3>
+<p>Учитывая номер версии МАЖОРНАЯ.МИНОРНАЯ.ПАТЧ, следует увеличивать:</p>
+<ul>
+<li>МАЖОРНУЮ версию, когда сделаны обратно несовместимые изменения API.</li>
+<li>МИНОРНУЮ версию, когда вы добавляете новую функциональность, не нарушая 
+  обратной совместимости.</li>
+<li>ПАТЧ-версию, когда вы делаете обратно совместимые исправления.</li>
+</ul>
+<p>Дополнительные обозначения для предрелизных и билд-метаданных возможны как 
+дополнения к МАЖОРНАЯ.МИНОРНАЯ.ПАТЧ формату.</p>
+<p>Начинать разработку нужно с версии 0.1.0.</p>
+<p><a href="https://semver.org/lang/ru/">Семантическое Версионирование 2.0.0</a> - перейдя по
+данной ссылке можно прочитать подробное описание того как необходимо работать 
+с версиями.</p>
+<p><a name='Логирование'></a></p>
+<h3>Логирование</h3>
+<p>Логи это мощный инструмент, который при правильном использовании позволяет 
+расследовать происшествия, а так же получать различные метрики. В данной 
+заметке будут описаны рекомендации, которые позволят получить максимум пользы 
+от собранных логов.</p>
+<p><strong>Выбор уровня логирования</strong></p>
+<p>Python предоставляет следующие уровни: debug, info, warning, error, critical.
+Ниже будут описаны рекомендации по использованию каждого из уровней. Если 
+следовать им, то при помощи логов можно будет легко понять в каком состоянии 
+находится система и есть ли в ней серьезные проблемы.</p>
+<ul>
+<li>
+<p>CRITICAL - Если такое случилось, то вполне можно разбудить кого-нибудь 
+  ночью, чтобы устранить проблему. Возможна потеря, порча данных, к примеру.</p>
+</li>
+<li>
+<p>ERROR - Нечто критичное для ОПЕРАЦИИ, но не для системы в целом. Такие ошибки
+  требуют привлечения специалиста, т.к. должны решаться в ручном режиме. </p>
+</li>
+</ul>
+<p>Пример: при мерже возникает неизвестное нам исключение, операция фейлится, 
+  повтор мержа не имеет смысла, решить можно только в ручном режиме.</p>
+<ul>
+<li>WARNING - Проблема для которой есть автоматическое решение. Например 
+  автоматическая повторная попытка запроса.</li>
+</ul>
+<p>Пример: протухла одна из прокси необходимых для работы системы, но проблему
+  может решить повторный запрос или автоматическая смена прокси. Ручных 
+  действий не требуется.</p>
+<ul>
+<li>INFO - Полезно для понимания происходящего в системе, не требует 
+  вмешательства.</li>
+</ul>
+<p>Пример: в систему пришёл запрос обновлении информации в бд. Очень полезно 
+  залогировать этот момент, чтобы понимать, что происходит в системе и из-за чего, 
+  но никакой проблемы в этом нет, решать нечего.</p>
+
+        </div><!--/.col-xs-12.col-sm-9-->
+
+    </div><!--/row-->
+
+
+    <hr>
+
+    <footer>
+        <p>
+            При копировании информации с данного сайта пожалуйста указывайте
+            ссылку на источник. © 2019 Записки питониста
+        </p>
+    </footer>
+
+</div><!--/.container-->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,757 @@
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148357635-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-148357635-1');
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <title>Записки питониста - База знаний</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/base.css">
+
+    
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/knowledge-base.css">
+
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-static-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://aleksey925.github.io/knowledge-base/index.html">Записки питониста</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                
+    <li><a href="https://aleksey925.github.io/knowledge-base/index.html">Главная</a></li>
+    <li class="active"><a href="https://aleksey925.github.io/knowledge-base/knowledge_base/index.html">База знаний</a></li>
+
+            </ul>
+        </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+</nav><!-- /.navbar -->
+
+<div class="container">
+
+    
+    <div class="row row-content">
+
+        <div class="col-xs-12 col-sm-12">
+            <h1>Заметки о Docker</h1>
+<h1>Оглавление</h1>
+<ol>
+<li>
+<p><h3><a href="#Введение">Введение</a></h3></p>
+<ul>
+<li><a href="#Установка">Установка</a></li>
+<li><a href="#Общие-сведения">Общие сведения</a></li>
+<li><a href="#Полезные-команды">Полезные команды</a></li>
+<li><a href="#Пользователь-в-Docker">Пользователь в Docker</a></li>
+<li><a href="#Оптимизация-размера-образа">Оптимизация размера образа</a></li>
+<li><a href="#Подключение-к-сервису-запущенному-на-host-машине-вне-docker">Подключение к сервису запущенному на host машине вне docker</a></li>
+</ul>
+</li>
+<li>
+<p><h3><a href="#Внутренние-устройство">Внутренние устройство</a></h3></p>
+<ul>
+<li><a href="#Обзор-контейнеризации-(что-это,-чем-отличается-от-виртуализации,-уровень-безопасности)">Обзор контейнеризации (что это, чем отличается от виртуализации, уровень безопасности)</a></li>
+<li><a href="#Устройство-докер-образов">Устройство докер образов</a></li>
+</ul>
+</li>
+<li>
+<p><h3><a href="#Примеры-использования-docker">Примеры использования docker</a></h3></p>
+<ul>
+<li><a href="#Запуск-PostgreSQL">Запуск PostgreSQL</a></li>
+<li><a href="#Запуск-RabbitMQ">Запуск RabbitMQ</a></li>
+<li><a href="#Запуск-простого-web-приложения-в-docker">Запуск простого web-приложения в docker</a></li>
+</ul>
+</li>
+<li>
+<p><h3><a href="#docker-compose">docker-compose</a></h3></p>
+<ul>
+<li><a href="#Применение-DRY-к-docker-compose.yml">Применение DRY к docker-compose.yml</a></li>
+<li><a href="#Работа-с-секретами">Работа с секретами</a></li>
+<li><a href="#Смена-пользователя">Смена пользователя</a></li>
+</ul>
+</li>
+</ol>
+<p><a name='Введение'></a></p>
+<h2>Введение</h2>
+<p><a name='Установка'></a></p>
+<h3>Установка</h3>
+<p><strong>Mac OS</strong></p>
+<p>Для того, чтобы установить docker на mac os, необходимо:</p>
+<ul>
+<li>иметь установленный brew <a href="../macos/macos-notes-index.html#Установка-brew">инструкция по установке</a></li>
+<li>добавить в brew реппозиторий cask 
+  <div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>brew tap caskroom/cask
+</code></pre></div></li>
+<li>при помощи brew установить docker
+  <div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>brew cask install docker
+</code></pre></div></li>
+<li>отключить SIP (System Integrity Protection). Если это не сделать есть 
+  большая вероятность получить проблемы. Точно известно, что если не отключить
+  SIP то при определенных обстоятельствах будет возникать ошибка <code>Cannot start 
+  service db: b'Mounts denied: EOF'</code>.
+  Инструкцию по отключению sip можно прочитать <a href="../macos/macos-notes-index.html#Отключение-SIP">тут</a>.</li>
+</ul>
+<p><strong>Ubuntu</strong></p>
+<ul>
+<li>
+<p>устанавливаем пакеты позволяющие apt работать по https</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>sudo apt update
+sudo apt install apt-transport-https ca-certificates curl software-properties-common
+</code></pre></div>
+</li>
+<li>
+<p>добавляем оф. репозиторий docker</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository &quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu &lt;UBUNTU_CODENAME&gt; stable&quot;
+sudo apt update
+</code></pre></div>
+</li>
+<li>
+<p>устанавливаем docker</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>sudo apt install docker-ce
+</code></pre></div>
+</li>
+<li>
+<p>разрешаем запуск docker под текущим пользователем без sudo</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>sudo usermod -aG docker ${USER}
+</code></pre></div>
+</li>
+<li>
+<p>для применения изменений выполняем</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>su - ${USER}
+</code></pre></div>
+</li>
+</ul>
+<p>Полезные ссылки:</p>
+<ul>
+<li><a href="https://www.digitalocean.com/community/tutorials/docker-ubuntu-18-04-1-ru">Как установить и использовать Docker в Ubuntu 18.04</a></li>
+</ul>
+<p><a name='Общие-сведения'></a></p>
+<h3>Общие сведения</h3>
+<ul>
+<li><a href="https://habr.com/ru/post/253877/">Понимая Docker | habr</a> - общая теория</li>
+<li><a href="https://habr.com/ru/post/337306/">Основы Docker за Х часов и Y дней | habr</a> - 
+хорошо описана теория с простыми примерами</li>
+<li><a href="https://docs.docker.com/compose/django/">Quickstart: Compose and Django</a> -
+простой и наглядный пример развертывания django и postgresql при помощи 
+docker compose</li>
+</ul>
+<p><a name='Полезные-команды'></a></p>
+<h3>Полезные команды</h3>
+<p><strong>Удаление контейнеров/образов</strong></p>
+<ul>
+<li><code>docker rm -vf $(docker ps -a -q)</code> - удаляет все контейнеры</li>
+<li><code>docker rmi -f $(docker images -a -q)</code> - удаляет все образы</li>
+<li><code>docker system prune</code> - удаляет все images, containers, networks (при 
+    использовании ключа --volumes будут удалены еще и volumes), которые не 
+    связаны с контейнерами. Если добавить ключ <code>-a</code>, то команда удалит еще и все 
+    остановленные контейнеры вместе с их ресурсами.</li>
+<li><code>docker volume prune</code> - удаляет все volume</li>
+<li><code>docker-compose down -v</code> - останавливает containers и удаляет containers, 
+  networks, volumes, и images</li>
+</ul>
+<p><strong>Запуск</strong></p>
+<ul>
+<li><code>docker run -i -t app /bin/bash</code> - создает контейнер на основе образа <code>app</code> и 
+    запускает там <code>bash</code></li>
+<li><code>docker exec -i -t af398085b30c /bin/bash</code> - выполняет подключение к 
+    запущенному контейнеру и запускает там <code>bash</code>, чтобы можно было выполнять 
+    команды внутри конйтера</li>
+</ul>
+<p><strong>Перезапуск работающего контейнера с пересборкой</strong></p>
+<ul>
+<li><code>docker-compose up -d --no-deps --build app</code> - пересобирает образ сервиса 
+    <code>app</code>, создает новый контейнер на основе нового образа, останавливает 
+    старый контейнер, запускает новый контейнер, удаляет старый контейнер 
+    (полезна при выкатывании обновлений)</li>
+<li><code>docker-compose up --build -d</code> - пересобирает все сервисы (полезна при 
+    выкатывании обновлений)</li>
+</ul>
+<p><strong>Логи</strong></p>
+<ul>
+<li><code>docker logs --tail 100 &lt;id&gt;</code> - выводит 100 строк логов контейнера <code>&lt;id&gt;</code></li>
+</ul>
+<p><strong>Остановка контейнеров</strong></p>
+<ul>
+<li><code>docker stop $(docker ps -a -q)</code> - остановка всех контейнеров</li>
+</ul>
+<p><a name='Пользователь-в-Docker'></a></p>
+<h3>Пользователь в Docker</h3>
+<p>Все процессы в контейнере будут работать из-под пользователя root, если 
+специальным образом его не указать. Это кажется очень удобно, ведь у этого 
+пользователя нет никаких ограничений. Именно поэтому работать под рутом 
+неправильно с точки зрения безопасности. Если на локальном компьютере никто 
+в здравом уме не работает с рутовыми правами, то многие запускают процессы 
+под рутом в контейнерах.</p>
+<p>Всегда есть баги, которые позволят зловреду выбраться из контейнера и попасть 
+на хостовый компьютер. Предполагая худшее, мы должны обеспечить запуск 
+процессов внутри контейнера от пользователя, который не имеет никаких прав 
+на хостовой машине.</p>
+<p>Есть несколько способов решить эту проблему:</p>
+<ol>
+<li>Создать пользователя при создании docker образа и переключиться на него</li>
+<li>При создании образа прописать от имени какого пользователя должен осуществляться 
+запуск  и т д.</li>
+</ol>
+<p>Ниже будет описано как это сделать на уровне создания docker образа.</p>
+<p>Для того, чтобы создать пользователя в дистрибутиве alpine необходимо выполнить:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>RUN addgroup app_user &amp;&amp; adduser -G app_user -s /bin/ash -D app_user
+</code></pre></div>
+<p>В debian подобных дистрибутивах это можно сделать так:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>RUN groupadd app_user &amp;&amp; \
+    useradd --gid app_user --shell /bin/bash --create-home app_user
+</code></pre></div>
+<p>После этого, чтобы сменить текущего пользователя необходимо прописать в 
+Dockerfile 
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>USER app_user
+</code></pre></div></p>
+<p>После этого, все запускаемые процессы будут выпоняться от имени <code>app_user</code>.</p>
+<p><strong>Проблемы</strong></p>
+<p>Некоторые серверы приложений требуют для своего запуска root прав. В этом 
+случае нужно будет не только просто создать нового пользователя, но и настроить
+sudo так, чтобы от root можно было запустить только 1 конкретную программу. </p>
+<p>Сделать это можно при помощи редактирования файла <code>/etc/sudoers</code>, который 
+хранит настройки используемые командой sudo. Например, если мы хотим позволить 
+нашему пользователю <code>app_user</code> запускать от имени root web-сервер nginx-unit, 
+то необходимо в файле <code>/etc/sudoers</code> разместить:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>app_user ALL=(root) NOPASSWD: /usr/sbin/unitd
+</code></pre></div>
+<p>Такая конфигурация позволит пользователю <code>app_user</code> запускать unitd с любыми 
+аргументами, если это не позволительно, то можете в настройках ограничить еще
+аргументы с которыми может запускаться приложение. Делается это так:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>app_user ALL=(root) NOPASSWD: /usr/sbin/unitd --no-daemon --control unix:/var/run/control.unit.sock
+</code></pre></div>
+<p>Кроме этого, иногда еще может пригодиться тег <code>SETENV</code>, который позволяет 
+передать пользователю root все переменные окружения доступные пользователю 
+<code>app_user</code>. Такое поведение полезно в том случае, если запускаемое приложение 
+считывает настройки из переменных окружения.</p>
+<p>В этом случае в <code>/etc/sudoers</code> нужно разместит следующую строку:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>app_user ALL=(root) NOPASSWD:SETENV: /usr/sbin/unitd
+</code></pre></div>
+<p>И при использовании sudo указывать ключ <code>-E</code>.</p>
+<p>При работе с дистрибутивом alpine после внесения изменений в <code>/etc/sudoers</code> 
+может возникать ошибка <code>sudo: setrlimit(RLIMIT_CORE): Operation not permitted</code>,
+исправить ее можно добавив <code>Set disable_coredump false</code> в <code>/etc/sudo.conf</code>.</p>
+<p>Использованные материалы:</p>
+<ul>
+<li><a href="https://habr.com/ru/post/448480/">Пользователь в Docker</a></li>
+<li><a href="https://ask.fedoraproject.org/t/sudo-setrlimit-rlimit-core-operation-not-permitted/4223">Sudo: setrlimit(RLIMIT_CORE): Operation not permitted - ask fedora</a></li>
+<li><a href="https://superuser.com/questions/636283/how-to-allow-user-to-preserve-environment-with-sudo">How to allow user to preserve environment with sudo? - superuser</a></li>
+<li><a href="https://www.8host.com/blog/redaktirovanie-fajla-sudoers-v-ubuntu-i-centos/">Редактирование файла sudoers в Ubuntu и CentOS - 8host</a></li>
+<li><a href="http://www.michurin.net/tools/sudo.html">Настройка sudo под Linux - michurin.net</a></li>
+<li><a href="http://blog.sedicomm.com/2018/03/21/poleznye-nastrojki-sudoers-dlya-sudo-v-linux/">Полезные настройки Sudoers для ‘sudo’ в Linux - blog.sedicomm</a></li>
+</ul>
+<p><a name='Оптимизация-размера-образа'></a></p>
+<h3>Оптимизация размера образа</h3>
+<p>Презентация с рассказом как можно уменьшить размер образа за счет того, что в 
+конечном образе не будет dev зависимостей <a href="https://youtu.be/2fU0SN4UBY0">Александр Кошелев, Яндекс «Сборка Docker образов без build зависимостей»</a>, <a href="https://cloud.mail.ru/public/4CyV/39hXkytCv">Копия</a></p>
+<p><a name='Подключение-к-сервису-запущенному-на-host-машине-вне-docker'></a></p>
+<h3>Подключение к сервису запущенному на host машине вне docker</h3>
+<p>При разработке иногда возникает необходимость подключиться к сервису запущенному
+на host машине вне docker. Например, к базе данных, которая запущена на host.
+Сделать это можно при помощи специального DNS имени <code>host.docker.internal</code>, которое
+резолвится в ip адрес host машины.</p>
+<blockquote>
+<p>Эта функциональность предназначена только для целей разработки и не будет работать вне 
+окружения Docker Desktop.</p>
+</blockquote>
+<p>Полезные ссылки:</p>
+<ul>
+<li><a href="https://docs.docker.com/desktop/networking/#i-want-to-connect-from-a-container-to-a-service-on-the-host">Explore networking features | Docker Documentation</a></li>
+</ul>
+<p><a name='Внутренние-устройство'></a></p>
+<h2>Внутренние устройство</h2>
+<p><a name='Обзор-контейнеризации-(что-это,-чем-отличается-от-виртуализации,-уровень-безопасности)'></a></p>
+<h3>Обзор контейнеризации (что это, чем отличается от виртуализации, уровень безопасности)</h3>
+<p><strong>Что такое контейнеры</strong></p>
+<p>Контейнеры — это современный способ упаковки, совместного использования и 
+развертывания приложения. В отличие от монолитного приложения, в котором все 
+функции упакованы в одну программу, контейнерные приложения или микросервисы 
+предназначены для целенаправленного узкого использования и специализируются 
+только на одной задаче.</p>
+<p>Контейнер включает в себя все зависимости (например, пакеты, библиотеки и 
+двоичные файлы), которые необходимы приложению для выполнения своей конкретной 
+задачи. В результате, контейнеризованные приложения не зависят от платформы и 
+могут работать в любой операционной системе независимо от ее версии или 
+установленных пакетов. Это удобство избавляет разработчиков от огромного куска 
+работы по адаптации разных версий программного обеспечения для разных платформ 
+или клиентов. Хотя концептуально это не совсем точно, многим людям нравится 
+думать о контейнерах как об «облегченных виртуальных машинах». </p>
+<p>Когда контейнер развертывается на хосте, ресурсы каждого контейнера, такие как
+его файловая система, процесс и сетевой стек, помещаются в фактически 
+изолированную среду, к которой другие контейнеры не могут получить доступ. Эта 
+архитектура позволяет одновременно запускать сотни и тысячи контейнеров в одном
+кластере, а каждое приложение (или микросервис) можно потом легко 
+масштабировать путем репликации бо́льшего количества экземпляров.</p>
+<p><strong>Как работает контейниризация</strong></p>
+<p>Контейнеризация основана на двух ключевых «строительных блоках»:
+пространстве имен Linux и контрольных группах Linux (cgroups). </p>
+<p>Пространство имен создает практически изолированное пользовательское 
+пространство и предоставляет приложению выделенные системные ресурсы, такие 
+как файловая система, сетевой стек, идентификатор процесса и идентификатор 
+пользователя. В этом изолированном пользовательском пространстве приложение 
+контролирует корневой каталог файловой системы и может запускаться от имени 
+root. Это абстрактное пространство позволяет каждому приложению работать 
+независимо, не мешая при этом жить другим приложениям на том же хосте. Сейчас 
+доступно шесть пространств имен: mount, inter-process communication (ipc), 
+UNIX time-sharing system (uts), process id (pid), network и user. Этот список 
+предлагается дополнить еще двумя дополнительными пространствами имен: time и 
+syslog, но сообщество Linux все еще не определилось с окончательными 
+спецификациями. </p>
+<p>Cgroups обеспечивают ограничение аппаратных ресурсов, расстановку приоритетов, 
+мониторинг и контроль приложения. В качестве примера аппаратных ресурсов, 
+которыми они могут управлять, можно назвать процессор, память, устройство и 
+сеть. При объединении пространства имен и cgroups, мы можем безопасно запускать
+несколько приложений на одном хосте, причем каждое приложение находится в 
+своей изолированной среде — что есть фундаментальное свойство контейнера.</p>
+<p><strong>Различия контейниризация и виртуализации</strong></p>
+<p>Основное же различие между виртуальной машиной (ВМ) и контейнером заключается 
+в том, что виртуальная машина — это виртуализация на аппаратном уровне, а 
+контейнер — виртуализация на уровне операционной системы. Гипервизор ВМ 
+эмулирует аппаратную среду для каждой машины, где уже среда выполнения 
+контейнера в свою очередь эмулирует операционную систему для каждого объекта. 
+Виртуальные машины совместно используют физическое оборудование хоста, а 
+контейнеры — как оборудование, так и ядро ​​ОС. Поскольку контейнеры в целом 
+разделяют с хостом большее количество ресурсов, их работа с хранилищем, 
+памятью и циклами ЦП намного эффективнее, чем у виртуальной машины. Однако 
+недостатком такого общего доступа является проблемы в плоскости информационной 
+безопасноти, так как между контейнерами и хостом устанавливается слишком 
+большое доверие.</p>
+<p><strong>Уровень изолированности контейнеров, на сколько они безопасны</strong></p>
+<p>В целом, изоляция виртуализированного оборудования создает гораздо более 
+прочный периметр безопасности, нежели просто изоляция именного пространства. 
+Риск того, что злоумышленник успешно покинет изолированный процесс, намного 
+выше, чем шанс успешного выхода за пределы виртуальной машины. Причиной более 
+высокого риска выхода за пределы ограниченной среды контейнеров является слабая
+изоляция, создаваемая пространством имен и cgroups. Linux реализует их, 
+связывая новые поля свойств с каждым процессом. Эти поля в файловой системе 
+<code>/proc</code> указывают операционной системе хоста, может ли один процесс видеть 
+другой, или сколько ресурсов процессора/памяти может использовать какой-то 
+конкретный процесс. При просмотре запущенных процессов и потоков из 
+родительской ОС (например, команды <code>top</code> или <code>ps</code>) контейнерный процесс выглядит 
+так же, как любой другой. Как правило, традиционные решения, такие как LXC или 
+Docker, не считаются полноценно изолированными, поскольку они используют одно 
+и то же ядро в рамках одного хоста. Поэтому, не удивительно, что у контейнеров 
+имеется достаточное количество уязвимостей. </p>
+<p>Например, CVE-2014-3519, CVE-2016-5195, CVE-2016-9962, CVE-2017-5123 и 
+CVE-2019-5736 могут привести получению злоумышленником доступа к данным за 
+пределами контейнера. </p>
+<p>Большинство эксплойтов ядра создают вектор для успешной атаки, поскольку 
+обычно они выливаются в повышение привилегий и позволяют скомпрометированному 
+процессу получить контроль за пределами своего предполагаемого именного 
+пространства. Помимо векторов атак в контексте уязвимостей программного 
+обеспечения, свою роль может сыграть и неправильная конфигурация. Например 
+развертывание образов с чрезмерными привилегиями (<code>CAP_SYS_ADMIN</code>, 
+привилегированный доступ) или критические точки монтирования 
+(<code>/var/run/docker.sock</code>), могут привести к утечке. Учитывая эти потенциально 
+катастрофические последствия, следует понимать риск, на который вы идете при 
+развертывании системы в мультиарендном пространстве или при использовании 
+контейнеров для хранения конфиденциальных данных.</p>
+<p>Полезные ссылки:</p>
+<ul>
+<li><a href="https://habr.com/ru/company/itsumma/blog/457760/">Как сделать контейнеры еще более изолированными: обзор контейнерных sandbox-технологий - habr</a> - описывает
+  что из себя преставляет контейнеризация, сраниват ее с виртуализацией и 
+  описывает как разные проекты пытаются создать по настоящему изолированный 
+  контейнер.</li>
+<li><a href="https://youtu.be/zvSgTBg_nac?t=1573">Демонстрация уязвимости CVE-2019-5736</a></li>
+<li><a href="https://youtu.be/hdVNKmru3LM">Дмитрий Столяров - Проникновение в Docker с примерами - Flant</a>, 
+  <a href="https://cloud.mail.ru/public/54kB/4wc2c6MMa">Копия</a> - на примерах простых 
+  кусков кода описывается, что из себя представляет docker</li>
+</ul>
+<p><a name='Устройство-докер-образов'></a></p>
+<h3>Устройство докер образов</h3>
+<p><a href="https://medium.com/@jessgreb01/digging-into-docker-layers-c22f948ed612">Digging into Docker layers</a></p>
+<p><a name='Примеры-использования-docker'></a></p>
+<h2>Примеры использования docker</h2>
+<p><a name='Запуск-PostgreSQL'></a></p>
+<h3>Запуск PostgreSQL</h3>
+<p><strong>Создание дирректории, которая будет хранить файлы PostgreSQL</strong></p>
+<p>Если мы хотим иметь возможность продолжить работу с созданными в контейнере 
+базами данных после перезапуска контейнера, то небходимо создать папку, которая 
+будет хранить все данные созданные postgres.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>mkdir -p <span style="color: #bb60d5">$HOME</span>/docker/volumes/postgres
+</code></pre></div>
+<p><strong>Запуск Postgres контейнера</strong></p>
+<p>Запустить контейнер postgres, так же просто как выполнить команду <code>docker run</code></p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>docker run -d <span style="color: #4070a0; font-weight: bold">\</span>
+           --rm <span style="color: #4070a0; font-weight: bold">\</span>
+           --name pg <span style="color: #4070a0; font-weight: bold">\</span>
+           -e <span style="color: #4070a0">&quot;POSTGRES_USER=alex&quot;</span> <span style="color: #4070a0; font-weight: bold">\</span>
+           -e <span style="color: #4070a0">&quot;POSTGRES_PASSWORD=123&quot;</span> <span style="color: #4070a0; font-weight: bold">\</span>
+           -e <span style="color: #4070a0">&quot;POSTGRES_DB=test&quot;</span> <span style="color: #4070a0; font-weight: bold">\</span>
+           -p <span style="color: #4070a0">&quot;5432:5432&quot;</span> <span style="color: #4070a0; font-weight: bold">\</span>
+           -v <span style="color: #bb60d5">$HOME</span>/docker/volumes/postgres:/var/lib/postgresql/data <span style="color: #4070a0; font-weight: bold">\</span>
+           postgres
+</code></pre></div>
+<p>В команде выше использовано достаточно много аргументов, давайте разберем их:</p>
+<ul>
+<li>
+<p>rm: Зставляет докер выполнять удаление контейнера и связанной с ним файловой
+системы при выходе. В общем, если есть необходимость запускать много 
+контейнеров, которые не должны жить долго, то считается хорошей практикой 
+передавать флаг rm команде <code>docker run</code> для автоматической очистки дискового 
+пространства.
+Стоить заметить, что мы всегда можем использовать ключ -v для сохрнения данных
+за пределами контейнера.</p>
+</li>
+<li>
+<p>name: Уникальное имя контейнера. Мы можем выбирать любые имена, главное они 
+не должны повторяться, потому что в системе не может быть 2 контейнера с 
+одинаковым именем. Для повтороного использования имени необходимо либо 
+передавать флаг rm команде docker run, либо явно удалить контейнер 
+<code>docker rm &lt;container name&gt;</code>.</p>
+</li>
+<li>
+<p>e: Объявляет переменную окружения в docker контейнере. POSTGRES_PASSWORD - 
+задает пароль суперпользователя для PostgreSQL. POSTGRES_USER - задает имя
+суперпользователя для PostgreSQL. POSTGRES_DB - задает имя базы данных, которая
+будет создана.</p>
+</li>
+<li>
+<p>d: Указывает, что контейнер должен быть запущен в detached mode (в фоновом 
+режиме).</p>
+</li>
+<li>
+<p>p: Привязывает порт 5432 с локальной машины, на порт 5432 в docker контейнере.
+Этот параметр позволяет приложениям, работающим вне контейнера, подключаться к 
+серверу postgres, работающему внутри контейнера.</p>
+</li>
+<li>
+<p>v: Монтирует папку $HOME/docker/volumes/postgres расположенную на локальной 
+машине, к папке /var/lib/postgresql/ располагающейся внутри контейнера. Это 
+гарантирует сохранение данных postgres даже после удаления контейнера.</p>
+</li>
+</ul>
+<p><strong>Подключение к Postgres</strong></p>
+<p>Теперь, после того как контейнер запущен, подключение к postgres ни чем не 
+отличается от подключения к экземпляру postgres расположеному вне docker 
+контейнера. Для примера подключение через psql будет выглядеть следующим 
+образом:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>psql -h localhost -U alex -d <span style="color: #007020">test</span>
+</code></pre></div>
+<p>Ссылки:</p>
+<ul>
+<li><a href="https://hackernoon.com/dont-install-postgres-docker-pull-postgres-bee20e200198">Don’t install Postgres. Docker pull Postgres</a> - на
+основе данной статьи сделана данная заметка</li>
+<li><a href="https://stackoverflow.com/questions/26598738/how-to-create-user-database-in-script-for-docker-postgres">How to create User/Database in script for Docker Postgres</a> -
+ответ на то как создать пользователя и базу данных в контейнере c postgres</li>
+<li><a href="https://habr.com/ru/post/328226/">Docker контейнер с данными на Postgres для интеграционного тестирования и лёгким расширением | habr</a></li>
+</ul>
+<p><a name='Запуск-RabbitMQ'></a></p>
+<h3>Запуск RabbitMQ</h3>
+<p>По сути, запуск RabbitMQ аналогичен запуску PostgreSQL, по этому приведу только
+основные команды необходимые для запуска RabbitMQ.</p>
+<p><strong>Создание контейнера с RabbitMQ</strong></p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>docker run -d <span style="color: #4070a0; font-weight: bold">\</span>
+           --name rabbit <span style="color: #4070a0; font-weight: bold">\</span>
+           -p <span style="color: #4070a0">&quot;4369:4369&quot;</span> <span style="color: #4070a0; font-weight: bold">\</span>
+           -p <span style="color: #4070a0">&quot;5672:5672&quot;</span> <span style="color: #4070a0; font-weight: bold">\</span>
+           -p <span style="color: #4070a0">&quot;15672:15672&quot;</span> <span style="color: #4070a0; font-weight: bold">\</span>
+           -p <span style="color: #4070a0">&quot;25672:25672&quot;</span> <span style="color: #4070a0; font-weight: bold">\</span>
+           -p <span style="color: #4070a0">&quot;35197:35197&quot;</span> <span style="color: #4070a0; font-weight: bold">\</span>
+           -e <span style="color: #4070a0">&quot;RABBITMQ_USE_LONGNAME=true&quot;</span> <span style="color: #4070a0; font-weight: bold">\</span>
+           -e <span style="color: #4070a0">&quot;RABBITMQ_LOGS=/var/log/rabbitmq/rabbit.log&quot;</span> <span style="color: #4070a0; font-weight: bold">\</span>
+           -v <span style="color: #bb60d5">$HOME</span>/docker/volumes/rabbit:/var/lib/rabbitmq <span style="color: #4070a0; font-weight: bold">\</span>
+           -v <span style="color: #bb60d5">$HOME</span>/docker/volumes/rabbit/logs:/var/log/rabbitmq <span style="color: #4070a0; font-weight: bold">\</span>
+           rabbitmq:3.7.11-management
+</code></pre></div>
+<p>После выполнения данной команды будет создан и запущен контейнер содержащий 
+RabbitMQ. </p>
+<p>Интерфейс управления доступен по ссылке <a href="http://127.0.0.1:15672">ссылке</a>.</p>
+<p><strong>Остановка контейнера</strong></p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>docker stop rabbit
+</code></pre></div>
+<p><strong>Запуск контейнера после перезагрузки или остановки контейнера</strong></p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>docker container start rabbit
+</code></pre></div>
+<p>Полезные ссылки:</p>
+<ul>
+<li><a href="https://thewebland.net/development/devops/rabbitmq/nastrojka-klastera-rabbitmq-na-docker/">Настройка кластера RabbitMQ на Docker</a></li>
+<li><a href="https://dev.to/usamaashraf/microservices--rabbitmq-on-docker-e2f">Microservices &amp; RabbitMQ On Docker</a></li>
+<li><a href="https://hub.docker.com/_/rabbitmq">Docker Hub - rabbitmq</a></li>
+</ul>
+<p><a name='Запуск-простого-web-приложения-в-docker'></a></p>
+<h3>Запуск простого web-приложения в docker</h3>
+<p>Для того, чтобы показать базовые принципы создания нового docker образа, 
+необходимо создать проект с элементарным web приложением:</p>
+<p>app.py</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">flask</span> <span style="color: #007020; font-weight: bold">import</span> Flask
+
+app <span style="color: #666666">=</span> Flask(<span style="color: #bb60d5">__name__</span>)
+
+
+<span style="color: #555555; font-weight: bold">@app</span><span style="color: #666666">.</span>route(<span style="color: #4070a0">&#39;/&#39;</span>)
+<span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">hello_world</span>():
+    <span style="color: #007020; font-weight: bold">return</span> <span style="color: #4070a0">&#39;Hello, World!&#39;</span>
+
+
+app<span style="color: #666666">.</span>run(host<span style="color: #666666">=</span><span style="color: #4070a0">&#39;0.0.0.0&#39;</span>, port<span style="color: #666666">=</span><span style="color: #40a070">5000</span>, debug<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">True</span>)
+</code></pre></div>
+<p>requirements.txt</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>flask==1.0.2
+</code></pre></div>
+<p>Теперь, когда проект создан можно заняться его докеризацией. Первым делом 
+необходимо создать файл <code>Dockerfile</code>, который будет содержать инструкции
+необходимые для сборки docker образа.</p>
+<p>Dockerfile</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">FROM</span><span style="color: #bbbbbb"> </span><span style="color: #4070a0">python:3.7.4-alpine</span>
+
+<span style="color: #007020; font-weight: bold">RUN</span><span style="color: #bbbbbb"> </span>addgroup app_user <span style="color: #666666">&amp;&amp;</span> adduser -G app_user -s /bin/sh -D app_user
+
+<span style="color: #60a0b0; font-style: italic"># requirements.txt копируется отдельно, для того, чтобы если если список</span>
+<span style="color: #60a0b0; font-style: italic"># зависимостей не менялся, то не производилась их повторная установка</span>
+<span style="color: #007020; font-weight: bold">COPY</span><span style="color: #bbbbbb"> </span>requirements.txt /opt/app/
+<span style="color: #007020; font-weight: bold">RUN</span><span style="color: #bbbbbb"> </span>pip3 install -r /opt/app/requirements.txt
+
+<span style="color: #007020; font-weight: bold">COPY</span><span style="color: #bbbbbb"> </span>app.py /opt/app/
+<span style="color: #007020; font-weight: bold">WORKDIR</span><span style="color: #bbbbbb"> </span><span style="color: #4070a0">/opt/app/</span>
+
+<span style="color: #007020; font-weight: bold">USER</span><span style="color: #bbbbbb"> </span><span style="color: #4070a0">app_user</span>
+<span style="color: #007020; font-weight: bold">CMD</span><span style="color: #bbbbbb"> </span>[<span style="color: #4070a0">&quot;python3&quot;</span>,<span style="color: #bbbbbb"> </span><span style="color: #4070a0">&quot;app.py&quot;</span>]
+</code></pre></div>
+<p>Собираем образ</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>docker build -t simple-web-app .
+</code></pre></div>
+<p>Теперь убеждаемся, что образ успешно создался </p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>docker images
+</code></pre></div>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>REPOSITORY          TAG                 IMAGE ID            CREATED              SIZE
+simple-web-app      latest              39e2e3bc092c        About a minute ago   109MB
+python              3.7.4-alpine        ac069ebfe1e1        42 hours ago         98.7MB
+</code></pre></div>
+<p>Как видим из вывода команды, образ был создан и имеет ID <code>39e2e3bc092c</code>.
+Теперь, мы можем запустить его. Сделать это можно при помощи команды:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>docker run -p <span style="color: #40a070">5000</span>:5000 simple-web-app
+</code></pre></div>
+<p>Данная команда запускает образ simple-web-app и связывает 5000 порт локальной 
+машины с 5000 портом контейнера, который будет создан в результате запуска 
+образа. Если необходимо запустить контейнер в фоне, нужно добавить ключ <code>-d</code>. </p>
+<p>Если контейнер был запущен в фоне, то для того, чтобы убедиться в его успешном
+запуске можно выполнить команду</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>docker ps
+</code></pre></div>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                    NAMES
+0adf5f5a5077        simple-web-app      &quot;python3 app.py&quot;    5 seconds ago       Up 2 seconds        0.0.0.0:5000-&gt;5000/tcp   objective_montalcini
+</code></pre></div>
+<p>которая покажет все запущенные контейнеры. Если контейнер запущен, можно 
+посмотреть его логи при помощи:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>docker logs -f 0adf5f5a5077
+</code></pre></div>
+<p>Вместо 0adf5f5a5077 нужно подставить id контейнера из вывода команды 
+<code>docker ps</code>.</p>
+<p>После того как мы убедились, что контейнер с нашим приложением успешно запущен,
+можно открыть наше приложение в <a href="http://0.0.0.0:5000">браузере</a>.</p>
+<p>После окончания работы контейнер с приложением можно будет остановить командой</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>docker stop 0adf5f5a5077
+</code></pre></div>
+<p>А если контейнер и образ более не нужны, то их можно удалить следующими 
+командами</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #60a0b0; font-style: italic"># Удаление контейнера</span>
+docker rm 0adf5f5a5077
+<span style="color: #60a0b0; font-style: italic"># Удаление образа</span>
+docker rmi 39e2e3bc092c
+</code></pre></div>
+<p>Полезные ссылки:</p>
+<ul>
+<li><a href="https://rtfm.co.ua/docker-build/">Docker: build и пример Dockerfile</a> - заметка
+  основана на данной статье</li>
+<li><a href="https://habr.com/ru/company/infobox/blog/240623/">Погружаемся в Docker: Dockerfile и коммуникация между контейнерами</a></li>
+</ul>
+<p><a name='docker-compose'></a></p>
+<h2>docker-compose</h2>
+<p><a name='Применение-DRY-к-docker-compose.yml'></a></p>
+<h3>Применение DRY к docker-compose.yml</h3>
+<p>docker-compose это отличная утилита, которая позволяет управлять запуском 
+группы контейнеров. Довольно часто описание нескольких контейнеров очень 
+похожее и из-за этого docker-compose.yml содержит много дублирующегося кода, 
+который тяжело поддерживать. К счатью, данную проблему можно решить при помощи 
+aliases и extension fields.</p>
+<p>Формат YAML позволяет создавать якоря и алиасы. С помощью якоря можно 
+определить элемент в документе YAML, а затем ссылаться на этот элемент 
+(используя алиас) позже в том же документе. Якорь можно обозначить с помощью
+символа &amp;, алиас - с помощью символа *. Ниже приведен пример YAML-файла с 
+якорем и алиасом: </p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>base: &amp;base
+  name: Everyone has same name
+
+foo:
+  &lt;&lt;: *base
+  age: 10
+
+bar:
+  &lt;&lt;: *base
+  age: 20
+</code></pre></div>
+<p>После прочтения файла парсером YAML результат будет следующим:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>foo:
+  name: Everyone has same name
+  age: 10
+
+bar:
+  name: Everyone has same name
+  age: 20
+</code></pre></div>
+<p>Использование якорей и алиасов “в чистом” виде в конфигурационных файлах 
+docker-compose.yml ранее было несколько неудобным и неочевидным, однако 
+начиная с версии 3.4 добавлена поддержка расширенных полей (или полей р
+асширений - extension fields). </p>
+<p>Теперь любой ключ верхнего уровня, начинающийся с <code>x-</code> в файле 
+docker-compose.yml, будет проигнорирован утилитой docker-compose и самим Docker
+Engine. Такие расширения можно использовать для определения части сервиса, 
+содержащей только общие параметры.</p>
+<p>Рассмотрим описанное выше на примере. Ниже представлено содержимое 
+среднестатистического docker-compose.yml файла, который описывает запуск 2 
+приложений: </p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>version: &quot;2.1&quot;
+
+services:
+  app1:
+    restart: on-failure
+    image: python:3.7.4-alpine
+    env_file:
+      - .env
+    environment:
+      - FOO=0
+    command: python3 -c &quot;print(&#39;Hello from app1&#39;)&quot;
+
+  app2:
+    restart: on-failure
+    image: python:3.7.4-alpine
+    env_file:
+      - .env
+    environment:
+      - BAR=1
+    command: python3 -c &quot;print(&#39;Hello from app2&#39;)&quot;
+</code></pre></div>
+<p>Как можно заметить, часть конфигурации идентична для обоих приложений. Давайте 
+избавимся от дублирования при помощи aliases и extension fields.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>version: &quot;2.1&quot;
+
+x-app-base: &amp;app-base
+  restart: on-failure
+  image: python:3.7.4-alpine
+  env_file:
+    - .env
+
+services:
+  app1:
+    &lt;&lt;: *app-base
+    environment:
+      - FOO=0
+    command: python3 -c &quot;print(&#39;Hello from app1&#39;)&quot;
+
+  app2:
+    &lt;&lt;: *app-base
+    environment:
+      - BAR=1
+    command: python3 -c &quot;print(&#39;Hello from app2&#39;)&quot;
+      https_proxy: $https_proxy
+</code></pre></div>
+<p>P.S. Для того, чтобы проверить не был ли нарушен синтаксис, можно использовать
+<code>docker-compose config</code>.</p>
+<p>Полезные ссылки:</p>
+<ul>
+<li><a href="https://ealebed.github.io/posts/2018/%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-dry-%D0%BA-docker-compose.yml/">Применение DRY к docker-compose.yml</a></li>
+</ul>
+<p><a name='Работа-с-секретами'></a></p>
+<h3>Работа с секретами</h3>
+<p>Проброс в контейнер контейнер секретов, которые будут использоваться во время 
+работы приложения <a href="https://serverfault.com/questions/871090/how-to-use-docker-secrets-without-a-swarm-cluster/">How to use docker secrets without a swarm cluster?</a></p>
+<p>Работа с секретами на этапе сборки образа более проблематичная задача. Сейчас
+01.08.2019 ее можно решить только используя различные костыли. К счатью разработчики docker
+знают об этой проблеме и работают над ее исправлением. Предлогаемое решение пока 
+находится в эксперементальной ветке и пока поддерживается только на уровене 
+Dockerfile (docker-compose не умеет с этим работать).</p>
+<p>09.04.2020 ничего не изменилось в данный момент поддержка секретов все еще 
+эксперементальная и docker-compose эту функциональность все еще не поддерживает.
+Если данный фунционал очень нужен можно воспользоваться подходом из статьи
+<a href="https://pythonspeed.com/articles/build-secrets-docker-compose/">Build secrets in Docker Compose, the secure way - pythonspeed</a>.</p>
+<p>Ссылки описывающие эксперементальное решение:</p>
+<ul>
+<li><a href="https://medium.com/@tonistiigi/build-secrets-and-ssh-forwarding-in-docker-18-09-ae8161d066">Build secrets and SSH forwarding in Docker 18.09 - medium</a></li>
+<li><a href="https://docs.docker.com/develop/develop-images/build_enhancements/">Build Enhancements for Docker - docs.docker</a></li>
+<li><a href="https://github.com/docker/compose/issues/6358">Support for docker build --secret for build-time docker secrets. #6358</a></li>
+</ul>
+<p><a name='Смена-пользователя'></a></p>
+<h3>Смена пользователя</h3>
+<p>Пример запуска приложения в контейнере с файловой системой доступной только на 
+запись, из под не привелегированного пользователя, с маппингом частей файловой 
+системы в ОЗУ, чтобы разрешить запись в них.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>app:
+  image: some-app
+  build:
+      context: .
+      dockerfile: Dockerfile
+  env_file:
+    - .env
+  volumes:
+    - &quot;./src/:/opt/app/src/&quot;
+    - &quot;./entrypoint.sh:/opt/app/entrypoint.sh&quot;
+  user: &quot;1000:1000&quot;
+  read_only: true
+  tmpfs:
+    - /opt/app/temp:uid=1000,gid=1000
+    - /tmp/:uid=1000,gid=1000
+    - /.config:uid=1000,gid=1000
+</code></pre></div>
+<p>Полезные ссылки:</p>
+<ul>
+<li><a href="https://blog.giovannidemizio.eu/2021/05/24/how-to-set-user-and-group-in-docker-compose/">How to set user and group in Docker Compose</a></li>
+<li><a href="https://stackoverflow.com/questions/53498380/docker-compose-mounting-a-tmpfs-usable-by-non-root-user">Docker-compose: Mounting a tmpfs usable by non-root user</a></li>
+</ul>
+
+        </div><!--/.col-xs-12.col-sm-9-->
+
+    </div><!--/row-->
+
+
+    <hr>
+
+    <footer>
+        <p>
+            При копировании информации с данного сайта пожалуйста указывайте
+            ссылку на источник. © 2019 Записки питониста
+        </p>
+    </footer>
+
+</div><!--/.container-->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</body>
+</html>

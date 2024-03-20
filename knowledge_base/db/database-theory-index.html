@@ -1,0 +1,376 @@
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148357635-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-148357635-1');
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <title>Записки питониста - База знаний</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/base.css">
+
+    
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/knowledge-base.css">
+
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-static-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://aleksey925.github.io/knowledge-base/index.html">Записки питониста</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                
+    <li><a href="https://aleksey925.github.io/knowledge-base/index.html">Главная</a></li>
+    <li class="active"><a href="https://aleksey925.github.io/knowledge-base/knowledge_base/index.html">База знаний</a></li>
+
+            </ul>
+        </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+</nav><!-- /.navbar -->
+
+<div class="container">
+
+    
+    <div class="row row-content">
+
+        <div class="col-xs-12 col-sm-12">
+            <h1>Теория баз данных</h1>
+<h1>Оглавление</h1>
+<ol>
+<li>
+<p><h3><a href="#Общее">Общее</a></h3></p>
+<ul>
+<li><a href="#Нормализация-баз-данных-Нормальные-формы">Нормализация баз данных. Нормальные формы</a></li>
+<li><a href="#Уровни-изоляции-транзакций">Уровни изоляции транзакций</a></li>
+</ul>
+</li>
+<li>
+<p><h3><a href="#Индексы">Индексы</a></h3></p>
+<ul>
+<li><a href="#Использование-b-tree-в-базах-данных">Использование b-tree в базах данных</a></li>
+</ul>
+</li>
+</ol>
+<p><a name='Общее'></a></p>
+<h2>Общее</h2>
+<p><a name='Нормализация-баз-данных-Нормальные-формы'></a></p>
+<h3>Нормализация баз данных. Нормальные формы</h3>
+<p><strong>Первая нормальная форма</strong></p>
+<p>Отношение находится в 1НФ, если все поля (атрибуты) таблицы
+хранят простые (атамарные) значения, то есть в одной ячейке не может 
+перечисляться несколько значений.</p>
+<p><em>Неправильно</em></p>
+<table>
+<thead>
+<tr>
+<th>Фирма</th>
+<th>Модели</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BMW</td>
+<td>M5, X5M, M1</td>
+</tr>
+<tr>
+<td>Nissan</td>
+<td>GT-R</td>
+</tr>
+</tbody>
+</table>
+<p><em>Правильно</em></p>
+<table>
+<thead>
+<tr>
+<th>Фирма</th>
+<th>Модели</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BMW</td>
+<td>M5</td>
+</tr>
+<tr>
+<td>BMW</td>
+<td>X5M</td>
+</tr>
+<tr>
+<td>BMW</td>
+<td>M1</td>
+</tr>
+<tr>
+<td>Nissan</td>
+<td>GT-R</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Вторая нормальная форма</strong></p>
+<p>Отношение находится во 2НФ, если оно находится в 1НФ и в таблице нет 
+столбцов, которые не связаны логически с первичным ключом таблицы.</p>
+<blockquote>
+<p>Под первичным ключом понимают поле или набор полей, однозначно (уникально) 
+идентифицирующих запись.</p>
+</blockquote>
+<p>Например, дана таблица:</p>
+<table>
+<thead>
+<tr>
+<th>Модель</th>
+<th>Фирма</th>
+<th>Цена</th>
+<th>Скидка</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M5</td>
+<td>BMW</td>
+<td>5500000</td>
+<td>5%</td>
+</tr>
+<tr>
+<td>X5M</td>
+<td>BMW</td>
+<td>6000000</td>
+<td>5%</td>
+</tr>
+<tr>
+<td>M1</td>
+<td>BMW</td>
+<td>2500000</td>
+<td>5%</td>
+</tr>
+<tr>
+<td>GT-R</td>
+<td>Nissan</td>
+<td>5000000</td>
+<td>10%</td>
+</tr>
+</tbody>
+</table>
+<p>Таблица находится в первой нормальной форме, но не во второй. Цены машин 
+зависят от модели и фирмы, а скидки зависят только от фирмы, то есть 
+зависимость от первичного ключа неполная. Исправляется это путем разбиения 
+на две таблицы.</p>
+<table>
+<thead>
+<tr>
+<th>Модель</th>
+<th>Фирма</th>
+<th>Цена</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M5</td>
+<td>BMW</td>
+<td>5500000</td>
+</tr>
+<tr>
+<td>X5M</td>
+<td>BMW</td>
+<td>6000000</td>
+</tr>
+<tr>
+<td>M1</td>
+<td>BMW</td>
+<td>2500000</td>
+</tr>
+<tr>
+<td>GT-R</td>
+<td>Nissan</td>
+<td>5000000</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Фирма</th>
+<th>Скидка</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BMW</td>
+<td>5%</td>
+</tr>
+<tr>
+<td>Nissan</td>
+<td>10%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Третья нормальная форма</strong> </p>
+<p>Отношение находится в 3НФ, если оно находится во 2НФ и все не ключевые столбцы,
+значения которых могут относиться к нескольким записям таблицы должны быть
+вынесены в отдельные таблицы.</p>
+<p>Рассмотрим таблицу:</p>
+<table>
+<thead>
+<tr>
+<th>Модель</th>
+<th>Магазин</th>
+<th>Телефон</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BMW</td>
+<td>Риал-авто</td>
+<td>87-33-98</td>
+</tr>
+<tr>
+<td>Audi</td>
+<td>Риал-авто</td>
+<td>87-33-98</td>
+</tr>
+<tr>
+<td>Nissan</td>
+<td>Некст-Авто</td>
+<td>94-54-12</td>
+</tr>
+</tbody>
+</table>
+<p>Таблица находится во 2НФ, но не в 3НФ.
+В отношении столбец «Модель» является первичным ключом. Личных телефонов у 
+автомобилей нет, и телефон зависит исключительно от магазина. По этому 
+отношение Магазин -&gt; Телефон необходимо вынести в отдельную таблицу.</p>
+<table>
+<thead>
+<tr>
+<th>Модель</th>
+<th>Магазин</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BMW</td>
+<td>Риал-авто</td>
+</tr>
+<tr>
+<td>Audi</td>
+<td>Риал-авто</td>
+</tr>
+<tr>
+<td>Nissan</td>
+<td>Некст-Авто</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Магазин</th>
+<th>Телефон</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Риал-авто</td>
+<td>87-33-98</td>
+</tr>
+<tr>
+<td>Риал-авто</td>
+<td>87-33-98</td>
+</tr>
+<tr>
+<td>Некст-Авто</td>
+<td>94-54-12</td>
+</tr>
+</tbody>
+</table>
+<p>Прочитать все тоже самое, но написаннное научным языком 
+можно <a href="https://habr.com/post/254773/">тут</a>.</p>
+<p><a name='Уровни-изоляции-транзакций'></a></p>
+<h3>Уровни изоляции транзакций</h3>
+<p><strong>Истоки проблемы</strong></p>
+<p>Напомним, что транзакцией называется упорядоченное множество действий, которые выполняются или все вместе или не 
+выполняются вовсе. В применении к SQL транзакция включает в себя один и более операторов языка. Уровни изоляций 
+транзакций с разной степенью обеспечивают целостность данных при их одновременной обработке множеством процессов 
+(пользователей). Наиболее простой вариант: один пользователь записывает информацию на уровне записи таблицы, другой 
+пытается ее прочитать. При отсутствии изоляции второй пользователь может прочитать данные незавершенной транзакции. 
+Ситуация усложняется, если изменениям (модификации, вставке, удалению) подвержена не одна запись, а несколько, возможно
+даже в разных таблицах.</p>
+<p><strong>Незавершенное (черновое) чтение (read uncommitted)</strong></p>
+<p>Минимальный уровень изоляции, гарантирует только физическую целостность при записи данных. Процессы-читатели могут 
+считывать данные незавершенной транзакции процесса-писателя.</p>
+<p><strong>Подтвержденное чтение (read committed)</strong></p>
+<p>Процессы-читатели не могут считывать данные незавершенной транзакции, но процессы-писатели
+могут изменять уже прочитанные читателем данные.</p>
+<p><strong>Повторяемое чтение (repeatable read)</strong></p>
+<p>Повторное чтение данных вернет те же значения, что и в начале транзакции. При этом процессы-писатели могут вставлять 
+новые записи, имеющие статус "фантома" при незавершенной транзакции.</p>
+<p><strong>Версионный срез (snapshot)</strong></p>
+<p>Процессы-читатели не ждут завершения транзакций писателей, а считывают данные, точнее их версию, по состоянию на момент 
+начала своей транзакции.</p>
+<p><strong>Сериализуемость (serializable)</strong></p>
+<p>Максимальный уровень изоляции, гарантирует неизменяемость данных другими процессами до завершения транзакции.</p>
+<p>Ссылки:</p>
+<ul>
+<li><a href="https://arbinada.com/en/node/619">первоисточник</a></li>
+</ul>
+<p><a name='Индексы'></a></p>
+<h2>Индексы</h2>
+<p><a name='Использование-b-tree-в-базах-данных'></a></p>
+<h3>Использование b-tree в базах данных</h3>
+<p><a href="https://cloud.mail.ru/public/531a/2ZfQBdbiL">Локальная копия доклада</a>, <a href="https://www.youtube.com/watch?v=TdtulzNC9iE">Владимир Кузнецов - Базы данных B-tree</a></p>
+<p>Видео содержит: описание способа хранения данных на основе страничной модели. 
+Исторические предпосылки. Устройство B-tree индексов. Особенности реализации, 
+сильные и слабые стороны этого подхода.</p>
+
+        </div><!--/.col-xs-12.col-sm-9-->
+
+    </div><!--/row-->
+
+
+    <hr>
+
+    <footer>
+        <p>
+            При копировании информации с данного сайта пожалуйста указывайте
+            ссылку на источник. © 2019 Записки питониста
+        </p>
+    </footer>
+
+</div><!--/.container-->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</body>
+</html>

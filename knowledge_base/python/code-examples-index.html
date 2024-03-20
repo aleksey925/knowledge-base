@@ -1,0 +1,426 @@
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148357635-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-148357635-1');
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <title>Записки питониста - База знаний</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/base.css">
+
+    
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/knowledge-base.css">
+
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-static-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://aleksey925.github.io/knowledge-base/index.html">Записки питониста</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                
+    <li><a href="https://aleksey925.github.io/knowledge-base/index.html">Главная</a></li>
+    <li class="active"><a href="https://aleksey925.github.io/knowledge-base/knowledge_base/index.html">База знаний</a></li>
+
+            </ul>
+        </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+</nav><!-- /.navbar -->
+
+<div class="container">
+
+    
+    <div class="row row-content">
+
+        <div class="col-xs-12 col-sm-12">
+            <h1>Реализации интересных заданий</h1>
+<h1>Оглавление</h1>
+<ul>
+<li><a href="#Проверка-на-чётность-с-помощью-поразрядного-И">Проверка на чётность с помощью поразрядного И</a></li>
+<li><a href="#Получение-времени-последнего-изменения-файла">Получение времени последнего изменения файла</a></li>
+<li><a href="#Прервание-работы-функции-по-таймауту">Прервание работы функции по таймауту</a></li>
+<li><a href="#Получение-из-объекта-функции-ещё-несколько-таких-же-функций">Получение из объекта функции ещё несколько таких же функций</a></li>
+<li><a href="#Работа-с-менеджерами-контекста">Работа с менеджерами контекста</a></li>
+<li><a href="#Консольный-progressbar-на-коленке">Консольный progressbar на коленке</a></li>
+<li><a href="#Автоматическая-запись-всех-атрибутов-класса-в-верхнем-регистре">Автоматическая запись всех атрибутов класса в верхнем регистре</a></li>
+<li><a href="#Реализация-глобального-для-всех-TestCase-setUp-and-tearDown">Реализация глобального для всех TestCase setUp and tearDown</a></li>
+</ul>
+<p><a name='Проверка-на-чётность-с-помощью-поразрядного-И'></a></p>
+<h3>Проверка на чётность с помощью поразрядного И</h3>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">for</span> num <span style="color: #007020; font-weight: bold">in</span> <span style="color: #007020">range</span>(<span style="color: #40a070">10000000</span>):
+    <span style="color: #007020; font-weight: bold">if</span> (num <span style="color: #666666">&amp;</span> <span style="color: #40a070">1</span>) <span style="color: #666666">==</span> <span style="color: #40a070">1</span>:
+        <span style="color: #007020">print</span>(<span style="color: #4070a0">&#39;Нечетное&#39;</span>)
+    <span style="color: #007020; font-weight: bold">else</span>:
+        <span style="color: #007020">print</span>(<span style="color: #4070a0">&#39;Чётное&#39;</span>)
+</code></pre></div>
+<p><a name='Получение-времени-последнего-изменения-файла'></a></p>
+<h3>Получение времени последнего изменения файла</h3>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">os</span>
+<span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">datetime</span>
+
+<span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">get_modif_time</span>(filepath):
+    <span style="color: #60a0b0; font-style: italic"># Получается время последнего изменения файла, в секундах.</span>
+    time <span style="color: #666666">=</span> os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>getmtime(filepath)
+    <span style="color: #60a0b0; font-style: italic"># Преобразуется в удобочитаемый вид</span>
+    <span style="color: #007020; font-weight: bold">return</span> datetime<span style="color: #666666">.</span>datetime<span style="color: #666666">.</span>fromtimestamp(time)
+
+<span style="color: #007020">print</span>(get_modif_time(<span style="color: #4070a0">&#39;temp3.py&#39;</span>))
+</code></pre></div>
+<p><a name='Прервание-работы-функции-по-таймауту'></a></p>
+<h3>Прервание работы функции по таймауту</h3>
+<p>Реализация для linux</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">time</span>
+<span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">signal</span>
+<span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">functools</span>
+
+<span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">ExceededError</span>(<span style="color: #007020">Exception</span>):
+    <span style="color: #007020; font-weight: bold">pass</span>
+
+<span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">timeout</span>(seconds<span style="color: #666666">=</span><span style="color: #40a070">10</span>):
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">decorator</span>(func):
+        <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">_handle_timeout</span>(signum, frame):
+            <span style="color: #007020; font-weight: bold">raise</span> ExceededError(<span style="color: #4070a0">&#39;Превышено время ожидания&#39;</span>)
+
+        <span style="color: #555555; font-weight: bold">@functools</span><span style="color: #666666">.</span>wraps(func)
+        <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">wrapper</span>(<span style="color: #666666">*</span>args, <span style="color: #666666">**</span>kwargs):
+            signal<span style="color: #666666">.</span>signal(signal<span style="color: #666666">.</span>SIGALRM, _handle_timeout)
+            signal<span style="color: #666666">.</span>alarm(seconds)
+            <span style="color: #007020; font-weight: bold">try</span>:
+                result <span style="color: #666666">=</span> func(<span style="color: #666666">*</span>args, <span style="color: #666666">**</span>kwargs)
+            <span style="color: #007020; font-weight: bold">finally</span>:
+                signal<span style="color: #666666">.</span>alarm(<span style="color: #40a070">0</span>)
+            <span style="color: #007020; font-weight: bold">return</span> result
+
+        <span style="color: #007020; font-weight: bold">if</span> seconds <span style="color: #666666">==</span> <span style="color: #40a070">0</span>:
+            <span style="color: #007020; font-weight: bold">return</span> func
+        <span style="color: #007020; font-weight: bold">else</span>:
+            <span style="color: #007020; font-weight: bold">return</span> wrapper
+
+    <span style="color: #007020; font-weight: bold">return</span> decorator
+
+
+<span style="color: #555555; font-weight: bold">@timeout</span>(seconds<span style="color: #666666">=</span><span style="color: #40a070">0</span>)
+<span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">long_running_function</span>():
+    <span style="color: #007020">print</span>(<span style="color: #4070a0">&#39;start&#39;</span>)
+    time<span style="color: #666666">.</span>sleep(<span style="color: #40a070">10</span>)
+    <span style="color: #007020">print</span>(<span style="color: #4070a0">&#39;end&#39;</span>)
+
+<span style="color: #007020; font-weight: bold">try</span>:
+    long_running_function()
+<span style="color: #007020; font-weight: bold">except</span> ExceededError <span style="color: #007020; font-weight: bold">as</span> error:
+    <span style="color: #007020">print</span>(error)
+
+<span style="color: #007020">print</span>(<span style="color: #4070a0">&#39;Продолжаем работу&#39;</span>)
+</code></pre></div>
+<p>Кроссплатформенная реализация</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">time</span>
+<span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">functools</span>
+<span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">threading</span>
+
+<span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">ExceededError</span>(<span style="color: #007020">Exception</span>):
+    <span style="color: #007020; font-weight: bold">pass</span>
+
+<span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">timeout</span>(seconds):
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">decorator</span>(func):
+        <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">run_with_timeout</span>(<span style="color: #666666">*</span>args, <span style="color: #666666">**</span>kwargs):
+            <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">target</span>():
+                <span style="color: #4070a0; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #4070a0; font-style: italic">                Обертка для выполенения функции в отдельном потоке</span>
+<span style="color: #4070a0; font-style: italic">                &quot;&quot;&quot;</span>
+                <span style="color: #007020; font-weight: bold">try</span>:
+                    result[<span style="color: #4070a0">&#39;returned&#39;</span>] <span style="color: #666666">=</span> func(<span style="color: #666666">*</span>args, <span style="color: #666666">**</span>kwargs)
+                    result[<span style="color: #4070a0">&#39;timeout_exceeded&#39;</span>] <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">False</span>
+                <span style="color: #007020; font-weight: bold">except</span> <span style="color: #007020">Exception</span> <span style="color: #007020; font-weight: bold">as</span> error:
+                    result[<span style="color: #4070a0">&#39;error&#39;</span>] <span style="color: #666666">=</span> error
+            result <span style="color: #666666">=</span> {<span style="color: #4070a0">&#39;returned&#39;</span>: <span style="color: #007020; font-weight: bold">None</span>, <span style="color: #4070a0">&#39;error&#39;</span>: <span style="color: #007020; font-weight: bold">None</span>}
+            worker <span style="color: #666666">=</span> threading<span style="color: #666666">.</span>Thread(target<span style="color: #666666">=</span>target)
+            worker<span style="color: #666666">.</span>daemon <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">True</span>
+            <span style="color: #007020; font-weight: bold">try</span>:
+                worker<span style="color: #666666">.</span>start()
+                worker<span style="color: #666666">.</span>join(seconds)
+            <span style="color: #007020; font-weight: bold">except</span> <span style="color: #007020">Exception</span> <span style="color: #007020; font-weight: bold">as</span> error:
+                <span style="color: #007020">print</span>(<span style="color: #4070a0">&#39;Error starting thread&#39;</span>)
+                <span style="color: #007020; font-weight: bold">raise</span> error
+
+            <span style="color: #60a0b0; font-style: italic"># Проверяем результат выполнения целевой функции</span>
+            <span style="color: #007020; font-weight: bold">if</span> result<span style="color: #666666">.</span>get(<span style="color: #4070a0">&#39;timeout_exceeded&#39;</span>, <span style="color: #007020; font-weight: bold">True</span>):
+                message <span style="color: #666666">=</span> (
+                    <span style="color: #4070a0">&#39;Функция &quot;</span><span style="color: #70a0d0; font-style: italic">{}</span><span style="color: #4070a0">&quot; выполнялась дольше,&#39;</span><span style="color: #666666">.</span>format(func<span style="color: #666666">.</span><span style="color: #bb60d5">__name__</span>) <span style="color: #666666">+</span>
+                    <span style="color: #4070a0">&#39; чем было разрешено &quot;</span><span style="color: #70a0d0; font-style: italic">{}</span><span style="color: #4070a0">&quot; сек.&#39;</span><span style="color: #666666">.</span>format(seconds)
+                )
+                <span style="color: #007020; font-weight: bold">raise</span> ExceededError(message)
+            <span style="color: #007020; font-weight: bold">else</span>:
+                <span style="color: #007020; font-weight: bold">if</span> result[<span style="color: #4070a0">&#39;error&#39;</span>]:
+                    <span style="color: #007020; font-weight: bold">raise</span> result[<span style="color: #4070a0">&#39;error&#39;</span>]
+                <span style="color: #007020; font-weight: bold">return</span> result[<span style="color: #4070a0">&#39;returned&#39;</span>]
+        <span style="color: #555555; font-weight: bold">@functools</span><span style="color: #666666">.</span>wraps(func)
+        <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">wrapper</span>(<span style="color: #666666">*</span>args, <span style="color: #666666">**</span>kwargs):
+            <span style="color: #007020; font-weight: bold">if</span> seconds <span style="color: #666666">==</span> <span style="color: #40a070">0</span>:
+                <span style="color: #007020; font-weight: bold">return</span> func(<span style="color: #666666">*</span>args, <span style="color: #666666">**</span>kwargs)
+            <span style="color: #007020; font-weight: bold">else</span>:
+                <span style="color: #007020; font-weight: bold">return</span> run_with_timeout(<span style="color: #666666">*</span>args, <span style="color: #666666">**</span>kwargs)
+        <span style="color: #007020; font-weight: bold">return</span> wrapper
+
+    <span style="color: #007020; font-weight: bold">return</span> decorator
+
+<span style="color: #555555; font-weight: bold">@timeout</span>(<span style="color: #40a070">2</span>)
+<span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">long_running_function</span>():
+    <span style="color: #007020">print</span>(<span style="color: #4070a0">&#39;start&#39;</span>)
+    time<span style="color: #666666">.</span>sleep(<span style="color: #40a070">5</span>)
+    <span style="color: #007020">print</span>(<span style="color: #4070a0">&#39;end&#39;</span>)
+    <span style="color: #007020; font-weight: bold">return</span> [<span style="color: #40a070">0.1</span>], <span style="color: #40a070">1</span>, <span style="color: #40a070">543</span>
+
+<span style="color: #007020">print</span>(long_running_function())
+</code></pre></div>
+<p><a name='Получение-из-объекта-функции-ещё-несколько-таких-же-функций'></a></p>
+<h3>Получение из объекта функции ещё несколько таких же функций</h3>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">functools</span>
+<span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">types</span>
+
+<span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">copy_func</span>(func):
+    g <span style="color: #666666">=</span> types<span style="color: #666666">.</span>FunctionType(func<span style="color: #666666">.</span><span style="color: #bb60d5">__code__</span>, func<span style="color: #666666">.</span><span style="color: #bb60d5">__globals__</span>, name<span style="color: #666666">=</span>func<span style="color: #666666">.</span><span style="color: #bb60d5">__name__</span>,
+                           argdefs<span style="color: #666666">=</span>func<span style="color: #666666">.</span><span style="color: #bb60d5">__defaults__</span>,
+                           closure<span style="color: #666666">=</span>func<span style="color: #666666">.</span><span style="color: #bb60d5">__closure__</span>)
+    g <span style="color: #666666">=</span> functools<span style="color: #666666">.</span>update_wrapper(g, func)
+    g<span style="color: #666666">.</span><span style="color: #bb60d5">__kwdefaults__</span> <span style="color: #666666">=</span> func<span style="color: #666666">.</span><span style="color: #bb60d5">__kwdefaults__</span>
+    <span style="color: #007020; font-weight: bold">return</span> g
+
+<span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">f</span>(arg1, arg2, arg3, kwarg1<span style="color: #666666">=</span><span style="color: #4070a0">&quot;FOO&quot;</span>, <span style="color: #666666">*</span>args, kwarg2<span style="color: #666666">=</span><span style="color: #4070a0">&quot;BAR&quot;</span>, kwarg3<span style="color: #666666">=</span><span style="color: #4070a0">&quot;BAZ&quot;</span>):
+    <span style="color: #007020; font-weight: bold">return</span> (arg1, arg2, arg3, args, kwarg1, kwarg2, kwarg3)
+
+f<span style="color: #666666">.</span>cache <span style="color: #666666">=</span> [<span style="color: #40a070">1</span>, <span style="color: #40a070">2</span>, <span style="color: #40a070">3</span>]
+g <span style="color: #666666">=</span> copy_func(f)
+<span style="color: #007020">print</span>(f(<span style="color: #40a070">1</span>, <span style="color: #40a070">2</span>, <span style="color: #40a070">3</span>, <span style="color: #40a070">4</span>, <span style="color: #40a070">5</span>))
+<span style="color: #007020">print</span>(g(<span style="color: #40a070">1</span>, <span style="color: #40a070">2</span>, <span style="color: #40a070">3</span>, <span style="color: #40a070">4</span>, <span style="color: #40a070">5</span>))
+<span style="color: #007020">print</span>(g<span style="color: #666666">.</span>cache)
+<span style="color: #007020; font-weight: bold">assert</span> f <span style="color: #007020; font-weight: bold">is</span> <span style="color: #007020; font-weight: bold">not</span> g
+</code></pre></div>
+<p>Ещё можно так, но этот пример работает в самом простом варианте (на функции 
+из предыдущего примера это не сработает).</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">f</span>(arg1, arg2, arg3):
+    <span style="color: #007020; font-weight: bold">return</span> arg1, arg2, arg3
+
+g <span style="color: #666666">=</span> f<span style="color: #666666">.</span><span style="color: #06287e">__new__</span>(f<span style="color: #666666">.</span><span style="color: #bb60d5">__class__</span>, f<span style="color: #666666">.</span><span style="color: #bb60d5">__code__</span>, f<span style="color: #666666">.</span><span style="color: #bb60d5">__globals__</span>)
+<span style="color: #007020">print</span>(f(<span style="color: #40a070">1</span>, <span style="color: #40a070">2</span>, <span style="color: #40a070">3</span>))
+<span style="color: #007020">print</span>(g(<span style="color: #40a070">1</span>, <span style="color: #40a070">2</span>, <span style="color: #40a070">3</span>))
+<span style="color: #007020; font-weight: bold">assert</span> f <span style="color: #007020; font-weight: bold">is</span> <span style="color: #007020; font-weight: bold">not</span> g
+</code></pre></div>
+<p><a href="http://stackoverflow.com/questions/13503079/how-to-create-a-copy-of-a-python-function">Ссылка на оригинальную статью</a></p>
+<p><a name='Работа-с-менеджерами-контекста'></a></p>
+<h3>Работа с менеджерами контекста</h3>
+<p>Допишите реализацию класса Enviroment, чтобы проходили все тесты.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">Environment</span>(<span style="color: #007020">object</span>):
+    <span style="color: #007020; font-weight: bold">pass</span>
+
+<span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">main</span>():
+    result <span style="color: #666666">=</span> []
+    env <span style="color: #666666">=</span> Environment()
+    <span style="color: #007020; font-weight: bold">try</span>:
+        result<span style="color: #666666">.</span>append(env<span style="color: #666666">.</span>attr)
+    <span style="color: #007020; font-weight: bold">except</span> <span style="color: #007020">AttributeError</span>:
+        result<span style="color: #666666">.</span>append(<span style="color: #4070a0">&#39;ok&#39;</span>)
+    <span style="color: #007020; font-weight: bold">with</span> env<span style="color: #666666">.</span>extend({<span style="color: #4070a0">&#39;attr&#39;</span>: <span style="color: #40a070">23</span>, <span style="color: #4070a0">&#39;foo&#39;</span>: <span style="color: #4070a0">&#39;bar&#39;</span>}):
+        result<span style="color: #666666">.</span>append(env<span style="color: #666666">.</span>attr)
+        result<span style="color: #666666">.</span>append(env<span style="color: #666666">.</span>foo)
+        result<span style="color: #666666">.</span>append(<span style="color: #4070a0">&#39;ok&#39;</span>)
+        <span style="color: #007020; font-weight: bold">try</span>:
+            result<span style="color: #666666">.</span>append(env<span style="color: #666666">.</span>bar)
+        <span style="color: #007020; font-weight: bold">except</span> <span style="color: #007020">AttributeError</span>:
+            result<span style="color: #666666">.</span>append(<span style="color: #4070a0">&#39;ok&#39;</span>)
+    <span style="color: #007020; font-weight: bold">try</span>:
+        result<span style="color: #666666">.</span>append(env<span style="color: #666666">.</span>attr)
+    <span style="color: #007020; font-weight: bold">except</span> <span style="color: #007020">AttributeError</span>:
+        result<span style="color: #666666">.</span>append(<span style="color: #4070a0">&#39;ok&#39;</span>)
+    <span style="color: #007020; font-weight: bold">try</span>:
+        result<span style="color: #666666">.</span>append(env<span style="color: #666666">.</span>foo)
+    <span style="color: #007020; font-weight: bold">except</span> <span style="color: #007020">AttributeError</span>:
+        result<span style="color: #666666">.</span>append(<span style="color: #4070a0">&#39;ok&#39;</span>)
+    <span style="color: #007020; font-weight: bold">try</span>:
+        result<span style="color: #666666">.</span>append(env<span style="color: #666666">.</span>bar)
+    <span style="color: #007020; font-weight: bold">except</span> <span style="color: #007020">AttributeError</span>:
+        result<span style="color: #666666">.</span>append(<span style="color: #4070a0">&#39;ok&#39;</span>)
+    <span style="color: #007020; font-weight: bold">return</span> result
+result <span style="color: #666666">=</span> main()
+<span style="color: #007020; font-weight: bold">assert</span> result <span style="color: #666666">==</span> [<span style="color: #4070a0">&#39;ok&#39;</span>, <span style="color: #40a070">23</span>, <span style="color: #4070a0">&#39;bar&#39;</span>, <span style="color: #4070a0">&#39;ok&#39;</span>, <span style="color: #4070a0">&#39;ok&#39;</span>, <span style="color: #4070a0">&#39;ok&#39;</span>, <span style="color: #4070a0">&#39;ok&#39;</span>, <span style="color: #4070a0">&#39;ok&#39;</span>]
+</code></pre></div>
+<p>Рабочая реализация</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">Environment</span>(<span style="color: #007020">object</span>):
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">__init__</span>(<span style="color: #007020">self</span>):
+        <span style="color: #007020">self</span><span style="color: #666666">.</span>temp_attr <span style="color: #666666">=</span> {}
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">extend</span>(<span style="color: #007020">self</span>, attrs: <span style="color: #007020">dict</span>):
+        <span style="color: #007020">self</span><span style="color: #666666">.</span>temp_attr<span style="color: #666666">.</span>update(attrs)
+        <span style="color: #007020; font-weight: bold">for</span> key, value <span style="color: #007020; font-weight: bold">in</span> attrs<span style="color: #666666">.</span>items():
+            <span style="color: #007020">setattr</span>(<span style="color: #007020">self</span>, key, value)
+        <span style="color: #007020; font-weight: bold">return</span> <span style="color: #007020">self</span>
+
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">__enter__</span>(<span style="color: #007020">self</span>):
+        <span style="color: #007020; font-weight: bold">pass</span>
+
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">__exit__</span>(<span style="color: #007020">self</span>, exc_type, exc_val, exc_tb):
+        <span style="color: #007020; font-weight: bold">for</span> i <span style="color: #007020; font-weight: bold">in</span> <span style="color: #007020">self</span><span style="color: #666666">.</span>temp_attr<span style="color: #666666">.</span>keys():
+            <span style="color: #007020">delattr</span>(<span style="color: #007020">self</span>, i)
+        <span style="color: #007020">self</span><span style="color: #666666">.</span>temp_attr<span style="color: #666666">.</span>clear()
+        <span style="color: #007020; font-weight: bold">return</span> <span style="color: #007020; font-weight: bold">True</span> <span style="color: #007020; font-weight: bold">if</span> exc_type <span style="color: #007020; font-weight: bold">is</span> <span style="color: #007020; font-weight: bold">None</span> <span style="color: #007020; font-weight: bold">else</span> <span style="color: #007020; font-weight: bold">False</span>
+
+<span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">main</span>():
+    result <span style="color: #666666">=</span> []
+    env <span style="color: #666666">=</span> Environment()
+    <span style="color: #007020; font-weight: bold">try</span>:
+        result<span style="color: #666666">.</span>append(env<span style="color: #666666">.</span>attr)
+    <span style="color: #007020; font-weight: bold">except</span> <span style="color: #007020">AttributeError</span>:
+        result<span style="color: #666666">.</span>append(<span style="color: #4070a0">&#39;ok&#39;</span>)
+    <span style="color: #007020; font-weight: bold">with</span> env<span style="color: #666666">.</span>extend({<span style="color: #4070a0">&#39;attr&#39;</span>: <span style="color: #40a070">23</span>, <span style="color: #4070a0">&#39;foo&#39;</span>: <span style="color: #4070a0">&#39;bar&#39;</span>}):
+        result<span style="color: #666666">.</span>append(env<span style="color: #666666">.</span>attr)
+        result<span style="color: #666666">.</span>append(env<span style="color: #666666">.</span>foo)
+        result<span style="color: #666666">.</span>append(<span style="color: #4070a0">&#39;ok&#39;</span>)
+        <span style="color: #007020; font-weight: bold">try</span>:
+            result<span style="color: #666666">.</span>append(env<span style="color: #666666">.</span>bar)
+        <span style="color: #007020; font-weight: bold">except</span> <span style="color: #007020">AttributeError</span>:
+            result<span style="color: #666666">.</span>append(<span style="color: #4070a0">&#39;ok&#39;</span>)
+    <span style="color: #007020; font-weight: bold">try</span>:
+        result<span style="color: #666666">.</span>append(env<span style="color: #666666">.</span>attr)
+    <span style="color: #007020; font-weight: bold">except</span> <span style="color: #007020">AttributeError</span>:
+        result<span style="color: #666666">.</span>append(<span style="color: #4070a0">&#39;ok&#39;</span>)
+    <span style="color: #007020; font-weight: bold">try</span>:
+        result<span style="color: #666666">.</span>append(env<span style="color: #666666">.</span>foo)
+    <span style="color: #007020; font-weight: bold">except</span> <span style="color: #007020">AttributeError</span>:
+        result<span style="color: #666666">.</span>append(<span style="color: #4070a0">&#39;ok&#39;</span>)
+    <span style="color: #007020; font-weight: bold">try</span>:
+        result<span style="color: #666666">.</span>append(env<span style="color: #666666">.</span>bar)
+    <span style="color: #007020; font-weight: bold">except</span> <span style="color: #007020">AttributeError</span>:
+        result<span style="color: #666666">.</span>append(<span style="color: #4070a0">&#39;ok&#39;</span>)
+    <span style="color: #007020; font-weight: bold">return</span> result
+
+result <span style="color: #666666">=</span> main()
+<span style="color: #007020; font-weight: bold">assert</span> result <span style="color: #666666">==</span> [<span style="color: #4070a0">&#39;ok&#39;</span>, <span style="color: #40a070">23</span>, <span style="color: #4070a0">&#39;bar&#39;</span>, <span style="color: #4070a0">&#39;ok&#39;</span>, <span style="color: #4070a0">&#39;ok&#39;</span>, <span style="color: #4070a0">&#39;ok&#39;</span>, <span style="color: #4070a0">&#39;ok&#39;</span>, <span style="color: #4070a0">&#39;ok&#39;</span>]
+</code></pre></div>
+<p><a name='Консольный-progressbar-на-коленке'></a></p>
+<h3>Консольный progressbar на коленке</h3>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">time</span>
+
+count_iter <span style="color: #666666">=</span> <span style="color: #40a070">9</span>
+<span style="color: #007020; font-weight: bold">for</span> current_iter <span style="color: #007020; font-weight: bold">in</span> <span style="color: #007020">range</span>(<span style="color: #40a070">1</span>, count_iter <span style="color: #666666">+</span> <span style="color: #40a070">1</span>):
+    made <span style="color: #666666">=</span> <span style="color: #007020">round</span>(current_iter <span style="color: #666666">/</span> count_iter <span style="color: #666666">*</span> <span style="color: #40a070">100</span>)
+    <span style="color: #007020">print</span>(<span style="color: #4070a0">&#39;</span><span style="color: #4070a0; font-weight: bold">\r</span><span style="color: #4070a0">[</span><span style="color: #70a0d0; font-style: italic">{:&lt;25}</span><span style="color: #4070a0">] </span><span style="color: #70a0d0; font-style: italic">{}</span><span style="color: #4070a0">%&#39;</span><span style="color: #666666">.</span>format(<span style="color: #4070a0">&#39;#&#39;</span> <span style="color: #666666">*</span> <span style="color: #007020">round</span>(made <span style="color: #666666">/</span> <span style="color: #40a070">4</span>), made), end<span style="color: #666666">=</span><span style="color: #4070a0">&#39;&#39;</span>)
+    time<span style="color: #666666">.</span>sleep(<span style="color: #40a070">.5</span>)
+<span style="color: #007020; font-weight: bold">else</span>:
+    <span style="color: #007020">print</span>()
+</code></pre></div>
+<p><a name='Автоматическая-запись-всех-атрибутов-класса-в-верхнем-регистре'></a></p>
+<h3>Автоматическая запись всех атрибутов класса в верхнем регистре</h3>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">upper_attribute</span>(classname, classparents, classatributs):
+    attr <span style="color: #666666">=</span> ((name, value) <span style="color: #007020; font-weight: bold">for</span> name, value <span style="color: #007020; font-weight: bold">in</span> classatributs<span style="color: #666666">.</span>items() <span style="color: #007020; font-weight: bold">if</span>
+            <span style="color: #007020; font-weight: bold">not</span> name<span style="color: #666666">.</span>startswith(<span style="color: #4070a0">&quot;__&quot;</span>))
+    uppercase_attr <span style="color: #666666">=</span> <span style="color: #007020">dict</span>((name<span style="color: #666666">.</span>upper(), value) <span style="color: #007020; font-weight: bold">for</span> name, value <span style="color: #007020; font-weight: bold">in</span> attr)
+    <span style="color: #007020; font-weight: bold">return</span> <span style="color: #007020">type</span>(classname, classparents, uppercase_attr)
+
+<span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">Check</span>(metaclass<span style="color: #666666">=</span>upper_attribute):
+    a <span style="color: #666666">=</span> <span style="color: #4070a0">&quot;AttrName&quot;</span>
+
+<span style="color: #007020">print</span>(<span style="color: #007020">hasattr</span>(Check, <span style="color: #4070a0">&#39;a&#39;</span>))
+<span style="color: #007020">print</span>(<span style="color: #007020">hasattr</span>(Check, <span style="color: #4070a0">&#39;A&#39;</span>))
+</code></pre></div>
+<p><a name='Реализация-глобального-для-всех-TestCase-setUp-and-tearDown'></a></p>
+<h3>Реализация глобального для всех TestCase setUp and tearDown</h3>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">unittest</span>
+
+<span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">TestCaseMount</span>(<span style="color: #007020">type</span>):
+    <span style="color: #4070a0; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #4070a0; font-style: italic">    Метакласс, который позволяет собрать классы всех TestCase в одном месте.</span>
+<span style="color: #4070a0; font-style: italic">    &quot;&quot;&quot;</span>
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">__init__</span>(<span style="color: #007020">cls</span>, name, bases, attrs):
+        <span style="color: #007020; font-weight: bold">if</span> <span style="color: #007020; font-weight: bold">not</span> <span style="color: #007020">hasattr</span>(<span style="color: #007020">cls</span>, <span style="color: #4070a0">&#39;test_cases&#39;</span>):
+            <span style="color: #007020">cls</span><span style="color: #666666">.</span>test_cases <span style="color: #666666">=</span> []
+        <span style="color: #007020; font-weight: bold">else</span>:
+            <span style="color: #007020">cls</span><span style="color: #666666">.</span>test_cases<span style="color: #666666">.</span>append(<span style="color: #007020">cls</span>)
+
+    <span style="color: #555555; font-weight: bold">@property</span>
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">count_test_cases</span>(<span style="color: #007020">cls</span>) <span style="color: #666666">-&gt;</span> <span style="color: #007020">int</span>:
+        <span style="color: #4070a0; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #4070a0; font-style: italic">        :return: количество test case</span>
+<span style="color: #4070a0; font-style: italic">        &quot;&quot;&quot;</span>
+        <span style="color: #007020; font-weight: bold">return</span> <span style="color: #007020">len</span>(<span style="color: #007020">cls</span><span style="color: #666666">.</span>test_cases)
+
+
+<span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">BaseTestCase</span>(unittest<span style="color: #666666">.</span>TestCase, metaclass<span style="color: #666666">=</span>TestCaseMount):
+    <span style="color: #4070a0; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #4070a0; font-style: italic">    Базовый класс для всех test case</span>
+<span style="color: #4070a0; font-style: italic">    &quot;&quot;&quot;</span>
+    test_cases_executed <span style="color: #666666">=</span> <span style="color: #40a070">0</span>
+
+    <span style="color: #555555; font-weight: bold">@classmethod</span>
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">setUpClass</span>(<span style="color: #007020">cls</span>):
+        <span style="color: #4070a0; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #4070a0; font-style: italic">        Реализует глобальный для всех тестов setUp</span>
+<span style="color: #4070a0; font-style: italic">        &quot;&quot;&quot;</span>
+        <span style="color: #007020; font-weight: bold">if</span> BaseTestCase<span style="color: #666666">.</span>test_cases_executed <span style="color: #666666">==</span> <span style="color: #40a070">0</span>:
+            drop_test_db(engine)
+            create_test_db(engine)
+            models<span style="color: #666666">.</span>Base<span style="color: #666666">.</span>metadata<span style="color: #666666">.</span>create_all(engine)
+
+        BaseTestCase<span style="color: #666666">.</span>test_cases_executed <span style="color: #666666">+=</span> <span style="color: #40a070">1</span>
+
+    <span style="color: #555555; font-weight: bold">@classmethod</span>
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">tearDownClass</span>(<span style="color: #007020">cls</span>):
+        <span style="color: #4070a0; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #4070a0; font-style: italic">        Реализует глобальный для всех тестов tearDown</span>
+<span style="color: #4070a0; font-style: italic">        &quot;&quot;&quot;</span>
+        <span style="color: #007020; font-weight: bold">if</span> BaseTestCase<span style="color: #666666">.</span>test_cases_executed <span style="color: #666666">==</span> <span style="color: #007020">cls</span><span style="color: #666666">.</span>count_test_cases:
+            drop_test_db(engine)
+</code></pre></div>
+
+        </div><!--/.col-xs-12.col-sm-9-->
+
+    </div><!--/row-->
+
+
+    <hr>
+
+    <footer>
+        <p>
+            При копировании информации с данного сайта пожалуйста указывайте
+            ссылку на источник. © 2019 Записки питониста
+        </p>
+    </footer>
+
+</div><!--/.container-->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</body>
+</html>

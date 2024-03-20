@@ -1,0 +1,536 @@
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148357635-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-148357635-1');
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <title>Записки питониста - База знаний</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/base.css">
+
+    
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/knowledge-base.css">
+
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-static-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://aleksey925.github.io/knowledge-base/index.html">Записки питониста</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                
+    <li><a href="https://aleksey925.github.io/knowledge-base/index.html">Главная</a></li>
+    <li class="active"><a href="https://aleksey925.github.io/knowledge-base/knowledge_base/index.html">База знаний</a></li>
+
+            </ul>
+        </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+</nav><!-- /.navbar -->
+
+<div class="container">
+
+    
+    <div class="row row-content">
+
+        <div class="col-xs-12 col-sm-12">
+            <h1>Tutorial argparse</h1>
+<p>argparse — это библиотека для простого и удобного создания программ с 
+консольным интерфейсом.</p>
+<p><a href="https://docs.python.org/3/howto/argparse.html">Ссылка на оригинал</a></p>
+<h3>Основы</h3>
+<p>Давайте начнем с самых основ и рассмотрим минимальное количество кода 
+необходимого для работы argparse.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">argparse</span>
+parser <span style="color: #666666">=</span> argparse<span style="color: #666666">.</span>ArgumentParser()
+parser<span style="color: #666666">.</span>parse_args()
+</code></pre></div>
+<p>Результат выполнения получим:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>$ python3 prog.py
+$ python3 prog.py --help
+usage: prog.py <span style="color: #666666">[</span>-h<span style="color: #666666">]</span>
+
+optional arguments:
+  -h, --help  show this <span style="color: #007020">help</span> message and <span style="color: #007020">exit</span>
+$ python3 prog.py --verbose
+usage: prog.py <span style="color: #666666">[</span>-h<span style="color: #666666">]</span>
+prog.py: error: unrecognized arguments: --verbose
+$ python3 prog.py foo
+usage: prog.py <span style="color: #666666">[</span>-h<span style="color: #666666">]</span>
+prog.py: error: unrecognized arguments: foo
+</code></pre></div>
+<p>Вот, что здесь происходит:</p>
+<ul>
+<li>Запущен скрипт без аргументов, на стандартный вывод в результате ничего не 
+  выведено. Не особо полезно</li>
+<li>Начиная со второго примера начинает раскрываться потенциал argparse. 
+  Мы практически ничего не сделали, но уже получили справку.</li>
+<li>При использовании не правильных аргументов мы автоматически получаем вывод 
+  команды --help, которую можно так же сократить до -h. Но по умолчанию, мы 
+  опять же получаем не информативный вывод.</li>
+</ul>
+<h3>Введение в позиционные аргументы</h3>
+<p>Пример:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">argparse</span>
+parser <span style="color: #666666">=</span> argparse<span style="color: #666666">.</span>ArgumentParser()
+parser<span style="color: #666666">.</span>add_argument(<span style="color: #4070a0">&quot;echo&quot;</span>)
+args <span style="color: #666666">=</span> parser<span style="color: #666666">.</span>parse_args()
+<span style="color: #007020">print</span>(args<span style="color: #666666">.</span>echo)
+</code></pre></div>
+<p>В результате запуска выдает:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>$ python3 prog.py
+usage: prog.py <span style="color: #666666">[</span>-h<span style="color: #666666">]</span> <span style="color: #007020">echo</span>
+prog.py: error: the following arguments are required: <span style="color: #007020">echo</span>
+$ python3 prog.py --help
+usage: prog.py <span style="color: #666666">[</span>-h<span style="color: #666666">]</span> <span style="color: #007020">echo</span>
+
+positional arguments:
+  <span style="color: #007020">echo</span>
+
+optional arguments:
+  -h, --help  show this <span style="color: #007020">help</span> message and <span style="color: #007020">exit</span>
+$ python3 prog.py foo
+foo
+</code></pre></div>
+<p>Что здесь происходит:
+- Мы здесь добавили использование метода add_argument() , который определяет 
+  какие аргументы командной строки программа должна принимать. В данном случае,
+  аргумент назван echo, в соотвествии с назначением моей программы.
+- Теперь при вызове нашей программы мы должны указывать данный аргумент.
+- parse_args() возвращает разобранные аргументы командной строки, которые мы 
+  определили у нашей программы (в данном случае, это echo).
+- Нам не нужно определять в каких переменных будут храниться разобранные 
+  данные. Имя переменной соответствует имени аргумента (в данном случае echo).</p>
+<p>В данный момент вывод справки о программе пока все ещё не особо информативен. 
+На пример мы видим, что программа ожидает позиционный аргумент echo, но мы не 
+знаем зачем он нужен. По этому давайте сделаем справку немного более 
+информативной:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">argparse</span>
+parser <span style="color: #666666">=</span> argparse<span style="color: #666666">.</span>ArgumentParser()
+parser<span style="color: #666666">.</span>add_argument(<span style="color: #4070a0">&quot;echo&quot;</span>, help<span style="color: #666666">=</span><span style="color: #4070a0">&quot;echo the string you use here&quot;</span>)
+args <span style="color: #666666">=</span> parser<span style="color: #666666">.</span>parse_args()
+<span style="color: #007020">print</span>(args<span style="color: #666666">.</span>echo)
+</code></pre></div>
+<p>И мы получим:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>$ python3 prog.py -h
+usage: prog.py <span style="color: #666666">[</span>-h<span style="color: #666666">]</span> <span style="color: #007020">echo</span>
+
+positional arguments:
+  <span style="color: #007020">echo</span>        <span style="color: #007020">echo</span> the string you use here
+
+optional arguments:
+  -h, --help  show this <span style="color: #007020">help</span> message and <span style="color: #007020">exit</span>
+</code></pre></div>
+<p>Теперь как на счет того, чтобы сделать, что-то ещё более полезное:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">argparse</span>
+parser <span style="color: #666666">=</span> argparse<span style="color: #666666">.</span>ArgumentParser()
+parser<span style="color: #666666">.</span>add_argument(<span style="color: #4070a0">&quot;square&quot;</span>, help<span style="color: #666666">=</span><span style="color: #4070a0">&quot;display a square of a given number&quot;</span>)
+args <span style="color: #666666">=</span> parser<span style="color: #666666">.</span>parse_args()
+<span style="color: #007020">print</span>(args<span style="color: #666666">.</span>square<span style="color: #666666">**</span><span style="color: #40a070">2</span>)
+</code></pre></div>
+<p>Результат выполнения следующего кода:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>$ python3 prog.py <span style="color: #40a070">4</span>
+Traceback <span style="color: #666666">(</span>most recent call last<span style="color: #666666">)</span>:
+  File <span style="color: #4070a0">&quot;prog.py&quot;</span>, line <span style="color: #40a070">5</span>, <span style="color: #007020; font-weight: bold">in</span> &lt;module&gt;
+    print<span style="color: #666666">(</span>args.square**2<span style="color: #666666">)</span>
+TypeError: unsupported operand type<span style="color: #666666">(</span>s<span style="color: #666666">)</span> <span style="color: #007020; font-weight: bold">for</span> ** or pow<span style="color: #666666">()</span>: <span style="color: #4070a0">&#39;str&#39;</span> and <span style="color: #4070a0">&#39;int&#39;</span>
+</code></pre></div>
+<p>Это не очень хорошо. По умолчанию argparse возвращает все аругменты в строковом
+представлении, пока мы явно не укажем тип аругмента. По этому давайте скажем 
+argparse, что square, это int.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">argparse</span>
+parser <span style="color: #666666">=</span> argparse<span style="color: #666666">.</span>ArgumentParser()
+parser<span style="color: #666666">.</span>add_argument(<span style="color: #4070a0">&quot;square&quot;</span>, help<span style="color: #666666">=</span><span style="color: #4070a0">&quot;display a square of a given number&quot;</span>,
+                    <span style="color: #007020">type</span><span style="color: #666666">=</span><span style="color: #007020">int</span>)
+args <span style="color: #666666">=</span> parser<span style="color: #666666">.</span>parse_args()
+<span style="color: #007020">print</span>(args<span style="color: #666666">.</span>square<span style="color: #666666">**</span><span style="color: #40a070">2</span>)
+</code></pre></div>
+<p>Результат выполнения следующего кода:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>$ python3 prog.py <span style="color: #40a070">4</span>
+<span style="color: #40a070">16</span>
+$ python3 prog.py four
+usage: prog.py <span style="color: #666666">[</span>-h<span style="color: #666666">]</span> square
+prog.py: error: argument square: invalid int value: <span style="color: #4070a0">&#39;four&#39;</span>
+</code></pre></div>
+<p>Вот теперь отлично. Теперь программа сообщает нам, если передан аргумент не 
+того типа.</p>
+<h3>Необязательные позиционные аргументы</h3>
+<p>До этого описывались позиционные аргументы, которым нужно было обязательно
+передать данные, сейчас мы рассмотрим необязательные позиционные аргументы.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">os</span>
+<span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">argparse</span>
+parser <span style="color: #666666">=</span> argparse<span style="color: #666666">.</span>ArgumentParser()
+parser<span style="color: #666666">.</span>add_argument(<span style="color: #4070a0">&#39;path&#39;</span>, nargs<span style="color: #666666">=</span><span style="color: #4070a0">&#39;?&#39;</span>, default<span style="color: #666666">=</span>os<span style="color: #666666">.</span>getcwd(),
+                    help<span style="color: #666666">=</span><span style="color: #4070a0">&#39;путь к папке чье содержимое нужно отобразить&#39;</span>)
+args <span style="color: #666666">=</span> parser<span style="color: #666666">.</span>parse_args()
+<span style="color: #007020">print</span>(args<span style="color: #666666">.</span>path)
+</code></pre></div>
+<p>И запустив получим:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>$ python3 prog.py
+/home/alex/PycharmProjects/По мелочи
+$ python3 prog.py /home/alex
+/home/alex
+</code></pre></div>
+<ul>
+<li>Мы можем запустить программу без параметров (или если у нас есть другие 
+  параметры, просто пропустить параметр path) и тогда используется значение по 
+  умолчанию;</li>
+<li>Если значение по умолчанию не устраивает, можно задать необходимое.</li>
+</ul>
+<p>Пример такого поведения можно увидеть у программы ls. Мы можем посмотреть 
+файлы в заданной папке или отобразить файлы из рабочей директории.</p>
+<h3>Введение в необязательные аргументы</h3>
+<p>До сих пор мы игрались с позиционными (обязательными) аргументами. Давайте 
+теперь посмотрим как добавить не обязательный аргумент.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">argparse</span>
+parser <span style="color: #666666">=</span> argparse<span style="color: #666666">.</span>ArgumentParser()
+parser<span style="color: #666666">.</span>add_argument(<span style="color: #4070a0">&quot;--verbosity&quot;</span>, help<span style="color: #666666">=</span><span style="color: #4070a0">&quot;increase output verbosity&quot;</span>)
+args <span style="color: #666666">=</span> parser<span style="color: #666666">.</span>parse_args()
+<span style="color: #007020; font-weight: bold">if</span> args<span style="color: #666666">.</span>verbosity:
+    <span style="color: #007020">print</span>(<span style="color: #4070a0">&quot;verbosity turned on&quot;</span>)
+</code></pre></div>
+<p>И посмотрим вывод:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>$ python3 prog.py --verbosity <span style="color: #40a070">1</span>
+verbosity turned on
+$ python3 prog.py
+$ python3 prog.py --help
+usage: prog.py <span style="color: #666666">[</span>-h<span style="color: #666666">]</span> <span style="color: #666666">[</span>--verbosity VERBOSITY<span style="color: #666666">]</span>
+optional arguments:
+  -h, --help            show this <span style="color: #007020">help</span> message and <span style="color: #007020">exit</span>
+  --verbosity VERBOSITY
+                        increase output verbosity
+$ python3 prog.py --verbosity
+usage: prog.py <span style="color: #666666">[</span>-h<span style="color: #666666">]</span> <span style="color: #666666">[</span>--verbosity VERBOSITY<span style="color: #666666">]</span>
+prog.py: error: argument --verbosity: expected one argument
+</code></pre></div>
+<p>Здесь мы видим:
+- Программа выводит какие-то подробности, когда --verbosity определен и не 
+  отображает нечего в обратном случае. 
+- Так как аргумент действительно не обязательный, то когда мы запускаем 
+  программу без него, то ошибок не возникает. Нужно заметить, что когда 
+  необязательный аргумент не используется, то в соответствующей переменной 
+  (arg.verbosity) хранится None. По этому используется if, для проверки 
+  хранящегося значения.
+- Справка немного отличается.
+- Когда мы используем ключ --verbosity, то мы должны определить для него 
+  какое-то любое значение.</p>
+<p>В примере выше, программа принимает произвольное значение типа <code>int</code> для 
+<code>--verbosity</code>, но в нашей простой программе нам нужно знать только одно. Был 
+использован  ключ <code>--verbosity</code> при запуске программы или нет 
+(<code>True</code> или <code>False</code>). Для того, чтобы нам получать только <code>True</code> или <code>False</code> 
+давайте исправим код:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">argparse</span>
+parser <span style="color: #666666">=</span> argparse<span style="color: #666666">.</span>ArgumentParser()
+parser<span style="color: #666666">.</span>add_argument(<span style="color: #4070a0">&quot;--verbose&quot;</span>, help<span style="color: #666666">=</span><span style="color: #4070a0">&quot;increase output verbosity&quot;</span>,
+                    action<span style="color: #666666">=</span><span style="color: #4070a0">&quot;store_true&quot;</span>)
+args <span style="color: #666666">=</span> parser<span style="color: #666666">.</span>parse_args()
+<span style="color: #007020; font-weight: bold">if</span> args<span style="color: #666666">.</span>verbose:
+    <span style="color: #007020">print</span>(<span style="color: #4070a0">&quot;verbosity turned on&quot;</span>)
+</code></pre></div>
+<p>и получим следующий вывод:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>$ python3 prog.py --verbose
+verbosity turned on
+$ python3 prog.py --verbose <span style="color: #40a070">1</span>
+usage: prog.py <span style="color: #666666">[</span>-h<span style="color: #666666">]</span> <span style="color: #666666">[</span>--verbose<span style="color: #666666">]</span>
+prog.py: error: unrecognized arguments: <span style="color: #40a070">1</span>
+$ python3 prog.py --help
+usage: prog.py <span style="color: #666666">[</span>-h<span style="color: #666666">]</span> <span style="color: #666666">[</span>--verbose<span style="color: #666666">]</span>
+optional arguments:
+  -h, --help  show this <span style="color: #007020">help</span> message and <span style="color: #007020">exit</span>
+  --verbose   increase output verbosity
+</code></pre></div>
+<p>Здесь мы видим:
+- Этот параметр теперь больше похожа на флаг. По этому мы изменили его 
+  название. Обратите внимание, мы использовали новый ключевой аргумент <code>action</code> 
+  со значением <code>'store_true'</code>. Это значит, что если при вызове будет использован 
+  параметр <code>--verbose</code>, то переменная <code>args.verbose</code> будет содержать True, а 
+  если нет, <code>False</code>.
+- Вы получите ошибку, если будете пытаться этой опции присвоить какое-то 
+  значение (по тому, что этот параметр теперь играет роль флага).
+- Обратите внимание на изменившийся текст справки.</p>
+<h3>Короткие аргументы</h3>
+<p>Если вы хорошо знакомы с командной строкой, то вы заметили, что мы ещё не 
+обсудили создание коротких версий аргументов. Это очень просто:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">argparse</span>
+parser <span style="color: #666666">=</span> argparse<span style="color: #666666">.</span>ArgumentParser()
+parser<span style="color: #666666">.</span>add_argument(<span style="color: #4070a0">&quot;-v&quot;</span>, <span style="color: #4070a0">&quot;--verbose&quot;</span>, help<span style="color: #666666">=</span><span style="color: #4070a0">&quot;increase output verbosity&quot;</span>,
+                    action<span style="color: #666666">=</span><span style="color: #4070a0">&quot;store_true&quot;</span>)
+args <span style="color: #666666">=</span> parser<span style="color: #666666">.</span>parse_args()
+<span style="color: #007020; font-weight: bold">if</span> args<span style="color: #666666">.</span>verbose:
+    <span style="color: #007020">print</span>(<span style="color: #4070a0">&quot;verbosity turned on&quot;</span>)
+</code></pre></div>
+<p>Это даст:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>$ python3 prog.py -v
+verbosity turned on
+$ python3 prog.py --help
+usage: prog.py <span style="color: #666666">[</span>-h<span style="color: #666666">]</span> <span style="color: #666666">[</span>-v<span style="color: #666666">]</span>
+optional arguments:
+  -h, --help     show this <span style="color: #007020">help</span> message and <span style="color: #007020">exit</span>
+  -v, --verbose  increase output verbosity
+</code></pre></div>
+<p>Обратите внимание, что все изменения зафиксированы в справке.</p>
+<h3>Комбинирование обязательных и необязательных аргументов</h3>
+<p>Наша программа усложняется:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">argparse</span>
+parser <span style="color: #666666">=</span> argparse<span style="color: #666666">.</span>ArgumentParser()
+parser<span style="color: #666666">.</span>add_argument(<span style="color: #4070a0">&quot;square&quot;</span>, <span style="color: #007020">type</span><span style="color: #666666">=</span><span style="color: #007020">int</span>,
+                    help<span style="color: #666666">=</span><span style="color: #4070a0">&quot;display a square of a given number&quot;</span>)
+parser<span style="color: #666666">.</span>add_argument(<span style="color: #4070a0">&quot;-v&quot;</span>, <span style="color: #4070a0">&quot;--verbose&quot;</span>, action<span style="color: #666666">=</span><span style="color: #4070a0">&quot;store_true&quot;</span>,
+                    help<span style="color: #666666">=</span><span style="color: #4070a0">&quot;increase output verbosity&quot;</span>)
+args <span style="color: #666666">=</span> parser<span style="color: #666666">.</span>parse_args()
+answer <span style="color: #666666">=</span> args<span style="color: #666666">.</span>square<span style="color: #666666">**</span><span style="color: #40a070">2</span>
+<span style="color: #007020; font-weight: bold">if</span> args<span style="color: #666666">.</span>verbose:
+    <span style="color: #007020">print</span>(<span style="color: #4070a0">&quot;the square of </span><span style="color: #70a0d0; font-style: italic">{}</span><span style="color: #4070a0"> equals </span><span style="color: #70a0d0; font-style: italic">{}</span><span style="color: #4070a0">&quot;</span><span style="color: #666666">.</span>format(args<span style="color: #666666">.</span>square, answer))
+<span style="color: #007020; font-weight: bold">else</span>:
+    <span style="color: #007020">print</span>(answer)
+</code></pre></div>
+<p>Сейчас выводит:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>$ python3 prog.py
+usage: prog.py <span style="color: #666666">[</span>-h<span style="color: #666666">]</span> <span style="color: #666666">[</span>-v<span style="color: #666666">]</span> square
+prog.py: error: the following arguments are required: square
+$ python3 prog.py <span style="color: #40a070">4</span>
+<span style="color: #40a070">16</span>
+$ python3 prog.py <span style="color: #40a070">4</span> --verbose
+the square of <span style="color: #40a070">4</span> equals <span style="color: #40a070">16</span>
+$ python3 prog.py --verbose <span style="color: #40a070">4</span>
+the square of <span style="color: #40a070">4</span> equals <span style="color: #40a070">16</span>
+</code></pre></div>
+<ul>
+<li>Мы добавили позиционный (обязательный) аргумент, отсюда и ошибка.</li>
+<li>Обратите внимание, что порядок не имеет значения.</li>
+</ul>
+<p>Как насчет того, чтобы усложнить нашу программу и создать несколько уровней 
+детализации и управлять ими.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">argparse</span>
+parser <span style="color: #666666">=</span> argparse<span style="color: #666666">.</span>ArgumentParser()
+parser<span style="color: #666666">.</span>add_argument(<span style="color: #4070a0">&quot;square&quot;</span>, <span style="color: #007020">type</span><span style="color: #666666">=</span><span style="color: #007020">int</span>,
+                    help<span style="color: #666666">=</span><span style="color: #4070a0">&quot;display a square of a given number&quot;</span>)
+parser<span style="color: #666666">.</span>add_argument(<span style="color: #4070a0">&quot;-v&quot;</span>, <span style="color: #4070a0">&quot;--verbosity&quot;</span>, <span style="color: #007020">type</span><span style="color: #666666">=</span><span style="color: #007020">int</span>,
+                    help<span style="color: #666666">=</span><span style="color: #4070a0">&quot;increase output verbosity&quot;</span>)
+args <span style="color: #666666">=</span> parser<span style="color: #666666">.</span>parse_args()
+answer <span style="color: #666666">=</span> args<span style="color: #666666">.</span>square<span style="color: #666666">**</span><span style="color: #40a070">2</span>
+<span style="color: #007020; font-weight: bold">if</span> args<span style="color: #666666">.</span>verbosity <span style="color: #666666">==</span> <span style="color: #40a070">2</span>:
+    <span style="color: #007020">print</span>(<span style="color: #4070a0">&quot;the square of </span><span style="color: #70a0d0; font-style: italic">{}</span><span style="color: #4070a0"> equals </span><span style="color: #70a0d0; font-style: italic">{}</span><span style="color: #4070a0">&quot;</span><span style="color: #666666">.</span>format(args<span style="color: #666666">.</span>square, answer))
+<span style="color: #007020; font-weight: bold">elif</span> args<span style="color: #666666">.</span>verbosity <span style="color: #666666">==</span> <span style="color: #40a070">1</span>:
+    <span style="color: #007020">print</span>(<span style="color: #4070a0">&quot;</span><span style="color: #70a0d0; font-style: italic">{}</span><span style="color: #4070a0">^2 == </span><span style="color: #70a0d0; font-style: italic">{}</span><span style="color: #4070a0">&quot;</span><span style="color: #666666">.</span>format(args<span style="color: #666666">.</span>square, answer))
+<span style="color: #007020; font-weight: bold">else</span>:
+    <span style="color: #007020">print</span>(answer)
+</code></pre></div>
+<p>И в выводе получим:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>$ python3 prog.py <span style="color: #40a070">4</span>
+<span style="color: #40a070">16</span>
+$ python3 prog.py <span style="color: #40a070">4</span> -v
+usage: prog.py <span style="color: #666666">[</span>-h<span style="color: #666666">]</span> <span style="color: #666666">[</span>-v VERBOSITY<span style="color: #666666">]</span> square
+prog.py: error: argument -v/--verbosity: expected one argument
+$ python3 prog.py <span style="color: #40a070">4</span> -v <span style="color: #40a070">1</span>
+<span style="color: #40a070">4</span>^2 <span style="color: #666666">==</span> <span style="color: #40a070">16</span>
+$ python3 prog.py <span style="color: #40a070">4</span> -v <span style="color: #40a070">2</span>
+the square of <span style="color: #40a070">4</span> equals <span style="color: #40a070">16</span>
+$ python3 prog.py <span style="color: #40a070">4</span> -v <span style="color: #40a070">3</span>
+<span style="color: #40a070">16</span>
+</code></pre></div>
+<p>В этой версии программы все хорошо, кроме бага с аргументом <code>-v</code>. Давайте 
+исправим его, задав какие значения может принимать аргумент <code>-v</code>:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">argparse</span>
+parser <span style="color: #666666">=</span> argparse<span style="color: #666666">.</span>ArgumentParser()
+parser<span style="color: #666666">.</span>add_argument(<span style="color: #4070a0">&quot;square&quot;</span>, <span style="color: #007020">type</span><span style="color: #666666">=</span><span style="color: #007020">int</span>,
+                    help<span style="color: #666666">=</span><span style="color: #4070a0">&quot;display a square of a given number&quot;</span>)
+parser<span style="color: #666666">.</span>add_argument(<span style="color: #4070a0">&quot;-v&quot;</span>, <span style="color: #4070a0">&quot;--verbosity&quot;</span>, <span style="color: #007020">type</span><span style="color: #666666">=</span><span style="color: #007020">int</span>, choices<span style="color: #666666">=</span>[<span style="color: #40a070">0</span>, <span style="color: #40a070">1</span>, <span style="color: #40a070">2</span>],
+                    help<span style="color: #666666">=</span><span style="color: #4070a0">&quot;increase output verbosity&quot;</span>)
+args <span style="color: #666666">=</span> parser<span style="color: #666666">.</span>parse_args()
+answer <span style="color: #666666">=</span> args<span style="color: #666666">.</span>square<span style="color: #666666">**</span><span style="color: #40a070">2</span>
+<span style="color: #007020; font-weight: bold">if</span> args<span style="color: #666666">.</span>verbosity <span style="color: #666666">==</span> <span style="color: #40a070">2</span>:
+    <span style="color: #007020">print</span>(<span style="color: #4070a0">&quot;the square of </span><span style="color: #70a0d0; font-style: italic">{}</span><span style="color: #4070a0"> equals </span><span style="color: #70a0d0; font-style: italic">{}</span><span style="color: #4070a0">&quot;</span><span style="color: #666666">.</span>format(args<span style="color: #666666">.</span>square, answer))
+<span style="color: #007020; font-weight: bold">elif</span> args<span style="color: #666666">.</span>verbosity <span style="color: #666666">==</span> <span style="color: #40a070">1</span>:
+    <span style="color: #007020">print</span>(<span style="color: #4070a0">&quot;</span><span style="color: #70a0d0; font-style: italic">{}</span><span style="color: #4070a0">^2 == </span><span style="color: #70a0d0; font-style: italic">{}</span><span style="color: #4070a0">&quot;</span><span style="color: #666666">.</span>format(args<span style="color: #666666">.</span>square, answer))
+<span style="color: #007020; font-weight: bold">else</span>:
+    <span style="color: #007020">print</span>(answer)
+</code></pre></div>
+<p>И в выводе получим:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>$ python3 prog.py <span style="color: #40a070">4</span> -v <span style="color: #40a070">3</span>
+usage: prog.py <span style="color: #666666">[</span>-h<span style="color: #666666">]</span> <span style="color: #666666">[</span>-v <span style="color: #666666">{</span><span style="color: #40a070">0</span>,1,2<span style="color: #666666">}]</span> square
+prog.py: error: argument -v/--verbosity: invalid choice: <span style="color: #40a070">3</span> <span style="color: #666666">(</span>choose from <span style="color: #40a070">0</span>, <span style="color: #40a070">1</span>, <span style="color: #40a070">2</span><span style="color: #666666">)</span>
+$ python3 prog.py <span style="color: #40a070">4</span> -h
+usage: prog.py <span style="color: #666666">[</span>-h<span style="color: #666666">]</span> <span style="color: #666666">[</span>-v <span style="color: #666666">{</span><span style="color: #40a070">0</span>,1,2<span style="color: #666666">}]</span> square
+positional arguments:
+  square                display a square of a given number
+optional arguments:
+  -h, --help            show this <span style="color: #007020">help</span> message and <span style="color: #007020">exit</span>
+  -v <span style="color: #666666">{</span><span style="color: #40a070">0</span>,1,2<span style="color: #666666">}</span>, --verbosity <span style="color: #666666">{</span><span style="color: #40a070">0</span>,1,2<span style="color: #666666">}</span>
+                        increase output verbosity
+</code></pre></div>
+<p>Обратите внимание, что изменения отражены в сообщениях об ошибке и в справке.
+Давайте применим другой, более распространенный подход в использовании 
+<code>--verbosity</code>. Он соответствует способу обработки аргумента <code>--verbosity</code>, в 
+CPython (проверьте вывод команды python <code>--help</code>):</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">argparse</span>
+parser <span style="color: #666666">=</span> argparse<span style="color: #666666">.</span>ArgumentParser()
+parser<span style="color: #666666">.</span>add_argument(<span style="color: #4070a0">&quot;square&quot;</span>, <span style="color: #007020">type</span><span style="color: #666666">=</span><span style="color: #007020">int</span>,
+                    help<span style="color: #666666">=</span><span style="color: #4070a0">&quot;display the square of a given number&quot;</span>)
+parser<span style="color: #666666">.</span>add_argument(<span style="color: #4070a0">&quot;-v&quot;</span>, <span style="color: #4070a0">&quot;--verbosity&quot;</span>, action<span style="color: #666666">=</span><span style="color: #4070a0">&quot;count&quot;</span>,
+                    help<span style="color: #666666">=</span><span style="color: #4070a0">&quot;increase output verbosity&quot;</span>)
+args <span style="color: #666666">=</span> parser<span style="color: #666666">.</span>parse_args()
+answer <span style="color: #666666">=</span> args<span style="color: #666666">.</span>square<span style="color: #666666">**</span><span style="color: #40a070">2</span>
+<span style="color: #007020; font-weight: bold">if</span> args<span style="color: #666666">.</span>verbosity <span style="color: #666666">==</span> <span style="color: #40a070">2</span>:
+    <span style="color: #007020">print</span>(<span style="color: #4070a0">&quot;the square of </span><span style="color: #70a0d0; font-style: italic">{}</span><span style="color: #4070a0"> equals </span><span style="color: #70a0d0; font-style: italic">{}</span><span style="color: #4070a0">&quot;</span><span style="color: #666666">.</span>format(args<span style="color: #666666">.</span>square, answer))
+<span style="color: #007020; font-weight: bold">elif</span> args<span style="color: #666666">.</span>verbosity <span style="color: #666666">==</span> <span style="color: #40a070">1</span>:
+    <span style="color: #007020">print</span>(<span style="color: #4070a0">&quot;</span><span style="color: #70a0d0; font-style: italic">{}</span><span style="color: #4070a0">^2 == </span><span style="color: #70a0d0; font-style: italic">{}</span><span style="color: #4070a0">&quot;</span><span style="color: #666666">.</span>format(args<span style="color: #666666">.</span>square, answer))
+<span style="color: #007020; font-weight: bold">else</span>:
+    <span style="color: #007020">print</span>(answer)
+</code></pre></div>
+<p>В этом примере представлено ещё одно действие, <code>count</code>. Оно используется для 
+того, чтобы посчитать сколько раз использовался необязательный аргумент при 
+вызове программы.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>$ python3 prog.py <span style="color: #40a070">4</span>
+<span style="color: #40a070">16</span>
+$ python3 prog.py <span style="color: #40a070">4</span> -v
+<span style="color: #40a070">4</span>^2 <span style="color: #666666">==</span> <span style="color: #40a070">16</span>
+$ python3 prog.py <span style="color: #40a070">4</span> -vv
+the square of <span style="color: #40a070">4</span> equals <span style="color: #40a070">16</span>
+$ python3 prog.py <span style="color: #40a070">4</span> --verbosity --verbosity
+the square of <span style="color: #40a070">4</span> equals <span style="color: #40a070">16</span>
+$ python3 prog.py <span style="color: #40a070">4</span> -v <span style="color: #40a070">1</span>
+usage: prog.py <span style="color: #666666">[</span>-h<span style="color: #666666">]</span> <span style="color: #666666">[</span>-v<span style="color: #666666">]</span> square
+prog.py: error: unrecognized arguments: <span style="color: #40a070">1</span>
+$ python3 prog.py <span style="color: #40a070">4</span> -h
+usage: prog.py <span style="color: #666666">[</span>-h<span style="color: #666666">]</span> <span style="color: #666666">[</span>-v<span style="color: #666666">]</span> square
+positional arguments:
+  square           display a square of a given number
+optional arguments:
+  -h, --help       show this <span style="color: #007020">help</span> message and <span style="color: #007020">exit</span>
+  -v, --verbosity  increase output verbosity
+$ python3 prog.py <span style="color: #40a070">4</span> -vvv
+<span style="color: #40a070">16</span>
+</code></pre></div>
+<ul>
+<li>Да, сейчас это больше похоже на флаг (как в случае с <code>action="store_true"</code>),
+  как в предыдущей версии скрипта.</li>
+<li>Ведет себя аналогично <code>store_true</code>.</li>
+<li>Теперь давайте продемонстрируем, что действие count нам даёт.</li>
+<li>Если флаг <code>-v</code> не использовался, то соотвествующая переменная будет равна 
+  <code>None</code> (так же как и в случае с store_true).</li>
+<li>Неважно какую форму флага вы использовали, длинную или короткую.</li>
+<li>К сожалению документация не содержит информацию об внесенных в скрипт 
+  изменениях, но это всегда можно исправить дополнив справку с помощью 
+  именованного аргумента <code>help</code>.</li>
+<li>Последний вывод показывает допущенную в программе ошибку.</li>
+</ul>
+<p>Давайте исправим ее:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">argparse</span>
+parser <span style="color: #666666">=</span> argparse<span style="color: #666666">.</span>ArgumentParser()
+parser<span style="color: #666666">.</span>add_argument(<span style="color: #4070a0">&quot;square&quot;</span>, <span style="color: #007020">type</span><span style="color: #666666">=</span><span style="color: #007020">int</span>,
+                    help<span style="color: #666666">=</span><span style="color: #4070a0">&quot;display a square of a given number&quot;</span>)
+parser<span style="color: #666666">.</span>add_argument(<span style="color: #4070a0">&quot;-v&quot;</span>, <span style="color: #4070a0">&quot;--verbosity&quot;</span>, action<span style="color: #666666">=</span><span style="color: #4070a0">&quot;count&quot;</span>,
+                    help<span style="color: #666666">=</span><span style="color: #4070a0">&quot;increase output verbosity&quot;</span>)
+args <span style="color: #666666">=</span> parser<span style="color: #666666">.</span>parse_args()
+answer <span style="color: #666666">=</span> args<span style="color: #666666">.</span>square<span style="color: #666666">**</span><span style="color: #40a070">2</span>
+<span style="color: #60a0b0; font-style: italic"># bugfix: replace == with &gt;=</span>
+<span style="color: #007020; font-weight: bold">if</span> args<span style="color: #666666">.</span>verbosity <span style="color: #666666">&gt;=</span> <span style="color: #40a070">2</span>:
+    <span style="color: #007020">print</span>(<span style="color: #4070a0">&quot;the square of </span><span style="color: #70a0d0; font-style: italic">{}</span><span style="color: #4070a0"> equals </span><span style="color: #70a0d0; font-style: italic">{}</span><span style="color: #4070a0">&quot;</span><span style="color: #666666">.</span>format(args<span style="color: #666666">.</span>square, answer))
+<span style="color: #007020; font-weight: bold">elif</span> args<span style="color: #666666">.</span>verbosity <span style="color: #666666">&gt;=</span> <span style="color: #40a070">1</span>:
+    <span style="color: #007020">print</span>(<span style="color: #4070a0">&quot;</span><span style="color: #70a0d0; font-style: italic">{}</span><span style="color: #4070a0">^2 == </span><span style="color: #70a0d0; font-style: italic">{}</span><span style="color: #4070a0">&quot;</span><span style="color: #666666">.</span>format(args<span style="color: #666666">.</span>square, answer))
+<span style="color: #007020; font-weight: bold">else</span>:
+    <span style="color: #007020">print</span>(answer)
+</code></pre></div>
+<p>И вот, что мы получаем:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>$ python3 prog.py <span style="color: #40a070">4</span> -vvv
+the square of <span style="color: #40a070">4</span> equals <span style="color: #40a070">16</span>
+$ python3 prog.py <span style="color: #40a070">4</span> -vvvv
+the square of <span style="color: #40a070">4</span> equals <span style="color: #40a070">16</span>
+$ python3 prog.py <span style="color: #40a070">4</span>
+Traceback <span style="color: #666666">(</span>most recent call last<span style="color: #666666">)</span>:
+  File <span style="color: #4070a0">&quot;prog.py&quot;</span>, line <span style="color: #40a070">11</span>, <span style="color: #007020; font-weight: bold">in</span> &lt;module&gt;
+    <span style="color: #007020; font-weight: bold">if</span> args.verbosity &gt;<span style="color: #666666">=</span> <span style="color: #40a070">2</span>:
+TypeError: unorderable types: NoneType<span style="color: #666666">()</span> &gt;<span style="color: #666666">=</span> int<span style="color: #666666">()</span>
+</code></pre></div>
+<ul>
+<li>Ошибку, которую мы хотели исправить, мы исправили.</li>
+<li>Третий вывод, не так хорош.</li>
+</ul>
+<p>Давайте исправим этот баг:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">argparse</span>
+parser <span style="color: #666666">=</span> argparse<span style="color: #666666">.</span>ArgumentParser()
+parser<span style="color: #666666">.</span>add_argument(<span style="color: #4070a0">&quot;square&quot;</span>, <span style="color: #007020">type</span><span style="color: #666666">=</span><span style="color: #007020">int</span>,
+                    help<span style="color: #666666">=</span><span style="color: #4070a0">&quot;display a square of a given number&quot;</span>)
+parser<span style="color: #666666">.</span>add_argument(<span style="color: #4070a0">&quot;-v&quot;</span>, <span style="color: #4070a0">&quot;--verbosity&quot;</span>, action<span style="color: #666666">=</span><span style="color: #4070a0">&quot;count&quot;</span>, default<span style="color: #666666">=</span><span style="color: #40a070">0</span>,
+                    help<span style="color: #666666">=</span><span style="color: #4070a0">&quot;increase output verbosity&quot;</span>)
+args <span style="color: #666666">=</span> parser<span style="color: #666666">.</span>parse_args()
+answer <span style="color: #666666">=</span> args<span style="color: #666666">.</span>square<span style="color: #666666">**</span><span style="color: #40a070">2</span>
+<span style="color: #007020; font-weight: bold">if</span> args<span style="color: #666666">.</span>verbosity <span style="color: #666666">&gt;=</span> <span style="color: #40a070">2</span>:
+    <span style="color: #007020">print</span>(<span style="color: #4070a0">&quot;the square of </span><span style="color: #70a0d0; font-style: italic">{}</span><span style="color: #4070a0"> equals </span><span style="color: #70a0d0; font-style: italic">{}</span><span style="color: #4070a0">&quot;</span><span style="color: #666666">.</span>format(args<span style="color: #666666">.</span>square, answer))
+<span style="color: #007020; font-weight: bold">elif</span> args<span style="color: #666666">.</span>verbosity <span style="color: #666666">&gt;=</span> <span style="color: #40a070">1</span>:
+    <span style="color: #007020">print</span>(<span style="color: #4070a0">&quot;</span><span style="color: #70a0d0; font-style: italic">{}</span><span style="color: #4070a0">^2 == </span><span style="color: #70a0d0; font-style: italic">{}</span><span style="color: #4070a0">&quot;</span><span style="color: #666666">.</span>format(args<span style="color: #666666">.</span>square, answer))
+<span style="color: #007020; font-weight: bold">else</span>:
+    <span style="color: #007020">print</span>(answer)
+</code></pre></div>
+<p>Мы просто использовали ещё один именованный аргумент <code>default</code>. Мы задали его 
+равным <code>0</code>, чтобы значение хранящиеся в <code>verbosity</code> могло участвовать в 
+операции сравнения с числами и не возникало ошибки, когда пользователь не 
+использовал аргумент <code>verbosity</code> (потому что если мы этого не сделаем, там 
+будет <code>None</code>).</p>
+<p>И:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>$ python3 prog.py <span style="color: #40a070">4</span>
+<span style="color: #40a070">16</span>
+</code></pre></div>
+<p>Даже с тем, что мы узнали до сих пор вы уже можете сделать многое, но на самом 
+деле это только вершина айсберга. Модуль argparse очень мощный и невозможно 
+все рассмотреть в этом учебнике.</p>
+<p>Дополнительные материалы по теме:</p>
+<ul>
+<li><a href="https://habr.com/post/144416/">Argparse — парсим аргументы и параметры командной строки с легкостью | habr</a></li>
+</ul>
+
+        </div><!--/.col-xs-12.col-sm-9-->
+
+    </div><!--/row-->
+
+
+    <hr>
+
+    <footer>
+        <p>
+            При копировании информации с данного сайта пожалуйста указывайте
+            ссылку на источник. © 2019 Записки питониста
+        </p>
+    </footer>
+
+</div><!--/.container-->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</body>
+</html>

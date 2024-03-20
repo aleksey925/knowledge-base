@@ -1,0 +1,994 @@
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148357635-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-148357635-1');
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <title>Записки питониста - База знаний</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/base.css">
+
+    
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/knowledge-base.css">
+
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-static-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://aleksey925.github.io/knowledge-base/index.html">Записки питониста</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                
+    <li><a href="https://aleksey925.github.io/knowledge-base/index.html">Главная</a></li>
+    <li class="active"><a href="https://aleksey925.github.io/knowledge-base/knowledge_base/index.html">База знаний</a></li>
+
+            </ul>
+        </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+</nav><!-- /.navbar -->
+
+<div class="container">
+
+    
+    <div class="row row-content">
+
+        <div class="col-xs-12 col-sm-12">
+            <h1>Заметки о работе с MacOS</h1>
+<h1>Оглавление</h1>
+<ol>
+<li>
+<p><h3><a href="#Настройка-системы">Настройка системы</a></h3></p>
+<ul>
+<li><a href="#Горячие-клавиши">Горячие клавиши</a></li>
+<li><a href="#Принудительная-очистка-ОЗУ">Принудительная очистка ОЗУ</a></li>
+<li><a href="#Отключение-Dashboard">Отключение Dashboard</a></li>
+<li><a href="#Отключение-автоматического-изменения-порядка-рабочих-столов">Отключение автоматического изменения порядка рабочих столов</a></li>
+<li><a href="#Отображение-в-finder-папок-перед-файлами">Отображение в finder папок перед файлами</a></li>
+<li><a href="#Предпросмотр-содержимого-архива-в-finder">Предпросмотр содержимого архива в finder</a></li>
+<li><a href="#Изменение-значения-TTL">Изменение значения TTL</a></li>
+<li><a href="#Создание-MacOS-приложения-из-простого-скрипта">Создание MacOS приложения из простого скрипта</a></li>
+<li><a href="#Отключение-SIP">Отключение SIP</a></li>
+<li><a href="#Отключение-Spotlight">Отключение Spotlight</a></li>
+<li><a href="#Отключение-уведомления-default-interactive-shell-is-now-zsh">Отключение уведомления "default interactive shell is now zsh"</a></li>
+<li><a href="#Настройка-автодополнения-команд-в-zsh">Настройка автодополнения команд в zsh</a></li>
+<li><a href="#Удаление-мусора">Удаление мусора</a></li>
+<li><a href="#Отключение-авторизации-для-доступа-к-сертификату-из-keychain">Отключение авторизации для доступа к сертификату из keychain</a></li>
+<li><a href="#Авторизация-в-консоли-через-TouchID">Авторизация в консоли через TouchID</a></li>
+</ul>
+</li>
+<li>
+<p><h3><a href="#Установка/удаление-программ">Установка/удаление программ</a></h3></p>
+<ul>
+<li>
+<p><h4><a href="#Brew">Brew</a></h4></p>
+<ul>
+<li><a href="#Установка-brew">Установка brew</a></li>
+<li><a href="#Использование-несколькими-пользователями">Использование несколькими пользователями</a></li>
+<li><a href="#Установка-пакетов-brew">Установка пакетов brew</a></li>
+<li><a href="#Удаление-пакетов-brew">Удаление пакетов brew</a></li>
+<li><a href="#Репозитории-brew">Репозитории brew</a></li>
+<li><a href="#Кэш-brew">Кэш brew</a></li>
+<li><a href="#Смена-используемой-версии-пакета">Смена используемой версии пакета</a></li>
+<li><a href="#Запуск-и-остановка-фоновых-служб-brew">Запуск и остановка фоновых служб brew</a></li>
+<li><a href="#Установка-приложений">Установка приложений</a></li>
+</ul>
+</li>
+<li>
+<p><h4><a href="#PGK">PGK</a></h4></p>
+<ul>
+<li><a href="#Удаление-pkg">Удаление pkg</a></li>
+</ul>
+</li>
+<li>
+<p><h4><a href="#Python">Python</a></h4></p>
+<ul>
+<li><a href="#Установка-PyQt4">Установка PyQt4</a></li>
+<li><a href="#Установка-lxml">Установка lxml</a></li>
+<li><a href="#Установка-mpi4py">Установка mpi4py</a></li>
+<li><a href="#Установка-numpy">Установка numpy</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><h3><a href="#Устранение-проблем">Устранение проблем</a></h3></p>
+<ul>
+<li><a href="#Не-удаляется-VPN-соединение">Не удаляется VPN соединение</a></li>
+</ul>
+</li>
+<li>
+<p><h3><a href="#Разное">Разное</a></h3></p>
+<ul>
+<li><a href="#Создание-автозагрузочной-флешки-с-windows">Создание автозагрузочной флешки с windows</a></li>
+<li><a href="#Создание-автозагрузочной-флешки-с-linux">Создание автозагрузочной флешки с linux</a></li>
+<li><a href="#Разбить-большой-файл-на-части">Разбить большой файл на части</a></li>
+</ul>
+</li>
+</ol>
+<p><a name='Настройка-системы'></a></p>
+<h2>Настройка системы</h2>
+<p><a name='Горячие-клавиши'></a></p>
+<h3>Горячие клавиши</h3>
+<p><strong>Система</strong></p>
+<table>
+<thead>
+<tr>
+<th>Комбинация</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>option + (комб. клавиш или взаимодействие с ui )</td>
+<td>option выступает мастер клавишей, которая позволяет получить доступ к большему количеству опций (например если зажать клавишу option и кликнуть по wi-fi или иконке настройке звука, то вы увидите меню с расширенными настройками) или получить альтернативный результат. Более подробно можно узнать <a href="https://youtu.be/pasrZ4QEUCQ">здесь</a>.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Finder</strong></p>
+<table>
+<thead>
+<tr>
+<th>Комбинация</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>shift + command + .</td>
+<td>Показать/скрыть скрытые файлы</td>
+</tr>
+</tbody>
+</table>
+<p>Если нужно посмотреть наиболее полную справку по горячим клавишам можно 
+поставить программу <code>CheatSheet</code>.</p>
+<p><a name='Принудительная-очистка-ОЗУ'></a></p>
+<h3>Принудительная очистка ОЗУ</h3>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>sudo purge
+</code></pre></div>
+<p><a name='Отключение-Dashboard'></a></p>
+<h3>Отключение Dashboard</h3>
+<p>Для отключение Dashboard необходимо в консоли выполнить следующие команды</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>defaults write com.apple.dashboard mcx-disabled -boolean YES
+killall Dock
+</code></pre></div>
+<p>Если вы передумали, включить Dashboard можно следующей командой</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>defaults write com.apple.dashboard mcx-disabled -boolean NO
+</code></pre></div>
+<p><a name='Отключение-автоматического-изменения-порядка-рабочих-столов'></a></p>
+<h3>Отключение автоматического изменения порядка рабочих столов</h3>
+<p>В macos есть фукнция, которая автоматически меняет порядок созданных рабочих 
+столов. Упорядочивает она их по частоте использования. Такое поведение не 
+всегда удобно, а иногда вообще доставляет сильный дискомфорт.</p>
+<p>К счастью эту "супер крутую" фичу можно отключить!</p>
+<p>MacOS &lt; 13.x</p>
+<ul>
+<li>откройте <code>Системные настройки</code></li>
+<li>выберите пункт <code>Mission Control</code></li>
+<li>снимите галочку с <code>Автоматически использовать последние расположение пространств</code></li>
+</ul>
+<p>MacOS &gt;= 13.x</p>
+<ul>
+<li>откройте <code>Системные настройки</code></li>
+<li>выберите пункт <code>Рабочий стол и Dock</code></li>
+<li>найдите раздел <code>Mission Control</code></li>
+<li>снимите галочку с <code>Менять расположение пространств в зависимости от недавнего использования</code></li>
+</ul>
+<p><a name='Отображение-в-finder-папок-перед-файлами'></a></p>
+<h3>Отображение в finder папок перед файлами</h3>
+<p>Полезные ссылки:</p>
+<ul>
+<li><a href="https://severe-programmer.com/manual/finder-kak-pokazyvat-papki-pered-faĭlami/">Finder – как показывать папки перед файлами</a> </li>
+</ul>
+<p><a name='Предпросмотр-содержимого-архива-в-finder'></a></p>
+<h3>Предпросмотр содержимого архива в finder</h3>
+<p>По умолчанию, для большинства файлов в finder доступен предпросмотр по нажатию <code>Option</code> + <code>Space</code>. К сожалению,
+в этот список не входят архивы. Для исправления этой проблемы необходимо установить <code>betterzip</code>.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>brew install --cask betterzip
+</code></pre></div>
+<p>После установки, приложение автоматически начнет работать, но будет не лишним зайти в его настройки и полазить там. 
+Оно имеет очень много полезных настроек.</p>
+<p><a name='Изменение-значения-TTL'></a></p>
+<h3>Изменение значения TTL</h3>
+<p>Time to live (TTL) — число итераций или переходов, за который набор данных 
+(пакет) может существовать до своего исчезновения.</p>
+<p>Есть 2 способа изменить значение TTL:</p>
+<ol>
+<li>
+<p>Значение TTL меняется на ограниченое время. После перезагрузки
+   системы будет востановлено значение по умолчанию.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>sudo sysctl -w net.inet.ip.ttl<span style="color: #666666">=</span>&lt;нужное значение ttl&gt;
+</code></pre></div>
+</li>
+<li>
+<p>Установка постоянного значения TTL делается следующим образом:</p>
+<ul>
+<li>создаем файл <code>/etc/sysctl.conf</code></li>
+<li>добавляем в него строку <code>net.inet.ip.ttl=&lt;нужное значение ttl&gt;</code></li>
+</ul>
+</li>
+</ol>
+<p><a name='Создание-MacOS-приложения-из-простого-скрипта'></a></p>
+<h3>Создание MacOS приложения из простого скрипта</h3>
+<p>В MacOS программы устроенны очень интересным образом, все программы это 
+своебразные пакеты с набором файлов в том, числе и с самой программой. Вы 
+можете сами убедиться в этом, нажав на программу правой кнопкой мыши выбрав 
+-&gt; <code>Показать содержимое пакета</code>.</p>
+<p>Внутри вы скорей всего увидите примерно такую структуру:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>.
+└── Contents
+    ├── MacOS
+    └── Resources
+</code></pre></div>
+<p><code>Resources</code> - содержит ресурсы программы (иконка программы и т.д.), в <code>MacOS</code> 
+находиться сама программа, точнее исполнительный файл, который запускает 
+программу. </p>
+<p>Кроме описанных выше каталогов, в корне папаки <code>Contents</code> могут находится еще 
+различные текстовые файлы, в них хранятся метаданные пакета.</p>
+<p>Теперь, когда мы уже имеем некоторое представление о том, что из себя 
+представляют приложения в MacOS, давайте превратим обычный python скрипт в 
+полноценное приложение.</p>
+<p>Код скрипта:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">sys</span>
+<span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">PyQt5.QtWidgets</span> <span style="color: #007020; font-weight: bold">import</span> QApplication, QWidget
+
+
+app <span style="color: #666666">=</span> QApplication(sys<span style="color: #666666">.</span>argv)
+
+w <span style="color: #666666">=</span> QWidget()
+w<span style="color: #666666">.</span>resize(<span style="color: #40a070">250</span>, <span style="color: #40a070">150</span>)
+w<span style="color: #666666">.</span>move(<span style="color: #40a070">300</span>, <span style="color: #40a070">300</span>)
+w<span style="color: #666666">.</span>setWindowTitle(<span style="color: #4070a0">&#39;Simple&#39;</span>)
+w<span style="color: #666666">.</span>show()
+
+sys<span style="color: #666666">.</span>exit(app<span style="color: #666666">.</span>exec_())
+</code></pre></div>
+<p>Для того, чтобы реализовать задуманное:</p>
+<ul>
+<li>Необходимо создать папку, которая будет иметь такое-же имя как наша программа.</li>
+<li>Потом, создаем внутри этой папки следующую структуру:
+    <div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>.
+└── Contents
+    ├── MacOS
+    ├── Resources
+    └── Info.plist
+</code></pre></div></li>
+<li>Теперь можно разместить внутри папки MacOS наш скрипт, содержание которого 
+  мы описали выше.</li>
+<li>Кроме самого python скрипта, потребуется еще bash скрипт, который
+  будет указывать, как именно запускать python скрипт. Расположить его 
+  необходимо так же в папке MacOS. В нашем случае скрипт будет называться 
+  simpleapp и будет иметь следующие содержание:
+  <div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #60a0b0; font-style: italic">#!/usr/bin/env bash</span>
+<span style="color: #bb60d5">BASE_DIR</span><span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">$(</span> <span style="color: #007020">cd</span> <span style="color: #4070a0">&quot;</span><span style="color: #007020; font-weight: bold">$(</span>dirname <span style="color: #4070a0">&quot;</span><span style="color: #70a0d0; font-style: italic">${</span><span style="color: #bb60d5">BASH_SOURCE</span>[0]<span style="color: #70a0d0; font-style: italic">}</span><span style="color: #4070a0">&quot;</span><span style="color: #007020; font-weight: bold">)</span><span style="color: #4070a0">&quot;</span> ; <span style="color: #007020">pwd</span> -P <span style="color: #007020; font-weight: bold">)</span>
+<span style="color: #007020">cd</span> <span style="color: #4070a0">&quot;</span><span style="color: #bb60d5">$BASE_DIR</span><span style="color: #4070a0">&quot;</span>
+python3 ./main.py
+</code></pre></div></li>
+<li>Для того, чтобы скрипт успешно выполнился, он должен иметь права на 
+  исполнение. Дать ему эти права можно следующей командой: <code>sudo chmod +x simpleapp</code></li>
+<li>После создания скриптов, необходимо скопировать иконку изображения в папку 
+  Resources. Иконка должна быть в формате <code>*.icns</code>.</li>
+<li>Теперь, необходимо создать в корне папки <code>Contents</code> файл <code>Info.plist</code> со 
+  следующим содержанием:
+    <div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE plist PUBLIC &quot;-//Apple Computer//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
+&lt;plist version=&quot;1.0&quot;&gt;
+    &lt;dict&gt;
+        &lt;key&gt;CFBundleDevelopmentRegion&lt;/key&gt;
+        &lt;string&gt;English&lt;/string&gt;
+        &lt;key&gt;CFBundleExecutable&lt;/key&gt;
+        &lt;string&gt;run.sh&lt;/string&gt;
+        &lt;key&gt;CFBundleIconFile&lt;/key&gt;
+        &lt;string&gt;app.icns&lt;/string&gt;
+        &lt;key&gt;CFBundleInfoDictionaryVersion&lt;/key&gt;
+        &lt;string&gt;6.0&lt;/string&gt;
+        &lt;key&gt;CFBundleName&lt;/key&gt;
+        &lt;string&gt;Simple app&lt;/string&gt;
+        &lt;key&gt;CFBundlePackageType&lt;/key&gt;
+        &lt;string&gt;APPL&lt;/string&gt;
+        &lt;key&gt;CFBundleIdentifier&lt;/key&gt;
+        &lt;string&gt;org.python.python&lt;/string&gt;
+        &lt;key&gt;CFBundleSignature&lt;/key&gt;
+        &lt;string&gt;????&lt;/string&gt;
+        &lt;key&gt;CFBundleGetInfoString&lt;/key&gt;
+        &lt;string&gt;Simple app 1.0.0&lt;/string&gt;
+        &lt;key&gt;CFBundleShortVersionString&lt;/key&gt;
+        &lt;string&gt;1.0.0&lt;/string&gt;
+        &lt;key&gt;CFBundleVersion&lt;/key&gt;
+        &lt;string&gt;1.0.0&lt;/string&gt;
+        &lt;key&gt;LSApplicationCategoryType&lt;/key&gt;
+        &lt;string&gt;public.app-category.entertainment&lt;/string&gt;
+
+        &lt;key&gt;NSRequiresAquaSystemAppearance&lt;/key&gt;
+        &lt;string&gt;false&lt;/string&gt;
+
+        &lt;key&gt;LSRequiresNativeExecution&lt;/key&gt;
+        &lt;string&gt;YES&lt;/string&gt;
+        &lt;key&gt;LSMinimumSystemVersion&lt;/key&gt;
+        &lt;string&gt;10.8&lt;/string&gt;
+    &lt;/dict&gt;
+&lt;/plist&gt;
+</code></pre></div></li>
+<li>И в качестве завершающего этапа, необходимо к имени папки, которую мы 
+  создали выполняя первый этап инструкции, добавить расширение <code>.app</code>.</li>
+</ul>
+<p>После того, как были проделаны все описанные выше пункты, должнна получиться 
+папка со следующим содержанием:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>.
+└── Simple\ app.app
+    └── Contents
+        ├── Info.plist
+        ├── MacOS
+        │   ├── main.py
+        │   └── run.sh
+        └── Resources
+            └── app.icns
+</code></pre></div>
+<p>Теперь, вы можете 2 раза щелкнуть по папке <code>Simple app</code> и будет запущен 
+созданный нами скрипт. </p>
+<p><strong>P.S.</strong></p>
+<p>Для того, чтобы убедиться в том, что у нашего приложения отображается 
+правильная картинка, необходимо либо перезагрузить комьютер, либо просто 
+выполнить <code>touch ./Simple app.app</code>.</p>
+<p>Полезные ссылки:</p>
+<ul>
+<li><a href="http://mynotelist.blogspot.com/2016/06/macos-bash-macos-app.html">Превращаем Bash скрипт в macOS *.app программу</a></li>
+<li><a href="https://www.sethvargo.com/replace-icons-osx">Changing Mac OS X Application Icons Programmatically</a></li>
+<li><a href="https://bitbucket.org/alex925/serial-notifier/src/master/tools/create_macos_package.py">Пример скрипта, который автоматически собирает python приложение в macos пакет</a></li>
+<li><a href="https://stackoverflow.com/questions/1596945/building-osx-app-bundle">building-osx-app-bundle - stackoverflow</a></li>
+</ul>
+<p><a name='Отключение-SIP'></a></p>
+<h3>Отключение SIP</h3>
+<p>System Integrity Protection – это технология, направленная на защиту от 
+вредоносного программного обеспечения. SIP серьезно ограничивает возможность 
+любого изменения системных файлов сторонним программами или пользователем. 
+Доступ к редактированию обладают только особые процессы, подписанные Apple. 
+Например, один из таких процессов — обновление ПО.</p>
+<p>Данный способ защиты может доставлять достаточно большое количество проблем, 
+если компьюетр используется для ведения разработки, по этому лучше его 
+отключить.</p>
+<p>Для того, чтобы отключить SIP, вам необходимо выполнить следующие действия:</p>
+<ul>
+<li>выключаем mac</li>
+<li>при включении удерживаем комбинацию клавиш Command + R, чтобы загрузился 
+  режим Recovery</li>
+<li>после загрузки выбираем в меню «Утилиты» приложение «Терминал»</li>
+<li>в терминале выполняем команду
+  <div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>csrutil disable
+</code></pre></div>
+  Если в будующем вы решите обратно включить данную защиту, то вам необходимо
+  выполнить
+  <div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>csrutil <span style="color: #007020">enable</span>
+</code></pre></div></li>
+</ul>
+<p><a name='Отключение-Spotlight'></a></p>
+<h3>Отключение Spotlight</h3>
+<p>Spotlight - это система «глобального» поиска по компьютеру. Она переодически 
+запускает индексацию файлов, и тратит на это ресурсы компьютера (аккумулятор, 
+процессор и т д). Если вы не пользутесь данной службой, то лучше будет ее 
+отключить.</p>
+<p>Сделать это можно командой:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>sudo mdutil -a -i off
+</code></pre></div>
+<p>Включить обратно службу можно будет так:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>sudo mdutil -a -i on
+</code></pre></div>
+<p>Полезные ссылки:</p>
+<ul>
+<li><a href="https://iphonegeek.me/instructions/dlya-chajnikov/255-kak-uskorit-rabotu-mac-i-sokratit-rashod-batarei-s-pomoschyu-spotlight.html">Как ускорить работу Mac и сократить расход батареи с помощью Spotlight</a></li>
+</ul>
+<p><a name='Отключение-уведомления-default-interactive-shell-is-now-zsh'></a></p>
+<h3>Отключение уведомления "default interactive shell is now zsh"</h3>
+<p>После обновления на macos catalina при открытии терминала всегда появляется 
+надоедливое сообщение:</p>
+<blockquote>
+<p>The default interactive shell is now zsh. To update your account to use zsh, 
+please run chsh -s /bin/zsh.</p>
+</blockquote>
+<p>К счатью его можно легко отключить. Для этого необходимо добавить в файл
+<code>~/.bash_profile</code> строку <code>export BASH_SILENCE_DEPRECATION_WARNING=1</code>.</p>
+<p><a name='Настройка-автодополнения-команд-в-zsh'></a></p>
+<h3>Настройка автодополнения команд в zsh</h3>
+<p>В данном примере будет показно, как включить автодополнение для: git, poetry, docker и docker-compose.</p>
+<ol>
+<li>Устанавливаем bash-completion <code>brew install bash-completion</code></li>
+<li>
+<p>Создаем папку для хранения файлов необходимых для автодополнения.</p>
+<blockquote>
+<p>Если у вас в окружении не определена переменная окружения HOMEBREW_PREFIX, то вам нужно инициализировать 
+окружение при помощи вызова <code>brew shellenv</code>.</p>
+</blockquote>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>mkdir -p ~/.zsh &amp;&amp; cd ~/.zsh
+
+poetry completions zsh &gt; ~/.zsh/_poetry
+
+curl -o git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+curl -o _git https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.zsh
+
+cp $HOMEBREW_PREFIX/share/zsh/site-functions/_docker ~/.zsh/_docker
+cp $HOMEBREW_PREFIX/share/zsh/site-functions/_docker_compose ~/.zsh/_docker_compose
+</code></pre></div>
+</li>
+<li>
+<p>Активируем загрузку автодополнений. Для этого открываем <code>~/.zshrc</code> и добавляем туда</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code># Enable console autocompletion
+zstyle &#39;:completion:*:*:git:*&#39; script ~/.zsh/git-completion.bash
+fpath=(~/.zsh $fpath)
+autoload -Uz compinit &amp;&amp; compinit
+</code></pre></div>
+</li>
+<li>
+<p>Перезагружаем консоль и наслаждаемся.</p>
+</li>
+</ol>
+<p>P.S. Если вы хотите включить автодополнение еще для какой-то утилиты и вы эту утилиту устанавливали через brew, то
+первым делом попробуйте поискать файл нужный для включения автодополнения в папке 
+<code>$HOMEBREW_PREFIX/share/zsh/site-functions/</code>.</p>
+<p><a name='Удаление-мусора'></a></p>
+<h3>Удаление мусора</h3>
+<p>Удаление ненужных файлов XCode</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #60a0b0; font-style: italic">#!/bin/bash</span>
+
+<span style="color: #60a0b0; font-style: italic"># Delete Archived Applications</span>
+rm -r ~/Library/Developer/Xcode/Archives/*/
+
+<span style="color: #60a0b0; font-style: italic"># Delete Devired Data</span>
+rm -r ~/Library/Developer/Xcode/DerivedData/*/
+
+<span style="color: #60a0b0; font-style: italic"># Delete Apple cached files</span>
+rm -r ~/Library/Developer/CoreSimulator/Caches/dyld/*/*/
+
+<span style="color: #60a0b0; font-style: italic"># Delegete cache on com.apple.DeveloperTools</span>
+rm -r /private/var/folders/dk/*/C/com.apple.DeveloperTools/*/
+
+<span style="color: #60a0b0; font-style: italic"># Delete unused simulators</span>
+xcrun simctl delete unavailable
+</code></pre></div>
+<p><a name='Отключение-авторизации-для-доступа-к-сертификату-из-keychain'></a></p>
+<h3>Отключение авторизации для доступа к сертификату из keychain</h3>
+<p>Некоторые приложения могут запрашивать доступ к сертификатам установленным в keychain и по 
+умолчанию MacOS в этом случае будет запрашивать авторизацию. Если это происходит часто, это 
+может начать бесить. Я столкнулся с такой проблемой при использовании Google Chrome. Ниже я
+опишу как решить эту проблему.</p>
+<ol>
+<li>
+<p>Открываем keychain.</p>
+</li>
+<li>
+<p>Находим там закрытый ключ к которому пытается получить доступ Google Chrome.</p>
+<p>P.S. Название ключа прописано во всплывающем окне <code>Выбор сертификата</code>.</p>
+</li>
+<li>
+<p>Открываем его свойства и переходим во вкладку <code>Доступ</code>.</p>
+</li>
+<li>
+<p>Добавляем нужное приложение (в моем случае это был Google Chrome) в список <code>Всегда разрешать доступ этим программам</code>.</p>
+</li>
+</ol>
+<p><a name='Авторизация-в-консоли-через-TouchID'></a></p>
+<h3>Авторизация в консоли через TouchID</h3>
+<p>Делаем резервную копию конфига sudo демона и открываем его на редактирование</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>cp /etc/pam.d/sudo ~/
+sudo vim /etc/pam.d/sudo
+</code></pre></div>
+<p>Добавьте первой строкой после комментария следующий текст:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>auth       sufficient     pam_tid.so
+</code></pre></div>
+<blockquote>
+<p>Сохраните файл, но не закрывайте редактор, сначала проверьте в соседнем окне 
+терминала, что вы без проблем можете запускать приложения используя sudo. Так
+если у вас возникнут какие-то проблемы, вы сможете откатить сделанные изменения. </p>
+</blockquote>
+<p>В результате у вас должно получится, что-то вроде этого:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code># sudo: auth account password session
+auth       sufficient     pam_tid.so
+auth       sufficient     pam_smartcard.so
+auth       required       pam_opendirectory.so
+account    required       pam_permit.so
+password   required       pam_deny.so
+session    required       pam_permit.so
+</code></pre></div>
+<p>Переоткройте терминал и наслаждайтесь тем, что подтвердить выполнение программы
+от имени суперпользователя можно при помощи отпечатка пальца.</p>
+<p>Полезные ссылки:</p>
+<ul>
+<li><a href="https://nicholasmangold.com/blog/how-use-sudo-touch-id-mac">How to use sudo with Touch ID on a Mac</a></li>
+</ul>
+<p><a name='Установка/удаление-программ'></a></p>
+<h2>Установка/удаление программ</h2>
+<p><a name='Brew'></a></p>
+<h3>Brew</h3>
+<p><a name='Установка-brew'></a></p>
+<h4>Установка brew</h4>
+<p><strong>Установка на mac с intel</strong></p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>/bin/bash -c <span style="color: #4070a0">&quot;</span><span style="color: #007020; font-weight: bold">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span style="color: #007020; font-weight: bold">)</span><span style="color: #4070a0">&quot;</span>
+</code></pre></div>
+<p>Полезные ссылки:
+- http://dghubble.com/blog/posts/homebrew-os-x-package-management/</p>
+<p><strong>Установка на mac с apple silicon</strong></p>
+<p>Работа на mac с apple silicon имеет свои особенности. Это связано с тем, что пока не все программы имеют нативные 
+версии. По этому ниже будет описано как установить и использовать brew на устройствах с чипом от apple.</p>
+<p>Установка и настройка системы:</p>
+<ol>
+<li>
+<p>Для начала, необходимо установить 2 версии brew, одна позволит нам устанавливать программы, которые будут работать 
+   через эмулятор, а вторая будет устанавливать нативные приложения.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>arch -x86_64 /bin/bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)&quot;
+arch -arm64 /bin/bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)&quot;
+</code></pre></div>
+<p>После установки brew для m1 будет установлен в <code>/opt/homebrew/bin/brew</code>, а для intel <code>/usr/local/bin/brew</code>.</p>
+</li>
+<li>
+<p>После установки очень важно правильно настроить инициализацию окружения. Для этого открываем файл <code>~/.zshrc</code> и 
+    добавляем в него следующие строки:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #60a0b0; font-style: italic"># brew</span>
+<span style="color: #007020; font-weight: bold">if</span> <span style="color: #666666">[[</span> <span style="color: #007020; font-weight: bold">$(</span>arch<span style="color: #007020; font-weight: bold">)</span> <span style="color: #666666">==</span> <span style="color: #4070a0">&#39;arm64&#39;</span> <span style="color: #666666">]]</span>; <span style="color: #007020; font-weight: bold">then</span>
+    <span style="color: #007020">eval</span> <span style="color: #4070a0">&quot;</span><span style="color: #007020; font-weight: bold">$(</span>/opt/homebrew/bin/brew shellenv<span style="color: #007020; font-weight: bold">)</span><span style="color: #4070a0">&quot;</span>
+<span style="color: #007020; font-weight: bold">else</span>
+    <span style="color: #007020">eval</span> <span style="color: #4070a0">&quot;</span><span style="color: #007020; font-weight: bold">$(</span>/usr/local/bin/brew shellenv<span style="color: #007020; font-weight: bold">)</span><span style="color: #4070a0">&quot;</span>
+<span style="color: #007020; font-weight: bold">fi</span>
+
+<span style="color: #60a0b0; font-style: italic"># Генерирует флаги необходимые для сборки из исходников сишных библиотек</span>
+<span style="color: #007020">export</span> <span style="color: #bb60d5">LDFLAGS</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;&quot;</span>
+<span style="color: #007020">export</span> <span style="color: #bb60d5">CPPFLAGS</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;&quot;</span>
+<span style="color: #007020">export</span> <span style="color: #bb60d5">PKG_CONFIG_PATH</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;&quot;</span>
+
+<span style="color: #bb60d5">pkgs</span><span style="color: #666666">=(</span>openssl@1.1 curl readline zlib sqlite<span style="color: #666666">)</span>
+<span style="color: #007020; font-weight: bold">for</span> pkg <span style="color: #007020; font-weight: bold">in</span> <span style="color: #bb60d5">$pkgs</span>; <span style="color: #007020; font-weight: bold">do</span>
+    <span style="color: #bb60d5">pkg_dir</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;</span><span style="color: #bb60d5">$HOMEBREW_PREFIX</span><span style="color: #4070a0">/opt/</span><span style="color: #bb60d5">$pkg</span><span style="color: #4070a0">&quot;</span>
+
+    <span style="color: #bb60d5">lib_dir</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;</span><span style="color: #bb60d5">$pkg_dir</span><span style="color: #4070a0">/lib&quot;</span>
+
+    <span style="color: #007020; font-weight: bold">if</span> <span style="color: #666666">[</span> -d <span style="color: #4070a0">&quot;</span><span style="color: #bb60d5">$lib_dir</span><span style="color: #4070a0">&quot;</span> <span style="color: #666666">]</span>; <span style="color: #007020; font-weight: bold">then</span>
+        <span style="color: #007020">export</span> <span style="color: #bb60d5">LDFLAGS</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;</span><span style="color: #bb60d5">$LDFLAGS</span><span style="color: #4070a0"> -L</span><span style="color: #bb60d5">$lib_dir</span><span style="color: #4070a0">&quot;</span>
+    <span style="color: #007020; font-weight: bold">fi</span>
+
+    <span style="color: #bb60d5">include_dir</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;</span><span style="color: #bb60d5">$pkg_dir</span><span style="color: #4070a0">/include&quot;</span>
+    <span style="color: #007020; font-weight: bold">if</span> <span style="color: #666666">[</span> -d <span style="color: #4070a0">&quot;</span><span style="color: #bb60d5">$include_dir</span><span style="color: #4070a0">&quot;</span> <span style="color: #666666">]</span>; <span style="color: #007020; font-weight: bold">then</span>
+        <span style="color: #007020">export</span> <span style="color: #bb60d5">CPPFLAGS</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;</span><span style="color: #bb60d5">$CPPFLAGS</span><span style="color: #4070a0"> -I</span><span style="color: #bb60d5">$include_dir</span><span style="color: #4070a0">&quot;</span>
+    <span style="color: #007020; font-weight: bold">fi</span>
+
+    <span style="color: #bb60d5">pkg_config_dir</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;</span><span style="color: #bb60d5">$lib_dir</span><span style="color: #4070a0">/pkgconfig&quot;</span>
+    <span style="color: #007020; font-weight: bold">if</span> <span style="color: #666666">[</span> -d <span style="color: #4070a0">&quot;</span><span style="color: #bb60d5">$pkg_config_dir</span><span style="color: #4070a0">&quot;</span> <span style="color: #666666">]</span>; <span style="color: #007020; font-weight: bold">then</span>
+        <span style="color: #007020; font-weight: bold">if</span> <span style="color: #666666">[</span> <span style="color: #4070a0">&quot;x</span><span style="color: #bb60d5">$PKG_CONFIG_PATH</span><span style="color: #4070a0">&quot;</span> <span style="color: #666666">=</span> <span style="color: #4070a0">&quot;x&quot;</span> <span style="color: #666666">]</span>; <span style="color: #007020; font-weight: bold">then</span>
+            <span style="color: #007020">export</span> <span style="color: #bb60d5">PKG_CONFIG_PATH</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;</span><span style="color: #bb60d5">$pkg_config_dir</span><span style="color: #4070a0">&quot;</span>
+        <span style="color: #007020; font-weight: bold">else</span>
+            <span style="color: #007020">export</span> <span style="color: #bb60d5">PKG_CONFIG_PATH</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;PKG_CONFIG_PATH:</span><span style="color: #bb60d5">$pkg_config_dir</span><span style="color: #4070a0">&quot;</span>
+        <span style="color: #007020; font-weight: bold">fi</span>
+    <span style="color: #007020; font-weight: bold">fi</span>
+<span style="color: #007020; font-weight: bold">done</span>
+</code></pre></div>
+<p>Данная конфигурация описывает логику выбора версии brew и создает переменные окружения необходимые для сборки из 
+исходников приложений, которые зависят от софта устанавливаемого через brew.</p>
+<p>В переменной pkgs описаны пакеты, которые являются зависимостями необходимыми для сборки других приложений из 
+исходников. В данный момент там перечисленны некоторые из очень популярных библиотек, если для сборки нужной вам 
+библиотеки нужные другие пакеты, которые вы уже установили, просто добавьте их туда.</p>
+</li>
+<li>
+<p>Теперь закройте и откройте новое окно терминала. Это необходимо для загрузки ранее описанной конфигурации.</p>
+</li>
+</ol>
+<p>Теперь, когда система настроена. Для установки нативных приложений вам всегда необходимо открывать терминал для 
+архитектуры arm64, а для установки старых приложений терминал нужно открывать для архитектуры x86_64. Сделать это можно 
+так:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #60a0b0; font-style: italic"># Открывает терминал позволяющий работать с нативными приложениями</span>
+arch -arm64 zsh
+
+<span style="color: #60a0b0; font-style: italic"># Открывает терминал позволяющий работать с приложениями в режиме эмуляции</span>
+arch -x86_64 zsh
+</code></pre></div>
+<blockquote>
+<p>Необходимо обратить внимание, что нужно делать именно так. Если вы будете пробовать выполнять команды вида 
+<code>arch -x86_64 brew install python</code>, то возможно возникновение проблем, так как вы работаете в уже настроенном для 
+другой архитектуры окружении.</p>
+</blockquote>
+<p><a name='Использование-несколькими-пользователями'></a></p>
+<h4>Использование несколькими пользователями</h4>
+<p>Если вы хотите использовать brew на одном компьютере несколькими пользователями, то у вас сразу возникает проблема, так
+как brew не заточен под такое использование. Нормально решить эту проблему на сколько я знаю нельзя, но есть
+несколько костылей. Они могут частично решить проблему. Ниже я опишу наиболее адекватный костыль, который сейчас сам 
+использую:</p>
+<ol>
+<li>Создаем отдельного пользователя.</li>
+<li>Авторизуемся под ним и <a href="#Установка-brew">устанавливаем brew</a> в нем.</li>
+<li>После этого настраиваем в <code>.zshrc</code> инициализацию окружения в каждом из пользователей, которые будут использовать 
+brew.</li>
+<li>
+<p>Добавляем в <code>.zshrc</code> следующий alias:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>alias brew=&#39;sudo -Hu &lt;account_name&gt; brew&#39;
+</code></pre></div>
+<p>Это позволит нам запускать brew от имени пользователя, которого мы создали на первом этапе.</p>
+</li>
+</ol>
+<p>P.S. Важно заметить, что вариант не идеальный и с некоторыми приложениями могут возникать проблемы.</p>
+<p>Полезные ссылки:</p>
+<ul>
+<li>https://www.codejam.info/2021/11/homebrew-multi-user.html</li>
+<li>https://stackoverflow.com/questions/13762280/zsh-compinit-insecure-directories</li>
+</ul>
+<p><a name='Установка-пакетов-brew'></a></p>
+<h4>Установка пакетов brew</h4>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>brew install &lt;FORMULA&gt;
+</code></pre></div>
+<p>FORMULA - это название пакета, который будет установлен.</p>
+<p><strong>Установка конкретной версии</strong></p>
+<p>При помощи команды выше будет установлена самая последняя версия приложения.
+Если вам необходимо установить определенную версию, то необходимо будет сделать 
+немного больше телодвижений:</p>
+<ul>
+<li>заходим в репозиторий и ищем в Pull requests коммит с нужной нам версией
+программы и переходим к нему</li>
+<li>открываем вкладку commits</li>
+<li>переходим к коду этого коммита</li>
+<li>нажимаем view, чтобы посмотреть код этого коммита</li>
+<li>теперь переходим в режим просмотра кода raw</li>
+<li>копируем ссылку из адресной строки и подставляем в команду
+    <div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>brew install https://raw.github.com/dsr/homebrew/9b22d42f50fcbc5e52c764448b3ac002bc153bd7/Library/Formula/python3.rb
+</code></pre></div>
+Таким способом можно поставить любую версию интересующей вас программы.</li>
+</ul>
+<p>Ссылки на дополнительную информацию:</p>
+<ul>
+<li>https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Tips-N'-Tricks.md</li>
+<li>http://effectif.com/mac-os-x/installing-specific-version-of-homebrew-formula (инф. старая)</li>
+</ul>
+<p><a name='Удаление-пакетов-brew'></a></p>
+<h4>Удаление пакетов brew</h4>
+<p>Удаление пакетов установленных при помощи brew производится командой:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>brew rm &lt;FORMULA&gt;
+</code></pre></div>
+<p>Неприятным моментом является то, что эта команда удаляет только указанный пакет,
+а все зависимости данного пакета остаются. Частичным решением данной проблемы 
+является команда (выполнять ее нужно после удаления самого пакета):</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>brew rm <span style="color: #007020; font-weight: bold">$(</span>join &lt;<span style="color: #666666">(</span>brew leaves<span style="color: #007020; font-weight: bold">)</span> &lt;<span style="color: #666666">(</span>brew deps FORMULA<span style="color: #666666">))</span>
+</code></pre></div>
+<ul>
+<li><code>FORMULA</code> - название пакета у которого необходимо найти неиспользуемые 
+   зависимости</li>
+<li><code>brew leaves</code> - выводит все пакеты, которые не зависят от других пакетов</li>
+<li><code>brew deps</code> - выводит пакеты, от которых зависит данный пакет</li>
+</ul>
+<p>Она удаляет пакеты зависящие от удаляемого пакета и те которые не 
+зависят больше ни от каких других пакетов. К сожалению данный способ ни как не
+решает проблему циклических зависимостей.</p>
+<p><strong>rmtree</strong></p>
+<p>rmtree - это расширение для brew, которое в теории должно позволять 1 командой
+удалять пакет со всеми его зависимостями. К сожалению, работает оно не всегда 
+хорошо.</p>
+<p>Установка rmtree делается следующей командой:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>brew tap beeftornado/rmtree
+</code></pre></div>
+<p>Теперь удалять пакеты можно следующей командой:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>brew rmtree &lt;package&gt;
+</code></pre></div>
+<p>Если подытожить, то пока нет идеального способа удалить пакет со всеми его 
+зависимостями. Лучший способ - это комбинация 2 описанных ранее способов.</p>
+<p>Ссылки по теме:</p>
+<ul>
+<li>http://oryband.com/removing-homebrew-packages-with-dependencies/</li>
+<li>https://stackoverflow.com/questions/7323261/uninstall-remove-a-homebrew-package-including-all-its-dependencies</li>
+</ul>
+<p><a name='Репозитории-brew'></a></p>
+<h4>Репозитории brew</h4>
+<p>Репозитории в brew называются tap.</p>
+<p>Добавить новый репозиторий можно командой:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>brew tap &lt;REPO&gt;
+</code></pre></div>
+<p>Список полезных реппозиториев:</p>
+<ul>
+<li>homebrew/cask</li>
+</ul>
+<p><a name='Кэш-brew'></a></p>
+<h4>Кэш brew</h4>
+<p>Для получения пути к папке где brew хранит исходники использовавшиеся
+для сборки, нужно выполнить:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>brew --cache
+</code></pre></div>
+<p><a name='Смена-используемой-версии-пакета'></a></p>
+<h4>Смена используемой версии пакета</h4>
+<p>Brew позволяет вам установить одновременно несколько версий одного приложения, 
+но по умолчанию у вас будет вызываться последняя установленная версия.
+Для того, чтобы переключиться на предыдущую версию необходимо использовать 
+команду switch.</p>
+<p>Общий синтаксис команды</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>brew switch &lt;FORMULA&gt; &lt;VERSION&gt;
+</code></pre></div>
+<p>Пример установки python 3.5.1 как версии используемой по умолчанию </p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>brew switch python3 <span style="color: #40a070">3</span>.5.1
+</code></pre></div>
+<p><a name='Запуск-и-остановка-фоновых-служб-brew'></a></p>
+<h4>Запуск и остановка фоновых служб brew</h4>
+<p>https://robots.thoughtbot.com/starting-and-stopping-background-services-with-homebrew</p>
+<p><a name='Установка-приложений'></a></p>
+<h4>Установка приложений</h4>
+<p>brew — «менеджер недостающих пакетов для macOS», как его называет создатель. 
+Изначально он предназначается для компиляции приложений из исходных кодов. Но 
+brew умеет не только это. Вместе с дополнением homebrew-cask он способен 
+устанавливать приложения из «Терминала».</p>
+<p>Для этого необходимо добавить в Homebrew репозиторий cask:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>brew tap caskroom/cask
+</code></pre></div>
+<p>После этого, можно устанавливать приложения просто 1 командой. Например, 
+команда ниже производит установку браузера google chrome:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>brew install --cask google-chrome
+</code></pre></div>
+<p>Если вам требуется установить несколько приложений, то вы можете сделать это 1 
+командой. Данная команда установит docker и google-chrome:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>brew install --cask google-chrome docker
+</code></pre></div>
+<p>Удаляются установленные приложения также просто как и устанавливаются:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>brew uninstall --cask google-chrome
+</code></pre></div>
+<p><a name='Brew-удаление-не-использующихся-зависимостей'></a></p>
+<h4>Удаление не использующихся зависимостей</h4>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>brew autoremove
+</code></pre></div>
+<p><a name='PGK'></a></p>
+<h3>PGK</h3>
+<p><a name='Удаление-pkg'></a></p>
+<h4>Удаление pkg</h4>
+<ol>
+<li>
+<p>Выведем список всех pkg в системе</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>pkgutil --pkgs
+</code></pre></div>
+</li>
+<li>
+<p>Выбираем pkg, который нужно удалить и копируем его имя и вставляем его в команду</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>pkgutil --forget &lt;скопированное имя&gt;
+</code></pre></div>
+</li>
+<li>
+<p>Перетащить app файл в корзину (если он остался)</p>
+</li>
+</ol>
+<p><a name='Python'></a></p>
+<h3>Python</h3>
+<p><a name='Установка-PyQt4'></a></p>
+<h4>Установка PyQt4</h4>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>brew install pyqt --with-python3
+</code></pre></div>
+<p><a name='Установка-lxml'></a></p>
+<h4>Установка lxml</h4>
+<p>Для того, чтобы установить библиотеку lxml нужно сначала установить сишную 
+реализацию этой либы</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>brew install libxml2 
+brew install libxslt
+
+brew link libxml2 --force 
+brew link libxslt --force
+</code></pre></div>
+<p>Теперь можно устанавливать обертку для python</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>pip3 install lxml
+</code></pre></div>
+<p>Теперь можно выполнить</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>brew unlink libxml2 
+brew unlink libxslt
+</code></pre></div>
+<p><a name='Установка-mpi4py'></a></p>
+<h4>Установка mpi4py</h4>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>brew install mpich
+pip3 install mpi4py
+</code></pre></div>
+<p><a name='Установка-numpy'></a></p>
+<h4>Установка numpy</h4>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>brew install homebrew/python/numpy --with-python3
+</code></pre></div>
+<p><a name='Устранение-проблем'></a></p>
+<h2>Устранение проблем</h2>
+<p><a name='Не-удаляется-VPN-соединение'></a></p>
+<h3>Не удаляется VPN соединение</h3>
+<p>Иногда может случиться так, что у вас не получается удалить старое VPN 
+соединение (кнопка удаления в меню "Сеть" не активна и в меню "Профили"
+профиль для вашего VPN уже удален). 
+В этом случае придется удалить информацию о всех VPN соединениях.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>sudo cp /Library/Preferences/com.apple.networkextension.plist /Library/Preferences/com.apple.networkextension.plist.old
+sudo rm /Library/Preferences/com.apple.networkextension.plist 
+</code></pre></div>
+<p>P.S. Если у вас не получается удалить файл, то проверьте отключен ли у вас SIP. </p>
+<p>Полезные ссылки:</p>
+<ul>
+<li><a href="https://apple.stackexchange.com/questions/315797/where-macos-keeps-vpn-network-configuration">Where macOS keeps VPN Network configuration?</a></li>
+</ul>
+<p><a name='Разное'></a></p>
+<h2>Разное</h2>
+<p><a name='Создание-автозагрузочной-флешки-с-windows'></a></p>
+<h3>Создание автозагрузочной флешки с windows</h3>
+<p>Для создания автозагрузочной флешки сделайте следующее:</p>
+<ol>
+<li>
+<p>Подключите флешку к ПК</p>
+</li>
+<li>
+<p>Откройте терминал и введите там команду</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>diskutil list
+</code></pre></div>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>MBP-Aleksej:~ aleksey$ diskutil list
+/dev/disk0 (internal, physical):
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:      GUID_partition_scheme                        *1.0 TB     disk0
+   1:                        EFI EFI                     314.6 MB   disk0s1
+   2:                 Apple_APFS Container disk1         1.0 TB     disk0s2
+
+/dev/disk1 (synthesized):
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:      APFS Container Scheme -                      +1.0 TB     disk1
+                                 Physical Store disk0s2
+   1:                APFS Volume Macintosh HD — данные   185.7 GB   disk1s1
+   2:                APFS Volume Preboot                 84.1 MB    disk1s2
+   3:                APFS Volume Recovery                528.1 MB   disk1s3
+   4:                APFS Volume VM                      1.1 GB     disk1s4
+   5:                APFS Volume Macintosh HD            11.1 GB    disk1s5
+
+/dev/disk2 (external, physical):
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:      GUID_partition_scheme                        *7.8 GB     disk2
+   1:                        EFI EFI                     209.7 MB   disk2s1
+   2:       Microsoft Basic Data WIN10                   7.6 GB     disk2s2
+</code></pre></div>
+<p>Данная команда позволила нам узнать идентификатор, который система присвоила
+нашей флешке. В моем случае флешка называется <code>/dev/disk2</code>.</p>
+</li>
+<li>
+<p>Теперь необходимо отформатировать флешку для работы в windows.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>diskutil eraseDisk MS-DOS &quot;LIVEUSB&quot; GPT /dev/disk2
+</code></pre></div>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>Started erase on disk2
+Unmounting disk
+Creating the partition map
+Waiting for partitions to activate
+Formatting disk2s2 as MS-DOS (FAT) with name LIVEUSB
+512 bytes per physical sector
+/dev/rdisk2s2: 14814936 sectors in 1851867 FAT32 clusters (4096 bytes/cluster)
+bps=512 spc=8 res=32 nft=2 mid=0xf8 spt=32 hds=255 hid=411648 drv=0x80 bsec=14843904 bspf=14468 rdcl=2 infs=1 bkbs=6
+Mounting disk
+Finished erase on disk2
+</code></pre></div>
+<p>Если при форматировании возникли ошибки, то необходимо выполнить немного другую
+команду:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>diskutil eraseDisk MS-DOS &quot;LIVEUSB&quot; MBR /dev/disk2
+</code></pre></div>
+</li>
+<li>
+<p>Примонтируем iso образ, который будем устанавливать на флешку</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>hdiutil mount ~/Downloads/Win10.iso
+</code></pre></div>
+</li>
+<li>
+<p>Скопируем все файлы из образа на нашу флешку</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>cp -rp /Volumes/Win10/* /Volumes/LIVEUSB/
+</code></pre></div>
+</li>
+</ol>
+<p>Отлично, теперь все готово, можно извлечь флешку и использовать.</p>
+<p>Полезные ссылки:</p>
+<ul>
+<li><a href="https://www.freecodecamp.org/news/how-make-a-windows-10-usb-using-your-mac-build-a-bootable-iso-from-your-macs-terminal/">How Make a Windows 10 USB Using Your Mac - Build a Bootable ISO From Your Mac's Terminal</a></li>
+</ul>
+<p><a name='Создание-автозагрузочной-флешки-с-linux'></a></p>
+<h3>Создание автозагрузочной флешки с linux</h3>
+<ol>
+<li>
+<p>Подключите флешку</p>
+</li>
+<li>
+<p>Отформатируйте при помощи дисковой утилиты ее в FAT</p>
+</li>
+<li>
+<p>Откройте терминал и введите там команду</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>diskutil list
+</code></pre></div>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>MBP-Aleksej:~ aleksey$ diskutil list
+/dev/disk0 (internal, physical):
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:      GUID_partition_scheme                        *1.0 TB     disk0
+   1:                        EFI EFI                     314.6 MB   disk0s1
+   2:                 Apple_APFS Container disk1         1.0 TB     disk0s2
+
+/dev/disk1 (synthesized):
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:      APFS Container Scheme -                      +1.0 TB     disk1
+                                 Physical Store disk0s2
+   1:                APFS Volume Macintosh HD — данные   185.7 GB   disk1s1
+   2:                APFS Volume Preboot                 84.1 MB    disk1s2
+   3:                APFS Volume Recovery                528.1 MB   disk1s3
+   4:                APFS Volume VM                      1.1 GB     disk1s4
+   5:                APFS Volume Macintosh HD            11.1 GB    disk1s5
+
+/dev/disk2 (external, physical):
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:      GUID_partition_scheme                        *7.8 GB     disk2
+   1:                        EFI EFI                     209.7 MB   disk2s1
+   2:       Microsoft Basic Data WIN10                   7.6 GB     disk2s2
+</code></pre></div>
+<p>Данная команда позволила нам узнать идентификатор, который система присвоила
+нашей флешке. В моем случае флешка называется <code>/dev/disk2</code>.</p>
+</li>
+<li>
+<p>Отмонитируем флешку</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>diskutil unmountDisk /dev/disk2
+</code></pre></div>
+</li>
+<li>
+<p>Теперь можно приступать к записи образа</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>sudo dd if=~/Downloads/linuxmint-20-mate-64bit.iso of=/dev/disk2 bs=1m
+</code></pre></div>
+<p>После того как команда завершится, macos выкинет предупреждение "Вставленный 
+Вами диск не может быть прочитан на этом компьютере", это совершенно нормально,
+вам необходимо нажать "Извлечь".</p>
+</li>
+<li>
+<p>Можно использовать сделанную флешку по назначению</p>
+</li>
+</ol>
+<p>Полезные ссылки:</p>
+<ul>
+<li><a href="https://itsfoss.com/create-bootable-ubuntu-usb-drive-mac-os/">How To Create A Bootable Ubuntu USB Drive For Mac In OS X</a></li>
+</ul>
+<p><a name='Разбить-большой-файл-на-части'></a></p>
+<h3>Разбить большой файл на части</h3>
+<p>Разбить большой файл на части можно при помощи команды split</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>split -a <span style="color: #40a070">1</span> -d -b 4000M sample.iso sample.iso.part
+</code></pre></div>
+<p>Данная команда разобьёт исходный файл sample.iso на части по 4 Гбайта, каждая из 
+которых будет именоваться как sample.iso.part<N>, где N = 0, 1, 2, ... .</p>
+<p>Собрать файл потом можно при помощи cat:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>cat sample.iso.part* &gt; sample.iso
+</code></pre></div>
+<p>Применение маски приведет к тому, что утилита cat переберет все файлы по порядку, начиная с sample.iso.part0.</p>
+<p>Источник: https://habr.com/ru/articles/43260/</p>
+
+        </div><!--/.col-xs-12.col-sm-9-->
+
+    </div><!--/row-->
+
+
+    <hr>
+
+    <footer>
+        <p>
+            При копировании информации с данного сайта пожалуйста указывайте
+            ссылку на источник. © 2019 Записки питониста
+        </p>
+    </footer>
+
+</div><!--/.container-->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</body>
+</html>

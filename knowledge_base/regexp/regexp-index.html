@@ -1,0 +1,208 @@
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148357635-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-148357635-1');
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <title>Записки питониста - База знаний</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/base.css">
+
+    
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/knowledge-base.css">
+
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-static-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://aleksey925.github.io/knowledge-base/index.html">Записки питониста</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                
+    <li><a href="https://aleksey925.github.io/knowledge-base/index.html">Главная</a></li>
+    <li class="active"><a href="https://aleksey925.github.io/knowledge-base/knowledge_base/index.html">База знаний</a></li>
+
+            </ul>
+        </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+</nav><!-- /.navbar -->
+
+<div class="container">
+
+    
+    <div class="row row-content">
+
+        <div class="col-xs-12 col-sm-12">
+            <h1>Регулярные выражения</h1>
+<h1>Оглавление</h1>
+<ol>
+<li>
+<p><h3><a href="#Теория">Теория</a></h3></p>
+<ul>
+<li><a href="#Использование-групп-при-замене-(частичное-изменение-текста)">Использование групп при замене (частичное изменение текста)</a></li>
+<li><a href="#Шпаргалка">Шпаргалка</a></li>
+</ul>
+</li>
+<li>
+<p><h3><a href="#Примеры">Примеры</a></h3></p>
+<ul>
+<li><a href="#Поиск-текста-записанного-через-тире">Поиск текста записанного через тире</a></li>
+<li><a href="#Валидация-email">Валидация email</a></li>
+<li><a href="#Удаление-повторяющихся-слов">Удаление повторяющихся слов</a></li>
+</ul>
+</li>
+</ol>
+<p><a name='Теория'></a></p>
+<h2>Теория</h2>
+<p><a name='Использование-групп-при-замене-(частичное-изменение-текста)'></a></p>
+<h3>Использование групп при замене (частичное изменение текста)</h3>
+<p>Иногда бывают ситуации, когда необходимо найти при помощи регулярного выражения
+кусок текста и например поменять в нем слова местами или заменить только часть
+найденного текста.</p>
+<p>Данную задачу можно решить обращаясь к группам регулярных выражений (части 
+регулярного выражения заключенные в круглые скобки).</p>
+<p>К группам можно обращаться 2 способами:</p>
+<ol>
+<li>через символ доллара $0 - $9 (работает в IDEA)</li>
+<li>через обратный слеш \0 - \9 (работает в python)</li>
+</ol>
+<p><strong>Обращение через $ (IDEA)</strong></p>
+<p>Важно заметить, что данный синтасис поддержиается не всеми текстовыми 
+редакторами и языками.
+Вот простой пример показывающий как добавить слово в найденное предложение.</p>
+<p>Исходный текст:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>как тебя зовут друг
+</code></pre></div>
+<p>Регулярное выражения для поиска текста:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>(.*зовут)\s+(друг)
+</code></pre></div>
+<p>Регулярное выражения для замены:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>$1 дорогой $2
+</code></pre></div>
+<p>В результате замены получим:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>как тебя зовут дорогой друг
+</code></pre></div>
+<p><strong>Обращение через косую черту (python)</strong></p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">re</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> data <span style="color: #666666">=</span> <span style="color: #4070a0">&#39;Вася пупкин дурак красавчик&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> pattern <span style="color: #666666">=</span> <span style="color: #4070a0">&#39;(.*) (дурак) (.*)&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> a <span style="color: #666666">=</span> re<span style="color: #666666">.</span>sub(pattern, <span style="color: #4070a0">r&#39;\1 не \2 \3&#39;</span>, data)
+<span style="color: #666666">&gt;&gt;&gt;</span> a
+<span style="color: #4070a0">&#39;Вася пупкин не дурак красавчик&#39;</span>
+</code></pre></div>
+<p>Представленный пример выше пример будет работать если в шаблоне было 
+использовано меньше 9 групп. Если групп больше 9, то можно ссылаться на них при 
+помощи конструкции вида <code>\g&lt;12&gt;</code>.</p>
+<p>Полезные ссылки:
+- <a href="https://habr.com/ru/post/349860/">Регулярные выражения в Python от простого к сложному. Подробности, примеры, картинки, упражнения</a></p>
+<p><a name='Шпаргалка'></a></p>
+<h3>Шпаргалка</h3>
+<p>Шпаргалка по синтаксису regexp
+<img alt="" src="./regex-cheat-sheet.png" /></p>
+<p><a name='Примеры'></a></p>
+<h2>Примеры</h2>
+<p><a name='Поиск-текста-записанного-через-тире'></a></p>
+<h3>Поиск текста записанного через тире</h3>
+<p>Условия регулярного выражения:
+ - текст должен начинаться с большой буквы
+ - тире может быть только 1 или его не будет сосвсем
+ - текст должен быть длинной минимум 3 символа, максимум 15</p>
+<p>Пример текста: </p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>Test-test
+</code></pre></div>
+<p>Решение: </p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>^(?=.{3,15}$)[A-Z][a-z]+-?[a-z]+$
+</code></pre></div>
+<p><a name='Валидация-email'></a></p>
+<h3>Валидация email</h3>
+<p>Если возникла идея валидировать email при помощи регулярного выражения, то
+самый лучший способ это сделать, это проверить, что в строке пристуствует 
+символ @. Все остальные варианты будут слишком сложными и все равно не будут 
+покрывать всех возможных вариантов.</p>
+<p>Решение:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>.+@.+
+</code></pre></div>
+<p>Материалы по данной теме:</p>
+<ul>
+<li><a href="https://habr.com/post/175375/">Прекратите проверять Email с помощью регулярных выражений!</a></li>
+</ul>
+<p><a name='Удаление-повторяющихся-слов'></a></p>
+<h3>Удаление повторяющихся слов</h3>
+<p>Удаляет повторяющиеся слова:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">re</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> data <span style="color: #666666">=</span> <span style="color: #4070a0">&#39;Вася Вася пупкин Вася дурак Вася красавчик&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> pattern <span style="color: #666666">=</span> <span style="color: #4070a0">r&#39;(\b\w+\b\s)(?=.?\1)&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> a <span style="color: #666666">=</span> re<span style="color: #666666">.</span>sub(pattern, <span style="color: #4070a0">&#39;&#39;</span>, data)
+<span style="color: #666666">&gt;&gt;&gt;</span> a
+<span style="color: #4070a0">&#39;Вася пупкин Вася дурак Вася красавчик&#39;</span>
+</code></pre></div>
+<p>Удаляет повторяющиеся слова, даже те, что не идут подряд.</p>
+<p>Вариант для киррилицы:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">re</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> data <span style="color: #666666">=</span> <span style="color: #4070a0">&#39;Вася Вася пупкин Вася дурак Вася красавчик&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> pattern <span style="color: #666666">=</span> <span style="color: #4070a0">r&#39;(\b[а-яА-яёЁ]+\b\s)(?=.*?\1)&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> a <span style="color: #666666">=</span> re<span style="color: #666666">.</span>sub(pattern, <span style="color: #4070a0">&#39;&#39;</span>, data)
+<span style="color: #666666">&gt;&gt;&gt;</span> a
+пупкин дурак Вася красавчик
+</code></pre></div>
+<p>Вариант для латиницы:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>(\b\w+\b\s)(?=.*?\1)
+</code></pre></div>
+<p><a href="https://zharikov.site/note/regexp_delete_repeatwords.html">Ссылка</a> на 
+оригинальную статью.</p>
+
+        </div><!--/.col-xs-12.col-sm-9-->
+
+    </div><!--/row-->
+
+
+    <hr>
+
+    <footer>
+        <p>
+            При копировании информации с данного сайта пожалуйста указывайте
+            ссылку на источник. © 2019 Записки питониста
+        </p>
+    </footer>
+
+</div><!--/.container-->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</body>
+</html>

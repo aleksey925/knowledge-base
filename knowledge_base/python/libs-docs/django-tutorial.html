@@ -1,0 +1,226 @@
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148357635-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-148357635-1');
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <title>Записки питониста - База знаний</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/base.css">
+
+    
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/knowledge-base.css">
+
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-static-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://aleksey925.github.io/knowledge-base/index.html">Записки питониста</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                
+    <li><a href="https://aleksey925.github.io/knowledge-base/index.html">Главная</a></li>
+    <li class="active"><a href="https://aleksey925.github.io/knowledge-base/knowledge_base/index.html">База знаний</a></li>
+
+            </ul>
+        </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+</nav><!-- /.navbar -->
+
+<div class="container">
+
+    
+    <div class="row row-content">
+
+        <div class="col-xs-12 col-sm-12">
+            <h1>Django</h1>
+<h1>Оглавление</h1>
+<ol>
+<li>
+<p><h3><a href="#ORM">ORM</a></h3></p>
+<ul>
+<li><a href="#Оптимизация-запросов">Оптимизация запросов</a></li>
+<li><a href="#Профалинг-запросов">Профалинг запросов</a></li>
+</ul>
+</li>
+<li>
+<p><h3><a href="#Архитектура">Архитектура</a></h3></p>
+<ul>
+<li><a href="#Проблемы-архитектуры">Проблемы архитектуры</a></li>
+</ul>
+</li>
+</ol>
+<p><a name='ORM'></a></p>
+<h2>ORM</h2>
+<p><a name='Оптимизация-запросов'></a></p>
+<h3>Оптимизация запросов</h3>
+<p>При работе ORM нужно быть очень осторожным, потому что не правильное его 
+использование может очень сильно увеличить нагрузку на БД. Один из примеров,
+когда это может случиться это работа со связаннами таблицами.</p>
+<p>Например мы имеем вот такую модель:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">Book</span>(models<span style="color: #666666">.</span>Model):
+    name <span style="color: #666666">=</span> models<span style="color: #666666">.</span>CharField(<span style="color: #4070a0">&#39;Название&#39;</span>, max_length<span style="color: #666666">=</span><span style="color: #40a070">100</span>)
+    category <span style="color: #666666">=</span> models<span style="color: #666666">.</span>ForeignKey(Category)
+    authors <span style="color: #666666">=</span> models<span style="color: #666666">.</span>ManyToManyField(Author)
+</code></pre></div>
+<p><strong>select_related</strong></p>
+<p>Предположим мы хотим получить информацию о книге и ее категории. Если решать 
+задачу влоб то мы напишем примерно вот такой код:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>book <span style="color: #666666">=</span> Book<span style="color: #666666">.</span>objects<span style="color: #666666">.</span>get(pk<span style="color: #666666">=</span>book_id)
+<span style="color: #007020">print</span>(book<span style="color: #666666">.</span>name, book<span style="color: #666666">.</span>category<span style="color: #666666">.</span>name)
+</code></pre></div>
+<p>Проблема данного кода в том, что он заставит ORM сделать 2 запроса к БД. Первый
+извлечет информацию о книге, а второй о катерии к которой относится книга.
+Для того, чтобы этого избежать необходимо использовать метод <code>select_related</code>.
+Он говорит ORM, что необходимо сделать запрос с JOIN.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>Book<span style="color: #666666">.</span>objects<span style="color: #666666">.</span>select_related(<span style="color: #4070a0">&#39;category&#39;</span>)<span style="color: #666666">.</span>get(pk<span style="color: #666666">=</span>book_id)
+</code></pre></div>
+<p>Теперь ORM за 1 запрос извлечет сразу всю нужную нам инфомрацию и при получении
+имени категории <code>book.category.name</code> не будет генерироваться допольнительный 
+запрос.</p>
+<p><strong>prefetch_related</strong></p>
+<p>Кроме получения информации о книге и ее категории у нас может возникнуть 
+желание получить информацию о книге и о всех ее авторах. Если решать эту задачу
+влоб, то мы столкнемся с проблемой N+1 select.</p>
+<p>Для того, чтобы решить ее необходимо использовать метод <code>prefetch_related</code>.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>book <span style="color: #666666">=</span> Book<span style="color: #666666">.</span>objects<span style="color: #666666">.</span>prefetch_related(<span style="color: #4070a0">&#39;authors&#39;</span>)<span style="color: #666666">.</span>get(pk<span style="color: #666666">=</span><span style="color: #40a070">1</span>)
+<span style="color: #007020">print</span>([author<span style="color: #666666">.</span>full_name <span style="color: #007020; font-weight: bold">for</span> author <span style="color: #007020; font-weight: bold">in</span> book<span style="color: #666666">.</span>authors<span style="color: #666666">.</span>all()])
+</code></pre></div>
+<p>Этот метод говорит ORM, что необходимо сделать 2 запроса, первый извлеч 
+инормацию о книге, а второй извлечет всех авторов связанных с данной книгой.
+Это очень сильно разгрузит нашу БД.</p>
+<p><a name='Профалинг-запросов'></a></p>
+<h3>Профалинг запросов</h3>
+<p>Для того, чтобы получить SQL запрос, который будет сгенерирован при 
+использовании ORM удобно использовать <code>shell_plus</code> из расширения 
+<code>django-extensions</code>.</p>
+<p>Пример использования:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>./manage.py shell_plus --print-sql
+</code></pre></div>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>User<span style="color: #666666">.</span>objects<span style="color: #666666">.</span>get(pk<span style="color: #666666">=</span><span style="color: #40a070">1</span>)
+</code></pre></div>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>SELECT &quot;auth_user&quot;.&quot;id&quot;,
+       &quot;auth_user&quot;.&quot;password&quot;,
+       &quot;auth_user&quot;.&quot;last_login&quot;,
+       &quot;auth_user&quot;.&quot;is_superuser&quot;,
+       &quot;auth_user&quot;.&quot;username&quot;,
+       &quot;auth_user&quot;.&quot;first_name&quot;,
+       &quot;auth_user&quot;.&quot;last_name&quot;,
+       &quot;auth_user&quot;.&quot;email&quot;,
+       &quot;auth_user&quot;.&quot;is_staff&quot;,
+       &quot;auth_user&quot;.&quot;is_active&quot;,
+       &quot;auth_user&quot;.&quot;date_joined&quot;
+FROM &quot;auth_user&quot;
+WHERE &quot;auth_user&quot;.&quot;id&quot; = 1
+
+Execution time: 0.002466s [Database: default]
+
+&lt;User: username&gt;
+</code></pre></div>
+<p>Полезные ссылки:</p>
+<ul>
+<li><a href="https://blog.ploetzli.ch/2019/showing-sql-queries-with-pytest-and-django/">Showing SQL Queries with Pytest and Django</a></li>
+</ul>
+<p><a name='Архитектура'></a></p>
+<h2>Архитектура</h2>
+<p><a name='Проблемы-архитектуры'></a></p>
+<h2>Проблемы архитектуры</h2>
+<p>Django, как и многие другие фреймворки имеет проблемы с архитектурой описываемой в оф. туториалах.
+В случае с django, проблема уходит корнями к первоначальной цели, которую преследовали разработчики. Им нужен был 
+простой инструмент для создания новостного сайта, который должен был просто отображать новости. Сложную логику 
+реализовывать не требовалось. В результате получился фреймворк, который дает ответ как решать базовые задачи. То есть
+из коробки у пользователя есть понятная структура проекта и базовый набор примитивов, которыми необходимо оперировать.</p>
+<p>В этот базовый набор входят: view, model и template. Проблема состоит в том, что для создания современного 
+приложения их недостаточно, по этому в документации нам предлагается размазывать бизнес логику по сериалайзерам (drf), 
+моделям, админке и т.д. Если следовать этому совету, то получится тяжело поддерживаемый проект, где каждое изменение 
+может привести к непредвиденным последствиям.</p>
+<p>Исправить описанную проблему легко, нужно добавить в проект новую сущность, сервисный объект (Service Object).
+Данная сущность должна хранить в себе бизнес логику, которая должна разбиваться на методы с понятным неймингом. 
+В идеале, сервисный объект должен выглядеть как описание бизнес процесса на английском языке. </p>
+<p>Схематичный пример:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">CreateNewUser</span>:
+
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">__init__</span>(<span style="color: #007020">self</span>, user_data: <span style="color: #007020">dict</span>):
+        <span style="color: #007020">self</span><span style="color: #666666">.</span>user_data <span style="color: #666666">=</span> user_data
+
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">create</span>(<span style="color: #007020">self</span>):
+        <span style="color: #007020; font-weight: bold">if</span> <span style="color: #007020; font-weight: bold">not</span> <span style="color: #007020">self</span><span style="color: #666666">.</span>_check_user_data(user_data):
+           <span style="color: #007020">self</span><span style="color: #666666">.</span>_notice_about_problem()
+           <span style="color: #007020; font-weight: bold">return</span>
+
+        <span style="color: #007020">self</span><span style="color: #666666">.</span>_create_user(user_data)
+
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">_check_user_data</span>(<span style="color: #007020">self</span>) <span style="color: #666666">-&gt;</span> <span style="color: #007020">bool</span>:
+        <span style="color: #60a0b0; font-style: italic"># логика проверки данных введенных при регистрации</span>
+        <span style="color: #007020; font-weight: bold">pass</span>
+
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">_notice_about_problem</span>(<span style="color: #007020">self</span>):
+        <span style="color: #60a0b0; font-style: italic"># логика уведомления пользователя о возникшей во время проверки проблеме</span>
+        <span style="color: #007020; font-weight: bold">pass</span>
+
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">_create_user</span>(<span style="color: #007020">self</span>):
+        <span style="color: #60a0b0; font-style: italic"># логика создания в системе нового пользователя</span>
+        <span style="color: #007020; font-weight: bold">pass</span>
+</code></pre></div>
+<p>Больше примеров можно посмотреть в прикрепленных к заметке статьям.</p>
+<p>Полезные статьи:</p>
+<ul>
+<li><a href="https://4ybakut2004.medium.com/паттерн-service-object-в-rails-11bd26a2efaf">Паттерн Service Object в Rails</a></li>
+<li><a href="https://habr.com/ru/post/158011/">7 паттернов рефакторинга толстых моделей в Rails</a></li>
+</ul>
+
+        </div><!--/.col-xs-12.col-sm-9-->
+
+    </div><!--/row-->
+
+
+    <hr>
+
+    <footer>
+        <p>
+            При копировании информации с данного сайта пожалуйста указывайте
+            ссылку на источник. © 2019 Записки питониста
+        </p>
+    </footer>
+
+</div><!--/.container-->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</body>
+</html>

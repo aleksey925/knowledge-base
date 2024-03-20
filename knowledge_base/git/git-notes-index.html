@@ -1,0 +1,384 @@
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148357635-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-148357635-1');
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <title>Записки питониста - База знаний</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/base.css">
+
+    
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/knowledge-base.css">
+
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-static-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://aleksey925.github.io/knowledge-base/index.html">Записки питониста</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                
+    <li><a href="https://aleksey925.github.io/knowledge-base/index.html">Главная</a></li>
+    <li class="active"><a href="https://aleksey925.github.io/knowledge-base/knowledge_base/index.html">База знаний</a></li>
+
+            </ul>
+        </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+</nav><!-- /.navbar -->
+
+<div class="container">
+
+    
+    <div class="row row-content">
+
+        <div class="col-xs-12 col-sm-12">
+            <h1>Git</h1>
+<h1>Оглавление</h1>
+<ol>
+<li>
+<p><h3><a href="#Теория">Теория</a></h3></p>
+<ul>
+<li><a href="#Терминология">Терминология</a></li>
+<li><a href="#Обучение">Обучение</a></li>
+</ul>
+</li>
+<li>
+<p><h3><a href="#Настройка">Настройка</a></h3></p>
+<ul>
+<li>
+<p><h4><a href="#Общая-настройка">Общая настройка</a></h4></p>
+<ul>
+<li><a href="#Начальная-настройка">Начальная настройка</a></li>
+<li><a href="#Автодополнение-в-MacOS">Автодополнение в MacOS</a></li>
+</ul>
+</li>
+<li>
+<p><h4><a href="#Решение-проблем">Решение проблем</a></h4></p>
+<ul>
+<li><a href="#SSL-Certificate-problem:-unable-to-get-local-issuer-certificate">SSL Certificate problem: unable to get local issuer certificate</a></li>
+<li><a href="#Не-сохраняется-логин/пароль">Не сохраняется логин/пароль</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><h3><a href="#Локальные-репозитории">Локальные репозитории</a></h3></p>
+<ul>
+<li><a href="#Общее">Общее</a></li>
+<li><a href="#Перезапись-истории">Перезапись истории</a></li>
+<li><a href="#Локальный-gitignore">Локальный gitignore</a></li>
+<li><a href="#Авторизация-при-помощи-токена">Авторизация при помощи токена</a></li>
+</ul>
+</li>
+</ol>
+<p><a name='Теория'></a></p>
+<h2>Теория</h2>
+<p><a name='Терминология'></a></p>
+<h3>Терминология</h3>
+<p>Индекс и область подготовленных файлов - это синонимы.
+Самый быстрый способ увидеть что индексе, можно с помощью команды <code>git status</code>. 
+Когда вы выполните команду <code>git status</code>, то увидите какие файлы попали в 
+индекс, какие модифицированы, но не в индексе и какие в данный момент вообще не 
+отслеживаются git.</p>
+<p><a name='Обучение'></a></p>
+<h3>Обучение</h3>
+<p><a href="https://learngitbranching.js.org/?demo">https://learngitbranching.js.org/?demo</a> - сервис, который позволяет 
+визуализировать действие тех или иных команд git.</p>
+<p><a name='Настройка'></a></p>
+<h2>Настройка</h2>
+<p><a name='Общая-настройка'></a></p>
+<h3>Общая настройка</h3>
+<p><a name='Начальная-настройка'></a></p>
+<h4>Начальная настройка</h4>
+<p>Настройки для git которые нужные выполнить после установки git и на linux и 
+windows.</p>
+<ul>
+<li><code>git config --global user.name "Aleksey Petrunnik"</code> - задаем имя пользователя</li>
+<li><code>git config --global user.email my_mail@mail.ru</code> - задаем email пользователя</li>
+<li><code>git config --global core.editor nano</code> - задаём редактор по умолчанию</li>
+<li><code>git config --list</code> - выводит список установленных настроек</li>
+</ul>
+<p>В windows ещё нужно выполнить:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>git config --global core.autocrlf <span style="color: #007020">true</span>
+git config --global core.safecrlf <span style="color: #007020">true</span>
+</code></pre></div>
+<p>Для корректного отображения киррилицы в nano, необходимо создать следующую 
+переменную окружения:</p>
+<ul>
+<li><code>LANG: ru_RU.UTF8</code></li>
+</ul>
+<p><a name='Автодополнение-в-MacOS'></a></p>
+<h4>Автодополнение в MacOS</h4>
+<p><strong>bash</strong></p>
+<p>По умолчанию в терминале MacOS для git отключено автодоплнение. Исправить это
+можно следующим образом:</p>
+<ul>
+<li>
+<p>выполнить поиск в системе скрипта <code>git-completion.bash</code></p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>sudo find / -type f -name <span style="color: #4070a0">&quot;git-completion.bash&quot;</span>
+</code></pre></div>
+<p>Результат выполнения команды будет примерно такой:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>MBP-Aleksej:~ aleksey$ sudo find / -type f -name &quot;git-completion.bash&quot;
+/Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash
+</code></pre></div>
+</li>
+<li>
+<p>после того как путь к скрипту найден необходимо скопировать его в папку
+    <code>/usr/local/etc/bash_completion.d/git-completion.bash</code>.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>sudo cp /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash /usr/local/etc/bash_completion.d/git-completion.bash 
+</code></pre></div>
+</li>
+</ul>
+<p>Теперь если открыть новое окно терминала, то там будет доступно автодополнение 
+при вводе команд для git. </p>
+<p><strong>zsh</strong></p>
+<ul>
+<li>
+<p>устанавливаем bash-completion</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>brew install bash-completion
+</code></pre></div>
+</li>
+<li>
+<p>скачиваем необходимые скрипты</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>mkdir -p ~/.zsh &amp;&amp; cd ~/.zsh
+
+curl -o git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+curl -o _git https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.zsh
+</code></pre></div>
+</li>
+<li>
+<p>включаем использование скриптов. Для этого открываем файл <code>~/.zshrc</code> и вставляем туда</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code># Load Git completion
+zstyle &#39;:completion:*:*:git:*&#39; script ~/.zsh/git-completion.bash
+fpath=(~/.zsh $fpath)
+
+autoload -Uz compinit &amp;&amp; compinit
+</code></pre></div>
+</li>
+<li>
+<p>очищаем cache</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>rm ~/.zcompdump
+</code></pre></div>
+</li>
+</ul>
+<p>Полезные ссылки:</p>
+<ul>
+<li><a href="https://oliverspryn.medium.com/adding-git-completion-to-zsh-60f3b0e7ffbc">Adding Git Completion to Zsh</a></li>
+</ul>
+<p><a name='Решение-проблем'></a></p>
+<h3>Решение проблем</h3>
+<p><a name='SSL-Certificate-problem:-unable-to-get-local-issuer-certificate'></a></p>
+<h4>SSL Certificate problem: unable to get local issuer certificate</h4>
+<p>При клонировании репозитория (возможно не только при клонировании) может 
+возникнуть ошибка <code>SSL Certificate problem: unable to get local issuer 
+certificate</code>. Устранить ее можно просто отключив проверку SSL сертификата. </p>
+<p>Сделать это можно 2 способами:</p>
+<ul>
+<li><code>export GIT_SSL_NO_VERIFY=1</code></li>
+<li><code>git config --global http.sslVerify false</code></li>
+</ul>
+<p>Ответ нашел <a href="https://confluence.atlassian.com/bitbucketserverkb/ssl-certificate-problem-unable-to-get-local-issuer-certificate-816521128.html">тут</a></p>
+<p><a name='Не-сохраняется-логин/пароль'></a></p>
+<h4>Не сохраняется логин/пароль</h4>
+<p>Для включения возможности сохранять credential необходимо выполнить</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>git config --global credential.helper store
+</code></pre></div>
+<p>Полезные ссылки:</p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/35942754/how-to-save-username-and-password-in-git-gitextension">How to save username and password in GIT [GitExtension]?</a></li>
+</ul>
+<p><a name='Локальные-репозитории'></a></p>
+<h2>Локальные репозитории</h2>
+<p><a name='Общее'></a></p>
+<h3>Общее</h3>
+<p><strong>Создание репозитория с проектом</strong> </p>
+<p><code>git init</code> - создаёт репозиторий в текущей папке</p>
+<p><strong>Добавление (удаление) новых или изменённых файлов в репозиторий</strong></p>
+<p>Для того, чтобы добавить файлы под версионный контроль нужно воспользоваться 
+командой <code>add &lt;имя файла&gt;</code>, после этого будет зафиксировано текущее состояние 
+файла и когда будет выполнен комит, в репозитории будет отравлен файл в том 
+состоянии в котором он находится во время выполнения команды <code>add</code>. После 
+внесения изменений файл, если их нужно отправить в репозиторий, то нужно опять 
+повторить действия с командой add.</p>
+<ul>
+<li><code>git add *.py</code> - добавить все файлы с расширеним py под версионный контроль </li>
+<li><code>git add .</code> - добавить все файлы и подпапки текущей папки под версионный контроль </li>
+<li>
+<p><code>git add phone.txt</code> - добавить файл phone.txt под версионный контроль </p>
+</li>
+<li>
+<p><code>git commit -m 'init version project'</code> - отправляет в репозиторий все файлы 
+  добавленные под версионный контроль. С помощью ключа -m указывается 
+  комментарий к комиту. </p>
+</li>
+<li>
+<p><code>git rm &lt;файл&gt;</code> - удаляет файл из рабочей директории, области подготовленных
+  файлов, а после выполения commit файл будет удалён и из репозитория</p>
+</li>
+<li><code>git rm &lt;файл&gt; --cached</code> - удаляет файл из области подготовленных файлов, но 
+  оставляет его в рабочей директории</li>
+</ul>
+<p><strong>Просмотр информации</strong></p>
+<ul>
+<li>
+<p><code>git status</code> - показывает статус репозитория (какие файлы изменились, какие 
+новые, какие были добавлены в индекс (было выполнено <code>git add</code>, но commit не 
+совершался)) </p>
+</li>
+<li>
+<p><code>git log</code> - истории коммитов (автор, емеил, хэш, комментарий) </p>
+</li>
+<li><code>git log --max-count 2</code> - информация о 2 последних коммитах</li>
+</ul>
+<p><strong>Возвращение рабочего каталога к предыдущему состоянию</strong></p>
+<p>Используется для получения предыдущих версий файлов или просто для переключения
+на другую рабочую ветку.</p>
+<ul>
+<li>
+<p><code>git checkout &lt;hash&gt;</code> - выгружает из репозитория предыдущую версию файла, 
+которая зафиксирована в коммите с заданным <code>&lt;hash&gt;</code> </p>
+</li>
+<li>
+<p><code>git checkout &lt;file name&gt;</code> - загрузит в рабочую директорию последнею версию 
+файла с именем <code>&lt;file name&gt;</code></p>
+</li>
+<li>
+<p><code>git checkout master</code> - получаем файлы последней версии из ветки master</p>
+</li>
+</ul>
+<p><a name='Перезапись-истории'></a></p>
+<h3>Перезапись истории</h3>
+<p><strong>Изменение последнего комита</strong></p>
+<p><code>git commit —amend</code> - изменение последнего комита</p>
+<p>Эта команда полезна в том случае, если нужно изменить последний коммит 
+(исправить описание коммита, добавить забытый файл, исправить пару забытых 
+опечаток и т д).</p>
+<p>Если нужно только изменить описание, то выполняем коммит с ключом <code>--amend</code>, 
+откроется редактор описания последнего коммита, там вносим правки и сохраняем 
+изменения (после закрытия редактора, будет выполнен коммит).
+Если же нужно изменить файлы, то меняем их, добавляем их в индекс <code>git add .</code> и 
+выполняем коммит с ключом <code>--amend</code>.</p>
+<p><strong>Объединение нескольких коммитов в один</strong></p>
+<p><strong>Способ 1</strong></p>
+<p>Объединение всех коммитов в ветке в один.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>git rebase --root -i
+</code></pre></div>
+<p>В открывшемся окне редактора для всех коммитов кроме первого меняем <code>pick</code> на <code>squash</code>, сохраняем изменения и закрываем 
+файл. </p>
+<p>Такие настройки говорят гиту использовать первый коммит как основной, а все остальные приклеить к нему.</p>
+<p><strong>Способ 2</strong></p>
+<p>Объединение 2 последних коммитов в 1</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>git rebase -i HEAD~2
+</code></pre></div>
+<p>В открывшемся окне редактора для всех коммитов кроме первого меняем <code>pick</code> на <code>squash</code>, сохраняем изменения и закрываем 
+файл.</p>
+<p><strong>Способ 3</strong></p>
+<p>Объединение коммитов в середине истории.</p>
+<p>Вместо HEAD указываем хэш нужного коммита и через тильду указываем сколько коммитов нужно склеить.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>git rebase -i ae88544~3
+</code></pre></div>
+<p>Полезные ссылки:</p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/1657017/how-to-squash-all-git-commits-into-one">https://stackoverflow.com/questions/1657017/how-to-squash-all-git-commits-into-one</a></li>
+<li><a href="https://pingvinus.ru/git/1591#:~:text=Объединение%20коммитов%20(с%20использованием%20git,-i%20(интерактивный%20режим).&amp;text=Откроется%20текстовый%20редактор%2C%20в%20котором,pick%20ab37583%20Added%20feature%201">https://pingvinus.ru/git/1591#:~:text=Объединение%20коммитов%20(с%20использованием%20git,-i%20(интерактивный%20режим).&amp;text=Откроется%20текстовый%20редактор%2C%20в%20котором,pick%20ab37583%20Added%20feature%201</a></li>
+<li><a href="https://htmlacademy.ru/blog/27-how-to-squash-commits-and-why-it-is-needed">https://htmlacademy.ru/blog/27-how-to-squash-commits-and-why-it-is-needed</a></li>
+</ul>
+<p><strong>Удаление файла из всех коммитов в репозитории</strong></p>
+<p>Данные команды производят удаление из всех коммитов папки <code>bin</code>.
+Если необходимо удалить не папку, а файл, то из первой команды нужно убрать 
+ключ <code>--force</code>.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>git filter-branch --force --index-filter <span style="color: #4070a0">&#39;git rm -r --cached --ignore-unmatch bin&#39;</span> --prune-empty --tag-name-filter cat -- --all
+
+rm -rf .git/refs/original <span style="color: #666666">&amp;&amp;</span> git gc --aggressive
+git reflog expire --expire<span style="color: #666666">=</span>now --all <span style="color: #666666">&amp;&amp;</span> git gc --prune<span style="color: #666666">=</span>now
+</code></pre></div>
+<p>Материалы по теме:</p>
+<ul>
+<li><a href="http://onedev.net/post/191">http://onedev.net/post/191</a></li>
+<li><a href="https://blog.truecrux.org/post/ix">https://blog.truecrux.org/post/ix</a></li>
+<li><a href="http://unixforum.org/index.php?showtopic=140254&amp;st=0&amp;gopid=1287903">http://unixforum.org/index.php?showtopic=140254&amp;st=0&amp;gopid=1287903</a> - здесь 
+  мне помогли найти ответ на данный вопрос</li>
+</ul>
+<p><strong>Отправка на сервер измененного репозитория</strong></p>
+<p>В случае если производилось изменение истории коммитов (коммиты объединялись 
+при помощи <code>reset hard</code> или выполнялся <code>commit --amend</code>), то загрузить 
+измененную историю на сервер простым <code>push</code> не получится. Необходимо
+выполнять:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>git push -f origin master
+</code></pre></div>
+<p>Ответ нашел <a href="https://habrahabr.ru/post/138590/">тут</a></p>
+<p><a name='Локальный-gitignore'></a></p>
+<h3>Локальный gitignore</h3>
+<p>Бывают ситуации, когда в папке с проектом нужно хранить файлы, которые не должны
+попасть под версионный контроль, но и файл <code>.gitignore</code> расположенный в корне 
+проекта использовать нельзя. </p>
+<p>Решение достаточно простое:
+- в папке <code>.git</code> cоздаем файл <code>.gitignore</code> (название файла и место его 
+  расположения не играет никакой роли)
+- заполняем созданный файл необходимыми нам правилами
+- выполняем команду</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>git config --local core.excludesfile &lt;path-to-project&gt;/.git/.gitignore
+</code></pre></div>
+<p>На этом все, теперь все папки или файлы прописанные в созданном нами файле 
+будут игнорироваться и созданный файл не попадет под версионный контроль.</p>
+<p>Ответ нашел <a href="https://stackoverflow.com/questions/1753070/how-do-i-configure-git-to-ignore-some-files-locally">здесь</a></p>
+<p><a name='Авторизация-при-помощи-токена'></a></p>
+<h3>Авторизация при помощи токена</h3>
+<p><a href="https://stackoverflow.com/questions/52445475/git-pull-with-access-token-git-push-with-username-password">git pull with access token, git push with username / password</a></p>
+
+        </div><!--/.col-xs-12.col-sm-9-->
+
+    </div><!--/row-->
+
+
+    <hr>
+
+    <footer>
+        <p>
+            При копировании информации с данного сайта пожалуйста указывайте
+            ссылку на источник. © 2019 Записки питониста
+        </p>
+    </footer>
+
+</div><!--/.container-->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</body>
+</html>

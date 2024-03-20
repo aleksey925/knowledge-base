@@ -1,0 +1,512 @@
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148357635-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-148357635-1');
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <title>Записки питониста - База знаний</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/base.css">
+
+    
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/knowledge-base.css">
+
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-static-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://aleksey925.github.io/knowledge-base/index.html">Записки питониста</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                
+    <li><a href="https://aleksey925.github.io/knowledge-base/index.html">Главная</a></li>
+    <li class="active"><a href="https://aleksey925.github.io/knowledge-base/knowledge_base/index.html">База знаний</a></li>
+
+            </ul>
+        </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+</nav><!-- /.navbar -->
+
+<div class="container">
+
+    
+    <div class="row row-content">
+
+        <div class="col-xs-12 col-sm-12">
+            <h1>Заметки о работе с Linux</h1>
+<h1>Оглавление</h1>
+<ol>
+<li>
+<p><h3><a href="#Работа-с-файловой-системой">Работа с файловой системой</a></h3></p>
+<ul>
+<li><a href="#Монтирование-дисков">Монтирование дисков</a></li>
+</ul>
+</li>
+<li>
+<p><h3><a href="#Настройка-системы">Настройка системы</a></h3></p>
+<ul>
+<li><a href="#Загрузка-системы-из-оболочки-GRUB">Загрузка системы из оболочки GRUB</a></li>
+<li><a href="#Переустановка/восстановление-загрузчика-grub">Переустановка/восстановление загрузчика grub</a></li>
+<li><a href="#Активация-&quot;Quick-Search&quot;-в-synaptic">Активация "Quick Search" в synaptic</a></li>
+<li><a href="#Настройка-разрешения-второго-монитора">Настройка разрешения второго монитора</a></li>
+<li><a href="#Восстановление-xorg.conf">Восстановление xorg.conf</a></li>
+<li><a href="#Настройка-5.1-звука-в-PulseAudio">Настройка 5.1 звука в PulseAudio</a></li>
+<li><a href="#Ручное-указание-дополнительных-DNS-серверов">Ручное указание дополнительных DNS серверов</a></li>
+</ul>
+</li>
+<li>
+<p><h3><a href="#Исправление-ошибок">Исправление ошибок</a></h3></p>
+<ul>
+<li><a href="#Fix-неправильного-отображения-иконки-skype-в-tray">Fix неправильного отображения иконки skype в tray</a></li>
+</ul>
+</li>
+</ol>
+<p><a name='Работа-с-файловой-системой'></a></p>
+<h2>Работа с файловой системой</h2>
+<p><a name='Монтирование-дисков'></a></p>
+<h3>Монтирование дисков</h3>
+<p>Для того, чтобы примонтировать нужный диск из консоли, нужно выполнить 2 
+простых действия:</p>
+<ul>
+<li>
+<p>Посмотреть как ОС определила жесткий диск. Это можно сделать при помощи 
+    команды</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>sudo fdisk -l
+</code></pre></div>
+</li>
+<li>
+<p>Теперь, увидев, какое имя присвоила ОС диску, его можно примонтировать к 
+    нужной дирректории</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>sudo mount -t ntfs /dev/sdb1 /media
+</code></pre></div>
+<p>Данная команда примонтирует раздел диска c именем <code>sdb1</code> и файловой системой
+<code>ntfs</code> к папке <code>/media</code>.</p>
+</li>
+</ul>
+<p>Ответ нашел <a href="https://askubuntu.com/questions/177825/how-to-mount-an-external-hdd">здесь</a></p>
+<p><a name='Настройка-системы'></a></p>
+<h2>Настройка системы</h2>
+<p><a name='Загрузка-системы-из-оболочки-GRUB'></a></p>
+<h3>Загрузка системы из оболочки GRUB</h3>
+<p>Для того, чтобы загрузить систему из оболочки GRUB необходимо:</p>
+<ul>
+<li>Найти раздел на котором расположены файлы <code>vmlinuz</code> или <code>linux</code>, 
+    и <code>initrd.img</code>. Посмотреть список файлов можно при помощи <code>ls (hd0,1)/</code>. 
+    Если на разделе <code>hd0,1</code> нет необходимых файлов, то продолжайте поиск на 
+    других разделах. Для этого увеличивайте цифру расположенную после запятой 
+    на единицу до тех пор пока не найдете нужный раздел.</li>
+<li>
+<p>После того как файлы найдены необходимо выполнить</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code># Загружаем ядро
+linux (hd0,1)/vmlinuz root=/dev/sda1
+или 
+linux (hd0,1)/linux root=/dev/sda1
+</code></pre></div>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code># Загружаем initrd-образ
+initrd (hd0,1)/initrd.img
+boot
+</code></pre></div>
+<p>P.S. если вы нашли файлы не в <code>hd0,1</code>, то укажите в командах актуальный 
+для вас раздел. Например если вы нашли файлы в <code>hd0,2</code>, то вам нужно 
+выполнять:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>linux (hd0,2)/vmlinuz root=/dev/sda2
+initrd (hd0,2)/initrd.img
+boot
+</code></pre></div>
+</li>
+</ul>
+<p>Полезные ссылки:</p>
+<ul>
+<li><a href="https://askubuntu.com/questions/929833/how-do-i-boot-my-pc-from-grub">How do I boot my PC from GRUB?</a></li>
+<li><a href="https://help.ubuntu.ru/wiki/grub">GRUB - загрузчик системы</a></li>
+</ul>
+<p><a name='Переустановка/восстановление-загрузчика-grub'></a></p>
+<h3>Переустановка/восстановление загрузчика grub</h3>
+<p>Иногда бывает, что после установки системы компьютер не загружается, а на экане
+красуется окно загрузчика grub.</p>
+<p><img alt="" src="linux-notes-index/reinstall-restore-grub-loader/grub-recovery-window.png" /></p>
+<p>Есть 2 основных способа исправить данную ситуацию:</p>
+<ul>
+<li>восстановление Grub в rescue mode</li>
+<li>восстановление Grub с помощью утилиты Boot repair</li>
+</ul>
+<p><strong>Восстановление Grub в rescue mode</strong></p>
+<p>Если по каким-то причинам у вас нет доступа к LiveCD/USB-носителю, а также к 
+компьютеру, с помощью которого этот самый носитель можно было бы сделать, то 
+этот способ для вас.</p>
+<p>Само восстановление проходит таким образом: сначала мы подгружаем все модули, 
+чтобы открыть доступ ко всей функциональной части Grub, после чего запуститься 
+с нужного раздела. Надо понимать, что Grub состоит из двух частей:</p>
+<p>Одна из этих частей (первая) записана в MBR диска. В ней присутствует базовый
+функционал и ничего больше (консоль в rescue mode).</p>
+<p>Стало быть, нам нужно определить, в каком разделе находится вторая часть Grub 
+(находится в каталоге /boot/grub), и после чего подгрузить все недостающие 
+модули. А вот уже после этого мы сможем запустить загрузчик с нужного раздела. 
+В rescue mode есть всего четыре команды:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>ls
+set
+unset
+insmod
+</code></pre></div>
+<p>Для начала вводим следующую команду:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>ls
+</code></pre></div>
+<p>В выводе будет что-то подобное:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>(hd0) (hd0,msdos3) (hd0,msdos2) (hd0,msdos1) (hd1) (hd1,msdos2) (hd1,msdos1)
+</code></pre></div>
+<p>В некоторых случаях Grub неправильно опеределяет файловые системы находящиеся 
+на разделах дисков. В данном примере загрузчик показывает их как msdos. Мы 
+должны попытаться угадать диски, которые видим. В примере доступно два диска. 
+Диск с индексом 0 содержащий три раздела, и диск с индексом 1 содержащий два 
+раздела. Если вы знаете структуру своих дисков, определить нужный труда не 
+составит.</p>
+<p>В загрузчике Grub разделы нумеруются в обратном исчислении. Не очень ясно 
+какой именно из разделов назван, к примеру (hd0,msdos3). Чтобы было более 
+понятно, можно использовать вид (hd0,1). Если в грабе отсчет дисков идет с 0,
+а разделов с 1, то можно определить, что операционная система установлена в 
+первый раздел первого раздела - (hd0,1). Используем следующую команду:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>set prefix=(hd0,1)/boot/grub 
+set root=(hd0,1)
+</code></pre></div>
+<p>С помощью этих команд мы приказываем системе использовать какой-то конкретный
+диск, для выполнения всех остальных операций (в нашем случае, это 
+диск (hd0,1)). Чтобы проверить есть ли на данном диске загрузчик, введем эту 
+команду:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>ls /boot/grub
+</code></pre></div>
+<p>Если в выводе будет список файлов и папок, значит мы все сделали правильно. 
+Теперь можно загрузить все необходимые модули. Для этого выполним команды:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>insmod ext2
+insmod normal
+normal
+</code></pre></div>
+<p>После выполнения команд Grub загрузится в полнофункциональном режиме. Будут 
+найдены все операционные системы, которые установлены на компьютере, после 
+чего будет показано стандартное меню загрузки.</p>
+<p>Чтобы закрепить результат (и не проделывать все то же самое после перезапуска
+ПК), нужно зайти в терминал своего дистрибутива Linux, где с root правами 
+выполнить следующую команду:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>grub-install /dev/sdX
+</code></pre></div>
+<p>sdX - диск, на который должен быть установлен Grub. Так же стоит заметить,
+что данная команда не всегда помогает исправить ситуацию. В этом случае 
+необходимо прибегнуть к помощи утилиты Boot repair, которая описывается в этой
+заметке отдельно.</p>
+<p>Если операционная система расположена на разделе с файловой системой btrfs, 
+то нам необходимо выполнить следующие команды:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>set prefix=(hd0,1)/@/boot/grub
+set root=(hd0,1)
+</code></pre></div>
+<p>И подгрузить модули:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>insmod btrfs
+insmod normal
+</code></pre></div>
+<p>Ну и теперь запустить GRUB:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>normal
+</code></pre></div>
+<p><strong>Восстановление Grub с помощью утилиты Boot repair</strong></p>
+<p>С помощью этой замечательной утилиты вы сможете восстановить загрузчик всего 
+в пару кликов. Утилита имеет собственный GUI, ее использование не вызовет 
+трудностей.</p>
+<p>Чтобы установить boot repair, вы можете воспользоваться одним из приведенных 
+способов:</p>
+<ul>
+<li>Запись и установка специального <a href="http://sourceforge.net/projects/boot-repair-cd/files/">образа диска Boot Repair</a>
+  (и дальнейшая загрузка с него)</li>
+<li>Установка Boot repair из PPA-репозитория в LiveCD/USB дистрибутиве или в 
+  системе загруженной вручную из GRUB rescue mode</li>
+</ul>
+<p>Если с первым способом все понятно: нужно просто скачать и записать образ с 
+помощью соответствующих инструментов. То во втором уже нужно знать конкретные 
+команды, которые выглядят следующим образом:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>sudo add-apt-repository ppa:yannubuntu/boot-repair
+sudo apt-get update <span style="color: #666666">&amp;&amp;</span> sudo apt-get install -y boot-repair
+</code></pre></div>
+<p>В утилите будет доступно два варианта на выбор:</p>
+<p><em>Recommended repair</em> исправляет большую часть известных ошибок, которые могли
+бы возникнуть при запуске. С его помощью вы сможете пофиксить и загрузчик Grub.</p>
+<p><em>Create a BootInfo summary</em> создает Boot-Info-Script – скрипт, который 
+позволяет диагностировать большинство проблем при загрузке.</p>
+<p>Здесь же есть и <em>Advanced options</em>. Он включает в себя варианты для 
+восстановления и настройки загрузчика Grub2 (загрузка по-умолчанию, опции 
+загрузки ядра, отображение или скрытие GRUB при загрузке, удаление GRUB). 
+С помощью этих же инструментов, вы можете восстановить MBR и т.д.</p>
+<p>Вам обязательно стоит заглянуть на <a href="http://sourceforge.net/p/boot-repair/home/Home/">официальный сайт</a>
+Boot Repair. Там вы сможете найти более подробную информацию обо всех 
+возможностях и особенностях программы. Там же будет доступна информация о 
+выходе новых версий: фиксах и улучшениях самой утилиты, а также многом и 
+многом другом.</p>
+<p><a href="https://omgubuntu.ru/nie-zaghruzhaietsia-linux-chinim-zaghruzchik-grub/">Оригинальная статья</a></p>
+<p><a name='Активация-"Quick-Search"-в-synaptic'></a></p>
+<h3>Активация "Quick Search" в synaptic</h3>
+<p>Иногда бывает, что по умолчанию "quick search" не активирован в synaptic и это 
+очень неудобно. Для того, чтобы исправить это, нужно выполнить следующие команды:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>sudo apt-get install apt-xapian-index
+sudo update-apt-xapian-index -vf
+</code></pre></div>
+<p><a name='Настройка-разрешения-второго-монитора'></a></p>
+<h3>Настройка разрешения второго монитора</h3>
+<p>При подключении 2 монитора я к несчастью обнаружил, что у него выставлено 
+слишком маленькое разрешение и выставить максимально доступное невозможно. 
+Ниже я опишу как я ставил систему и как решил эту проблему. Эта проблема 
+возникла сразу после установки системы, по этому описывать буду с самого 
+начала.</p>
+<ol>
+<li>Установил систему.</li>
+<li>Установил через менеджер драйверов последний доступный драйвер для своей 
+    видеокарты (на момент написания статьи это был nvidia-331) и перезагрузил 
+    систему.</li>
+<li>Подключил второй монитор.</li>
+<li>Создал <code>xorg.conf</code> с помощью автоконфигуратора <code>sudo nvidia-xconfig</code></li>
+<li>
+<p>Открыл созданный файл <code>sudo nano /etc/X11/xorg.conf</code> и в секции <code>Monitor</code> 
+   изменил значения <code>HorizSync</code> и <code>VertRefresh</code> на такие:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>HorizSync       31.0 - 81.0 
+VertRefresh     56.0 - 76.0
+</code></pre></div>
+</li>
+<li>
+<p>Перезагрузил X Server.</p>
+</li>
+<li>
+<p>Открыл <code>nvidia-settings</code> и перешёл в раздел <code>X Server Display Configuration</code>. 
+    Здесь после внесенных изменений у второго монитора стало возможно выбрать 
+    нужное разрешение экрана. После это можно выбрать нужное расположение 
+    мониторов, выбрать главный применить эти измения, а после сохранить их нажав 
+    <code>Save to X Configuration file</code>.
+    После всех выше перечисленных действий должно все работать как надо.
+    Вот содержимое файла <code>xorg.conf</code>, после всех действий над ним:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>Section &quot;ServerLayout&quot;
+    Identifier     &quot;Layout0&quot;
+    Screen      0  &quot;Screen0&quot; 0 0
+    InputDevice    &quot;Keyboard0&quot; &quot;CoreKeyboard&quot;
+    InputDevice    &quot;Mouse0&quot; &quot;CorePointer&quot;
+    Option         &quot;Xinerama&quot; &quot;0&quot;
+EndSection
+
+Section &quot;Files&quot;
+EndSection
+
+Section &quot;InputDevice&quot;
+
+    # generated from default
+    Identifier     &quot;Mouse0&quot;
+    Driver         &quot;mouse&quot;
+    Option         &quot;Protocol&quot; &quot;auto&quot;
+    Option         &quot;Device&quot; &quot;/dev/psaux&quot;
+    Option         &quot;Emulate3Buttons&quot; &quot;no&quot;
+    Option         &quot;ZAxisMapping&quot; &quot;4 5&quot;
+EndSection
+
+Section &quot;InputDevice&quot;
+
+    # generated from default
+    Identifier     &quot;Keyboard0&quot;
+    Driver         &quot;kbd&quot;
+EndSection
+
+Section &quot;Monitor&quot;
+    Identifier     &quot;Monitor0&quot;
+    VendorName     &quot;Unknown&quot;
+    ModelName      &quot;CRT-0&quot;
+    HorizSync       31.0 - 81.0
+    VertRefresh     56.0 - 76.0
+    Option         &quot;DPMS&quot;
+EndSection
+
+Section &quot;Device&quot;
+    Identifier     &quot;Device0&quot;
+    Driver         &quot;nvidia&quot;
+    VendorName     &quot;NVIDIA Corporation&quot;
+    BoardName      &quot;GeForce GTX 560&quot;
+EndSection
+
+Section &quot;Screen&quot;
+
+# Removed Option &quot;metamodes&quot; &quot;DVI-I-0: nvidia-auto-select +1920+156, HDMI-0: nvidia-auto-select +0+0&quot;
+    Identifier     &quot;Screen0&quot;
+    Device         &quot;Device0&quot;
+    Monitor        &quot;Monitor0&quot;
+    DefaultDepth    24
+    Option         &quot;Stereo&quot; &quot;0&quot;
+    Option         &quot;nvidiaXineramaInfoOrder&quot; &quot;DFP-1&quot;
+    Option         &quot;metamodes&quot; &quot;DVI-I-0: 1280x1024 +1920+28, HDMI-0: nvidia-auto-select +0+0&quot;
+    Option         &quot;SLI&quot; &quot;Off&quot;
+    Option         &quot;MultiGPU&quot; &quot;Off&quot;
+    Option         &quot;BaseMosaic&quot; &quot;off&quot;
+    SubSection     &quot;Display&quot;
+        Depth       24
+    EndSubSection
+EndSection
+</code></pre></div>
+</li>
+</ol>
+<p><strong>Статьи которые помогли в нахождении решения:</strong></p>
+<p>ubuntu nvidia after reboot monitor off</p>
+<ul>
+<li>http://askubuntu.com/questions/421730/xorg-conf-changes-from-nvidia-setting-have-no-effect-after-reboot</li>
+<li>http://askubuntu.com/questions/456470/cant-save-nvidia-settings-for-screens-after-reboot</li>
+</ul>
+<p>Настройка 2 мониторов</p>
+<ul>
+<li>http://unixforum.org/index.php?showtopic=90226</li>
+</ul>
+<p>1280x1024 HorizSync и VertRefresh</p>
+<ul>
+<li>http://www.blackmoreops.com/2014/08/29/fix-linux-display-issue-find-horizsync-vertrefresh-rates/</li>
+<li>http://askubuntu.com/questions/60939/how-to-get-1280x1024-with-a-benq-t905</li>
+</ul>
+<p>ubuntu модель монитора</p>
+<ul>
+<li>http://igorka.com.ua/2010-03-15/ubuntu-ne-opredelyaet-model-monitora/</li>
+<li>http://igorka.com.ua/2010-02-22/x-server-v-linux/</li>
+</ul>
+<p>Изменить разрешение монитора в ubuntu</p>
+<ul>
+<li>http://forums.overclockers.ru/viewtopic.php?t=112768</li>
+<li>http://help.ubuntu.ru/wiki/драйвер_видеокарт_nvidia#неправильно_определяются_разрешение_и_частота_монитора</li>
+</ul>
+<p><a name='Восстановление-xorg.conf'></a></p>
+<h3>Восстановление xorg.conf</h3>
+<p>Бывают случаи, что в результате редактирования файла <code>xorg.conf</code>, Xserver не 
+запускается, а резервная копия файла не была сделана. В этом случае можно 
+сгенерировать новый файл с помощью утилиты для настройки Xserver:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>sudo X -configure
+</code></pre></div>
+<p>После этого в домашней директории появится файл xorg.conf.new. Попробовать 
+загрузиться использовав настройки этого файла можно вот так:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>sudo X -config /root/xorg.conf.new
+</code></pre></div>
+<p>Если загрузка Xserver прошла успешно, то можно заменить нерабочий файл этим.
+Стоит заметить если у вас используются проприетарные драйвера от Nvidia, то 
+лучше используйте утилиту от Nvidia. Она сама заменит не работающий файл новым 
+и вам нужно будет только попробовать перезапустить графический сеанс:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>sudo nvidia-xconfig
+</code></pre></div>
+<p><a name='Настройка-5.1-звука-в-PulseAudio'></a></p>
+<h3>Настройка 5.1 звука в PulseAudio</h3>
+<p>Настройки PulseAudio находятся в <code>/etc/pulse/daemon.conf</code>. Нужно немного 
+изменить содержание данного файла. Разкоментируем строку:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>; default-sample-channels = 2
+</code></pre></div>
+<p>В этом файле знаком комментария служит ";". Вместо двойки в этой строке, 
+нужно указать сколько каналов небходимо использовать. Например если у вас 
+система 5.1, нужно поставить 6, если система 7.1, то соответственно 8. 
+Далее находим строку: </p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>; enable-lfe-remixing = no
+</code></pre></div>
+<p>разкоментируем её и устанавливаем значение не "no", а "yes". Эта строка 
+отвечает за включение саббуфера. Lfe (low-frequency effects, перевод: 
+низкочастотные эффекты). Находим строку:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>; enable-remixing = yes
+</code></pre></div>
+<p>и разкоментируем её. На одном из форумов объясняется этот параметр так: 
+«Любой звук меньше 5.1 будет растягиваться до 5.1. Настоящий 5.1 будет 
+выводиться нормально, главное чтоб в плеере был указан вывод 5.1 (vlc, 
+smplayer), а то сперва произойдет даунмикс плеером до стерео (дефолтная 
+настройка), а потом пульс растянет до 5.1.»</p>
+<p>Дополнительные параметры звукового драйвера ALSA доступны через консольную 
+утилиту <code>alsamixer</code> (чтобы запустить, нужно ввести эту команду в терминале).</p>
+<p><a name='Ручное-указание-дополнительных-DNS-серверов'></a></p>
+<h3>Ручное указание дополнительных DNS серверов</h3>
+<p>Для того, чтобы иметь возможность вручную указать дополнительные dns севера, 
+необходимо:</p>
+<ul>
+<li>
+<p>установить resolvconf</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>sudo apt-get install resolvconf
+</code></pre></div>
+</li>
+<li>
+<p>открыть файл <code>/etc/resolvconf/resolv.conf.d/head</code> и добавить в конец адреса
+  нужных dns серверов.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>nameserver 8.8.8.8
+nameserver 8.8.4.4
+</code></pre></div>
+</li>
+<li>
+<p>выполнить в консоли <code>sudo resolvconf -u</code></p>
+</li>
+</ul>
+<p>Использованные материалы:</p>
+<ul>
+<li><a href="https://unix.stackexchange.com/questions/128220/how-do-i-set-my-dns-when-resolv-conf-is-being-overwritten">How do I set my DNS when resolv.conf is being overwritten?</a></li>
+</ul>
+<p><a name='Исправление-ошибок'></a></p>
+<h2>Исправление ошибок</h2>
+<p><a name='Fix-неправильного-отображения-иконки-skype-в-tray'></a></p>
+<h3>Fix неправильного отображения иконки skype в tray</h3>
+<p>В некоторых оболочках значек skype в tray отображается как полтора маленьких
+значка. Для того, чтобы это исправить, нужно:</p>
+<ul>
+<li>открыть файл <code>/usr/bin/skypeforlinux</code> в текстовом редакторе</li>
+<li>
+<p>найти в нем строку </p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>nohup &quot;$SKYPE_PATH&quot; --executed-from=&quot;$(pwd)&quot; --pid=$$ &quot;$@&quot; &gt; &quot;$SKYPE_LOGS/skype-startup.log&quot; 2&gt;&amp;1 &amp;
+</code></pre></div>
+</li>
+<li>
+<p>превести ее к следующему виду</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>XDG_CURRENT_DESKTOP=Unity
+nohup &quot;$SKYPE_PATH&quot; --executed-from=&quot;$(pwd)&quot; --pid=$$ &quot;$@&quot; &gt; &quot;$SKYPE_LOGS/skype-startup.log&quot; 2&gt;&amp;1 &amp;
+XDG_CURRENT_DESKTOP=MATE
+</code></pre></div>
+</li>
+</ul>
+<p>Ответ нашел <a href="https://github.com/mate-desktop/mate-panel/issues/793">здесь</a></p>
+
+        </div><!--/.col-xs-12.col-sm-9-->
+
+    </div><!--/row-->
+
+
+    <hr>
+
+    <footer>
+        <p>
+            При копировании информации с данного сайта пожалуйста указывайте
+            ссылку на источник. © 2019 Записки питониста
+        </p>
+    </footer>
+
+</div><!--/.container-->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</body>
+</html>

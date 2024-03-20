@@ -1,0 +1,161 @@
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148357635-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-148357635-1');
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <title>Записки питониста - База знаний</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/base.css">
+
+    
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/knowledge-base.css">
+
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-static-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://aleksey925.github.io/knowledge-base/index.html">Записки питониста</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                
+    <li><a href="https://aleksey925.github.io/knowledge-base/index.html">Главная</a></li>
+    <li class="active"><a href="https://aleksey925.github.io/knowledge-base/knowledge_base/index.html">База знаний</a></li>
+
+            </ul>
+        </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+</nav><!-- /.navbar -->
+
+<div class="container">
+
+    
+    <div class="row row-content">
+
+        <div class="col-xs-12 col-sm-12">
+            <h1>Заметки о devops</h1>
+<h1>Оглавление</h1>
+<ol>
+<li>
+<p><h3><a href="#GitLab-CI">GitLab CI</a></h3></p>
+<ul>
+<li><a href="#Использование-в-CI-конфиге-docker-образ-из-приватного-docker-hub">Использование в CI конфиге docker образ из приватного docker-hub</a></li>
+</ul>
+</li>
+</ol>
+<p><a name='GitLab-CI'></a></p>
+<h2>GitLab CI</h2>
+<p><a name='Использование-в-CI-конфиге-docker-образ-из-приватного-docker-hub'></a></p>
+<h3>Использование в CI конфиге docker образ из приватного docker-hub</h3>
+<p>Для того, чтобы иметь возможность использовать свой собственный
+docker образ из приватного репозитория docker-hub, необходимо:</p>
+<ul>
+<li>в <code>.gitlab-ci.yml</code> указать какой образ вы хотите использовать. В общем виде<br />
+    это выглядит так:
+    <div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>image: registry.hub.docker.com/&lt;username&gt;/&lt;repo-name&gt;:&lt;tag&gt;
+</code></pre></div></li>
+<li>после этого необходимо по <a href="#Настройка-авторизации-в-docker-hub">инструкции</a>
+    сформировать настроки для docker, которые будут использоваться gitlab 
+    runner для доступа к приватному docker-hub</li>
+<li>теперь, когда настройки были сформированы, необходимо в gitlab открыть 
+    <code>Settings</code> -&gt; <code>CI / CD</code> -&gt; <code>Variables</code>, создать переменную <code>DOCKER_AUTH_CONFIG</code>
+    и поместить в нее настройки, которые были сгенерированны на предыдущем шаге 
+    (флажки <code>Protected</code> и <code>Masked</code> активировать не нужно).</li>
+</ul>
+<p><a name='Настройка-авторизации-в-docker-hub'></a>
+<strong>Настройка авторизации в docker hub</strong> </p>
+<p>Обычно для подключения к docker hub используется логин и пароль, но так делать 
+не безопасно, когда речь заходить про настройку доступа к реппозиторию из 
+CI/CD систем. Для того, чтобы сделать авторизацию более безопасной, docker hub
+дает возможность сгенерировать специальный токен, который можно будет 
+использовать вместо пароля. Для того, чтобы его сненерировать, необходимо 
+перейти по <a href="https://hub.docker.com/settings/security">ссылке</a>.</p>
+<p>После того как токен был сгенерирован, можно приступать к написанию конфига для 
+docker, где будет описано при помощи каких credentials будет происходить 
+автризация.</p>
+<p>Перед созданием конфига необходимо выполнить команду:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020">echo</span> -n <span style="color: #4070a0">&quot;&lt;docker-hub-login&gt;:&lt;docker-hub-pass-or-token&gt;&quot;</span> | base64
+</code></pre></div>
+<blockquote>
+<p><code>&lt;docker-hub-login&gt;</code> логин к вашему docker hub аккаунту 
+<code>&lt;docker-hub-pass-or-token&gt;</code> пароль или токен для доступа к docker hub</p>
+</blockquote>
+<p>И подставить результат в следеющую структуру:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>{
+    &quot;auths&quot;: {
+        &quot;registry.hub.docker.com&quot;: {
+            &quot;auth&quot;: &quot;&lt;generated-string&gt;&quot;
+        }
+    }
+}
+</code></pre></div>
+<p>В результате получится примерно вот такой конфиг:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>{
+    &quot;auths&quot;: {
+        &quot;registry.hub.docker.com&quot;: {
+            &quot;auth&quot;: &quot;PGRvY2tlci1odWItbG9naW4+Ojxkb2NrZXItaHViLXBhc3Mtb3ItdG9rZW4+&quot;
+        }
+    }
+}
+</code></pre></div>
+<p>Полезные ссылки:</p>
+<ul>
+<li><a href="https://docs.gitlab.com/ee/ci/docker/using_docker_images.html#define-an-image-from-a-private-container-registry">Define an image from a private Container Registry - gitlab doc</a></li>
+<li><a href="https://stackoverflow.com/questions/51580858/cant-access-private-mysql-docker-image-from-gitlab-ci">Can't Access Private MySQL Docker Image From Gitlab CI - stackoverflow</a></li>
+</ul>
+
+        </div><!--/.col-xs-12.col-sm-9-->
+
+    </div><!--/row-->
+
+
+    <hr>
+
+    <footer>
+        <p>
+            При копировании информации с данного сайта пожалуйста указывайте
+            ссылку на источник. © 2019 Записки питониста
+        </p>
+    </footer>
+
+</div><!--/.container-->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</body>
+</html>

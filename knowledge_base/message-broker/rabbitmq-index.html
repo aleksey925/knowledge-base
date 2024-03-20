@@ -1,0 +1,175 @@
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148357635-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-148357635-1');
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <title>Записки питониста - База знаний</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/base.css">
+
+    
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/knowledge-base.css">
+
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-static-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://aleksey925.github.io/knowledge-base/index.html">Записки питониста</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                
+    <li><a href="https://aleksey925.github.io/knowledge-base/index.html">Главная</a></li>
+    <li class="active"><a href="https://aleksey925.github.io/knowledge-base/knowledge_base/index.html">База знаний</a></li>
+
+            </ul>
+        </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+</nav><!-- /.navbar -->
+
+<div class="container">
+
+    
+    <div class="row row-content">
+
+        <div class="col-xs-12 col-sm-12">
+            <h1>RabbitMQ</h1>
+<h1>Оглавление</h1>
+<ol>
+<li><a href="#Producer-throttling">Producer throttling</a></li>
+</ol>
+<p><a name='Producer-throttling'></a></p>
+<h2>Producer throttling</h2>
+<p>В больших системах, где сервисы обмениваются данными через брокер сообщений может возникать проблема со скоростью 
+обработки сообщений из очереди. В этом случае размер очереди может очень быстро увеличиваться и может достигать 
+размеров, когда это может начинать негативно влиять на производительность всего брокера. Эта ситуация может быть большой 
+проблемой, когда с брокером взаимодействует вся система или большая её часть. В связи с этим очень важно иметь 
+настроенный мониторинг, который будет оповещать о наличии проблем и очень желательно интегрировать в consumers/producers 
+механизм позволяющий в автоматическом режиме разрешать такие проблемы, чтобы одновременно не легла вся система.
+Есть несколько способов реализовать подобное. </p>
+<p>Первый и самый простой это интеграция блоков, которые будут после отправки каждого сообщения тормозить producer на 
+заданное количество времени (то есть будут просто вызывать <code>time.sleep()</code> с определенным значением). При таком подходе 
+довольно важно иметь возможность в realtime обновлять значение на основании которого будет происходить "засыпание" 
+producer. Это нужно, чтобы в критический момент кто-то из службы сопровождения мог замедлить публикацию новых сообщений 
+и consumer успел обработать сообщения из очереди. Этот способ очень простой и действенный, но он требует постоянного 
+сопровождения, особенно если в разное время producer генерирует разную нагрузку на систему. В этом как раз кроется 
+главный минус этого подхода.</p>
+<p>Второй подход более автоматизированный и позволяет системе работать в автоматическом режиме, без внешних вмешательств.
+Он основан на внутреннем механизме rabbitmq, который позволяет объявить максимальный размер очереди и определить 
+поведение брокера при попытке положить новое сообщение в переполненную очередь. Идея использования данного механизма 
+заключается в следующем:</p>
+<ul>
+<li>создаем очередь и указываем ее максимальный размер</li>
+<li>определяем, что при попытке отправить в переполненную очередь новое сообщение оно должно отбрасываться (реджектится)</li>
+<li>в producer включаем подтверждение отправки сообщения (<code>publisher confirms</code>). Это даст нам возможность понять удалось
+  ли успешно положить новое сообщение в очередь.</li>
+<li>реализовываем в producer логику обработки ошибки говорящей о том, что сообщение не удалось положить в очередь, где при
+  возникновении такой ситуации мы засыпаем на некоторое время и после снова пытаемся отправить нужное сообщение. Если 
+  в следующий раз опять возникла ошибка, то опять повторяем ранее описанную логику и так до тех пор, пока у нас не 
+  закончится разрешенное кол-во попыток. Если разрешенное кол-во попыток, кончилось, а опубликовать сообщения так и не 
+  получилось, то нужно начинать бить тревогу (писать в лог информацию о критической ошибке, которая должна быть в свою 
+  очередь подхвачена системой мониторинга).</li>
+</ul>
+<p>Вот пример producer, который используя аргументы <code>x-max-length</code> и <code>x-overflow</code> реализовывает логику работа rabbitmq, 
+которая была описана ранее. В данном примере для определения <code>max-length</code> и <code>overflow</code> используется параметры при 
+создании очереди. Важно заметить, что это не единственный способ, можно сделать то же самое и через политики. Это 
+описано в оф. документации, ссылка на которую прикреплена к заметке.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">asyncio</span>
+<span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">logging</span>
+
+<span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">aio_pika</span>
+<span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">aiormq</span>
+
+MAX_QUEUE_LEN <span style="color: #666666">=</span> <span style="color: #40a070">3</span>
+
+logger <span style="color: #666666">=</span> logging<span style="color: #666666">.</span>getLogger(<span style="color: #bb60d5">__name__</span>)
+
+
+<span style="color: #007020; font-weight: bold">async</span> <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">main</span>():
+    connection <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">await</span> aio_pika<span style="color: #666666">.</span>connect_robust(<span style="color: #4070a0">&#39;amqp://admin:admin@127.0.0.1/&#39;</span>, loop<span style="color: #666666">=</span>asyncio<span style="color: #666666">.</span>get_event_loop())
+
+    <span style="color: #007020; font-weight: bold">async</span> <span style="color: #007020; font-weight: bold">with</span> connection:
+        queue_name <span style="color: #666666">=</span> <span style="color: #4070a0">&#39;test_queue&#39;</span>
+        routing_key <span style="color: #666666">=</span> <span style="color: #4070a0">&#39;test_queue&#39;</span>
+
+        channel <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">await</span> connection<span style="color: #666666">.</span>channel(publisher_confirms<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">True</span>)
+        exchange <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">await</span> channel<span style="color: #666666">.</span>declare_exchange(<span style="color: #4070a0">&#39;direct&#39;</span>)
+        queue <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">await</span> channel<span style="color: #666666">.</span>declare_queue(
+            queue_name,
+            durable<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">True</span>,
+            arguments<span style="color: #666666">=</span>{<span style="color: #4070a0">&#39;x-max-length&#39;</span>: MAX_QUEUE_LEN, <span style="color: #4070a0">&#39;x-overflow&#39;</span>: <span style="color: #4070a0">&#39;reject-publish&#39;</span>}
+        )
+
+        <span style="color: #007020; font-weight: bold">await</span> queue<span style="color: #666666">.</span>bind(exchange, routing_key)
+
+        <span style="color: #007020; font-weight: bold">for</span> i <span style="color: #007020; font-weight: bold">in</span> <span style="color: #007020">range</span>(MAX_QUEUE_LEN <span style="color: #666666">+</span> <span style="color: #40a070">1</span>):
+            msg <span style="color: #666666">=</span> <span style="color: #4070a0">f&#39;Hello world </span><span style="color: #70a0d0; font-style: italic">{</span>i<span style="color: #70a0d0; font-style: italic">}</span><span style="color: #4070a0">&#39;</span>
+            <span style="color: #007020; font-weight: bold">try</span>:
+                <span style="color: #007020; font-weight: bold">await</span> exchange<span style="color: #666666">.</span>publish(aio_pika<span style="color: #666666">.</span>Message(msg<span style="color: #666666">.</span>encode()), routing_key)
+                logger<span style="color: #666666">.</span>debug(<span style="color: #4070a0">f&#39;Сообщение &quot;%s&quot;, отправлено&#39;</span>, msg)
+            <span style="color: #007020; font-weight: bold">except</span> aiormq<span style="color: #666666">.</span>exceptions<span style="color: #666666">.</span>DeliveryError:
+                <span style="color: #60a0b0; font-style: italic"># Здесь должна быть реализована система ретраев</span>
+                logger<span style="color: #666666">.</span>error(<span style="color: #4070a0">f&#39;Очередь переполнена, невозможно отправить сообщение: &quot;%s&quot;&#39;</span>, msg)
+
+
+<span style="color: #007020; font-weight: bold">if</span> <span style="color: #bb60d5">__name__</span> <span style="color: #666666">==</span> <span style="color: #4070a0">&#39;__main__&#39;</span>:
+    asyncio<span style="color: #666666">.</span>run(main())
+</code></pre></div>
+<p>Полезные ссылки:</p>
+<p><a href="https://www.rabbitmq.com/maxlength.html#definition-using-x-args">Queue Length Limit - RabbitMQ</a></p>
+
+        </div><!--/.col-xs-12.col-sm-9-->
+
+    </div><!--/row-->
+
+
+    <hr>
+
+    <footer>
+        <p>
+            При копировании информации с данного сайта пожалуйста указывайте
+            ссылку на источник. © 2019 Записки питониста
+        </p>
+    </footer>
+
+</div><!--/.container-->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</body>
+</html>

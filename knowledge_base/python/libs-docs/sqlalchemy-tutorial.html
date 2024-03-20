@@ -1,0 +1,171 @@
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148357635-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-148357635-1');
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <title>Записки питониста - База знаний</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/base.css">
+
+    
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/knowledge-base.css">
+
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-static-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://aleksey925.github.io/knowledge-base/index.html">Записки питониста</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                
+    <li><a href="https://aleksey925.github.io/knowledge-base/index.html">Главная</a></li>
+    <li class="active"><a href="https://aleksey925.github.io/knowledge-base/knowledge_base/index.html">База знаний</a></li>
+
+            </ul>
+        </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+</nav><!-- /.navbar -->
+
+<div class="container">
+
+    
+    <div class="row row-content">
+
+        <div class="col-xs-12 col-sm-12">
+            <h1>SQLAlchemy</h1>
+<h1>Оглавление</h1>
+<ol>
+<li>
+<p><h3><a href="#Общее">Общее</a></h3></p>
+<ul>
+<li><a href="#Обзор-возможностей">Обзор возможностей</a></li>
+<li><a href="#В-чем-разница-между-flush-и-commit">В чем разница между flush и commit</a></li>
+<li><a href="#Работа-с-сессиями">Работа с сессиями</a></li>
+</ul>
+</li>
+<li>
+<p><h3><a href="#Проблемы">Проблемы</a></h3></p>
+<ul>
+<li><a href="#n+1-select">n+1 select</a></li>
+</ul>
+</li>
+</ol>
+<p><a name='Общее'></a></p>
+<h2>Общее</h2>
+<p><a name='Обзор-возможностей'></a></p>
+<h3>Обзор возможностей</h3>
+<ul>
+<li>очень подробный разбор возможностей sqlalchemy
+ <a href="https://cloud.mail.ru/public/55Ku/5KbWy8ANZ">локально сохраненная версия доклада</a>, 
+ <a href="https://www.youtube.com/watch?v=jUGK-CtM-Mk">Денис Катаев, Tinkoff.ru «SQLAlchemy: Python vs Raw SQL»</a></li>
+<li>оптимизация <a href="https://www.youtube.com/watch?v=flA2lEl2a0M">Ускорение SQLAlchemy для архитектурных космонавтов / Алексей Старков (Qrator Labs)</a></li>
+</ul>
+<p><a name='В-чем-разница-между-flush-и-commit'></a></p>
+<h3>В чем разница между flush и commit</h3>
+<p><a href="http://qaru.site/questions/26368/sqlalchemy-whats-the-difference-between-flush-and-commit">SQLAlchemy: Какая разница между flush() и commit()? - python | Qaru</a></p>
+<p><a name='Работа-с-сессиями'></a></p>
+<h3>Работа с сессиями</h3>
+<p><a href="https://otus.ru/nest/post/250/">БД в SQLAlchemy: правильно работаем с сессиями | OTUS</a></p>
+<p><a name='Проблемы'></a></p>
+<h2>Проблемы</h2>
+<p><a name='n+1-select'></a></p>
+<h3>n+1 select</h3>
+<p>Предположим у нас есть объекты Car (строки таблицы) и у любой машины есть
+набор объектов Wheel (строки таблицы). Таким образом имеем отношение 1 ко 
+многим (Car — Wheel).</p>
+<p>Теперь предположим, что нам нужно обойти все машины и для каждой вывести 
+список ее колес. Наивное решение будет таким:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">SELECT</span><span style="color: #bbbbbb"> </span><span style="color: #666666">*</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">FROM</span><span style="color: #bbbbbb"> </span>Cars;<span style="color: #bbbbbb"></span>
+</code></pre></div>
+<p>И потом для каждой машины выполнить:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">SELECT</span><span style="color: #bbbbbb"> </span><span style="color: #666666">*</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">FROM</span><span style="color: #bbbbbb"> </span>Wheel<span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">WHERE</span><span style="color: #bbbbbb"> </span>CarId<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">?</span><span style="color: #bbbbbb"></span>
+</code></pre></div>
+<p>Таким образом у нас есть 1 select для выборки всех машин и N дополнительных 
+selects (N это общее колличество машин).</p>
+<p>Более правильным решением будет получить все колеса и выполнить поиск в памяти.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">SELECT</span><span style="color: #bbbbbb"> </span><span style="color: #666666">*</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">FROM</span><span style="color: #bbbbbb"> </span>Wheel;<span style="color: #bbbbbb"></span>
+</code></pre></div>
+<p>Это уменьшает колличество обращений к базе от N + 1, до 2.</p>
+<p><strong>Пример решения этой проблемы в SQLAlchemy</strong></p>
+<p>Модель</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">OrderItem</span>(Base):
+    <span style="color: #007020">id</span> <span style="color: #666666">=</span> Column(Integer, primary_key<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">True</span>)
+    order <span style="color: #666666">=</span> many_to_one(<span style="color: #4070a0">&#39;Order&#39;</span>)
+    product <span style="color: #666666">=</span> many_to_one(<span style="color: #4070a0">&#39;Product&#39;</span>)
+    quantity <span style="color: #666666">=</span> Column(Integer)
+
+<span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">Order</span>(Base):
+    <span style="color: #666666">...</span>
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">update_stock</span>(<span style="color: #007020">self</span>):
+        <span style="color: #007020; font-weight: bold">for</span> item <span style="color: #007020; font-weight: bold">in</span> <span style="color: #007020">self</span><span style="color: #666666">.</span>items:
+            item<span style="color: #666666">.</span>product<span style="color: #666666">.</span>stock <span style="color: #666666">-=</span> item<span style="color: #666666">.</span>quantity
+</code></pre></div>
+<p>Большинство orm используют lazy loading. Когда первый раз используется 
+отношение, выдается SQL запрос для загрузки нужных данных. В примере выше 
+используется oreder.items, который вызывает исполнение SQL запроса, затем 
+каждый вызов item.product выполняет очередной запрос к БД. Из-за вызова 
+item.product в цикле создается большое количество запросов к БД и это может 
+к снижению производительности. Это называется пробелема N + 1 select.</p>
+<p>SQLAlchemy имеет решение: безотложенная загрузка. Когда мы загружаем объект 
+Order, можно указать ORM какие отношения мы будем использовать и тогда все 
+данные загрузятся в 1 запросе. Для этого используется следующий синтаксис.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>session<span style="color: #666666">.</span>query(Order)<span style="color: #666666">.</span>options(joinedload_all(<span style="color: #4070a0">&#39;items.product&#39;</span>))<span style="color: #666666">.</span>get(order_id)
+</code></pre></div>
+<p><a href="http://pajhome.org.uk/blog/10_reasons_to_love_sqlalchemy.html">Ссылка на оригинальную статью</a></p>
+
+        </div><!--/.col-xs-12.col-sm-9-->
+
+    </div><!--/row-->
+
+
+    <hr>
+
+    <footer>
+        <p>
+            При копировании информации с данного сайта пожалуйста указывайте
+            ссылку на источник. © 2019 Записки питониста
+        </p>
+    </footer>
+
+</div><!--/.container-->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</body>
+</html>

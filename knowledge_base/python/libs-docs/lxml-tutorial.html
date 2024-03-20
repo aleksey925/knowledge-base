@@ -1,0 +1,198 @@
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148357635-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-148357635-1');
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <title>Записки питониста - База знаний</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/base.css">
+
+    
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/knowledge-base.css">
+
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-static-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://aleksey925.github.io/knowledge-base/index.html">Записки питониста</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                
+    <li><a href="https://aleksey925.github.io/knowledge-base/index.html">Главная</a></li>
+    <li class="active"><a href="https://aleksey925.github.io/knowledge-base/knowledge_base/index.html">База знаний</a></li>
+
+            </ul>
+        </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+</nav><!-- /.navbar -->
+
+<div class="container">
+
+    
+    <div class="row row-content">
+
+        <div class="col-xs-12 col-sm-12">
+            <h1>Tutorial lxml</h1>
+<p>lxml - библиотека для работы с XML и HTML, она основана сишных библиотеках 
+libxml2 и libxslt. Она совмещает в себе высокую скорость работы, богатый 
+функционал и простоту использования при обработке XML и HTML.</p>
+<h3>XML</h3>
+<p>Начнём с разбора данных в XML.
+Сначала импортируем библиотеку и проинициализуем тестовые строки.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">lxml</span> <span style="color: #007020; font-weight: bold">import</span> html, etree
+example_xml <span style="color: #666666">=</span> <span style="color: #4070a0">&quot;&quot;&quot;</span>
+<span style="color: #4070a0">&lt;notes&gt; </span>
+<span style="color: #4070a0">     &lt;note&gt; </span>
+<span style="color: #4070a0">         &lt;to&gt;Timmy&lt;/to&gt; </span>
+<span style="color: #4070a0">         &lt;from&gt;Rich&lt;/from&gt; </span>
+<span style="color: #4070a0">         &lt;heading&gt;Reminder&lt;/heading&gt; </span>
+<span style="color: #4070a0">         &lt;body&gt;Remeber the concert tickets.&lt;/body&gt; </span>
+<span style="color: #4070a0">     &lt;/note&gt; </span>
+<span style="color: #4070a0">     &lt;note&gt; </span>
+<span style="color: #4070a0">         &lt;to&gt;Eric&lt;/to&gt; </span>
+<span style="color: #4070a0">         &lt;from&gt;Josh&lt;/from&gt; </span>
+<span style="color: #4070a0">         &lt;heading&gt;Ride Plans&lt;/heading&gt; </span>
+<span style="color: #4070a0">        &lt;body&gt;Meet at the gas station on the corner of Diffley and 13 at 6:00pm.&lt;/body&gt; </span>
+<span style="color: #4070a0">    &lt;/note&gt; </span>
+<span style="color: #4070a0">&lt;/notes&gt;</span>
+<span style="color: #4070a0">&quot;&quot;&quot;</span>
+</code></pre></div>
+<p>Структура двух определённых заметок (notes) с сообщениями и некоторой 
+дополнительной информацией. Сейчас мы попробуем получить некотрую информацию 
+из этой разметки.</p>
+<p>Сначала с помощью метода <code>fromstring</code> мы загрузим данные в новый объект.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>notes <span style="color: #666666">=</span> etree<span style="color: #666666">.</span>fromstring(example_xml)
+</code></pre></div>
+<p>Теперь в цикле обойдём все дочерние элементы notes.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">for</span> note <span style="color: #007020; font-weight: bold">in</span> notes<span style="color: #666666">.</span>getchildren(): 
+   <span style="color: #007020">print</span>(note<span style="color: #666666">.</span>tag)
+</code></pre></div>
+<p>После выполнения этого кода в консоли мы увидим следующие строки:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>note
+note
+</code></pre></div>
+<p>Сохраним в отдельную переменную первый дочерний элемент notes для дальнейшего 
+исследования.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>note <span style="color: #666666">=</span> notes<span style="color: #666666">.</span>getchildren()[<span style="color: #40a070">0</span>]
+</code></pre></div>
+<p>Выведем данные содержащиеся в полях полученного нами элемента.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">for</span> field <span style="color: #007020; font-weight: bold">in</span> note<span style="color: #666666">.</span>iterchildren(): 
+    <span style="color: #007020">print</span>(<span style="color: #4070a0">&#39;</span><span style="color: #70a0d0; font-style: italic">%s</span><span style="color: #4070a0">: </span><span style="color: #70a0d0; font-style: italic">%s</span><span style="color: #4070a0">&#39;</span> <span style="color: #666666">%</span> (field<span style="color: #666666">.</span>tag, field<span style="color: #666666">.</span>text))
+</code></pre></div>
+<p>После выполнения этого кода в консоли мы увидим следующие строки:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>to: Timmy 
+from: Rich 
+heading: Reminder 
+body: Remeber the concert tickets.
+</code></pre></div>
+<p>Из заметок очень легко можно извлечь имена людей, которым она предназначается.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">for</span> field <span style="color: #007020; font-weight: bold">in</span> notes<span style="color: #666666">.</span>findall(<span style="color: #4070a0">&#39;.//to&#39;</span>): 
+    <span style="color: #007020">print</span>(<span style="color: #4070a0">&#39;Note to: </span><span style="color: #70a0d0; font-style: italic">%s</span><span style="color: #4070a0">&#39;</span> <span style="color: #666666">%</span> field<span style="color: #666666">.</span>text)
+</code></pre></div>
+<p>После выполнения этого кода в консоли мы увидим следующие строки:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>Note to: Timmy
+Note to: Eric
+</code></pre></div>
+<h3>HTML</h3>
+<p>Теперь когда мы научились извлекать данные из XML, попробуем поработать с HTML.
+Начнём опять с определения тестовых строк, с которыми будем работать.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>example_html <span style="color: #666666">=</span> <span style="color: #4070a0">&quot;&quot;&quot; </span>
+<span style="color: #4070a0">    &lt;html&gt; </span>
+<span style="color: #4070a0">        &lt;head&gt; </span>
+<span style="color: #4070a0">            &lt;title&gt;Example HTML Title&lt;/title&gt; </span>
+<span style="color: #4070a0">        &lt;/head&gt; </span>
+<span style="color: #4070a0">        &lt;body&gt; </span>
+<span style="color: #4070a0">            &lt;h1 class=&quot;big_heading&quot;&gt;LXML Example HTML&lt;/h1&gt; </span>
+<span style="color: #4070a0">            &lt;div class=&quot;all_items&quot;&gt; </span>
+<span style="color: #4070a0">                &lt;p class=&quot;item&quot;&gt; </span>
+<span style="color: #4070a0">                    This is the first paragrah. </span>
+<span style="color: #4070a0">                &lt;/p&gt; </span>
+<span style="color: #4070a0">                &lt;p class=&quot;item&quot;&gt; </span>
+<span style="color: #4070a0">                    This is the second paragraph. </span>
+<span style="color: #4070a0">                    &lt;img src=&#39;/fakeurl/to_fake_img.png&#39; /&gt; </span>
+<span style="color: #4070a0">                &lt;/p&gt; </span>
+<span style="color: #4070a0">            &lt;/div&gt; </span>
+<span style="color: #4070a0">        &lt;/body&gt; </span>
+<span style="color: #4070a0">    &lt;/html&gt; </span>
+<span style="color: #4070a0">&quot;&quot;&quot;</span>
+</code></pre></div>
+<p>Так же как и в случае с XML, нам нужно сначала создать объект с помощью 
+которого мы будем парсить HTML. Для этого нужно использовать функцию 
+<code>document_fromstring</code>.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>doc <span style="color: #666666">=</span> html<span style="color: #666666">.</span>document_fromstring(example_html)
+</code></pre></div>
+<p>Теперь мы можем начать извлекать данные. Для поиска нужных элементов мы можем 
+использовать CSS селекторы.</p>
+<p>Получим заголовок страницы:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>title <span style="color: #666666">=</span> doc<span style="color: #666666">.</span>cssselect(<span style="color: #4070a0">&#39;head title&#39;</span>)[<span style="color: #40a070">0</span>]
+<span style="color: #007020">print</span>(title<span style="color: #666666">.</span>text)
+</code></pre></div>
+<p>Теперь попробуем извлечь все элементы списка:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>items <span style="color: #666666">=</span> doc<span style="color: #666666">.</span>cssselect(<span style="color: #4070a0">&#39;div.all_items .item&#39;</span>)
+<span style="color: #007020; font-weight: bold">for</span> item <span style="color: #007020; font-weight: bold">in</span> items: 
+    <span style="color: #007020">print</span>(item<span style="color: #666666">.</span>text<span style="color: #666666">.</span>strip())
+</code></pre></div>
+<p>После выполнения этого кода в консоли мы увидим следующие строки:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>This is the first paragrah.
+This is the second paragraph.
+</code></pre></div>
+<p>Здесь мы продемонстрировали примеры того, на сколько просто использовать 
+библиотеку lxml. Есть много дополнительных функций, к которым мы даже близко 
+не подобрались, мы всего лишь извлекли содержимое некоторых тегов.</p>
+
+        </div><!--/.col-xs-12.col-sm-9-->
+
+    </div><!--/row-->
+
+
+    <hr>
+
+    <footer>
+        <p>
+            При копировании информации с данного сайта пожалуйста указывайте
+            ссылку на источник. © 2019 Записки питониста
+        </p>
+    </footer>
+
+</div><!--/.container-->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</body>
+</html>

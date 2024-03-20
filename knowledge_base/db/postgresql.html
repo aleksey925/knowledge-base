@@ -1,0 +1,439 @@
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148357635-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-148357635-1');
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <title>Записки питониста - База знаний</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/base.css">
+
+    
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/knowledge-base.css">
+
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-static-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://aleksey925.github.io/knowledge-base/index.html">Записки питониста</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                
+    <li><a href="https://aleksey925.github.io/knowledge-base/index.html">Главная</a></li>
+    <li class="active"><a href="https://aleksey925.github.io/knowledge-base/knowledge_base/index.html">База знаний</a></li>
+
+            </ul>
+        </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+</nav><!-- /.navbar -->
+
+<div class="container">
+
+    
+    <div class="row row-content">
+
+        <div class="col-xs-12 col-sm-12">
+            <h1>PostgreSQL</h1>
+<h1>Оглавление</h1>
+<ul>
+<li>
+<p><a href="#Установка-настройка">Установка/настройка</a></p>
+<ul>
+<li><a href="#Установка-на-MacOS">Установка на MacOS</a></li>
+<li><a href="#Установка-утилит">Установка утилит</a></li>
+<li><a href="#Конфигурирование">Конфигурирование</a></li>
+<li><a href="#Импортирование-дампа-БД">Импортирование дампа БД</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#Туториалы">Туториалы</a></p>
+</li>
+<li>
+<p><a href="#Индексы">Индексы</a></p>
+</li>
+<li><a href="#Общая-информация-по-индексам">Общая информация по индексам</a></li>
+<li>
+<p><a href="#Устройство-B-Tree-индексов">Устройство B-Tree индексов</a></p>
+</li>
+<li>
+<p><a href="#Теория">Теория</a></p>
+<ul>
+<li><a href="#Оптимизация-запросов">Оптимизация запросов</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#Примеры-решения-задач">Примеры решения задач</a></p>
+<ul>
+<li><a href="#Запрет-на-созадние-записей-пересекающихся-по-времени">Запрет на созадние записей пересекающихся по времени</a></li>
+</ul>
+</li>
+</ul>
+<p><a name='Установка-настройка'></a></p>
+<h2>Установка/настройка</h2>
+<p><a name='Установка-на-MacOS'></a></p>
+<h3>Установка на MacOS</h3>
+<p>Установить postgres на macos можно при помощи <a href="https://postgresapp.com">PostgresApp</a>. </p>
+<p>Данное приложение предоставляет простой и удобный GUI, который позволяет устанавливать и управлять postgres.</p>
+<p><a name='Установка-утилит'></a></p>
+<h3>Установка утилит</h3>
+<p>При установке дистрибутива postgres устанавливается не только сама СУБД, но 
+еще и разные вспомогательные утилиты. Иногда бывает так, что сама СУБД, не 
+нужна, а нужны только утилиты для работы с ней. В этом случае можно 
+воспользоваться специальными пакетами, которые установят только утилиты.</p>
+<p><strong>MacOS</strong></p>
+<p>В MacOS установить утилиты для работы с postgres можно при помощи brew</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>brew install libpq
+</code></pre></div>
+<p>После установки пакета найти установленные утилиты можно в 
+<code>/usr/local/Cellar/libpq/&lt;версия-пакета&gt;/bin/</code>.</p>
+<p><a name='Конфигурирование'></a></p>
+<h3>Конфигурирование</h3>
+<p>http://pgconfigurator.cybertec.at/ - онлайн конфигуратор postgres</p>
+<p><a name='Импортирование-дампа-БД'></a></p>
+<h3>Импортирование дампа БД</h3>
+<p>Данная инструкция проверялась и обкатывалась под ubuntu, будет она работать на других платформах или нет, не известно.</p>
+<p>Для импортирования дампа БД, необходимо:</p>
+<ol>
+<li>
+<p>Подключиться к СУБД через оболочку</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>sudo -u postgres psql
+</code></pre></div>
+</li>
+<li>
+<p>Создать базу данных, пользователя и дать новому пользователю права на 
+   созданную БД</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">CREATE</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">DATABASE</span><span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;</span>db_name<span style="color: #666666">&gt;</span>;<span style="color: #bbbbbb"></span>
+<span style="color: #007020; font-weight: bold">CREATE</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">USER</span><span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;</span>user_name<span style="color: #666666">&gt;</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">WITH</span><span style="color: #bbbbbb"> </span>password<span style="color: #bbbbbb"> </span><span style="color: #4070a0">&#39;&lt;you_password&gt;&#39;</span>;<span style="color: #bbbbbb"></span>
+<span style="color: #007020; font-weight: bold">GRANT</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">ALL</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">ON</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">DATABASE</span><span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;</span>db_name<span style="color: #666666">&gt;</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">TO</span><span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;</span>user_name<span style="color: #666666">&gt;</span>;<span style="color: #bbbbbb"></span>
+</code></pre></div>
+</li>
+<li>
+<p>Теперь можно выйти из оболочки, для этого введите команду <code>\q</code>. Оказавшись 
+   в терминале необходимо выполнить команду:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>psql -h localhost -d &lt;db_name&gt; -U &lt;user_name&gt; -W -f &lt;/path/to/db_dump.sql&gt;
+</code></pre></div>
+<p>db_name и user_name это значения введенные Вами на предыдущем этапе.</p>
+</li>
+</ol>
+<p><a name='Туториалы'></a></p>
+<h2>Туториалы</h2>
+<ul>
+<li>https://metanit.com/sql/postgresql/1.1.php - простой и хорошо 
+структуризированный манул для начинающих. Есть описание установки сервера,
+примеры различных запросов и т д</li>
+</ul>
+<p><a name='Индексы'></a></p>
+<h2>Индексы</h2>
+<p><a name='Общая-информация-по-индексам'></a></p>
+<h3>Общая информация по индексам</h3>
+<p>Индексы помогают ускорить операций, требующие выборки ограниченных данных. Это:</p>
+<ul>
+<li>
+<p>операции <code>select</code>, <code>update</code> и <code>delete</code>, в которых присутствует условие <code>where</code>;</p>
+</li>
+<li>
+<p>операция <code>join</code> и подобные ей (если индекс создан для полей, по которым происходит объединение);</p>
+</li>
+<li>
+<p>некоторые случаи, где присутствует <code>ORDER BY</code>.</p>
+</li>
+</ul>
+<h4>Создание и удаление индексов</h4>
+<p>В самом базовом случае команда создания индекса выглядит следующим образом:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">CREATE</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">INDEX</span><span style="color: #bbbbbb"> </span>index_name<span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">ON</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">table_name</span><span style="color: #bbbbbb"> </span>(<span style="color: #007020; font-weight: bold">column_name</span>);<span style="color: #bbbbbb"></span>
+</code></pre></div>
+<p>Чтобы создать уникальный индекс, который не позволяет создавать несколько записей с одинаковым значением в поле, 
+нужно добавить модификатор UNIQUE. Уникальность поддерживают только B-tree индексы.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">CREATE</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">UNIQUE</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">INDEX</span><span style="color: #bbbbbb"> </span>index_name<span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">ON</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">table_name</span><span style="color: #bbbbbb"> </span>(<span style="color: #007020; font-weight: bold">column_name</span>);<span style="color: #bbbbbb"></span>
+</code></pre></div>
+<p>На время создания индекса таблица остается доступной для чтения, но блокируется для изменений. В виду того, что 
+создание индекса для больших таблиц может быть не быстрым, это не всегда допустимо. PostgreSQL позволяет создавать 
+индексы без блокировки изменений таблицы. Для этого надо воспользоваться конкурентным созданием, добавив модификатор 
+CONCURRENTLY. Естественно в этом случае создание индекса займет больше времени, плюс просядет производительность.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">CREATE</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">INDEX</span><span style="color: #bbbbbb"> </span>CONCURRENTLY<span style="color: #bbbbbb"> </span>index_name<span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">ON</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">table_name</span><span style="color: #bbbbbb"> </span>(<span style="color: #007020; font-weight: bold">column_name</span>);<span style="color: #bbbbbb"></span>
+</code></pre></div>
+<p>Есть пара моментов, о которых стоит помнить:</p>
+<ul>
+<li>
+<p>нельзя конкурентно создавать несколько индексов для одной таблицы одновременно;</p>
+</li>
+<li>
+<p>в отличие от обычного создания, конкурентное не может быть обернуто в транзакцию.</p>
+</li>
+</ul>
+<p>Для удаления индекса необходимо воспользоваться запросом вида:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">DROP</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">INDEX</span><span style="color: #bbbbbb"> </span>name;<span style="color: #bbbbbb"></span>
+</code></pre></div>
+<p><strong>Пересоздание индексов (реиндекс)</strong></p>
+<p>Иногда индекс может выйти из строя и для нормальной работы его необходимо пересоздать. Это может понадобиться в случае 
+программного или аппаратного сбоя, раздутия индекса, смены настроек СУБД или падения во время конкурентного создания 
+индекса. Для этого служит один из следующих запросов.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">REINDEX</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">INDEX</span><span style="color: #bbbbbb"> </span>index_name;<span style="color: #bbbbbb"> </span><span style="color: #60a0b0; font-style: italic">/* Пересоздаст индекс index_name */</span><span style="color: #bbbbbb"></span>
+<span style="color: #007020; font-weight: bold">REINDEX</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">TABLE</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">table_name</span>;<span style="color: #bbbbbb"> </span><span style="color: #60a0b0; font-style: italic">/* Пересоздаст все индексы в таблице table_name */</span><span style="color: #bbbbbb"></span>
+<span style="color: #007020; font-weight: bold">REINDEX</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">DATABASE</span><span style="color: #bbbbbb"> </span>database_name;<span style="color: #bbbbbb"> </span><span style="color: #60a0b0; font-style: italic">/* Пересоздаст все индексы в базе database_name */</span><span style="color: #bbbbbb"></span>
+</code></pre></div>
+<h4>Типы индексов</h4>
+<p>PostgreSQL позволяет создавать индексы нескольких типов: B-tree, GIN, GiST, BRIN и HASH. Каждый из них использует свой 
+алгоритм работы и подходит для определенных запросов. По умолчанию создаются индексы типа B-tree, как поддерживающий 
+наиболее часто используемые операции. Чтобы создать индекс другого типа надо указать его явно, добавив модификатор 
+USING type.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">CREATE</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">INDEX</span><span style="color: #bbbbbb"> </span>index_name<span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">ON</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">table_name</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">USING</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">type</span><span style="color: #bbbbbb"> </span>(<span style="color: #007020; font-weight: bold">column_name</span>);<span style="color: #bbbbbb"></span>
+</code></pre></div>
+<p>Рассмотрим подробнее каждый тип.</p>
+<p><strong>B-tree</strong></p>
+<p>B-tree строит индексы используя <a href="https://ru.wikipedia.org/wiki/B-дерево">одноименную реализацию</a> сбалансированного 
+дерева. Может использоваться в случаях, если к индексированному полю применяются:</p>
+<ul>
+<li>
+<p>операторы сравнения &gt;, &lt;, =, &gt;=, &lt;=, BETWEEN и IN;</p>
+</li>
+<li>
+<p>условия пустоты IS NULL и IS NOT NULL;</p>
+</li>
+<li>операторы поиска подстроки LIKE и ~, если искомая строка закреплена в начале шаблона (например str_1 LIKE 'search%');</li>
+<li>регистронезависимые операторы поиска подстроки ILIKE и ~*. Но только в том случае, если искомая строка начинается с 
+  символа, который одинаков и в верхнем и в нижнем регистре (например числа)`.</li>
+</ul>
+<p><strong>GiST</strong></p>
+<p>GiST для построения индексов использует один из нескольких алгоритмов, наиболее подходящих под тип индексируемого поля. 
+Поэтому набор операторов при работе с которыми может быть задействован этот индекс зависит от типа поля. По умолчанию 
+PostgreSQL предоставляет индексы для некоторых типов данных, таких как 
+<a href="https://www.postgresql.org/docs/9.5/datatype-geometric.html">геометрические типы</a>, 
+<a href="https://www.postgresql.org/docs/9.1/static/datatype-net-types.html">сетевые адреса</a>, 
+<a href="https://www.postgresql.org/docs/9.2/static/rangetypes.html">диапазоны</a> и т.д. Так же этот список можно расширить, 
+установив соответствующие модули.</p>
+<p>Вот список типов полей и индексируемых операторов для них. Значение операторов для каждого конкретного типа можно найти 
+в официальной документации.</p>
+<ul>
+<li>типы box, circle и polygon - операторы &amp;&amp;, &amp;&gt;, &amp;&lt;, &amp;&lt;|, &gt;&gt;, &lt;&lt;, &lt;&lt;|, &lt;@, @&gt;, @, |&amp;&gt;, |&gt;&gt;, ~, ~=;</li>
+<li>типы inet и cidr - операторы &amp;&amp;, &gt;&gt;, &gt;&gt;=, &gt;, &gt;=, &lt;&gt;, &lt;&lt;, &lt;&lt;=, &lt;, &lt;=, =;</li>
+<li>тип point - операторы &gt;&gt;, &gt;^, &lt;&lt;, &lt;@, &lt;@, &lt;@, &lt;^, ~=;</li>
+<li>тип tsquery - операторы &lt;@, @&gt;;</li>
+<li>тип tsvector - оператор @@;</li>
+<li>все типы range - операторы &amp;&amp;, &amp;&gt;, &amp;&lt;, &gt;&gt;, &lt;&lt;, &lt;@, -|-, =, @&gt;, @&gt;.</li>
+</ul>
+<p><strong>GIN</strong></p>
+<p>GIN индексы применимы к составным типам, работа с которыми осуществляется с помощью ключей. Это массивы, jsonb и 
+tsvector. Как и GiST индексы, они могут реализовать один из нескольких алгоритмов. И стандартный набор можно так же 
+расширить, установив модули.</p>
+<p>Ниже приведен список типов полей и индексируемых операторов для них. Значение операторов для каждого конкретного типа 
+можно найти в официальной документации.</p>
+<ul>
+<li>массивы - операторы &amp;&amp;, &lt;@, =, @&gt;;</li>
+<li>тип jsonb - операторы ?, ?&amp;, ?|, @&gt;;</li>
+<li>тип tsvector - операторы @@ и @@@.</li>
+</ul>
+<p>Так же GIN индекс может быть создан только для определенных полей jsonb.</p>
+<p><strong>BRIN</strong></p>
+<p>BRIN индекс отчается от остальных, его идея не в том, чтобы быстро найти нужные строки, а в том, чтобы избежать 
+просмотра заведомо ненужных, то есть <strong>ускорить последовательное сканирование</strong> таблицы. Это всегда неточный индекс: он 
+вообще не содержит TID-ов табличных строк (ссылок на конкретные строки).</p>
+<p>Упрощенно говоря, BRIN хорошо работает для тех столбцов, значения в которых коррелируют с их физическим расположением в 
+таблице. Иными словами, если запрос без предложения ORDER BY выдает значения столбца практически в порядке возрастания 
+или убывания (и при этом по столбцу нет индексов).</p>
+<p>Работает это следующим образом. Таблица разбивается на зоны (range) размером в несколько страниц (или блоков, что то же 
+самое) — отсюда и название: Block Range Index, BRIN. Для каждой зоны в индексе сохраняется сводная информация о данных 
+в этой зоне. Как правило, это минимальное и максимальное значения, но бывает и иначе. Если при выполнении запроса, 
+содержащего условие на столбец, искомые значения не попадают в диапазон, то всю зону можно смело пропускать; если же 
+попадают — все строки во всех блоках зоны придется просмотреть и выбрать среди них подходящие.</p>
+<p>BRIN можно применять к большому количеству типов данных, вот некоторые из них: числа, строки, дата/время, диопазоны и 
+т.д. Список поддерживаемых операторов зависит от типа столбца, для большинства типов поддерживаются операторы 
+<code>&lt;</code>, <code>&lt;=</code>, <code>=</code>, <code>&gt;=</code>, <code>&gt;</code>. Полный список поддерживаемых типов и операторов можно посмотреть в 
+<a href="https://postgrespro.ru/docs/postgresql/13/brin-builtin-opclasses#brin-builtin-opclasses-table">официальной документации</a>.</p>
+<p>Один из примеров, когда уместно использовать данный индекс это логи или истории заказов магазина, которые пишутся 
+последовательно, а потому некоторые колонки (дата, время, номер) частично упорядочены уже на физическом уровне.</p>
+<p>Отличительные особенности:</p>
+<ul>
+<li>небольшой размер;</li>
+<li>минимальные накладные расходы на поддержание (разрабатывался для таблиц размеров в несколько терабайтов или даже 
+  десятков терабайт).</li>
+</ul>
+<p>Детали реализации можно посмотреть <a href="https://habr.com/ru/company/postgrespro/blog/346460/">здесь</a> и 
+<a href="https://ru.wikipedia.org/wiki/BRIN">здесь</a>.</p>
+<p><strong>HASH</strong></p>
+<p>Hash индексы могут использоваться, только если проиндексированное поле участвует в сравнении (только оператор =). Этот 
+индекс так же не используется в условиях IS NULL и IS NOT NULL. </p>
+<p>В старых версиях postgres (например 9.5) этот тип индекса не рекомендуется использовать.</p>
+<blockquote>
+<p>Операции с хеш-индексами в настоящее время не проходят через WAL, так что после аварийной остановки базы данных может 
+потребоваться перестроить хеш-индексы командой REINDEX. Кроме того, изменения в хеш-индексах после начальной копии не
+переносятся при потоковой или файловой репликации, так что в последующих запросах они будут давать неправильные 
+ответы. По этим причинам настоятельно рекомендуется не использовать их.</p>
+</blockquote>
+<p>В новых версиях эти проблемы исправили.</p>
+<h4>Составные индексы</h4>
+<p>Индекс можно построить больше чем по одному полю. Для построения индекса по нескольких полям - составного индекса, 
+надо просто перечислить входящие в него поля через запятую.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">CREATE</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">INDEX</span><span style="color: #bbbbbb"> </span>index_name<span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">ON</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">table_name</span><span style="color: #bbbbbb"> </span>(column_name_1,<span style="color: #bbbbbb"> </span>compumn_name_2);<span style="color: #bbbbbb"></span>
+</code></pre></div>
+<p>Максимальное количество полей в индексе - 32. Это значение может быть изменено, если вы самостоятельно компилируете 
+PostgreSQL из исходников. Но на практике индексы, состоящие больше чем из трех полей, практически не применяются.</p>
+<p>Составными могут быть индексы только B-tree, GiST, GIN и BRIN. Составные индексы могут использоваться, как когда в 
+условии фигурирует только часть полей, так и когда в условии используются все поля входящие в индекс. Главное нужно 
+помнить, что для каждого типа есть свои особенности.</p>
+<p><strong>B-tree</strong></p>
+<p>B-tree индекс может быть использован, когда условие включает в себя любые входящие в него поля. Но наиболее полезен он 
+в том случае, если в условии задействовано ведущее (первое в списке) поле. По этому важно думать в каком порядке 
+перечисляются поля во время создания индекса. Первыми нужно указывать поля, фильтр по которым будет отсекать как можно 
+больше значений.</p>
+<p><strong>GiST</strong></p>
+<p>GiST индекс может использоваться в тех же условиях, что и B-tree. Помимо этого эффективность индекса сильно снижается, 
+если условие по ведущему полю отсекает мало значений. Нужно стараться так составлять индекс, чтобы наиболее строгое 
+ограничение применялось к ведущему полю.</p>
+<p><strong>GIN</strong></p>
+<p>Составной GIN индекс одинаково эффективен при использовании любого входящего в него поля не зависимо от его 
+расположения. Это отличает его от B-tree и GiST индексов, где условие по ведущему полю сильно желательно.</p>
+<p><strong>Частичные индексы</strong></p>
+<p>Иногда может возникать ситуация, что индекс требуются не для всех записей в таблице. Например, у нас есть таблица users, 
+у которой есть поле is_active типа boolean. Записей со значением поля true намного меньше, чем с false. Но логично, 
+что основная часть запросов идет к активным пользователям. В этом случае будет разумно построить индекс только для них. 
+PostgreSQL предоставляет такую возможность.</p>
+<p>Для создания частичного индекса надо добавить модификатор WHERE в запрос на создание.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">CREATE</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">INDEX</span><span style="color: #bbbbbb"> </span>index_name<span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">ON</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">table_name</span><span style="color: #bbbbbb"> </span>(<span style="color: #007020; font-weight: bold">column_name</span>)<span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">WHERE</span><span style="color: #bbbbbb"> </span>condition;<span style="color: #bbbbbb"></span>
+</code></pre></div>
+<p>Вот запрос на создание частичного индекса для поля <code>users.rating</code> с условием <code>is_active = true</code>:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">CREATE</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">INDEX</span><span style="color: #bbbbbb"> </span>active_users<span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">ON</span><span style="color: #bbbbbb"> </span>users<span style="color: #bbbbbb"> </span>(rating)<span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">WHERE</span><span style="color: #bbbbbb"> </span>is_active<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">true</span>;<span style="color: #bbbbbb"></span>
+</code></pre></div>
+<p>Составные и уникальные индексы тоже могут быть частичными.</p>
+<h4>Функциональные индексы</h4>
+<p>Порой возникает необходимость создания индекса не для конкретного поля/полей, а для результата выражения. Например, 
+если мы часто ищем записи в таблице <code>users</code> по имени и фамилии одной строкой. Пример такого запроса:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">SELECT</span><span style="color: #bbbbbb"> </span><span style="color: #666666">*</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">FROM</span><span style="color: #bbbbbb"> </span>users<span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">where</span><span style="color: #bbbbbb"> </span>(name<span style="color: #bbbbbb"> </span><span style="color: #666666">||</span><span style="color: #bbbbbb"> </span><span style="color: #4070a0">&#39; &#39;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">||</span><span style="color: #bbbbbb"> </span>surname)<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #4070a0">&#39;Haru Atari&#39;</span>;<span style="color: #bbbbbb"></span>
+</code></pre></div>
+<p>Здесь может сильно помочь функциональный индекс. Для его создания используется обычный запрос, но вместо полей, надо 
+указать выражение. Запрос на создание индекса для нашего случая будет выглядеть так:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">CREATE</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">INDEX</span><span style="color: #bbbbbb"> </span>active_users<span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">ON</span><span style="color: #bbbbbb"> </span>users<span style="color: #bbbbbb"> </span>((name<span style="color: #bbbbbb"> </span><span style="color: #666666">||</span><span style="color: #bbbbbb"> </span><span style="color: #4070a0">&#39; &#39;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">||</span><span style="color: #bbbbbb"> </span>surname));<span style="color: #bbbbbb"></span>
+</code></pre></div>
+<p>Важно понимать, что функциональные индексы хранят результат выражения и вычисляют его при вставке или обновлении записи.
+Из-за этого сильно возрастает скорость чтения т.к. теперь нет необходимости высчитывать значения выражения для каждой 
+записи, а достаточно произвести простое сравнение. Но при этом сильно просаживается скорость при создании и 
+редактировании записей т.к. при этом еще и рассчитывается новое значение для индекса.</p>
+<blockquote>
+<p>Данная заметка скопирована с <a href="https://web.archive.org/web/20190116120501/https://haru-atari.com/ru/blog/6/indexes-in-postgresql-full-manual">сайта</a>,
+после того как владелец удалил свой блог.</p>
+</blockquote>
+<p>Полезные ссылки:</p>
+<ul>
+<li><a href="https://postgrespro.ru/docs/postgresql/13/indexes-types">Индексы - Postgres документация</a></li>
+<li><a href="https://habr.com/ru/company/postgrespro/blog/346460/">Индексы в PostgreSQL — 9 - habr (описание работы brin индексов)</a></li>
+<li><a href="https://ru.wikipedia.org/wiki/BRIN">BRIN - wikipedia</a></li>
+</ul>
+<p><a name='Устройство-B-Tree-индексов'></a></p>
+<h3>Устройство B-Tree индексов</h3>
+<p>Поговорим об особенностях индексов в PostgreSQL и тем, что их отличает от других РСУБД. Речь пойдёт о стандартных для 
+реляционных СУБД B-tree индексах:</p>
+<ol>
+<li>
+<p>Индексы, строго говоря, являются B+ деревом, что даёт возможность прочитать страницы одного уровня, не возвращаясь 
+   каждый раз по иерархии к корневому узлу.</p>
+</li>
+<li>
+<p>Индексы в СУБД PostgreSQL не содержат ссылку на кластерный индекс или первичный ключ, как в некоторых других (MySQL, 
+   MS SQL Server). Вместо этого, индекс в PostgreSQL содержит указатель на строку таблицы на диске (TID).</p>
+</li>
+<li>
+<p>Ещё одно отличие индексов в PostgreSQL: индекс не содержит информации об актуальной версии, поэтому нет возможности 
+   вычитать все данные и вернуть пользователю из индекса, даже если в SELECT выбираются только поля, входящие в индекс. 
+   Всё равно необходимо обращение к основной таблице, чтобы получить информацию об актуальных строках и вернуть их в 
+   результатах запроса. </p>
+</li>
+</ol>
+<p>Полезные ссылки:</p>
+<ul>
+<li><a href="https://otus.ru/nest/post/1082/">Особенности индексов в PostgreSQL</a></li>
+</ul>
+<p><a name='Теория'></a></p>
+<h2>Теория</h2>
+<p><a name='Оптимизация-запросов'></a></p>
+<h2>Оптимизация запросов</h2>
+<ul>
+<li><a href="https://m.habr.com/ru/post/203320/">Оптимизация запросов. Основы EXPLAIN в PostgreSQL</a></li>
+<li><a href="https://m.habr.com/ru/post/203386/">Оптимизация запросов. Основы EXPLAIN в PostgreSQL (часть 2)</a></li>
+<li><a href="https://m.habr.com/ru/post/203484/">Оптимизация запросов. Основы EXPLAIN в PostgreSQL (часть 3</a></li>
+</ul>
+<p><a name='Примеры-решения-задач'></a></p>
+<h2>Примеры решения задач</h2>
+<p><a name='Запрет-на-созадние-записей-пересекающихся-по-времени'></a></p>
+<h3>Запрет на создание записей пересекающихся по времени</h3>
+<p>Данный пример показывает как можно реализовать блокировку на одновременное 
+редактирование одного и тоже поста несколькими пользователями с проверкой на 
+стороне БД. </p>
+<p>Благодаря ограничению tstzrange_constraint в таблице нельзя создать
+несколько записей у которых post_id равен и значения timestamp_start_block и
+timestamp_end_block пересекаются.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">CREATE</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">TABLE</span><span style="color: #bbbbbb"> </span>post<span style="color: #bbbbbb"> </span>(<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>id<span style="color: #bbbbbb"> </span><span style="color: #007020">SERIAL</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">PRIMARY</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">KEY</span>,<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>name<span style="color: #bbbbbb"> </span><span style="color: #007020">varchar</span>(<span style="color: #40a070">20</span>)<span style="color: #bbbbbb"></span>
+);<span style="color: #bbbbbb"></span>
+
+<span style="color: #007020; font-weight: bold">CREATE</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">TABLE</span><span style="color: #bbbbbb"> </span>post_edit_block<span style="color: #bbbbbb"> </span>(<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>id<span style="color: #bbbbbb"> </span><span style="color: #007020">SERIAL</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">PRIMARY</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">KEY</span>,<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>post_id<span style="color: #bbbbbb"> </span><span style="color: #007020">INT</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">REFERENCES</span><span style="color: #bbbbbb"> </span>post<span style="color: #bbbbbb"> </span>(id),<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>timestamp_start_block<span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">TIMESTAMP</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">WITH</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">TIME</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">ZONE</span>,<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>timestamp_end_block<span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">TIMESTAMP</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">WITH</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">TIME</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">ZONE</span><span style="color: #bbbbbb"></span>
+);<span style="color: #bbbbbb"></span>
+
+<span style="color: #007020; font-weight: bold">CREATE</span><span style="color: #bbbbbb"> </span>EXTENSION<span style="color: #bbbbbb"> </span>btree_gist;<span style="color: #bbbbbb"></span>
+<span style="color: #007020; font-weight: bold">ALTER</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">TABLE</span><span style="color: #bbbbbb"> </span>post_edit_block<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span><span style="color: #007020; font-weight: bold">ADD</span><span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">CONSTRAINT</span><span style="color: #bbbbbb"> </span>tstzrange_constraint<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span>EXCLUDE<span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">USING</span><span style="color: #bbbbbb"> </span>gist<span style="color: #bbbbbb"> </span>(<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">            </span>post_id<span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">WITH</span><span style="color: #bbbbbb"> </span><span style="color: #666666">=</span>,<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">            </span>tstzrange(timestamp_start_block,<span style="color: #bbbbbb"> </span>timestamp_end_block,<span style="color: #bbbbbb"> </span><span style="color: #4070a0">&#39;[]&#39;</span>)<span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">WITH</span><span style="color: #bbbbbb"> </span><span style="color: #666666">&amp;&amp;</span><span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span>);<span style="color: #bbbbbb"></span>
+</code></pre></div>
+
+        </div><!--/.col-xs-12.col-sm-9-->
+
+    </div><!--/row-->
+
+
+    <hr>
+
+    <footer>
+        <p>
+            При копировании информации с данного сайта пожалуйста указывайте
+            ссылку на источник. © 2019 Записки питониста
+        </p>
+    </footer>
+
+</div><!--/.container-->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</body>
+</html>
