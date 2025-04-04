@@ -177,27 +177,38 @@ py -3
 <a name='Настройка-окружения-для-разработки-на-MacOS'></a>
 ### Настройка окружения для разработки на MacOS
 
-Данный мануал актуален для компьютеров на основе чипа Apple Silicone. В целом его можно применять и для компьютеров на
-intel, но не с небольшими доработками.
+Данный мануал можно использовать для настройки компьютеров с чипом Apple Silicone и Intel.
 
-1. Устанавливаем brew. Выполнять обе команды требуется для возможности устанавливать как нативно поддерживаемые 
-    приложения, так и те, которые будут работать через прослойку совместимости.
+1. Устанавливаем brew. Выполнять требуется только 1 из команд ниже. Выбирайте исходя из процессора 
+    установленного в вашем ПК. Раньше было полезно устанавливать обе версии, если вы использовали
+    ПК с Apple Silicone, но сейчас эта рекомендация потеряла свою актуальность, так как почти не 
+    осталось не портированного софта.
 
-    Устанавливает brew для архитектуры x86
+    Устанавливает brew для Intel
     
     ```
     arch -x86_64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     ```
     
-    Устанавливает brew для apple silicone
+    Устанавливает brew для Apple Silicone
     
     ```
     arch -arm64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     ```
     
-    После установки brew для m1 будет установлен в /opt/homebrew/bin/brew, а для intel /usr/local/bin/brew
+    После установки brew для Apple Silicone будет установлен в /opt/homebrew/bin/brew, а для Intel /usr/local/bin/brew.
 
-2. Добавляем в ~/.zshrc и переоткрываем консоль, чтобы настройки применились
+2. Добавляем в `~/.zshrc`
+
+    ```bash
+    # mise
+    eval "$(mise activate zsh)"
+    
+    # direnv
+    eval "$(direnv hook zsh)"
+    ```
+   
+    Добавляем в `~/.zprofile`
 
     ```bash
     # brew
@@ -207,75 +218,28 @@ intel, но не с небольшими доработками.
         eval "$(/usr/local/bin/brew shellenv)"
     fi
     export HOMEBREW_NO_ANALYTICS=1
-     
-    # Poetry
-    export PATH="$HOME/.poetryenv/1.7.1:$PATH"
-    poetry completions zsh > ~/.zsh/_poetry
-     
-    # Pyenv
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init --path)"
-     
-    # direnv
-    eval "$(direnv hook zsh)"
-     
-    # Включает погрузку скриптов реализующих автодополнение в консоли
-    zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
-    fpath=(~/.zsh $fpath)
+    
+    # activating loading autocompletion scripts
     autoload -Uz compinit && compinit
-   
-    source <(kubectl completion zsh)
-     
-    # Генерирует флаги необходимые для сборки из исходников сишных библиотек
-    export LDFLAGS=""
-    export CPPFLAGS=""
-    export PKG_CONFIG_PATH=""
-     
-    pkgs=(curl readline sqlite)
-    for pkg in $pkgs; do
-        pkg_dir="$HOMEBREW_PREFIX/opt/$pkg"
-     
-        lib_dir="$pkg_dir/lib"
-     
-        if [ -d "$lib_dir" ]; then
-            export LDFLAGS="$LDFLAGS -L$lib_dir"
-        fi
-     
-        include_dir="$pkg_dir/include"
-        if [ -d "$include_dir" ]; then
-            export CPPFLAGS="$CPPFLAGS -I$include_dir"
-        fi
-     
-        pkg_config_dir="$lib_dir/pkgconfig"
-        if [ -d "$pkg_config_dir" ]; then
-            if [ "x$PKG_CONFIG_PATH" = "x" ]; then
-                export PKG_CONFIG_PATH="$pkg_config_dir"
-            else
-                export PKG_CONFIG_PATH="PKG_CONFIG_PATH:$pkg_config_dir"
-            fi
-        fi
-    done 
-    ```
-
-3. Открываем консоль для работы с ПО адаптированным под Apple Silicon, чтобы у нас использовалась правильная версия 
-    brew и зависимости установились правильно.
-
-    ```
-    arch -arm64 zsh
+    source <(docker completion zsh)
     ```
    
-    > P.S. Вы всегда должны загружать оболочку (zsh) для той архитектуры, с ПО для которой вы собираетесь работать.  
-    > Если так не делать и просто перед вызовом программы указывать требуемую архитектуру через arch, то вы можете  
-    > получить большие проблемы, так как у вас будут загружены переменные окружения указывающие не на те версии 
-    > программ.
+    После этого закрываем и открываем терминал снова, чтобы настройки применились.
+
+3. Если вы работаете с софтом для обоих платформ, очень важно открыть перед работой терминал нужной платформы.
+    Так как платформа открытого терминала будет определять для какой платформы будет ставиться софт. В данном
+    мануале мы будем открывать терминал как обычно из GUI, потому что подразумеваем что будем работать с дефолтной
+    платформой (Apple Silicone). Если вы хотите открыть терминал для установки софта под Intel, вам нужно выполнить 
+    в терминале следующую команду:
+
+    ```
+    arch -x86_64 zsh
+    ```
 
 4. Устанавливаем полезные утилиты необходимые для работы
 
     ```
-    brew install wget direnv bash-completion mc xz
-    curl https://pyenv.run | bash
-    curl -sSL https://raw.githubusercontent.com/aleksey925/poetryenv/master/src/poetryenv.sh -o ~/poetryenv && bash ~/poetryenv self-install
+    brew install wget mise direnv mc
     ```
 
 5. Устанавливаем docker
@@ -284,27 +248,16 @@ intel, но не с небольшими доработками.
     brew install --cask docker
     ```
 
-6. Устанавливаем poetry
+6. Устанавливаем через mise нужную для проекта версию python
 
     ```
-    poetryenv install --python 3.12.1 --poetry 1.7.1
-    poetry config virtualenvs.create false
+    mise use python@3.12.1
     ```
+   
+    Если нужно установить python для всей системы делаем:
 
-7. Копируем подсказки для автодоплнения
-
-    ```
-    mkdir -p ~/.zsh && cd ~/.zsh
-    curl -o git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
-    curl -o _git https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.zsh
-    ln -s /Applications/Docker.app/Contents/Resources/etc/docker.zsh-completion ~/.zsh/_docker
-    ln -s /Applications/Docker.app/Contents/Resources/etc/docker-compose.zsh-completion ~/.zsh/_docker_compose
-    ```
-
-8. Устанавливаем через pyenv нужную версию python
-
-    ```
-    pyenv install 3.12.1
+    ```bash
+    mise use --global python@3.12.1
     ```
 
 
