@@ -1130,7 +1130,7 @@ cat sample.iso.part* > sample.iso
 
 ```bash
 git init --bare $HOME/.home-git
-echo -e "\n\n[status]\n\tshowUntrackedFiles = no" >> $HOME/.home-git/config
+git --git-dir=$HOME/.home-git config status.showUntrackedFiles no
 ```
 
 Эти команды создадут новый проект и укажут, что не нужно отслеживать по умолчанию все файлы, 
@@ -1142,7 +1142,7 @@ echo -e "\n\n[status]\n\tshowUntrackedFiles = no" >> $HOME/.home-git/config
 alias home='git --work-tree=$HOME --git-dir=$HOME/.home-git'
 ```
 
-Этот alias будет указывывать папку `$HOME/.home-git` как git репозиторий, а `$HOME` как рабочую папку. 
+Этот alias будет указывать папку `$HOME/.home-git` как git репозиторий, а `$HOME` как рабочую папку. 
 Такой подход удобен, так как снижает риск случайно закомитить то что не нужно.
 
 После это добавляем нужные файлы под версионный контроль, коммитим их теперь мы всегда будем иметь 
@@ -1159,7 +1159,11 @@ home push
 
 ```bash
 git clone --bare <git-repo-url> $HOME/.home-git
+home checkout
 ```
+
+После этого все файлы из репозитория будут скопированы в вашу домашнюю директорию. Если какие-то из файлов
+уже существуют, git выдаст ошибку и вам нужно будет вручную решить, что сделать с этими файлами.
 
 Полезные ссылки:
 
