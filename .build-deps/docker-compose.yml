@@ -4,6 +4,7 @@ x-base: &base
     - .env
   environment:
     - CONTENT_DIR_NAME=knowledge_base
+    - PWD=$(pwd)
   volumes:
     - ../.build-deps:/opt/build-deps
     - ../:/opt/source
@@ -17,7 +18,7 @@ services:
                   --output-dir=/opt/output \
                   --template-dir=/opt/build-deps/templates \
                   --static-dir=/opt/build-deps/static \
-                  --site-root-prefix=/Users/alekseipetrunnik/PycharmProjects/knowledge-base/.build-deps/output"
+                  --site-root-prefix=${PWD}/output"
 
   build:
     <<: *base
