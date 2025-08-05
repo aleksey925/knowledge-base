@@ -15,7 +15,7 @@
     - [docker](docker/docker-notes-index.md)
     - [web-servers](web-servers/web-servers-notes-index.md)
     - [message-brokers](message-broker/message-broker-index.md)
-    - [разное](prog/prog-index.md)
+    - [firefox](firefox/firefox-notes-index.md)
 3. [DevOps](devops/devops-notes-index.md)
 4. Базы данных
     - [Теория баз данных](db/database-theory-index.md)
