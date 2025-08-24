@@ -14,10 +14,10 @@ Firefox
 - `~/Library/Application Support/Firefox/installs.ini`
 - `~/Library/Application Support/Firefox/profiles.ini`
 
-Эти файлы описывают какие профили есть и какой профиль будет загружаться по умолчанию при открытии Firefox.
+Они описывают какие профили есть и какой профиль будет загружаться по умолчанию при открытии Firefox.
 
-После этого нужно добавить в `~/Library/Application Support/Firefox/Profiles/<profile-name>/` файл `user.js` примерно 
-следующего содержания (и так же добавить его под версионный контроль):
+После этого добавьте в каталог `~/Library/Application Support/Firefox/Profiles/<profile-name>/` файл `user.js` и 
+поместите его под версионный контроль. Пример содержимого файла:
 
 ```js
 // =============================================================================
@@ -28,7 +28,7 @@ Firefox
 user_pref("browser.startup.page", 3);  // General -> Startup -> Open previous windows and tabs
 
 // Language
-user_pref("intl.locale.requested", "en-US,ru"); // General -> Language -> Set Alternatives...
+user_pref("intl.locale.requested", "en-US,ru");  // General -> Language -> Set Alternatives...
 
 // Tabs
 user_pref("browser.tabs.tabMinWidth", 100);
@@ -44,10 +44,22 @@ user_pref("browser.newtabpage.activity-stream.showSponsoredCheckboxes", false); 
 user_pref("browser.newtabpage.activity-stream.showSponsoredTopSites", false);  // Home -> Firefox Home Content -> Support Firefox
 ```
 
-Здесь мы через вызов `user_pref` определяем настройки, которые будут синхронизироваться и которые теперь задаются через
-код. При запущенном Firefox значения настроек можно смотреть через посещение `about:config`.
+Данный файл автоматически загружается при каждом запуске и в нем мы через вызов `user_pref` задаем нужные нам настройки.
+При работающем Firefox текущие значения настроек можно просмотреть, перейдя на страницу `about:config`.
 
-Готово. Теперь при синхронизации dotfiles вы всегда будете получать актуальную конфигурацию Firefox. Если на новом ПК 
-вы сначала загрузите конфигурацию, а потом впервые установите и запустите Firefox, у вас сразу инициализируется нужный 
-профиль с нужными настройками. В случае если Firefox уже использовался, нужно будет либо удалить вручную старую папку с 
-профилем, либо переименовать её (если нужно сохранить открытые вкладки и т. д.).
+После настройки синхронизации dotfiles вы будете автоматически получать актуальную конфигурацию Firefox на всех 
+устройствах.
+
+**Сценарии использования**
+
+Новый компьютер (Firefox ещё не установлен или установлен, но не запускался ни разу):
+
+1. загрузите конфигурацию из dotfiles
+2. запустите Firefox
+3. профиль автоматически инициализируется с нужными настройками
+
+Существующая установка Firefox:
+
+- переименуйте старую папку профиля (`~/Library/Application Support/Firefox/Profiles/<profile-name>/`) в соответствии 
+  с названием профиля по умолчанию из файла `profiles.ini`
+
