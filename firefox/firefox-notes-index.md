@@ -14,7 +14,7 @@ Firefox
 - `~/Library/Application Support/Firefox/installs.ini`
 - `~/Library/Application Support/Firefox/profiles.ini`
 
-Они описывают какие профили есть и какой профиль будет загружаться по умолчанию при открытии Firefox.
+Они описывают, какие профили существуют и какой профиль будет загружаться по умолчанию при открытии Firefox.
 
 После этого добавьте в каталог `~/Library/Application Support/Firefox/Profiles/<profile-name>/` файл `user.js` и 
 поместите его под версионный контроль. Пример содержимого файла:
@@ -42,6 +42,9 @@ user_pref("browser.newtabpage.activity-stream.feeds.section.highlights", false);
 user_pref("browser.newtabpage.activity-stream.showSponsored", false);
 user_pref("browser.newtabpage.activity-stream.showSponsoredCheckboxes", false);  // Home -> Firefox Home Content -> Support Firefox
 user_pref("browser.newtabpage.activity-stream.showSponsoredTopSites", false);  // Home -> Firefox Home Content -> Support Firefox
+
+// Other
+user_pref("accessibility.typeaheadfind.prefillwithselection", true);  // by default, insert selected text from page into search field
 ```
 
 Данный файл автоматически загружается при каждом запуске и в нем мы через вызов `user_pref` задаем нужные нам настройки.
