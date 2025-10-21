@@ -5,6 +5,7 @@ Claude
 
 - [Установка](#установка)
 - [Настройка JetBrains IDE](#настройка-jetbrains-ide)
+- [Подключение локального MCP](#подключение-локального-mcp)
 
 
 # Установка
@@ -62,3 +63,30 @@ echo "Claude installed successfully at: $CLAUDE_PATH"
 
 - https://docs.claude.com/en/docs/claude-code/jetbrains#esc-key-configuration
 - https://youtrack.jetbrains.com/issue/IJPL-203824/ESC-key-focus-behavior-ignores-Terminal-settings-after-PyCharm-2025.2.0.1-update
+
+
+# Подключение локального MCP
+
+Чтобы подключить локальный MCP (Model Control Plane) к Claude Code, нужно выполнить следующие шаги:
+
+- desktop приложение Claude -> Settings -> Developer -> Edit config
+
+- открыть файл конфигурации для редактирования
+
+- добавить туда
+
+    ```json
+    {
+      "mcpServers": {
+        "browsermcp": {
+          "command": "mise",
+          "args": ["exec", "--", "npx", "@browsermcp/mcp@latest"]
+        }
+      }
+    }
+    ```
+
+    Это указывает, что MCP сервер будет запущен при помощи node, который установлен при помощи `mise`.
+
+    > Данный пример показывает установку https://browsermcp.io/ MCP, который позволяет управлять заданной 
+    > вкладкой браузера.
