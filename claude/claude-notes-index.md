@@ -5,7 +5,7 @@ Claude
 
 - [Установка](#установка)
 - [Настройка JetBrains IDE](#настройка-jetbrains-ide)
-- [Подключение локального MCP](#подключение-локального-mcp)
+- [Model Context Protocol (MCP)](#model-context-protocol-mcp)
 
 
 # Установка
@@ -65,15 +65,76 @@ echo "Claude installed successfully at: $CLAUDE_PATH"
 - https://youtrack.jetbrains.com/issue/IJPL-203824/ESC-key-focus-behavior-ignores-Terminal-settings-after-PyCharm-2025.2.0.1-update
 
 
-# Подключение локального MCP
+# Model Context Protocol (MCP)
 
-Чтобы подключить локальный MCP (Model Control Plane) к Claude Code, нужно выполнить следующие шаги:
+**Model Context Protocol (MCP)** — это открытый стандартный протокол от Anthropic для подключения AI приложений к внешним инструментам, данным и сервисам.
 
-- desktop приложение Claude -> Settings -> Developer -> Edit config
+**Типы MCP серверов**
 
-- открыть файл конфигурации для редактирования
+**🏠 Локальные MCP серверы**
 
-- добавить туда
+**Где запускаются:** На вашей локальной машине  
+**Транспорт:** stdio (стандартный ввод/вывод)  
+**Данные:** Остаются на вашем компьютере  
+
+**Примеры:**
+
+- **filesystem** - доступ к файлам и папкам
+- **sqlite** - работа с локальными базами данных
+- **puppeteer** - автоматизация браузера
+- **git** - управление git репозиториями
+
+
+**☁️ Удаленные MCP серверы**
+
+**Где запускаются:** На облачных серверах (у партнеров или ваши собственные)  
+**Транспорт:** HTTP/SSE (Server-Sent Events)  
+**Данные:** Передаются через интернет  
+**Безопасность:** OAuth, HTTPS, контроль разрешений
+
+**Примеры:**
+
+- **Notion** - работа с документами и базами Notion
+- **Slack** - отправка сообщений, чтение каналов
+- **GitHub** - создание PR, issues, работа с кодом
+- **Zapier** - доступ к 5000+ интеграций
+- **Canva** - создание дизайнов
+- **Figma** - работа с макетами
+
+**Когда использовать:**
+
+- Интеграция с SaaS сервисами
+- Командная работа
+- Доступ с разных устройств
+- Синхронизация данных
+
+
+## Подключение MCP в Claude Desktop
+
+### Способ 1: Через Connectors
+
+- выбрать нужный connector `Settings → Connectors → Browse connectors`
+
+  > В каталоге доступны:
+  > 
+  > - **Web** (Notion, Linear, Slack, Zapier и др.)
+  > - **Desktop Extensions** (локальные MCP)
+
+- установить
+
+- использовать в чате
+  - чате нажать **"Search and tools"** (нижний левый угол)
+  - включить нужные connectors
+  - claude автоматически использует их при необходимости
+
+Или же можно добавить кастомный connector `Settings → Connectors → Add custom connector`
+
+
+### Способ 2: Через конфигурационный файл (для локальных MCP серверов (старый способ))
+
+- открыть конфигурационный файл `Settings → Developer → Edit Config`
+
+- добавить MCP сервер, на пример [Browser MCP](https://browsermcp.io/)
 
     ```json
     {
@@ -86,7 +147,46 @@ echo "Claude installed successfully at: $CLAUDE_PATH"
     }
     ```
 
-    Это указывает, что MCP сервер будет запущен при помощи node, который установлен при помощи `mise`.
+- перезапустить Claude Desktop
 
-    > Данный пример показывает установку https://browsermcp.io/ MCP, который позволяет управлять заданной 
-    > вкладкой браузера.
+  > Изменения в `claude_desktop_config.json` требуют полного перезапуска приложения.
+
+
+## Подключение MCP в Claude Code
+
+### Способ 1: Через CLI команды
+
+```bash
+claude mcp add filesystem
+
+# Filesystem с конкретной папкой
+claude mcp add filesystem --args "/path/to/folder"
+
+# С переменными окружения
+claude mcp add github --env GITHUB_TOKEN=your_token
+```
+
+**Управление MCP**
+
+- `claude mcp list` - список всех MCP серверов
+- `claude mcp remove server-name` - удалить MCP сервер
+
+
+### Способ 2: Через Plugins
+
+MCP серверы могут быть упакованы в плагины.
+
+```bash
+# Добавляем marketplace
+/plugin marketplace add anthropics/claude-code
+
+# Устанавливаем нужный MCP
+/plugin install <name-of-plugin>
+```
+
+> Плагин автоматически настроит MCP сервер
+> Не требуется дополнительная конфигурация
+
+Marketplaces:
+
+- [https://github.com/anthropics/claude-code/blob/main/plugins/README.md](https://github.com/anthropics/claude-code/blob/main/plugins/README.md)
