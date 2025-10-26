@@ -3,12 +3,13 @@ Claude
 
 # Оглавление
 
-- [Установка](#установка)
+- [Установка claude code](#установка-claude-code)
 - [Настройка JetBrains IDE](#настройка-jetbrains-ide)
 - [Model Context Protocol (MCP)](#model-context-protocol-mcp)
 
 
-# Установка
+<a name='установка-claude-code'></a>
+# Установка claude code
 
 Официальная документация на данный момент не описывает, как установить версию claude code написанную на nodejs 
 правильно. Этот скрипт закрывает эту проблему, он установит claude code сразу правильно, чтобы потом не нужно было 
@@ -43,6 +44,7 @@ chmod +x "$CLAUDE_PATH"/claude
 echo "Claude installed successfully at: $CLAUDE_PATH"
 ```
 
+<a name='настройка-jetbrains-ide'></a>
 # Настройка JetBrains IDE
 
 Чтобы удобно было использовать Claude Code из консоли JetBrains IDE, нужно сделать следующее:
@@ -65,6 +67,7 @@ echo "Claude installed successfully at: $CLAUDE_PATH"
 - https://youtrack.jetbrains.com/issue/IJPL-203824/ESC-key-focus-behavior-ignores-Terminal-settings-after-PyCharm-2025.2.0.1-update
 
 
+<a name='model-context-protocol-mcp'></a>
 # Model Context Protocol (MCP)
 
 **Model Context Protocol (MCP)** — это открытый стандартный протокол от Anthropic для подключения AI приложений к внешним инструментам, данным и сервисам.
@@ -123,9 +126,9 @@ echo "Claude installed successfully at: $CLAUDE_PATH"
 - установить
 
 - использовать в чате
-  - чате нажать **"Search and tools"** (нижний левый угол)
-  - включить нужные connectors
-  - claude автоматически использует их при необходимости
+    - чате нажать **"Search and tools"** (нижний левый угол)
+    - включить нужные connectors
+    - claude автоматически использует их при необходимости
 
 Или же можно добавить кастомный connector `Settings → Connectors → Add custom connector`
 
