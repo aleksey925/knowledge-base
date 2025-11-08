@@ -17,6 +17,7 @@
     - [message-brokers](message-broker/message-broker-index.md)
     - [firefox](firefox/firefox-notes-index.md)
     - [claude](claude/claude-notes-index.md)
+    - [mise](mise/mise-notes-index.md)
 3. [DevOps](devops/devops-notes-index.md)
 4. Базы данных
     - [Теория баз данных](db/database-theory-index.md)
