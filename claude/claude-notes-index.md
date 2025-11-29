@@ -5,10 +5,10 @@ Claude
 
 - [Установка claude code](#установка-claude-code)
 - [Настройка JetBrains IDE](#настройка-jetbrains-ide)
+- [Hotkeys](#hotkeys)
 - [Model Context Protocol (MCP)](#model-context-protocol-mcp)
 
 
-<a name='установка-claude-code'></a>
 # Установка claude code
 
 > На 13.11.2025 потеряло свою актуальность. На данный момент появилась возможность установить нативный бинарник.
@@ -46,7 +46,6 @@ chmod +x "$CLAUDE_PATH"/claude
 echo "Claude installed successfully at: $CLAUDE_PATH"
 ```
 
-<a name='настройка-jetbrains-ide'></a>
 # Настройка JetBrains IDE
 
 Чтобы удобно было использовать Claude Code из консоли JetBrains IDE, нужно сделать следующее:
@@ -69,7 +68,12 @@ echo "Claude installed successfully at: $CLAUDE_PATH"
 - https://youtrack.jetbrains.com/issue/IJPL-203824/ESC-key-focus-behavior-ignores-Terminal-settings-after-PyCharm-2025.2.0.1-update
 
 
-<a name='model-context-protocol-mcp'></a>
+# Hotkeys
+
+- `tab` - включает thinking mode
+- `shift + tab` - включает plan mode
+
+
 # Model Context Protocol (MCP)
 
 **Model Context Protocol (MCP)** — это открытый стандартный протокол от Anthropic для подключения AI приложений к внешним инструментам, данным и сервисам.
@@ -194,4 +198,4 @@ MCP серверы могут быть упакованы в плагины.
 
 Marketplaces:
 
-- [https://github.com/anthropics/claude-code/blob/main/plugins/README.md](https://github.com/anthropics/claude-code/blob/main/plugins/README.md)
+- https://github.com/anthropics/claude-code/blob/main/plugins/README.md
