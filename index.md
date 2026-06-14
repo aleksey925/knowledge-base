@@ -16,7 +16,6 @@
     - [web-servers](web-servers/web-servers-notes-index.md)
     - [message-brokers](message-broker/message-broker-index.md)
     - [firefox](firefox/firefox-notes-index.md)
-    - [claude](claude/claude-notes-index.md)
     - [mise](mise/mise-notes-index.md)
 3. [DevOps](devops/devops-notes-index.md)
 4. Базы данных
@@ -25,3 +24,4 @@
 5. ОС
     - [Linux](linux/linux-notes-index.md)
     - [MacOS](macos/macos-notes-index.md)
+6. [AI](ai/ai-index.md)
