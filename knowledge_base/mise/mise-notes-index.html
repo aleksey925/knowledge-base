@@ -1,0 +1,364 @@
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148357635-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-148357635-1');
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <title>Записки питониста - База знаний</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/base.css">
+
+    
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/knowledge-base.css">
+
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-static-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://aleksey925.github.io/knowledge-base/index.html">Записки питониста</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                
+    <li><a href="https://aleksey925.github.io/knowledge-base/index.html">Главная</a></li>
+    <li class="active"><a href="https://aleksey925.github.io/knowledge-base/knowledge_base/index.html">База знаний</a></li>
+
+            </ul>
+        </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+</nav><!-- /.navbar -->
+
+<div class="container">
+
+    
+    <div class="row row-content">
+
+        <div class="col-xs-12 col-sm-12">
+            <h1 id="mise">mise</h1>
+<h1 id="оглавление">Оглавление</h1>
+<ul>
+<li><a href="#порядок-загрузки-misetoml-при-активации-окружения">Порядок загрузки mise.toml при активации окружения</a></li>
+<li><a href="#как-хранить-секреты-в-проектах-sops-and-age">Как хранить секреты в проектах: sops and age</a></li>
+</ul>
+<h2 id="порядок-загрузки-misetoml-при-активации-окружения">Порядок загрузки mise.toml при активации окружения</h2>
+<blockquote>
+<p>Ресерч делался на основе версии 2025.11.3</p>
+</blockquote>
+<p>Когда у вас настроена интеграция mise с shell (<code>eval "$(mise activate bash)"</code>) и вы переходите в директорию
+с <code>mise.toml</code>, mise автоматически загружает конфигурацию и настраивает окружение. Важно понимать <strong>в каком порядке</strong>
+это происходит, чтобы правильно выстраивать зависимости между секциями.</p>
+<hr>
+<p><strong>Порядок загрузки</strong></p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>┌─────────────────────────────────────────────────────────────────────────┐
+│              Порядок загрузки при cd в папку                            │
+├─────────────────────────────────────────────────────────────────────────┤
+│ 1. [vars]            - переменные для шаблонов                          │
+│ 2. [alias]/[plugins] - опционально                                      │
+│ 3. [env] БЕЗ tools   - базовые переменные окружения (первый проход)     │
+│ 4. [tools]           - установка/проверка инструментов                  │
+│ 5. [env] С tools     - переменные после установки tools (второй проход) │
+│ 6. Применение        - export в shell                                   │
+└─────────────────────────────────────────────────────────────────────────┘
+</code></pre></div>
+<p><strong>Ключевые правила</strong></p>
+<ul>
+<li><strong><code>[[env]]</code> блоки</strong> выполняются <strong>в порядке написания</strong> в файле, по этому, если важен порядок, используйте их вместо одного блока <code>[env]</code></li>
+<li>но с учетом <strong>двух проходов</strong>: сначала директивы БЕЗ <code>tools=true</code>, потом С <code>tools=true</code></li>
+<li>несколько директив с <code>tools=true</code> будут загружаться в порядке объявления</li>
+<li><strong>vars</strong> НЕ может использовать env или tools</li>
+<li><strong>env</strong> может использовать vars ВСЕГДА</li>
+<li><strong>env</strong> может использовать tools ТОЛЬКО когда директива имеет параметр <code>tools=true</code></li>
+<li><strong>_.python.venv</strong> ВСЕГДА имеет <code>tools=true</code> (нельзя изменить)</li>
+<li><strong>Порядок <code>_.*</code> директив</strong> внутри <code>[env]</code> жестко закодирован: <code>_.path</code> → <code>_.file</code> → <code>_.source</code> → другие → <code>_.python.venv</code></li>
+</ul>
+<p><strong>Доступность данных в templates</strong></p>
+<table>
+<thead>
+<tr>
+<th>Секция</th>
+<th>vars</th>
+<th>env (pass 1)</th>
+<th>tools</th>
+<th>env (pass 2)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[vars]</code></td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>[env]</code> pass 1</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>[env]</code> pass 2</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Что доступно в шаблонах:</strong></p>
+<ul>
+<li><code>{{config_root}}</code> - путь к директории с mise.toml</li>
+<li><code>{{cwd}}</code> - текущая рабочая директория</li>
+<li><code>{{vars.NAME}}</code> - переменные из [vars]</li>
+<li><code>{{env.NAME}}</code> - переменные окружения</li>
+</ul>
+<h3 id="примеры-решения-проблем">Примеры решения проблем</h3>
+<p><strong>Использование VIRTUAL_ENV без установки tools=true</strong></p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">[[env]]</span>
+_.python.venv<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span>{<span style="color: #BBB"> </span>path<span style="color: #BBB"> </span>=<span style="color: #BBB"> </span><span style="color: #4070A0">&quot;.venv&quot;</span>,<span style="color: #BBB"> </span>create<span style="color: #BBB"> </span>=<span style="color: #BBB"> </span><span style="color: #007020; font-weight: bold">true</span><span style="color: #BBB"> </span>}
+MY_PATH<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #4070A0">&quot;{{env.VIRTUAL_ENV}}/data&quot;</span><span style="color: #BBB">  </span><span style="color: #60A0B0; font-style: italic"># ❌ VIRTUAL_ENV еще нет!</span>
+</code></pre></div>
+<p>Решение: добавьте <code>tools = true</code></p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">[[env]]</span>
+MY_PATH<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span>{<span style="color: #BBB"> </span>value<span style="color: #BBB"> </span>=<span style="color: #BBB"> </span><span style="color: #4070A0">&quot;{{env.VIRTUAL_ENV}}/data&quot;</span>,<span style="color: #BBB"> </span>tools<span style="color: #BBB"> </span>=<span style="color: #BBB"> </span><span style="color: #007020; font-weight: bold">true</span><span style="color: #BBB"> </span>}<span style="color: #BBB">  </span><span style="color: #60A0B0; font-style: italic"># ✅</span>
+</code></pre></div>
+<p>Переменная <code>VIRTUAL_ENV</code> создается после того как инициализированы tools и после <code>_.python.venv</code>, а обычные
+переменные окружения без <code>tools = true</code> загружаются на первом проходе.</p>
+<p><strong>Использование env в vars</strong></p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">[vars]</span>
+OTHER_VAR<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #4070A0">&quot;{{env.MY_VAR}}&quot;</span><span style="color: #BBB">  </span><span style="color: #60A0B0; font-style: italic"># ❌ env не доступны в vars!</span>
+</code></pre></div>
+<p>Решение: используйте vars или переместите в [env]</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">[vars]</span>
+OTHER_VAR<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #4070A0">&quot;{{vars.MY_VAR}}&quot;</span><span style="color: #BBB">  </span><span style="color: #60A0B0; font-style: italic"># ✅</span>
+</code></pre></div>
+<p><strong>Скрипт выполняется до установки tools</strong></p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">[[env]]</span>
+_.source<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #4070A0">&quot;setup.sh&quot;</span><span style="color: #BBB">  </span><span style="color: #60A0B0; font-style: italic"># ❌ Скрипту нужен Python, но его еще нет!</span>
+</code></pre></div>
+<p>Решение: добавьте <code>tools = true</code></p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">[[env]]</span>
+_.source<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span>{<span style="color: #BBB"> </span>path<span style="color: #BBB"> </span>=<span style="color: #BBB"> </span><span style="color: #4070A0">&quot;setup.sh&quot;</span>,<span style="color: #BBB"> </span>tools<span style="color: #BBB"> </span>=<span style="color: #BBB"> </span><span style="color: #007020; font-weight: bold">true</span><span style="color: #BBB"> </span>}<span style="color: #BBB">  </span><span style="color: #60A0B0; font-style: italic"># ✅</span>
+</code></pre></div>
+<p><strong>Ожидание порядка <code>_.*</code> директив внутри <code>[env]</code></strong></p>
+<p>Порядок выполнения директив жестко закодирован: <code>_.file</code> → <code>_.source</code> → <code>_.python.venv</code></p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">[env]</span>
+_.python.venv<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span>{<span style="color: #BBB"> </span>path<span style="color: #BBB"> </span>=<span style="color: #BBB"> </span><span style="color: #4070A0">&quot;.venv&quot;</span>,<span style="color: #BBB"> </span>create<span style="color: #BBB"> </span>=<span style="color: #BBB"> </span><span style="color: #007020; font-weight: bold">true</span><span style="color: #BBB"> </span>}
+_.source<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #4070A0">&quot;script.sh&quot;</span>
+_.file<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #4070A0">&quot;.env&quot;</span>
+</code></pre></div>
+<p>Решение: объявите отдельные [[env]] блоки и расположите их в нужном порядке (но не забывайте, что параметр <code>tools</code>
+оказывает все равно влияение на порядок загрузки и что есть 2 прохода)</p>
+<h2 id="env-_file--env-env-_source--scriptsh-env-_pythonvenv---path--venv-create--true-"><div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">[[env]]</span>
+_.file<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #4070A0">&quot;.env&quot;</span>
+
+<span style="color: #007020; font-weight: bold">[[env]]</span>
+_.source<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #4070A0">&quot;script.sh&quot;</span>
+
+<span style="color: #007020; font-weight: bold">[[env]]</span>
+_.python.venv<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span>{<span style="color: #BBB"> </span>path<span style="color: #BBB"> </span>=<span style="color: #BBB"> </span><span style="color: #4070A0">&quot;.venv&quot;</span>,<span style="color: #BBB"> </span>create<span style="color: #BBB"> </span>=<span style="color: #BBB"> </span><span style="color: #007020; font-weight: bold">true</span><span style="color: #BBB"> </span>}
+</code></pre></div></h2>
+<h2 id="как-хранить-секреты-в-проектах-sops-and-age">Как хранить секреты в проектах: sops and age</h2>
+<p>Секреты проекта лежат рядом с кодом в зашифрованном файле, а mise
+расшифровывает их и подставляет в переменные окружения при входе
+в директорию.</p>
+<p><strong>Зачем.</strong> Главная цель - закрыть секреты от AI-агентов, работающих
+с проектом. В файле лежит только шифротекст, а приватный ключ хранится
+вне проекта, в <code>~/.config/sops/age/</code>. Вторая половина защиты - изоляция:
+агенты запускаются в agentbox, отдельном контейнере, куда примонтирован
+только текущий проект. Ключа там нет, поэтому расшифровать файл агент
+не сможет, даже если попытается.</p>
+<p><strong>Чего способ не даёт.</strong> Это не «безопасное хранилище» и не защита
+от того, у кого есть доступ к машине:</p>
+<ul>
+<li>приватный ключ лежит на диске открытым текстом, вся защита - права
+  на файл;</li>
+<li>любой процесс, запущенный на хосте от твоего пользователя, прочитает
+  и ключ, и расшифрованные значения;</li>
+<li>после подстановки значения живут в переменных окружения открытым
+  текстом;</li>
+<li>ротация и отзыв ключей делаются руками.</li>
+</ul>
+<p><strong>1. Установка</strong></p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>brew<span style="color: #BBB"> </span>install<span style="color: #BBB"> </span>sops<span style="color: #BBB"> </span>age
+</code></pre></div>
+<p><code>age</code> нужен только для генерации ключа, <code>sops</code> - для шифрования
+и редактирования. Расшифровывает mise сам, встроенным rops.</p>
+<p><strong>2. Генерация ключа</strong></p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>mkdir<span style="color: #BBB"> </span>-p<span style="color: #BBB"> </span>~/.config/sops/age
+age-keygen<span style="color: #BBB"> </span>-o<span style="color: #BBB"> </span>~/.config/sops/age/keys.txt
+chmod<span style="color: #BBB"> </span><span style="color: #40A070">600</span><span style="color: #BBB"> </span>~/.config/sops/age/keys.txt
+</code></pre></div>
+<p>В файле окажется приватный ключ (<code>AGE-SECRET-KEY-1...</code>) и публичный
+комментарием (<code># public key: age1...</code>).</p>
+<blockquote>
+<p>Если секреты не хранятся используемые в проекте больше ни где не дублируются,
+нужно быть особенно аккуратным с содержимым файла <code>keys.txt</code> и сделать его
+бепап. Потому что в случае его полной утраты будет не возможно более
+расшифровать содержимое файлов с секретами.</p>
+</blockquote>
+<p><strong>3. Переменные окружения</strong></p>
+<p>В <code>~/.zshrc</code>:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020">export</span><span style="color: #BBB"> </span><span style="color: #BB60D5">SOPS_AGE_KEY_FILE</span><span style="color: #666">=</span><span style="color: #4070A0">&quot;</span><span style="color: #BB60D5">$HOME</span><span style="color: #4070A0">/.config/sops/age/keys.txt&quot;</span>
+<span style="color: #007020">export</span><span style="color: #BBB"> </span><span style="color: #BB60D5">SOPS_AGE_RECIPIENTS</span><span style="color: #666">=</span><span style="color: #4070A0">&quot;</span><span style="color: #007020; font-weight: bold">$(</span>age-keygen<span style="color: #BBB"> </span>-y<span style="color: #BBB"> </span><span style="color: #BB60D5">$HOME</span>/.config/sops/age/keys.txt<span style="color: #007020; font-weight: bold">)</span><span style="color: #4070A0">&quot;</span>
+</code></pre></div>
+<ul>
+<li><code>SOPS_AGE_KEY_FILE</code> - чем <strong>расшифровывать</strong> (приватный ключ)</li>
+<li><code>SOPS_AGE_RECIPIENTS</code> - чем <strong>шифровать</strong> (публичный ключ)</li>
+</ul>
+<blockquote>
+<p><code>age-keygen -y</code> достаёт публичный ключ из приватного, поэтому хардкодить
+<code>age1...</code> не нужно - перегенерируешь ключ, всё подхватится. Благодаря
+этим переменным <code>.sops.yaml</code> в проектах <strong>не нужен</strong>.</p>
+</blockquote>
+<p>Перезапускаем шелл или <code>source ~/.zshrc</code> и проверяем:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020">echo</span><span style="color: #BBB"> </span><span style="color: #BB60D5">$SOPS_AGE_RECIPIENTS</span><span style="color: #BBB">   </span><span style="color: #60A0B0; font-style: italic"># должна быть строка age1...</span>
+</code></pre></div>
+<p><strong>4. Создание файла с секретами</strong></p>
+<blockquote>
+<p>Важно: <strong>пустой файл не годится.</strong> sops парсит содержимое в структуру,
+а из пустого файла структуры не получается. Симптом:
+<code>Could not unmarshal input data: EOF</code></p>
+</blockquote>
+<p>Впервый раз создать файл с секретами можно одним из следующих методов.</p>
+<p><strong>Метод 1.</strong> Через sops, который создаст файл с дефолтным шаблоном
+и откроет в редакторе по умолчанию:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>sops<span style="color: #BBB"> </span>.env.sops.yaml
+</code></pre></div>
+<p><strong>Метод 2.</strong> Создать файл с будующими секретами самому и потом просто
+открыть его на редактирование. Надёжнее, не зависит от версии sops
+(<code>-e</code> - зашифровать, <code>-i</code> - на месте, перезаписав файл):</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>cat<span style="color: #BBB"> </span>&gt;<span style="color: #BBB"> </span>.env.sops.yaml<span style="color: #BBB"> </span><span style="color: #4070A0">&lt;&lt;&#39;EOF&#39;</span>
+<span style="color: #4070A0">DATABASE_URL: postgresql://localhost/mydb</span>
+<span style="color: #4070A0">API_KEY: sk_test_abc123</span>
+<span style="color: #4070A0">EOF</span>
+
+sops<span style="color: #BBB"> </span>-e<span style="color: #BBB"> </span>-i<span style="color: #BBB"> </span>.env.sops.yaml
+</code></pre></div>
+<p><strong>Про YAML.</strong> Значения <code>yes</code>, <code>no</code>, <code>on</code>, <code>off</code>, <code>true</code>, <code>false</code> и числа
+с ведущим нулём YAML приведёт к своим типам, а не к строке. Для секретов
+всплывает редко, но если попалось - оберни в кавычки:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #062873; font-weight: bold">FEATURE_FLAG</span>:<span style="color: #BBB"> </span><span style="color: #4070A0">&quot;no&quot;</span>
+<span style="color: #062873; font-weight: bold">FILE_MODE</span>:<span style="color: #BBB"> </span><span style="color: #4070A0">&quot;0755&quot;</span>
+</code></pre></div>
+<p>Комментарии, в отличие от JSON, поддерживаются - удобно помечать
+источник секрета или срок ротации:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #60A0B0; font-style: italic"># ротировать до 2026-12-01</span>
+<span style="color: #062873; font-weight: bold">STRIPE_KEY</span>:<span style="color: #BBB"> </span>sk_test_xyz
+</code></pre></div>
+<p><strong>Проверка, что зашифровалось</strong></p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>head<span style="color: #BBB"> </span>-c<span style="color: #BBB"> </span><span style="color: #40A070">200</span><span style="color: #BBB"> </span>.env.sops.yaml
+</code></pre></div>
+<p>Должно быть <code>ENC[AES256_GCM,...]</code> вместо значений. Имена переменных
+остаются читаемыми - это нормально и удобно для code review.</p>
+<p><strong>5. Подключение к mise</strong></p>
+<p>В <code>mise.toml</code>:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">[env]</span>
+_.file<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #4070A0">&quot;.env.sops.yaml&quot;</span>
+</code></pre></div>
+<p>После этого переотркываем косоль или переактивируем mise, чтобы он
+переинициализовал окружение и проверяем.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>mise<span style="color: #BBB"> </span>env<span style="color: #BBB"> </span>|<span style="color: #BBB"> </span>grep<span style="color: #BBB"> </span>DATABASE_URL
+</code></pre></div>
+<p><strong>Запуск там, где ключа нет</strong></p>
+<p>По умолчанию mise падает, если не может расшифровать файл:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>mise ERROR failed to decrypt sops file
+mise ERROR unable to retrieve data key
+mise ERROR no data key retrieved from metadata
+</code></pre></div>
+<p>Типичная ситуация - контейнер, CI или чужая машина: <code>mise.toml</code>
+и <code>.env.sops.yaml</code> приехали вместе с репозиторием, а приватного ключа
+там нет и быть не должно.</p>
+<p>Лечится настройкой <code>sops.strict</code>. При <code>false</code> mise пропускает
+расшифровку и продолжает с остальным окружением вместо того, чтобы
+падать.</p>
+<p><strong>Вариант А. Переменная окружения</strong></p>
+<p>Только в том месте, где ключа нет:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">ENV</span><span style="color: #BBB"> </span><span style="color: #BB60D5">MISE_SOPS_STRICT</span><span style="color: #666">=</span><span style="color: #40A070">0</span>
+</code></pre></div>
+<p>На хосте поведение остаётся строгим.</p>
+<p><strong>Вариант Б. В mise.toml</strong></p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">[settings]</span>
+sops.strict<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #007020; font-weight: bold">false</span>
+
+<span style="color: #007020; font-weight: bold">[env]</span>
+_.file<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span><span style="color: #4070A0">&quot;.env.sops.yaml&quot;</span>
+</code></pre></div>
+<p>Проще, но действует <strong>везде</strong>, включая твою машину. Сломается ключ -
+приложение молча стартует с пустыми переменными вместо внятной ошибки.</p>
+<p><strong>Таски для Zed</strong></p>
+<p>Пример тасок для zed, которые позволят редактировать и просматривать секреты.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>[
+<span style="color: #BBB">  </span>{
+<span style="color: #BBB">    </span><span style="color: #062873; font-weight: bold">&quot;label&quot;</span>:<span style="color: #BBB"> </span><span style="color: #4070A0">&quot;sops: edit secrets&quot;</span>,
+<span style="color: #BBB">    </span><span style="color: #062873; font-weight: bold">&quot;command&quot;</span>:<span style="color: #BBB"> </span><span style="color: #4070A0">&quot;sops&quot;</span>,
+<span style="color: #BBB">    </span><span style="color: #062873; font-weight: bold">&quot;args&quot;</span>:<span style="color: #BBB"> </span>[<span style="color: #4070A0">&quot;.env.sops.yaml&quot;</span>],
+<span style="color: #BBB">    </span><span style="color: #062873; font-weight: bold">&quot;env&quot;</span>:<span style="color: #BBB"> </span>{<span style="color: #BBB"> </span><span style="color: #062873; font-weight: bold">&quot;EDITOR&quot;</span>:<span style="color: #BBB"> </span><span style="color: #4070A0">&quot;zed --wait&quot;</span><span style="color: #BBB"> </span>},
+<span style="color: #BBB">    </span><span style="color: #062873; font-weight: bold">&quot;use_new_terminal&quot;</span>:<span style="color: #BBB"> </span><span style="color: #007020; font-weight: bold">false</span>,
+<span style="color: #BBB">    </span><span style="color: #062873; font-weight: bold">&quot;allow_concurrent_runs&quot;</span>:<span style="color: #BBB"> </span><span style="color: #007020; font-weight: bold">false</span>,
+<span style="color: #BBB">    </span><span style="color: #062873; font-weight: bold">&quot;reveal&quot;</span>:<span style="color: #BBB"> </span><span style="color: #4070A0">&quot;no_focus&quot;</span>
+<span style="color: #BBB">  </span>},
+<span style="color: #BBB">  </span>{
+<span style="color: #BBB">    </span><span style="color: #062873; font-weight: bold">&quot;label&quot;</span>:<span style="color: #BBB"> </span><span style="color: #4070A0">&quot;sops: show secrets&quot;</span>,
+<span style="color: #BBB">    </span><span style="color: #062873; font-weight: bold">&quot;command&quot;</span>:<span style="color: #BBB"> </span><span style="color: #4070A0">&quot;sops&quot;</span>,
+<span style="color: #BBB">    </span><span style="color: #062873; font-weight: bold">&quot;args&quot;</span>:<span style="color: #BBB"> </span>[<span style="color: #4070A0">&quot;-d&quot;</span>,<span style="color: #BBB"> </span><span style="color: #4070A0">&quot;.env.sops.yaml&quot;</span>],
+<span style="color: #BBB">    </span><span style="color: #062873; font-weight: bold">&quot;reveal&quot;</span>:<span style="color: #BBB"> </span><span style="color: #4070A0">&quot;always&quot;</span>
+<span style="color: #BBB">  </span>}
+]
+</code></pre></div>
+
+        </div><!--/.col-xs-12.col-sm-9-->
+
+    </div><!--/row-->
+
+
+    <hr>
+
+    <footer>
+        <p>
+            При копировании информации с данного сайта пожалуйста указывайте
+            ссылку на источник. © 2019 Записки питониста
+        </p>
+    </footer>
+
+</div><!--/.container-->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148357635-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-148357635-1');
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <title>Записки питониста - База знаний</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/base.css">
+
+    
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/knowledge-base.css">
+
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-static-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://aleksey925.github.io/knowledge-base/index.html">Записки питониста</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                
+    <li><a href="https://aleksey925.github.io/knowledge-base/index.html">Главная</a></li>
+    <li class="active"><a href="https://aleksey925.github.io/knowledge-base/knowledge_base/index.html">База знаний</a></li>
+
+            </ul>
+        </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+</nav><!-- /.navbar -->
+
+<div class="container">
+
+    
+    <div class="row row-content">
+
+        <div class="col-xs-12 col-sm-12">
+            <h1 id="firefox">Firefox</h1>
+<h1 id="оглавление">Оглавление</h1>
+<ul>
+<li><a href="#синхронизация-настроек-между-разными-пк">Синхронизация настроек между разными ПК</a></li>
+</ul>
+<h1 id="синхронизация-настроек-между-разными-пк">Синхронизация настроек между разными ПК</h1>
+<p>Конфигурацию Firefox можно синхронизировать между разными пк используя подход <a href="../macos/macos-notes-index.html#Хранение-конфигов-системы-в-git">dotfiles</a>.
+Для того чтобы это реализовать, нам нужно добавить под версионный контроль следующие файлы:</p>
+<ul>
+<li><code>~/Library/Application Support/Firefox/installs.ini</code></li>
+<li><code>~/Library/Application Support/Firefox/profiles.ini</code></li>
+</ul>
+<p>Они описывают, какие профили существуют и какой профиль будет загружаться по умолчанию при открытии Firefox.</p>
+<p>После этого добавьте в каталог <code>~/Library/Application Support/Firefox/Profiles/&amp;lt;profile-name&amp;gt;/</code> файл <code>user.js</code> и 
+поместите его под версионный контроль. Пример содержимого файла:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #60A0B0; font-style: italic">// =============================================================================</span>
+<span style="color: #60A0B0; font-style: italic">// Firefox User Configuration</span>
+<span style="color: #60A0B0; font-style: italic">// =============================================================================</span>
+
+<span style="color: #60A0B0; font-style: italic">// Startup</span>
+user_pref(<span style="color: #4070A0">&quot;browser.startup.page&quot;</span>,<span style="color: #BBB"> </span><span style="color: #40A070">3</span>);<span style="color: #BBB">  </span><span style="color: #60A0B0; font-style: italic">// General -&gt; Startup -&gt; Open previous windows and tabs</span>
+
+<span style="color: #60A0B0; font-style: italic">// Language</span>
+user_pref(<span style="color: #4070A0">&quot;intl.locale.requested&quot;</span>,<span style="color: #BBB"> </span><span style="color: #4070A0">&quot;en-US,ru&quot;</span>);<span style="color: #BBB">  </span><span style="color: #60A0B0; font-style: italic">// General -&gt; Language -&gt; Set Alternatives...</span>
+
+<span style="color: #60A0B0; font-style: italic">// Tabs</span>
+user_pref(<span style="color: #4070A0">&quot;browser.tabs.tabMinWidth&quot;</span>,<span style="color: #BBB"> </span><span style="color: #40A070">100</span>);
+user_pref(<span style="color: #4070A0">&quot;browser.tabs.insertAfterCurrent&quot;</span>,<span style="color: #BBB"> </span><span style="color: #007020; font-weight: bold">true</span>);
+user_pref(<span style="color: #4070A0">&quot;browser.warnOnQuitShortcut&quot;</span>,<span style="color: #BBB"> </span><span style="color: #007020; font-weight: bold">true</span>);<span style="color: #BBB">  </span><span style="color: #60A0B0; font-style: italic">// General -&gt; Tabs -&gt; Ask before quitting with *Q</span>
+user_pref(<span style="color: #4070A0">&quot;browser.tabs.warnOnClose&quot;</span>,<span style="color: #BBB"> </span><span style="color: #007020; font-weight: bold">true</span>);<span style="color: #BBB">  </span><span style="color: #60A0B0; font-style: italic">// General -&gt; Tabs -&gt; Ask before closing multiple tabs</span>
+
+<span style="color: #60A0B0; font-style: italic">// Homepage</span>
+user_pref(<span style="color: #4070A0">&quot;browser.newtabpage.activity-stream.topSitesRows&quot;</span>,<span style="color: #BBB"> </span><span style="color: #40A070">1</span>);<span style="color: #BBB">  </span><span style="color: #60A0B0; font-style: italic">// Home -&gt; Firefox Home Content -&gt; Shortcuts</span>
+user_pref(<span style="color: #4070A0">&quot;browser.newtabpage.activity-stream.feeds.section.highlights&quot;</span>,<span style="color: #BBB"> </span><span style="color: #007020; font-weight: bold">false</span>);<span style="color: #BBB">  </span><span style="color: #60A0B0; font-style: italic">// Home -&gt; Firefox Home Content -&gt; Recent activity</span>
+user_pref(<span style="color: #4070A0">&quot;browser.newtabpage.activity-stream.showSponsored&quot;</span>,<span style="color: #BBB"> </span><span style="color: #007020; font-weight: bold">false</span>);
+user_pref(<span style="color: #4070A0">&quot;browser.newtabpage.activity-stream.showSponsoredCheckboxes&quot;</span>,<span style="color: #BBB"> </span><span style="color: #007020; font-weight: bold">false</span>);<span style="color: #BBB">  </span><span style="color: #60A0B0; font-style: italic">// Home -&gt; Firefox Home Content -&gt; Support Firefox</span>
+user_pref(<span style="color: #4070A0">&quot;browser.newtabpage.activity-stream.showSponsoredTopSites&quot;</span>,<span style="color: #BBB"> </span><span style="color: #007020; font-weight: bold">false</span>);<span style="color: #BBB">  </span><span style="color: #60A0B0; font-style: italic">// Home -&gt; Firefox Home Content -&gt; Support Firefox</span>
+
+<span style="color: #60A0B0; font-style: italic">// Other</span>
+user_pref(<span style="color: #4070A0">&quot;accessibility.typeaheadfind.prefillwithselection&quot;</span>,<span style="color: #BBB"> </span><span style="color: #007020; font-weight: bold">true</span>);<span style="color: #BBB">  </span><span style="color: #60A0B0; font-style: italic">// by default, insert selected text from page into search field</span>
+</code></pre></div>
+<p>Данный файл автоматически загружается при каждом запуске и в нем мы через вызов <code>user_pref</code> задаем нужные нам настройки.
+При работающем Firefox текущие значения настроек можно просмотреть, перейдя на страницу <code>about:config</code>.</p>
+<p>После настройки синхронизации dotfiles вы будете автоматически получать актуальную конфигурацию Firefox на всех 
+устройствах.</p>
+<p><strong>Сценарии использования</strong></p>
+<p>Новый компьютер (Firefox ещё не установлен или установлен, но не запускался ни разу):</p>
+<ol>
+<li>загрузите конфигурацию из dotfiles</li>
+<li>запустите Firefox</li>
+<li>профиль автоматически инициализируется с нужными настройками</li>
+</ol>
+<p>Существующая установка Firefox:</p>
+<ul>
+<li>переименуйте старую папку профиля (<code>~/Library/Application Support/Firefox/Profiles/&amp;lt;profile-name&amp;gt;/</code>) в соответствии 
+  с названием профиля по умолчанию из файла <code>profiles.ini</code></li>
+</ul>
+
+        </div><!--/.col-xs-12.col-sm-9-->
+
+    </div><!--/row-->
+
+
+    <hr>
+
+    <footer>
+        <p>
+            При копировании информации с данного сайта пожалуйста указывайте
+            ссылку на источник. © 2019 Записки питониста
+        </p>
+    </footer>
+
+</div><!--/.container-->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</body>
+</html>
