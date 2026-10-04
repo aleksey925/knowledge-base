@@ -1,0 +1,427 @@
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148357635-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-148357635-1');
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <title>Записки питониста - База знаний</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/base.css">
+
+    
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/knowledge-base.css">
+
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-static-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://aleksey925.github.io/knowledge-base/index.html">Записки питониста</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                
+    <li><a href="https://aleksey925.github.io/knowledge-base/index.html">Главная</a></li>
+    <li class="active"><a href="https://aleksey925.github.io/knowledge-base/knowledge_base/index.html">База знаний</a></li>
+
+            </ul>
+        </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+</nav><!-- /.navbar -->
+
+<div class="container">
+
+    
+    <div class="row row-content">
+
+        <div class="col-xs-12 col-sm-12">
+            <h1 id="tutorial-alembic">Tutorial alembic</h1>
+<p>alembic - это легковесный инструмент для создания и управления миграциями БД.</p>
+<blockquote>
+<p>Пример очень простого проекта, который настроен в соответствии с данным мануалом 
+и показывает как работать с alembic можно найти <a href="https://github.com/aleksey925/alembic-example" target="_blank" rel="noopener noreferrer">здесь</a>.</p>
+</blockquote>
+<h2 id="содержание">Содержание</h2>
+<ul>
+<li><a href="#добавление-в-проект-миграций-бд">Добавление в проект миграций БД</a><ul>
+<li><a href="#установка">Установка</a></li>
+<li><a href="#инициализация-alembic-в-проекте">Инициализация alembic в проекте</a></li>
+<li><a href="#автоматическая-генерация-миграций">Автоматическая генерация миграций</a></li>
+<li><a href="#ручное-создание-миграций">Ручное создание миграций</a></li>
+<li><a href="#добавление-миграций-в-существующие-приложение">Добавление миграций в существующие приложение</a></li>
+<li><a href="#использование-alembic-в-тестах">Использование alembic в тестах</a></li>
+</ul>
+</li>
+<li><a href="#исправление-известных-проблем">Исправление известных проблем</a><ul>
+<li><a href="#команда-для-автоматической-генерации-миграции-создает-пустой-скрипт">Команда для автоматической генерации миграции создает пустой скрипт</a></li>
+<li><a href="#no-support-for-alter-of-constraints-in-sqlite-dialec">No support for ALTER of constraints in SQLite dialec</a></li>
+<li><a href="#изменение-foreign-key-в-sqlite">Изменение foreign key в sqlite</a></li>
+</ul>
+</li>
+</ul>
+<p><a name='добавление-в-проект-миграций-бд'></a></p>
+<h2 id="добавление-в-проект-миграций-бд">Добавление в проект миграций БД</h2>
+<p>Данный туториал описывает процесс настройки alembic в проекте, для управления 
+миграциями, а так же показывает как можно вызывать alembic из тестов для 
+инициализации БД.</p>
+<p><a name='установка'></a></p>
+<h3 id="установка">Установка</h3>
+<p>Устанавливаем alembic </p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>pip<span style="color: #BBB"> </span>install<span style="color: #BBB"> </span>alembic&gt;<span style="color: #666">=</span><span style="color: #40A070">1</span>.13.3
+</code></pre></div>
+<p><a name='инициализация-alembic-в-проекте'></a></p>
+<h3 id="инициализация-alembic-в-проекте">Инициализация alembic в проекте</h3>
+<p>Инициализируем alembic:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>alembic<span style="color: #BBB"> </span>init<span style="color: #BBB"> </span>--template<span style="color: #BBB"> </span>generic<span style="color: #BBB"> </span>migrations
+</code></pre></div>
+<p>В создавшемся файле <code>alembic.ini</code> проверьте наличие следующих настроек в секции <code>[alembic]</code> и если их нет 
+или они закомментированы добавьте/раскомментируйте их.</p>
+<ul>
+<li>
+<p><code>file_template = %%(year)d_%%(month).2d_%%(day).2d_%%(hour).2d%%(minute).2d-%%(rev)s_%%(slug)s</code> - <br>
+  шаблон имени файла с миграцией, который создает alembic. Довольно важный параметр, который помогает легче
+  ориентироваться в созданных миграциях.</p>
+</li>
+<li>
+<p><code>prepend_sys_path = .</code> - очень важная настройка. Она нужна, чтобы вы могли импортировать метаданные 
+  или какие-то любые другие части вашего проекта в скрипте<code>env.py</code> без проблем. Иначе вам придется 
+  редактировать <code>sys.path</code> вручную внутри <code>env.py</code>.</p>
+</li>
+</ul>
+<p>Теперь, после базовой настройки, необходимо немного подправить сгенерированный скрипт <code>env.py</code>. Это нужно, 
+чтобы объяснить alembic к какой базе данных он должен подключаться, где он может найти метаданные 
+sqlalchemy, а так же включить поддержку автогенерации миграций.</p>
+<p>Для этого открываем скрипт <code>migrations/env.py</code> и:</p>
+<ul>
+<li>
+<p>импортируем базовый класс всех моделей sqlalchemy, берем из него metadata и кладем в переменную 
+<code>target_metadata</code></p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #0E84B5; font-weight: bold">main</span><span style="color: #BBB"> </span><span style="color: #007020; font-weight: bold">import</span> Base
+<span style="color: #666">...</span>
+target_metadata <span style="color: #666">=</span> Base<span style="color: #666">.</span>metadata
+<span style="color: #666">...</span>
+</code></pre></div>
+</li>
+<li>
+<p>где-то после объявления <code>target_metadata</code> вставляем следующий код, которые будет говорить alembic 
+с какой БД он должен работать</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>pg_dns <span style="color: #666">=</span> build_pg_dsn(
+    user<span style="color: #666">=</span>os<span style="color: #666">.</span>environ[<span style="color: #4070A0">&#39;PG_USER&#39;</span>],
+    password<span style="color: #666">=</span>os<span style="color: #666">.</span>environ[<span style="color: #4070A0">&#39;PG_PASSWORD&#39;</span>],
+    host<span style="color: #666">=</span>os<span style="color: #666">.</span>environ[<span style="color: #4070A0">&#39;PG_HOST&#39;</span>],
+    dbname<span style="color: #666">=</span>os<span style="color: #666">.</span>environ[<span style="color: #4070A0">&#39;PG_DB&#39;</span>],
+)
+config<span style="color: #666">.</span>set_main_option(<span style="color: #4070A0">&#39;sqlalchemy.url&#39;</span>, pg_dns)
+</code></pre></div>
+<p>В данном случае, мы собираем строку подключения к БД из переменных окружения. Вы можете брать
+ее откуда угодно, на пример из конфигурационного файла проекта.</p>
+</li>
+<li>
+<p>находим строку <code>fileConfig(config.config_file_name)</code> и заменяем ее на
+<code>fileConfig(config.config_file_name, disable_existing_loggers=False)</code>. Если  это не сделать alembic 
+отключит все существующие логгеры. В случае если alembic вызывается исключительно как консольная 
+команда, то это не страшно, но если работа с миграциями будет осуществляться из кода приложения, 
+то дефотное поведение alembic может доставить много хлопот. </p>
+</li>
+</ul>
+<p><a name='автоматическая-генерация-миграций'></a></p>
+<h3 id="автоматическая-генерация-миграций">Автоматическая генерация миграций</h3>
+<p>После настройки можно сгенерировать нашу первую миграцию, которая зафиксирует
+начальное состояние базы. Скрипт с миграцией будет создан в папке 
+migrations/versions.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>alembic<span style="color: #BBB"> </span>revision<span style="color: #BBB"> </span>--autogenerate<span style="color: #BBB"> </span>-m<span style="color: #BBB"> </span><span style="color: #4070A0">&quot;init&quot;</span>
+</code></pre></div>
+<p>Когда создание миграции закончено, можно применить ее к БД </p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>alembic<span style="color: #BBB"> </span>upgrade<span style="color: #BBB"> </span>head
+</code></pre></div>
+<h4 id="ограничения-автоматической-генерации-миграций">Ограничения автоматической генерации миграций</h4>
+<p>Автогенерация просто замечательна, но у нее есть некоторые ограничения, о 
+которых нужно знать. Прежде всего, если вы переименуете таблицу или столбец,
+то alembic будет считать это удалением и созданием нового столбца/таблицы. Это 
+приведет к потере данных. По этому вы должны вручную произвести редактирование 
+автоматически сгенерированной миграции в которой был переименован 
+столбец/таблица. </p>
+<p><a name='ручное-создание-миграций'></a></p>
+<h3 id="ручное-создание-миграций">Ручное создание миграций</h3>
+<p>Иногда бывает нужно создать миграцию вручную. Для этого необходимо выполнить
+в консоли команду</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>alembic<span style="color: #BBB"> </span>revision<span style="color: #BBB"> </span>-m<span style="color: #BBB"> </span><span style="color: #4070A0">&quot;add_field_create_date&quot;</span>
+</code></pre></div>
+<p>После ее выполнения, в папке <code>migrations/versions</code>, будет создан скрипт 
+<code>2019_06_09_2107-7c86752c4a38_add_field_create_date.py</code> с пустыми функциями 
+upgrade и downgrade, в которых нужно будет описать то, что необходимо сделать с БД.</p>
+<p>В результате должен получиться примерно такой код:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #4070A0; font-style: italic">&quot;&quot;&quot;add_field_create_date</span>
+
+<span style="color: #4070A0; font-style: italic">Revision ID: 7c86752c4a38</span>
+<span style="color: #4070A0; font-style: italic">Revises: 2e8e603859e2</span>
+<span style="color: #4070A0; font-style: italic">Create Date: 2019-06-09 21:07:17.573918</span>
+
+<span style="color: #4070A0; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #007020; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #0E84B5; font-weight: bold">alembic</span><span style="color: #BBB"> </span><span style="color: #007020; font-weight: bold">import</span> op
+<span style="color: #007020; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #0E84B5; font-weight: bold">sqlalchemy</span><span style="color: #BBB"> </span><span style="color: #007020; font-weight: bold">as</span><span style="color: #BBB"> </span><span style="color: #0E84B5; font-weight: bold">sa</span>
+
+
+<span style="color: #60A0B0; font-style: italic"># revision identifiers, used by Alembic.</span>
+revision <span style="color: #666">=</span> <span style="color: #4070A0">&#39;7c86752c4a38&#39;</span>
+down_revision <span style="color: #666">=</span> <span style="color: #4070A0">&#39;2e8e603859e2&#39;</span>
+branch_labels <span style="color: #666">=</span> <span style="color: #007020; font-weight: bold">None</span>
+depends_on <span style="color: #666">=</span> <span style="color: #007020; font-weight: bold">None</span>
+
+
+<span style="color: #007020; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #06287E">upgrade</span>():
+    op<span style="color: #666">.</span>add_column(<span style="color: #4070A0">&#39;student&#39;</span>, sa<span style="color: #666">.</span>Column(<span style="color: #4070A0">&#39;create_date&#39;</span>, sa<span style="color: #666">.</span>Date(), nullable<span style="color: #666">=</span><span style="color: #007020; font-weight: bold">True</span>))
+
+
+<span style="color: #007020; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #06287E">downgrade</span>():
+    <span style="color: #007020; font-weight: bold">with</span> op<span style="color: #666">.</span>batch_alter_table(<span style="color: #4070A0">&#39;student&#39;</span>) <span style="color: #007020; font-weight: bold">as</span> batch_op:
+        batch_op<span style="color: #666">.</span>drop_column(<span style="color: #4070A0">&#39;create_date&#39;</span>)
+</code></pre></div>
+<p>Теперь, можно применить данную миграцию при помощи команды:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>alembic<span style="color: #BBB"> </span>upgrade<span style="color: #BBB"> </span>head
+</code></pre></div>
+<p>Если необходимо будет откатить сделанные изменения, то это можно будет сделать
+1 из ниже перечисленных команд:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #60A0B0; font-style: italic"># 2e8e603859e2 - это номер ревизии к которой мы должны откатиться</span>
+alembic<span style="color: #BBB"> </span>downgrade<span style="color: #BBB"> </span>2e8e603859e2
+</code></pre></div>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>alembic<span style="color: #BBB"> </span>downgrade<span style="color: #BBB"> </span>-1
+</code></pre></div>
+<p><a name='добавление-миграций-в-существующие-приложение'></a></p>
+<h3 id="добавление-миграций-в-существующие-приложение">Добавление миграций в существующие приложение</h3>
+<p>При добавлении миграций в существующие приложение, где в БД уже созданы все 
+необходимые таблицы в ручную или просто sql скриптами необходимо выполнить 
+команду:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>alembic stamp head
+</code></pre></div>
+<p>После этого alembic будет считать, что все миграции применены и не будет пытаться запустить.</p>
+<p>Ссылки на дополнительные материалы:</p>
+<ul>
+<li><a href="https://michaelheap.com/alembic-python-migrations-quick-start/" target="_blank" rel="noopener noreferrer">alembic – Python migrations quick start</a></li>
+<li><a href="https://www.compose.com/articles/schema-migrations-with-alembic-python-and-postgresql/" target="_blank" rel="noopener noreferrer">Schema migrations with Alembic, Python and PostgreSQL</a></li>
+</ul>
+<p><a name='использование-alembic-в-тестах'></a></p>
+<h3 id="использование-alembic-в-тестах">Использование alembic в тестах</h3>
+<p>Ниже приведен пример фикстур, которые нужно положить в <code>conftest.py</code> и после этого вы 
+можете писать тесты, которые будут взаимодействовать с БД через подключение выдаваемое в
+фикстурой pg_conn.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #0E84B5; font-weight: bold">asyncio</span>
+<span style="color: #007020; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #0E84B5; font-weight: bold">os</span>
+<span style="color: #007020; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #0E84B5; font-weight: bold">pathlib</span><span style="color: #BBB"> </span><span style="color: #007020; font-weight: bold">import</span> Path
+<span style="color: #007020; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #0E84B5; font-weight: bold">typing</span><span style="color: #BBB"> </span><span style="color: #007020; font-weight: bold">import</span> AsyncGenerator, Generator
+
+<span style="color: #007020; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #0E84B5; font-weight: bold">pytest</span>
+<span style="color: #007020; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #0E84B5; font-weight: bold">alembic</span><span style="color: #BBB"> </span><span style="color: #007020; font-weight: bold">import</span> command
+<span style="color: #007020; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #0E84B5; font-weight: bold">alembic.config</span><span style="color: #BBB"> </span><span style="color: #007020; font-weight: bold">import</span> Config
+<span style="color: #007020; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #0E84B5; font-weight: bold">sqlalchemy.ext.asyncio</span><span style="color: #BBB"> </span><span style="color: #007020; font-weight: bold">import</span> AsyncEngine, AsyncConnection, create_async_engine
+<span style="color: #007020; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #0E84B5; font-weight: bold">sqlalchemy_utils</span><span style="color: #BBB"> </span><span style="color: #007020; font-weight: bold">import</span> drop_database, create_database, database_exists
+
+<span style="color: #007020; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #0E84B5; font-weight: bold">main</span><span style="color: #BBB"> </span><span style="color: #007020; font-weight: bold">import</span> build_pg_dsn
+
+os<span style="color: #666">.</span>environ[<span style="color: #4070A0">&#39;PG_DB&#39;</span>] <span style="color: #666">=</span> <span style="color: #4070A0">f&quot;</span><span style="color: #70A0D0; font-style: italic">{</span>os<span style="color: #666">.</span>environ[<span style="color: #4070A0">&#39;PG_DB&#39;</span>]<span style="color: #70A0D0; font-style: italic">}</span><span style="color: #4070A0">_test&quot;</span>
+PG_DSN <span style="color: #666">=</span> build_pg_dsn(
+    user<span style="color: #666">=</span>os<span style="color: #666">.</span>environ[<span style="color: #4070A0">&#39;PG_USER&#39;</span>],
+    password<span style="color: #666">=</span>os<span style="color: #666">.</span>environ[<span style="color: #4070A0">&#39;PG_PASSWORD&#39;</span>],
+    host<span style="color: #666">=</span>os<span style="color: #666">.</span>environ[<span style="color: #4070A0">&#39;PG_HOST&#39;</span>],
+    dbname<span style="color: #666">=</span>os<span style="color: #666">.</span>environ[<span style="color: #4070A0">&#39;PG_DB&#39;</span>],
+)
+ROOT_DIR <span style="color: #666">=</span> Path(<span style="color: #BB60D5">__file__</span>)<span style="color: #666">.</span>parent<span style="color: #666">.</span>parent
+
+
+<span style="color: #555; font-weight: bold">@pytest</span><span style="color: #666">.</span>fixture(scope<span style="color: #666">=</span><span style="color: #4070A0">&#39;session&#39;</span>)
+<span style="color: #007020; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #06287E">project_root</span>() <span style="color: #666">-&gt;</span> Path:
+    <span style="color: #007020; font-weight: bold">return</span> ROOT_DIR
+
+
+<span style="color: #555; font-weight: bold">@pytest</span><span style="color: #666">.</span>fixture(scope<span style="color: #666">=</span><span style="color: #4070A0">&#39;session&#39;</span>)
+<span style="color: #007020; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #06287E">setup_pg</span>(project_root: Path) <span style="color: #666">-&gt;</span> Generator[<span style="color: #007020; font-weight: bold">None</span>, <span style="color: #007020; font-weight: bold">None</span>, <span style="color: #007020; font-weight: bold">None</span>]:
+    <span style="color: #007020; font-weight: bold">if</span> database_exists(PG_DSN):
+        drop_database(PG_DSN)
+    create_database(PG_DSN)
+
+    curr_work_dir <span style="color: #666">=</span> os<span style="color: #666">.</span>getcwd()
+    os<span style="color: #666">.</span>chdir(project_root)
+    alembic_cfg <span style="color: #666">=</span> Config(<span style="color: #007020">str</span>(ROOT_DIR <span style="color: #666">/</span> <span style="color: #4070A0">&#39;alembic.ini&#39;</span>))
+    command<span style="color: #666">.</span>upgrade(alembic_cfg, <span style="color: #4070A0">&#39;head&#39;</span>)
+    os<span style="color: #666">.</span>chdir(curr_work_dir)
+
+    <span style="color: #007020; font-weight: bold">yield</span>
+
+    drop_database(PG_DSN)
+
+
+<span style="color: #555; font-weight: bold">@pytest</span><span style="color: #666">.</span>fixture(scope<span style="color: #666">=</span><span style="color: #4070A0">&#39;session&#39;</span>)
+<span style="color: #007020; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #06287E">pg_engine</span>() <span style="color: #666">-&gt;</span> Generator[AsyncEngine, <span style="color: #007020; font-weight: bold">None</span>, <span style="color: #007020; font-weight: bold">None</span>]:
+    engine <span style="color: #666">=</span> create_async_engine(PG_DSN)
+    <span style="color: #007020; font-weight: bold">yield</span> engine
+    asyncio<span style="color: #666">.</span>run(engine<span style="color: #666">.</span>dispose())
+
+
+<span style="color: #555; font-weight: bold">@pytest</span><span style="color: #666">.</span>fixture
+<span style="color: #007020; font-weight: bold">async</span> <span style="color: #007020; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #06287E">pg_conn</span>(setup_pg: <span style="color: #007020; font-weight: bold">None</span>, pg_engine: AsyncEngine) <span style="color: #666">-&gt;</span> AsyncGenerator[AsyncConnection, <span style="color: #007020; font-weight: bold">None</span>]:
+    <span style="color: #007020; font-weight: bold">async</span> <span style="color: #007020; font-weight: bold">with</span> pg_engine<span style="color: #666">.</span>begin() <span style="color: #007020; font-weight: bold">as</span> conn:
+        <span style="color: #007020; font-weight: bold">yield</span> conn
+        <span style="color: #007020; font-weight: bold">await</span> conn<span style="color: #666">.</span>rollback()
+</code></pre></div>
+<p><a name='исправление-известных-проблем'></a></p>
+<h2 id="исправление-известных-проблем">Исправление известных проблем</h2>
+<p><a name='команда-для-автоматической-генерации-миграции-создает-пустой-скрипт'></a></p>
+<h3 id="команда-для-автоматической-генерации-миграции-создает-пустой-скрипт">Команда для автоматической генерации миграции создает пустой скрипт</h3>
+<p>Если вы столкнулись с тем, что автоматическая генерация миграций не срабатывает,
+значит вам необходимо проверить, что при импорте базового класса (<code>Base</code>) 
+происходит импорт всех моделей приложения. </p>
+<blockquote>
+<p>Это очень важно, так как базовый класс моделей внутри себя пользуется 
+возможностями метапрограммирования по этому, если во время исполнения 
+скрипта <a href="http://env.py" target="_blank" rel="noopener noreferrer">env.py</a> модели не будут импортированы, то sqlalchemy ничего не будет о 
+них знать и следовательно не сможет сгенерировать миграцию.</p>
+</blockquote>
+<p>Если вы поняли, что столкнулись именно с такой ситуацией, то один из путей 
+решения проблемы, это:</p>
+<ul>
+<li>вынести все модули с моделями в отдельный пакет</li>
+<li>реализовать в <code>__init__.py</code> импортирование всех модулей пакета</li>
+<li>в <a href="http://env.py" target="_blank" rel="noopener noreferrer">env.py</a> импортировать класс Base из этого пакета</li>
+</ul>
+<p><a name='no-support-for-alter-of-constraints-in-sqlite-dialec'></a></p>
+<h3 id="no-support-for-alter-of-constraints-in-sqlite-dialec">No support for ALTER of constraints in SQLite dialec</h3>
+<p>При использовании sqlite может возникать ошибка 
+<code>No support for ALTER of constraints in SQLite dialect</code> (в моем случае данная 
+ошибка возникала, когда один из столбцов был помечен как уникальный 
+<code>unique=True</code>).</p>
+<p>Для того, чтобы исправить данную ошибку, нужно внести исправления в функции
+<code>run_migrations_offline</code> и <code>run_migrations_online</code>, которые находятся в скрипте 
+env.</p>
+<p>В этих функциях необходимо найти вызов context.configure и добавить в него 
+параметр <code>render_as_batch=True</code>. После этого будут генерироваться корректные 
+миграции.</p>
+<p>Полезные ссылки:</p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/30378233/sqlite-lack-of-alter-support-alembic-migration-failing-because-of-this-solutio" target="_blank" rel="noopener noreferrer">Sqlite lack of ALTER support, Alembic migration failing because of this. Solutions?</a></li>
+<li><a href="https://kite.com/python/docs/alembic.op.batch_alter_table" target="_blank" rel="noopener noreferrer">batch_alter_table - alembic</a></li>
+</ul>
+<p><a name='изменение-foreign-key-в-sqlite'></a></p>
+<h3 id="изменение-foreign-key-в-sqlite">Изменение foreign key в sqlite</h3>
+<p>Пример миграции, которая изменяет значение ondelete у внешнего ключа</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code><span style="color: #007020; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #0E84B5; font-weight: bold">alembic</span><span style="color: #BBB"> </span><span style="color: #007020; font-weight: bold">import</span> op
+<span style="color: #007020; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #0E84B5; font-weight: bold">sqlalchemy</span><span style="color: #BBB"> </span><span style="color: #007020; font-weight: bold">as</span><span style="color: #BBB"> </span><span style="color: #0E84B5; font-weight: bold">sa</span>
+<span style="color: #007020; font-weight: bold">from</span><span style="color: #BBB"> </span><span style="color: #0E84B5; font-weight: bold">sqlalchemy</span><span style="color: #BBB"> </span><span style="color: #007020; font-weight: bold">import</span> orm
+
+
+NEW_SERIES_TABLE_ARGS <span style="color: #666">=</span> (
+    <span style="color: #4070A0">&#39;series&#39;</span>,
+    sa<span style="color: #666">.</span>Column(<span style="color: #4070A0">&#39;id&#39;</span>, sa<span style="color: #666">.</span>Integer(), nullable<span style="color: #666">=</span><span style="color: #007020; font-weight: bold">False</span>),
+    sa<span style="color: #666">.</span>Column(<span style="color: #4070A0">&#39;id_serial&#39;</span>, sa<span style="color: #666">.</span>Integer(), nullable<span style="color: #666">=</span><span style="color: #007020; font-weight: bold">True</span>),
+    sa<span style="color: #666">.</span>Column(<span style="color: #4070A0">&#39;series_number&#39;</span>, sa<span style="color: #666">.</span>Integer(), nullable<span style="color: #666">=</span><span style="color: #007020; font-weight: bold">True</span>),
+    sa<span style="color: #666">.</span>Column(<span style="color: #4070A0">&#39;season_number&#39;</span>, sa<span style="color: #666">.</span>Integer(), nullable<span style="color: #666">=</span><span style="color: #007020; font-weight: bold">True</span>),
+    sa<span style="color: #666">.</span>Column(<span style="color: #4070A0">&#39;looked&#39;</span>, sa<span style="color: #666">.</span>Boolean(), nullable<span style="color: #666">=</span><span style="color: #007020; font-weight: bold">True</span>),
+    sa<span style="color: #666">.</span>ForeignKeyConstraint([<span style="color: #4070A0">&#39;id_serial&#39;</span>], [<span style="color: #4070A0">&#39;serial.id&#39;</span>], ondelete<span style="color: #666">=</span><span style="color: #4070A0">&#39;CASCADE&#39;</span>),
+    sa<span style="color: #666">.</span>PrimaryKeyConstraint(<span style="color: #4070A0">&#39;id&#39;</span>)
+)
+
+OLD_SERIES_TABLE_ARGS <span style="color: #666">=</span> (
+    <span style="color: #4070A0">&#39;series&#39;</span>,
+    sa<span style="color: #666">.</span>Column(<span style="color: #4070A0">&#39;id&#39;</span>, sa<span style="color: #666">.</span>Integer(), nullable<span style="color: #666">=</span><span style="color: #007020; font-weight: bold">False</span>),
+    sa<span style="color: #666">.</span>Column(<span style="color: #4070A0">&#39;id_serial&#39;</span>, sa<span style="color: #666">.</span>Integer(), nullable<span style="color: #666">=</span><span style="color: #007020; font-weight: bold">True</span>),
+    sa<span style="color: #666">.</span>Column(<span style="color: #4070A0">&#39;series_number&#39;</span>, sa<span style="color: #666">.</span>Integer(), nullable<span style="color: #666">=</span><span style="color: #007020; font-weight: bold">True</span>),
+    sa<span style="color: #666">.</span>Column(<span style="color: #4070A0">&#39;season_number&#39;</span>, sa<span style="color: #666">.</span>Integer(), nullable<span style="color: #666">=</span><span style="color: #007020; font-weight: bold">True</span>),
+    sa<span style="color: #666">.</span>Column(<span style="color: #4070A0">&#39;looked&#39;</span>, sa<span style="color: #666">.</span>Boolean(), nullable<span style="color: #666">=</span><span style="color: #007020; font-weight: bold">True</span>),
+    sa<span style="color: #666">.</span>ForeignKeyConstraint([<span style="color: #4070A0">&#39;id_serial&#39;</span>], [<span style="color: #4070A0">&#39;serial.id&#39;</span>], ),
+    sa<span style="color: #666">.</span>PrimaryKeyConstraint(<span style="color: #4070A0">&#39;id&#39;</span>)
+)
+
+
+<span style="color: #007020; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #06287E">move_data</span>(table_args):
+    temp_serial_table_name <span style="color: #666">=</span> <span style="color: #4070A0">&#39;series_temp&#39;</span>
+    column_series_tabel <span style="color: #666">=</span> [
+        <span style="color: #4070A0">&#39;id&#39;</span>, <span style="color: #4070A0">&#39;id_serial&#39;</span>, <span style="color: #4070A0">&#39;series_number&#39;</span>, <span style="color: #4070A0">&#39;season_number&#39;</span>, <span style="color: #4070A0">&#39;looked&#39;</span>
+    ]
+    sql_get_all_series <span style="color: #666">=</span> (
+        <span style="color: #4070A0">f&#39;select </span><span style="color: #70A0D0; font-style: italic">{</span><span style="color: #4070A0">&quot;, &quot;</span><span style="color: #666">.</span>join(column_series_tabel)<span style="color: #70A0D0; font-style: italic">}</span><span style="color: #4070A0"> &#39;</span>
+        <span style="color: #4070A0">f&#39;from </span><span style="color: #70A0D0; font-style: italic">{</span>temp_serial_table_name<span style="color: #70A0D0; font-style: italic">}</span><span style="color: #4070A0">&#39;</span>
+    )
+
+    <span style="color: #60A0B0; font-style: italic"># В sqlite нельзя изменить foreign key, по этому приходится создавать новую</span>
+    <span style="color: #60A0B0; font-style: italic"># таблицу и переносить в нее данные из старой</span>
+    op<span style="color: #666">.</span>rename_table(<span style="color: #4070A0">&#39;series&#39;</span>, temp_serial_table_name)
+
+    new_series_table <span style="color: #666">=</span> op<span style="color: #666">.</span>create_table(<span style="color: #666">*</span>table_args)
+
+    bind <span style="color: #666">=</span> op<span style="color: #666">.</span>get_bind()
+    session <span style="color: #666">=</span> orm<span style="color: #666">.</span>Session(bind<span style="color: #666">=</span>bind)
+
+    all_series <span style="color: #666">=</span> <span style="color: #007020">list</span>(<span style="color: #007020">map</span>(
+        <span style="color: #007020; font-weight: bold">lambda</span> row: <span style="color: #007020">dict</span>(<span style="color: #007020">zip</span>(column_series_tabel, row)),
+        session<span style="color: #666">.</span>execute(sql_get_all_series)
+    ))
+    op<span style="color: #666">.</span>bulk_insert(new_series_table, all_series)
+    session<span style="color: #666">.</span>commit()
+
+    op<span style="color: #666">.</span>drop_table(temp_serial_table_name)
+
+
+<span style="color: #007020; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #06287E">upgrade</span>():
+    move_data(NEW_SERIES_TABLE_ARGS)
+
+
+<span style="color: #007020; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #06287E">downgrade</span>():
+    move_data(OLD_SERIES_TABLE_ARGS)
+</code></pre></div>
+<p>Полезные ссылки:</p>
+<ul>
+<li><a href="https://www.techonthenet.com/sqlite/foreign_keys/foreign_delete.php" target="_blank" rel="noopener noreferrer">SQLite: Foreign Keys with Cascade Delete</a></li>
+</ul>
+
+        </div><!--/.col-xs-12.col-sm-9-->
+
+    </div><!--/row-->
+
+
+    <hr>
+
+    <footer>
+        <p>
+            При копировании информации с данного сайта пожалуйста указывайте
+            ссылку на источник. © 2019 Записки питониста
+        </p>
+    </footer>
+
+</div><!--/.container-->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</body>
+</html>

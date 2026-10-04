@@ -1,0 +1,278 @@
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148357635-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-148357635-1');
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <title>Записки питониста - База знаний</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/base.css">
+
+    
+    <link rel="stylesheet" href="https://aleksey925.github.io/knowledge-base/static/css/knowledge-base.css">
+
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-static-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://aleksey925.github.io/knowledge-base/index.html">Записки питониста</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                
+    <li><a href="https://aleksey925.github.io/knowledge-base/index.html">Главная</a></li>
+    <li class="active"><a href="https://aleksey925.github.io/knowledge-base/knowledge_base/index.html">База знаний</a></li>
+
+            </ul>
+        </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+</nav><!-- /.navbar -->
+
+<div class="container">
+
+    
+    <div class="row row-content">
+
+        <div class="col-xs-12 col-sm-12">
+            <h1 id="ai">AI</h1>
+<h1 id="оглавление">Оглавление</h1>
+<ul>
+<li><a href="#как-читать-названия-и-характеристики-моделей">Как читать названия и характеристики моделей</a></li>
+</ul>
+<h1 id="как-читать-названия-и-характеристики-моделей">Как читать названия и характеристики моделей</h1>
+<p>Простая инструкция объясняющая - что значат сокращения и пометки, которые
+встречаются в именах моделей и их описаниях.</p>
+<hr>
+<p><strong>Размер / «вес» модели</strong></p>
+<p>Часто стоит прямо в названии:</p>
+<ul>
+<li><strong>7B, 13B, 35B, 70B</strong> - число параметров в миллиардах (B = billion). Больше =
+  умнее, но медленнее и требует больше памяти.</li>
+<li><strong>Mini, Nano, Small, Medium, Large</strong> - то же самое, но словами: от
+  маленькой/быстрой до большой/мощной.</li>
+</ul>
+<hr>
+<p><strong>Тип и назначение</strong></p>
+<ul>
+<li><strong>Base</strong> - «сырая» модель. Просто продолжает текст, как автодополнение, а не
+  отвечает на вопросы и не выполняет команды. Спросишь «Какая столица Франции?»</li>
+<li>может выдать «Какая столица Германии?», просто продолжая похожий текст.</li>
+<li><em>Как узнать:</em> пометка <code>Base</code> в названии либо отсутствие <code>Instruct/Chat/IT</code>.</li>
+<li><em>Для кого:</em> в основном для разработчиков - её дообучают под свои задачи (все
+    chat-модели делают из base). Обычному пользователю не нужна - <strong>бери версию
+    с <code>Instruct</code> или <code>Chat</code></strong>.</li>
+<li><strong>Instruct / IT</strong> - обучена выполнять инструкции и команды.</li>
+<li><strong>Chat</strong> - заточена под диалог, общение в формате переписки.</li>
+<li><strong>Code / Coder</strong> - специально для программирования.</li>
+<li><strong>Vision / VL / -V / Multimodal</strong> - умеет работать не только с текстом, но и с
+  картинками (а иногда звук/видео). V = vision, VL = vision-language.</li>
+</ul>
+<hr>
+<p><strong>Модели для автодополнения кода (FIM)</strong></p>
+<p>Для inline-подсказок в редакторе (когда код дописывается прямо пока печатаешь,
+как Copilot) нужен особый тип - <strong>FIM (Fill-In-the-Middle, «заполнение
+середины»)</strong>. Обычная модель продолжает текст с конца, а FIM видит код <strong>и до
+курсора, и после</strong> и вставляет недостающее в середину.</p>
+<p>Что искать:</p>
+<ul>
+<li><strong><code>Coder</code> / <code>Code</code></strong> - модель для кода, иногда прямо пометка <strong>FIM</strong>.</li>
+<li><strong><code>Base</code>, а не <code>Instruct</code></strong> - для автодополнения берут base-версию (инструкт
+  заточена под чат, а не под вставку в середину).</li>
+<li><strong>Маленький размер (1.5B–7B)</strong> - тут важнее скорость, чем «ум»: подсказка
+  должна появляться мгновенно.</li>
+</ul>
+<p>Реальные популярные варианты (локально через Ollama / LM Studio + плагины
+Continue, Tabby, Twinny): <strong>Qwen2.5-Coder</strong> (1.5B–7B), <strong>DeepSeek-Coder</strong>,
+<strong>StarCoder2</strong>, <strong>CodeGemma</strong>.</p>
+<blockquote>
+<p>На практике часто ставят две модели: маленькую FIM - для автодополнения, и
+большую Instruct - отдельно для чата и объяснений.</p>
+</blockquote>
+<hr>
+<p><strong>Степень доработки</strong></p>
+<ul>
+<li><strong>SFT</strong> - дообучена на примерах (supervised fine-tuning).</li>
+<li><strong>RLHF / DPO</strong> - дообучена с учётом человеческих оценок, чтобы отвечать «как
+  надо».</li>
+<li><strong>Distill / Distilled</strong> - «сжатая» версия большой модели: легче и быстрее,
+  чуть менее точная.</li>
+</ul>
+<hr>
+<p><strong>Архитектура: Dense vs MoE</strong></p>
+<ul>
+<li><strong>Dense (плотная)</strong> - обычная модель, где при ответе работают все нейроны
+  сразу. Проще и предсказуемее. Если про MoE ничего не сказано - скорее всего
+  dense.</li>
+<li><strong>MoE (Mixture of Experts, «смесь экспертов»)</strong> - часть слоёв модели поделена
+  на группы-«эксперты», и на каждое слово включаются только несколько из них,
+  остальные простаивают.</li>
+</ul>
+<p><strong>Как это работает.</strong> Делится не вся сеть, а определённые её слои: там, где в
+dense просто шли все нейроны, в MoE стоит «развилка». <strong>Диспетчер (router)</strong> на
+каждое слово выбирает несколько подходящих экспертов (например, 8 из 256), их
+ответы смешиваются. Остальная часть модели общая и работает всегда.</p>
+<p><strong>Важно: эксперты - не человеческие категории.</strong> Заманчиво думать «один эксперт
+для кода, другой для поэзии», но это не так. Эксперты формируются сами в ходе
+обучения, и за что отвечает конкретный - обычно словами не описать (один
+срабатывает на пунктуацию, другой на какой-то паттерн). Деление есть, но не по
+понятным нам темам.</p>
+<p><strong>За счёт чего экономия.</strong> Идея - расцепить <em>«сколько модель знает»</em> и <em>«сколько
+считает на каждом шаге»</em>. В dense это связано жёстко: больше знаний = больше
+вычислений. В MoE знания держат огромными, а вычислений на слово мало. Итог:
+скорость как у маленькой модели, эрудиция как у большой.</p>
+<p><strong>Оговорка - память не экономится!</strong> Все эксперты всё равно лежат в памяти
+целиком (заранее неизвестно, кто понадобится). Поэтому <code>A3B</code> быстрая, но памяти
+ей надо как на полные 35B. Частая ловушка: видишь маленькое активное число -
+думаешь «лёгкая», а по памяти она тяжёлая.</p>
+<p><strong>Как это читается в названии - пометка <code>A…</code>:</strong> в <strong>35B-A3B</strong> первое число (35B)
+= сколько модель весит / сколько надо памяти, число после <strong>A</strong> (3B, <strong>A</strong>ctive)
+= насколько быстро она считает.</p>
+<p><em>Пример:</em> в <code>Qwen3.6-35B-A3B</code> всего 256 экспертов, на каждое слово включаются ~8</p>
+<ul>
+<li>отсюда из 35B активны только ~3B.</li>
+</ul>
+<hr>
+<p><strong>«Рассуждающие» модели (Reasoning / Thinking)</strong></p>
+<p>Модель сначала «думает» - пишет себе черновик рассуждений, и только потом
+отвечает. Лучше в математике, логике и коде, но отвечает медленнее.</p>
+<p>Пометки: <strong>thinking, reasoning, -R, R1</strong>.</p>
+<hr>
+<p><strong>Квантизация (важно для запуска на своём компьютере)</strong></p>
+<p>Когда качаешь модель себе, видишь пометки степени «сжатия»:</p>
+<ul>
+<li><strong>Q8 / 8-bit</strong> - почти без потери качества, но тяжелее.</li>
+<li><strong>Q5</strong> - золотая середина.</li>
+<li><strong>Q4 / 4-bit</strong> - сильно легче, влезает на слабое железо, но чуть «глупее».</li>
+<li><strong>FP8, fp16, bf16, fp32</strong> - точность вычислений; fp32 точнее и тяжелее,
+  остальные легче.</li>
+</ul>
+<p><strong>Правило:</strong> бери максимальный Q, который влезает в твою память.</p>
+<hr>
+<p><strong>Формат файла и движок (где запускать)</strong></p>
+<p>Отдельное от квантизации измерение: не «насколько сжата», а в каком формате
+лежит файл и каким движком запускается. Обычно стоит суффиксом в имени
+(<code>...-GGUF-Q4</code>).</p>
+<ul>
+<li><strong>GGUF</strong> - самый ходовой формат для локального запуска через llama.cpp
+  (движок внутри Ollama и LM Studio). Кросс-платформенный: крутит модель на
+  CPU и почти любом GPU, работает на Windows, Linux и Mac.</li>
+<li><strong>MLX</strong> - формат и фреймворк от Apple под Apple Silicon (чипы M1/M2/M3 и
+  новее). Использует unified memory и заточен под Mac: там обычно быстрее
+  GGUF, но на другом железе не работает.</li>
+<li><strong>GPTQ, AWQ</strong> - форматы квантованных моделей под запуск на GPU (через vLLM,
+  TGI и т.п.).</li>
+</ul>
+<hr>
+<p><strong>Контекст (context length)</strong></p>
+<p>Сколько текста модель «держит в голове» за раз - твой вопрос, документ, история
+диалога.</p>
+<ul>
+<li>Обозначается как <strong>8K, 32K, 128K, 262K, 1M</strong> и т.д.</li>
+<li>Чем больше - тем длиннее документ или проект можно дать, но тем больше памяти
+  ест.</li>
+<li>Например, 262K - это уже целые книги или большой проект с кодом.</li>
+</ul>
+<hr>
+<p><strong>Примеры: разбираем названия по частям</strong></p>
+<p><em>Base и Instruct рядом - на примере Qwen</em></p>
+<p>В каталогах (Hugging Face, LM Studio) модели часто лежат «парой»: сырая и
+дообученная. Видно прямо по названию:</p>
+<ul>
+<li><strong><code>Qwen3-8B</code></strong> - base. Та самая «сырая» модель: просто продолжает текст,
+  командам не следует. Это «холст» для дообучения.</li>
+<li><strong><code>Qwen3-8B-Instruct</code></strong> - та же модель 8B, но дообученная под диалог и
+  инструкции. <strong>Вот её и берёшь</strong> для обычного использования.</li>
+</ul>
+<p>Разница в названии - всего одно слово <code>Instruct</code>. Нет его (или <code>Chat</code>) → перед
+тобой, скорее всего, base.</p>
+<p><em><code>Qwen3.6-35B-A3B</code></em></p>
+<ul>
+<li><strong>Qwen</strong> - семейство (от Alibaba).</li>
+<li><strong>3.6</strong> - поколение.</li>
+<li><strong>35B</strong> - всего 35 миллиардов параметров (столько весит, столько надо памяти).</li>
+<li><strong>A3B</strong> - но активны только ~3 миллиарда → значит это <strong>MoE</strong>, быстрая при
+  большом размере.</li>
+<li>→ Итог: большая, но шустрая «смесь экспертов» нового поколения.</li>
+</ul>
+<p><em><code>Llama-3-8B-Instruct</code></em></p>
+<ul>
+<li><strong>Llama</strong> - семейство (от Meta).</li>
+<li><strong>3</strong> - поколение.</li>
+<li><strong>8B</strong> - 8 миллиардов параметров, dense (про MoE не сказано).</li>
+<li><strong>Instruct</strong> - умеет выполнять команды, годится для диалога.</li>
+<li>→ Итог: небольшая обычная модель, готовая к общению и задачам.</li>
+</ul>
+<p><em><code>Qwen2.5-Coder-32B-Instruct-GGUF-Q4</code></em></p>
+<ul>
+<li><strong>Qwen 2.5</strong> - семейство и поколение.</li>
+<li><strong>Coder</strong> - заточена под программирование.</li>
+<li><strong>32B</strong> - 32 миллиарда параметров, dense.</li>
+<li><strong>Instruct</strong> - выполняет инструкции.</li>
+<li><strong>GGUF</strong> - формат для локального запуска.</li>
+<li><strong>Q4</strong> - сжата до 4-bit, чтобы влезть на слабое железо.</li>
+<li>→ Итог: модель для кода среднего размера, подготовленная для запуска дома на
+  ограниченной памяти.</li>
+</ul>
+<p><em><code>DeepSeek-R1-Distill-7B</code></em></p>
+<ul>
+<li><strong>DeepSeek</strong> - семейство.</li>
+<li><strong>R1</strong> - «рассуждающая» модель (сначала думает, потом отвечает).</li>
+<li><strong>Distill</strong> - сжатая (дистиллированная) версия большой модели.</li>
+<li><strong>7B</strong> - 7 миллиардов параметров, dense.</li>
+<li>→ Итог: компактная рассуждающая модель, «выжимка» из большой.</li>
+</ul>
+
+        </div><!--/.col-xs-12.col-sm-9-->
+
+    </div><!--/row-->
+
+
+    <hr>
+
+    <footer>
+        <p>
+            При копировании информации с данного сайта пожалуйста указывайте
+            ссылку на источник. © 2019 Записки питониста
+        </p>
+    </footer>
+
+</div><!--/.container-->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</body>
+</html>
