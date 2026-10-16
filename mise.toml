@@ -1,2 +1,2 @@
 [tools]
-python = "latest"
+"github:aleksey925/scrawl" = "0.0.1-dev25"

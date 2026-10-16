@@ -94,4 +94,4 @@ crashlytics-build.properties
 fabric.properties
 
 # Project
-.build-deps/output
+dist/

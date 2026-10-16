@@ -12,24 +12,15 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/aleksey925/markdown-docs-compiler:latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-      - name: Install git
-        run: apt update && apt install -y git
-      - name: Compile
-        env:
-          SOURCE_IGNORE: '[".idea",".git",".github",".gitignore",".build-deps"]'
-          CONTENT_DIR_NAME: "knowledge_base"
-        run: |
-          markdown-docs-compiler compile \
-                                 --source-dir=./ \
-                                 --output-dir=../output \
-                                 --template-dir=./.build-deps/templates \
-                                 --static-dir=./.build-deps/static \
-                                 --site-root-prefix=https://aleksey925.github.io/knowledge-base/
+        uses: actions/checkout@v4
+      - name: Install scrawl
+        uses: jdx/mise-action@v2
+        with:
+          install_args: github:aleksey925/scrawl
+      - name: Build
+        run: make build OUTPUT=../output
       - name: Push result
         run: |
             cd ../output \
@@ -38,6 +29,6 @@ jobs:
             && git config --local user.email "ci@ci.com" \
             && git add . \
             && git commit -m 'init' \
-            && git remote add origin $RELEASE_REPO \
-            && git branch -m $RELEASE_BRANCH \
-            && git push -u origin $RELEASE_BRANCH -f
+            && git remote add origin "$RELEASE_REPO" \
+            && git branch -m "$RELEASE_BRANCH" \
+            && git push -u origin "$RELEASE_BRANCH" -f
