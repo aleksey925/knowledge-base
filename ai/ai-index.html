@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+<meta name="color-scheme" content="light dark">
+<meta name="generator" content="scrawl">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#191919" media="(prefers-color-scheme: dark)">
+<title>AI</title>
+<link rel="icon" href="../scrawl/favicon.svg" type="image/svg+xml">
+<script src="../scrawl/boot.js"></script>
+<link rel="stylesheet" href="../scrawl/chroma.css">
+<link rel="stylesheet" href="../scrawl/site.css">
+<script defer src="../scrawl/tree.js"></script>
+<script defer src="../scrawl/site.js"></script>
+</head>
+<body>
+<script type="application/json" data-scrawl="page">{"route":"/doc/ai/ai-index.md","root":"../","answer":{"path":"ai/ai-index.md","kind":"document","title":"AI","html":"\u003ch1 id=\"ai\" data-source-start=\"1\" data-source-end=\"1\"\u003eAI\u003c/h1\u003e\n\u003ch1 id=\"оглавление\" data-source-start=\"3\" data-source-end=\"3\"\u003eОглавление\u003c/h1\u003e\n\u003cul data-source-start=\"5\" data-source-end=\"5\"\u003e\n\u003cli data-source-start=\"5\" data-source-end=\"5\"\u003e\u003ca href=\"#%D0%BA%D0%B0%D0%BA-%D1%87%D0%B8%D1%82%D0%B0%D1%82%D1%8C-%D0%BD%D0%B0%D0%B7%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F-%D0%B8-%D1%85%D0%B0%D1%80%D0%B0%D0%BA%D1%82%D0%B5%D1%80%D0%B8%D1%81%D1%82%D0%B8%D0%BA%D0%B8-%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D0%B5%D0%B9\"\u003eКак читать названия и характеристики моделей\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch1 id=\"как-читать-названия-и-характеристики-моделей\" data-source-start=\"7\" data-source-end=\"7\"\u003eКак читать названия и характеристики моделей\u003c/h1\u003e\n\u003cp data-source-start=\"9\" data-source-end=\"10\"\u003eПростая инструкция объясняющая - что значат сокращения и пометки, которые\nвстречаются в именах моделей и их описаниях.\u003c/p\u003e\n\u003chr data-source-start=\"12\" data-source-end=\"12\"\u003e\n\u003cp data-source-start=\"14\" data-source-end=\"14\"\u003e\u003cstrong\u003eРазмер / «вес» модели\u003c/strong\u003e\u003c/p\u003e\n\u003cp data-source-start=\"16\" data-source-end=\"16\"\u003eЧасто стоит прямо в названии:\u003c/p\u003e\n\u003cul data-source-start=\"18\" data-source-end=\"21\"\u003e\n\u003cli data-source-start=\"18\" data-source-end=\"19\"\u003e\u003cstrong\u003e7B, 13B, 35B, 70B\u003c/strong\u003e - число параметров в миллиардах (B = billion). Больше =\nумнее, но медленнее и требует больше памяти.\u003c/li\u003e\n\u003cli data-source-start=\"20\" data-source-end=\"21\"\u003e\u003cstrong\u003eMini, Nano, Small, Medium, Large\u003c/strong\u003e - то же самое, но словами: от\nмаленькой/быстрой до большой/мощной.\u003c/li\u003e\n\u003c/ul\u003e\n\u003chr data-source-start=\"23\" data-source-end=\"23\"\u003e\n\u003cp data-source-start=\"25\" data-source-end=\"25\"\u003e\u003cstrong\u003eТип и назначение\u003c/strong\u003e\u003c/p\u003e\n\u003cul data-source-start=\"27\" data-source-end=\"39\"\u003e\n\u003cli data-source-start=\"27\" data-source-end=\"34\"\u003e\u003cstrong\u003eBase\u003c/strong\u003e - «сырая» модель. Просто продолжает текст, как автодополнение, а не\nотвечает на вопросы и не выполняет команды. Спросишь «Какая столица\nФранции?» - может выдать «Какая столица Германии?», просто продолжая похожий\nтекст.\n\u003cul data-source-start=\"31\" data-source-end=\"34\"\u003e\n\u003cli data-source-start=\"31\" data-source-end=\"31\"\u003e\u003cem\u003eКак узнать:\u003c/em\u003e пометка \u003ccode\u003eBase\u003c/code\u003e в названии либо отсутствие \u003ccode\u003eInstruct/Chat/IT\u003c/code\u003e.\u003c/li\u003e\n\u003cli data-source-start=\"32\" data-source-end=\"34\"\u003e\u003cem\u003eДля кого:\u003c/em\u003e в основном для разработчиков - её дообучают под свои задачи\n(все chat-модели делают из base). Обычному пользователю не нужна - \u003cstrong\u003eбери\nверсию с \u003ccode\u003eInstruct\u003c/code\u003e или \u003ccode\u003eChat\u003c/code\u003e\u003c/strong\u003e.\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"35\" data-source-end=\"35\"\u003e\u003cstrong\u003eInstruct / IT\u003c/strong\u003e - обучена выполнять инструкции и команды.\u003c/li\u003e\n\u003cli data-source-start=\"36\" data-source-end=\"36\"\u003e\u003cstrong\u003eChat\u003c/strong\u003e - заточена под диалог, общение в формате переписки.\u003c/li\u003e\n\u003cli data-source-start=\"37\" data-source-end=\"37\"\u003e\u003cstrong\u003eCode / Coder\u003c/strong\u003e - специально для программирования.\u003c/li\u003e\n\u003cli data-source-start=\"38\" data-source-end=\"39\"\u003e\u003cstrong\u003eVision / VL / -V / Multimodal\u003c/strong\u003e - умеет работать не только с текстом, но и\nс картинками (а иногда звук/видео). V = vision, VL = vision-language.\u003c/li\u003e\n\u003c/ul\u003e\n\u003chr data-source-start=\"41\" data-source-end=\"41\"\u003e\n\u003cp data-source-start=\"43\" data-source-end=\"43\"\u003e\u003cstrong\u003eМодели для автодополнения кода (FIM)\u003c/strong\u003e\u003c/p\u003e\n\u003cp data-source-start=\"45\" data-source-end=\"48\"\u003eДля inline-подсказок в редакторе (когда код дописывается прямо пока печатаешь,\nкак Copilot) нужен особый тип - \u003cstrong\u003eFIM (Fill-In-the-Middle, «заполнение\nсередины»)\u003c/strong\u003e. Обычная модель продолжает текст с конца, а FIM видит код \u003cstrong\u003eи до\nкурсора, и после\u003c/strong\u003e и вставляет недостающее в середину.\u003c/p\u003e\n\u003cp data-source-start=\"50\" data-source-end=\"50\"\u003eЧто искать:\u003c/p\u003e\n\u003cul data-source-start=\"52\" data-source-end=\"56\"\u003e\n\u003cli data-source-start=\"52\" data-source-end=\"52\"\u003e\u003cstrong\u003e\u003ccode\u003eCoder\u003c/code\u003e / \u003ccode\u003eCode\u003c/code\u003e\u003c/strong\u003e - модель для кода, иногда прямо пометка \u003cstrong\u003eFIM\u003c/strong\u003e.\u003c/li\u003e\n\u003cli data-source-start=\"53\" data-source-end=\"54\"\u003e\u003cstrong\u003e\u003ccode\u003eBase\u003c/code\u003e, а не \u003ccode\u003eInstruct\u003c/code\u003e\u003c/strong\u003e - для автодополнения берут base-версию (инструкт\nзаточена под чат, а не под вставку в середину).\u003c/li\u003e\n\u003cli data-source-start=\"55\" data-source-end=\"56\"\u003e\u003cstrong\u003eМаленький размер (1.5B–7B)\u003c/strong\u003e - тут важнее скорость, чем «ум»: подсказка\nдолжна появляться мгновенно.\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp data-source-start=\"58\" data-source-end=\"60\"\u003eРеальные популярные варианты (локально через Ollama / LM Studio + плагины\nContinue, Tabby, Twinny): \u003cstrong\u003eQwen2.5-Coder\u003c/strong\u003e (1.5B–7B), \u003cstrong\u003eDeepSeek-Coder\u003c/strong\u003e,\n\u003cstrong\u003eStarCoder2\u003c/strong\u003e, \u003cstrong\u003eCodeGemma\u003c/strong\u003e.\u003c/p\u003e\n\u003cblockquote data-source-start=\"62\" data-source-end=\"63\"\u003e\n\u003cp data-source-start=\"62\" data-source-end=\"63\"\u003eНа практике часто ставят две модели: маленькую FIM - для автодополнения, и\nбольшую Instruct - отдельно для чата и объяснений.\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003chr data-source-start=\"65\" data-source-end=\"65\"\u003e\n\u003cp data-source-start=\"67\" data-source-end=\"67\"\u003e\u003cstrong\u003eСтепень доработки\u003c/strong\u003e\u003c/p\u003e\n\u003cul data-source-start=\"69\" data-source-end=\"73\"\u003e\n\u003cli data-source-start=\"69\" data-source-end=\"69\"\u003e\u003cstrong\u003eSFT\u003c/strong\u003e - дообучена на примерах (supervised fine-tuning).\u003c/li\u003e\n\u003cli data-source-start=\"70\" data-source-end=\"71\"\u003e\u003cstrong\u003eRLHF / DPO\u003c/strong\u003e - дообучена с учётом человеческих оценок, чтобы отвечать «как\nнадо».\u003c/li\u003e\n\u003cli data-source-start=\"72\" data-source-end=\"73\"\u003e\u003cstrong\u003eDistill / Distilled\u003c/strong\u003e - «сжатая» версия большой модели: легче и быстрее,\nчуть менее точная.\u003c/li\u003e\n\u003c/ul\u003e\n\u003chr data-source-start=\"75\" data-source-end=\"75\"\u003e\n\u003cp data-source-start=\"77\" data-source-end=\"77\"\u003e\u003cstrong\u003eАрхитектура: Dense vs MoE\u003c/strong\u003e\u003c/p\u003e\n\u003cul data-source-start=\"79\" data-source-end=\"84\"\u003e\n\u003cli data-source-start=\"79\" data-source-end=\"81\"\u003e\u003cstrong\u003eDense (плотная)\u003c/strong\u003e - обычная модель, где при ответе работают все нейроны\nсразу. Проще и предсказуемее. Если про MoE ничего не сказано - скорее всего\ndense.\u003c/li\u003e\n\u003cli data-source-start=\"82\" data-source-end=\"84\"\u003e\u003cstrong\u003eMoE (Mixture of Experts, «смесь экспертов»)\u003c/strong\u003e - часть слоёв модели поделена\nна группы-«эксперты», и на каждое слово включаются только несколько из них,\nостальные простаивают.\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp data-source-start=\"86\" data-source-end=\"89\"\u003e\u003cstrong\u003eКак это работает.\u003c/strong\u003e Делится не вся сеть, а определённые её слои: там, где в\ndense просто шли все нейроны, в MoE стоит «развилка». \u003cstrong\u003eДиспетчер (router)\u003c/strong\u003e на\nкаждое слово выбирает несколько подходящих экспертов (например, 8 из 256), их\nответы смешиваются. Остальная часть модели общая и работает всегда.\u003c/p\u003e\n\u003cp data-source-start=\"91\" data-source-end=\"95\"\u003e\u003cstrong\u003eВажно: эксперты - не человеческие категории.\u003c/strong\u003e Заманчиво думать «один эксперт\nдля кода, другой для поэзии», но это не так. Эксперты формируются сами в ходе\nобучения, и за что отвечает конкретный - обычно словами не описать (один\nсрабатывает на пунктуацию, другой на какой-то паттерн). Деление есть, но не по\nпонятным нам темам.\u003c/p\u003e\n\u003cp data-source-start=\"97\" data-source-end=\"100\"\u003e\u003cstrong\u003eЗа счёт чего экономия.\u003c/strong\u003e Идея - расцепить \u003cem\u003e«сколько модель знает»\u003c/em\u003e и\n\u003cem\u003e«сколько считает на каждом шаге»\u003c/em\u003e. В dense это связано жёстко: больше знаний =\nбольше вычислений. В MoE знания держат огромными, а вычислений на слово мало.\nИтог: скорость как у маленькой модели, эрудиция как у большой.\u003c/p\u003e\n\u003cp data-source-start=\"102\" data-source-end=\"105\"\u003e\u003cstrong\u003eОговорка - память не экономится!\u003c/strong\u003e Все эксперты всё равно лежат в памяти\nцеликом (заранее неизвестно, кто понадобится). Поэтому \u003ccode\u003eA3B\u003c/code\u003e быстрая, но памяти\nей надо как на полные 35B. Частая ловушка: видишь маленькое активное число -\nдумаешь «лёгкая», а по памяти она тяжёлая.\u003c/p\u003e\n\u003cp data-source-start=\"107\" data-source-end=\"109\"\u003e\u003cstrong\u003eКак это читается в названии - пометка \u003ccode\u003eA…\u003c/code\u003e:\u003c/strong\u003e в \u003cstrong\u003e35B-A3B\u003c/strong\u003e первое число\n(35B) = сколько модель весит / сколько надо памяти, число после \u003cstrong\u003eA\u003c/strong\u003e (3B,\n\u003cstrong\u003eA\u003c/strong\u003ective) = насколько быстро она считает.\u003c/p\u003e\n\u003cp data-source-start=\"111\" data-source-end=\"112\"\u003e\u003cem\u003eПример:\u003c/em\u003e в \u003ccode\u003eQwen3.6-35B-A3B\u003c/code\u003e всего 256 экспертов, на каждое слово включаются\n~8 - отсюда из 35B активны только ~3B.\u003c/p\u003e\n\u003chr data-source-start=\"114\" data-source-end=\"114\"\u003e\n\u003cp data-source-start=\"116\" data-source-end=\"116\"\u003e\u003cstrong\u003e«Рассуждающие» модели (Reasoning / Thinking)\u003c/strong\u003e\u003c/p\u003e\n\u003cp data-source-start=\"118\" data-source-end=\"119\"\u003eМодель сначала «думает» - пишет себе черновик рассуждений, и только потом\nотвечает. Лучше в математике, логике и коде, но отвечает медленнее.\u003c/p\u003e\n\u003cp data-source-start=\"121\" data-source-end=\"121\"\u003eПометки: \u003cstrong\u003ethinking, reasoning, -R, R1\u003c/strong\u003e.\u003c/p\u003e\n\u003chr data-source-start=\"123\" data-source-end=\"123\"\u003e\n\u003cp data-source-start=\"125\" data-source-end=\"125\"\u003e\u003cstrong\u003eКвантизация (важно для запуска на своём компьютере)\u003c/strong\u003e\u003c/p\u003e\n\u003cp data-source-start=\"127\" data-source-end=\"127\"\u003eКогда качаешь модель себе, видишь пометки степени «сжатия»:\u003c/p\u003e\n\u003cul data-source-start=\"129\" data-source-end=\"133\"\u003e\n\u003cli data-source-start=\"129\" data-source-end=\"129\"\u003e\u003cstrong\u003eQ8 / 8-bit\u003c/strong\u003e - почти без потери качества, но тяжелее.\u003c/li\u003e\n\u003cli data-source-start=\"130\" data-source-end=\"130\"\u003e\u003cstrong\u003eQ5\u003c/strong\u003e - золотая середина.\u003c/li\u003e\n\u003cli data-source-start=\"131\" data-source-end=\"131\"\u003e\u003cstrong\u003eQ4 / 4-bit\u003c/strong\u003e - сильно легче, влезает на слабое железо, но чуть «глупее».\u003c/li\u003e\n\u003cli data-source-start=\"132\" data-source-end=\"133\"\u003e\u003cstrong\u003eFP8, fp16, bf16, fp32\u003c/strong\u003e - точность вычислений; fp32 точнее и тяжелее,\nостальные легче.\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp data-source-start=\"135\" data-source-end=\"135\"\u003e\u003cstrong\u003eПравило:\u003c/strong\u003e бери максимальный Q, который влезает в твою память.\u003c/p\u003e\n\u003chr data-source-start=\"137\" data-source-end=\"137\"\u003e\n\u003cp data-source-start=\"139\" data-source-end=\"139\"\u003e\u003cstrong\u003eФормат файла и движок (где запускать)\u003c/strong\u003e\u003c/p\u003e\n\u003cp data-source-start=\"141\" data-source-end=\"143\"\u003eОтдельное от квантизации измерение: не «насколько сжата», а в каком формате\nлежит файл и каким движком запускается. Обычно стоит суффиксом в имени\n(\u003ccode\u003e...-GGUF-Q4\u003c/code\u003e).\u003c/p\u003e\n\u003cul data-source-start=\"145\" data-source-end=\"152\"\u003e\n\u003cli data-source-start=\"145\" data-source-end=\"147\"\u003e\u003cstrong\u003eGGUF\u003c/strong\u003e - самый ходовой формат для локального запуска через llama.cpp\n(движок внутри Ollama и LM Studio). Кросс-платформенный: крутит модель на CPU\nи почти любом GPU, работает на Windows, Linux и Mac.\u003c/li\u003e\n\u003cli data-source-start=\"148\" data-source-end=\"150\"\u003e\u003cstrong\u003eMLX\u003c/strong\u003e - формат и фреймворк от Apple под Apple Silicon (чипы M1/M2/M3 и\nновее). Использует unified memory и заточен под Mac: там обычно быстрее GGUF,\nно на другом железе не работает.\u003c/li\u003e\n\u003cli data-source-start=\"151\" data-source-end=\"152\"\u003e\u003cstrong\u003eGPTQ, AWQ\u003c/strong\u003e - форматы квантованных моделей под запуск на GPU (через vLLM,\nTGI и т.п.).\u003c/li\u003e\n\u003c/ul\u003e\n\u003chr data-source-start=\"154\" data-source-end=\"154\"\u003e\n\u003cp data-source-start=\"156\" data-source-end=\"156\"\u003e\u003cstrong\u003eКонтекст (context length)\u003c/strong\u003e\u003c/p\u003e\n\u003cp data-source-start=\"158\" data-source-end=\"159\"\u003eСколько текста модель «держит в голове» за раз - твой вопрос, документ, история\nдиалога.\u003c/p\u003e\n\u003cul data-source-start=\"161\" data-source-end=\"164\"\u003e\n\u003cli data-source-start=\"161\" data-source-end=\"161\"\u003eОбозначается как \u003cstrong\u003e8K, 32K, 128K, 262K, 1M\u003c/strong\u003e и т.д.\u003c/li\u003e\n\u003cli data-source-start=\"162\" data-source-end=\"163\"\u003eЧем больше - тем длиннее документ или проект можно дать, но тем больше памяти\nест.\u003c/li\u003e\n\u003cli data-source-start=\"164\" data-source-end=\"164\"\u003eНапример, 262K - это уже целые книги или большой проект с кодом.\u003c/li\u003e\n\u003c/ul\u003e\n\u003chr data-source-start=\"166\" data-source-end=\"166\"\u003e\n\u003cp data-source-start=\"168\" data-source-end=\"168\"\u003e\u003cstrong\u003eПримеры: разбираем названия по частям\u003c/strong\u003e\u003c/p\u003e\n\u003cp data-source-start=\"170\" data-source-end=\"170\"\u003e\u003cem\u003eBase и Instruct рядом - на примере Qwen\u003c/em\u003e\u003c/p\u003e\n\u003cp data-source-start=\"172\" data-source-end=\"173\"\u003eВ каталогах (Hugging Face, LM Studio) модели часто лежат «парой»: сырая и\nдообученная. Видно прямо по названию:\u003c/p\u003e\n\u003cul data-source-start=\"175\" data-source-end=\"178\"\u003e\n\u003cli data-source-start=\"175\" data-source-end=\"176\"\u003e\u003cstrong\u003e\u003ccode\u003eQwen3-8B\u003c/code\u003e\u003c/strong\u003e - base. Та самая «сырая» модель: просто продолжает текст,\nкомандам не следует. Это «холст» для дообучения.\u003c/li\u003e\n\u003cli data-source-start=\"177\" data-source-end=\"178\"\u003e\u003cstrong\u003e\u003ccode\u003eQwen3-8B-Instruct\u003c/code\u003e\u003c/strong\u003e - та же модель 8B, но дообученная под диалог и\nинструкции. \u003cstrong\u003eВот её и берёшь\u003c/strong\u003e для обычного использования.\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp data-source-start=\"180\" data-source-end=\"181\"\u003eРазница в названии - всего одно слово \u003ccode\u003eInstruct\u003c/code\u003e. Нет его (или \u003ccode\u003eChat\u003c/code\u003e) → перед\nтобой, скорее всего, base.\u003c/p\u003e\n\u003cp data-source-start=\"183\" data-source-end=\"183\"\u003e\u003cem\u003e\u003ccode\u003eQwen3.6-35B-A3B\u003c/code\u003e\u003c/em\u003e\u003c/p\u003e\n\u003cul data-source-start=\"185\" data-source-end=\"191\"\u003e\n\u003cli data-source-start=\"185\" data-source-end=\"185\"\u003e\u003cstrong\u003eQwen\u003c/strong\u003e - семейство (от Alibaba).\u003c/li\u003e\n\u003cli data-source-start=\"186\" data-source-end=\"186\"\u003e\u003cstrong\u003e3.6\u003c/strong\u003e - поколение.\u003c/li\u003e\n\u003cli data-source-start=\"187\" data-source-end=\"188\"\u003e\u003cstrong\u003e35B\u003c/strong\u003e - всего 35 миллиардов параметров (столько весит, столько надо\nпамяти).\u003c/li\u003e\n\u003cli data-source-start=\"189\" data-source-end=\"190\"\u003e\u003cstrong\u003eA3B\u003c/strong\u003e - но активны только ~3 миллиарда → значит это \u003cstrong\u003eMoE\u003c/strong\u003e, быстрая при\nбольшом размере.\u003c/li\u003e\n\u003cli data-source-start=\"191\" data-source-end=\"191\"\u003e→ Итог: большая, но шустрая «смесь экспертов» нового поколения.\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp data-source-start=\"193\" data-source-end=\"193\"\u003e\u003cem\u003e\u003ccode\u003eLlama-3-8B-Instruct\u003c/code\u003e\u003c/em\u003e\u003c/p\u003e\n\u003cul data-source-start=\"195\" data-source-end=\"199\"\u003e\n\u003cli data-source-start=\"195\" data-source-end=\"195\"\u003e\u003cstrong\u003eLlama\u003c/strong\u003e - семейство (от Meta).\u003c/li\u003e\n\u003cli data-source-start=\"196\" data-source-end=\"196\"\u003e\u003cstrong\u003e3\u003c/strong\u003e - поколение.\u003c/li\u003e\n\u003cli data-source-start=\"197\" data-source-end=\"197\"\u003e\u003cstrong\u003e8B\u003c/strong\u003e - 8 миллиардов параметров, dense (про MoE не сказано).\u003c/li\u003e\n\u003cli data-source-start=\"198\" data-source-end=\"198\"\u003e\u003cstrong\u003eInstruct\u003c/strong\u003e - умеет выполнять команды, годится для диалога.\u003c/li\u003e\n\u003cli data-source-start=\"199\" data-source-end=\"199\"\u003e→ Итог: небольшая обычная модель, готовая к общению и задачам.\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp data-source-start=\"201\" data-source-end=\"201\"\u003e\u003cem\u003e\u003ccode\u003eQwen2.5-Coder-32B-Instruct-GGUF-Q4\u003c/code\u003e\u003c/em\u003e\u003c/p\u003e\n\u003cul data-source-start=\"203\" data-source-end=\"210\"\u003e\n\u003cli data-source-start=\"203\" data-source-end=\"203\"\u003e\u003cstrong\u003eQwen 2.5\u003c/strong\u003e - семейство и поколение.\u003c/li\u003e\n\u003cli data-source-start=\"204\" data-source-end=\"204\"\u003e\u003cstrong\u003eCoder\u003c/strong\u003e - заточена под программирование.\u003c/li\u003e\n\u003cli data-source-start=\"205\" data-source-end=\"205\"\u003e\u003cstrong\u003e32B\u003c/strong\u003e - 32 миллиарда параметров, dense.\u003c/li\u003e\n\u003cli data-source-start=\"206\" data-source-end=\"206\"\u003e\u003cstrong\u003eInstruct\u003c/strong\u003e - выполняет инструкции.\u003c/li\u003e\n\u003cli data-source-start=\"207\" data-source-end=\"207\"\u003e\u003cstrong\u003eGGUF\u003c/strong\u003e - формат для локального запуска.\u003c/li\u003e\n\u003cli data-source-start=\"208\" data-source-end=\"208\"\u003e\u003cstrong\u003eQ4\u003c/strong\u003e - сжата до 4-bit, чтобы влезть на слабое железо.\u003c/li\u003e\n\u003cli data-source-start=\"209\" data-source-end=\"210\"\u003e→ Итог: модель для кода среднего размера, подготовленная для запуска дома на\nограниченной памяти.\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp data-source-start=\"212\" data-source-end=\"212\"\u003e\u003cem\u003e\u003ccode\u003eDeepSeek-R1-Distill-7B\u003c/code\u003e\u003c/em\u003e\u003c/p\u003e\n\u003cul data-source-start=\"214\" data-source-end=\"218\"\u003e\n\u003cli data-source-start=\"214\" data-source-end=\"214\"\u003e\u003cstrong\u003eDeepSeek\u003c/strong\u003e - семейство.\u003c/li\u003e\n\u003cli data-source-start=\"215\" data-source-end=\"215\"\u003e\u003cstrong\u003eR1\u003c/strong\u003e - «рассуждающая» модель (сначала думает, потом отвечает).\u003c/li\u003e\n\u003cli data-source-start=\"216\" data-source-end=\"216\"\u003e\u003cstrong\u003eDistill\u003c/strong\u003e - сжатая (дистиллированная) версия большой модели.\u003c/li\u003e\n\u003cli data-source-start=\"217\" data-source-end=\"217\"\u003e\u003cstrong\u003e7B\u003c/strong\u003e - 7 миллиардов параметров, dense.\u003c/li\u003e\n\u003cli data-source-start=\"218\" data-source-end=\"218\"\u003e→ Итог: компактная рассуждающая модель, «выжимка» из большой.\u003c/li\u003e\n\u003c/ul\u003e\n","toc":[],"show_toc":false,"rev":"sha256:805989876afd65e08ac07a1361b855a0fd308cc4fe935d91c8db5ec309c481b5","mod_time":"2026-10-24T11:37:57.761884336Z","breadcrumbs":[{"name":"Home","url":"/"},{"name":"ai","url":"/doc/ai/"},{"name":"ai-index.md","url":""}],"edit_url":"/edit/ai/ai-index.md","missing":false,"can_create":false}}</script>
+<div id="scrawl-app-root"></div>
+
+<main data-scrawl-static>
+<nav aria-label="Path"><ol class="scrawl-static-crumbs"><li><a href="../index.html">Home</a></li><li><a href="../ai/index.html">ai</a></li><li>ai-index.md</li></ol></nav>
+<article class="markdown-document">
+<h1 id="ai" data-source-start="1" data-source-end="1">AI</h1>
+<h1 id="оглавление" data-source-start="3" data-source-end="3">Оглавление</h1>
+<ul data-source-start="5" data-source-end="5">
+<li data-source-start="5" data-source-end="5"><a href="#%D0%BA%D0%B0%D0%BA-%D1%87%D0%B8%D1%82%D0%B0%D1%82%D1%8C-%D0%BD%D0%B0%D0%B7%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F-%D0%B8-%D1%85%D0%B0%D1%80%D0%B0%D0%BA%D1%82%D0%B5%D1%80%D0%B8%D1%81%D1%82%D0%B8%D0%BA%D0%B8-%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D0%B5%D0%B9">Как читать названия и характеристики моделей</a></li>
+</ul>
+<h1 id="как-читать-названия-и-характеристики-моделей" data-source-start="7" data-source-end="7">Как читать названия и характеристики моделей</h1>
+<p data-source-start="9" data-source-end="10">Простая инструкция объясняющая - что значат сокращения и пометки, которые
+встречаются в именах моделей и их описаниях.</p>
+<hr data-source-start="12" data-source-end="12">
+<p data-source-start="14" data-source-end="14"><strong>Размер / «вес» модели</strong></p>
+<p data-source-start="16" data-source-end="16">Часто стоит прямо в названии:</p>
+<ul data-source-start="18" data-source-end="21">
+<li data-source-start="18" data-source-end="19"><strong>7B, 13B, 35B, 70B</strong> - число параметров в миллиардах (B = billion). Больше =
+умнее, но медленнее и требует больше памяти.</li>
+<li data-source-start="20" data-source-end="21"><strong>Mini, Nano, Small, Medium, Large</strong> - то же самое, но словами: от
+маленькой/быстрой до большой/мощной.</li>
+</ul>
+<hr data-source-start="23" data-source-end="23">
+<p data-source-start="25" data-source-end="25"><strong>Тип и назначение</strong></p>
+<ul data-source-start="27" data-source-end="39">
+<li data-source-start="27" data-source-end="34"><strong>Base</strong> - «сырая» модель. Просто продолжает текст, как автодополнение, а не
+отвечает на вопросы и не выполняет команды. Спросишь «Какая столица
+Франции?» - может выдать «Какая столица Германии?», просто продолжая похожий
+текст.
+<ul data-source-start="31" data-source-end="34">
+<li data-source-start="31" data-source-end="31"><em>Как узнать:</em> пометка <code>Base</code> в названии либо отсутствие <code>Instruct/Chat/IT</code>.</li>
+<li data-source-start="32" data-source-end="34"><em>Для кого:</em> в основном для разработчиков - её дообучают под свои задачи
+(все chat-модели делают из base). Обычному пользователю не нужна - <strong>бери
+версию с <code>Instruct</code> или <code>Chat</code></strong>.</li>
+</ul>
+</li>
+<li data-source-start="35" data-source-end="35"><strong>Instruct / IT</strong> - обучена выполнять инструкции и команды.</li>
+<li data-source-start="36" data-source-end="36"><strong>Chat</strong> - заточена под диалог, общение в формате переписки.</li>
+<li data-source-start="37" data-source-end="37"><strong>Code / Coder</strong> - специально для программирования.</li>
+<li data-source-start="38" data-source-end="39"><strong>Vision / VL / -V / Multimodal</strong> - умеет работать не только с текстом, но и
+с картинками (а иногда звук/видео). V = vision, VL = vision-language.</li>
+</ul>
+<hr data-source-start="41" data-source-end="41">
+<p data-source-start="43" data-source-end="43"><strong>Модели для автодополнения кода (FIM)</strong></p>
+<p data-source-start="45" data-source-end="48">Для inline-подсказок в редакторе (когда код дописывается прямо пока печатаешь,
+как Copilot) нужен особый тип - <strong>FIM (Fill-In-the-Middle, «заполнение
+середины»)</strong>. Обычная модель продолжает текст с конца, а FIM видит код <strong>и до
+курсора, и после</strong> и вставляет недостающее в середину.</p>
+<p data-source-start="50" data-source-end="50">Что искать:</p>
+<ul data-source-start="52" data-source-end="56">
+<li data-source-start="52" data-source-end="52"><strong><code>Coder</code> / <code>Code</code></strong> - модель для кода, иногда прямо пометка <strong>FIM</strong>.</li>
+<li data-source-start="53" data-source-end="54"><strong><code>Base</code>, а не <code>Instruct</code></strong> - для автодополнения берут base-версию (инструкт
+заточена под чат, а не под вставку в середину).</li>
+<li data-source-start="55" data-source-end="56"><strong>Маленький размер (1.5B–7B)</strong> - тут важнее скорость, чем «ум»: подсказка
+должна появляться мгновенно.</li>
+</ul>
+<p data-source-start="58" data-source-end="60">Реальные популярные варианты (локально через Ollama / LM Studio + плагины
+Continue, Tabby, Twinny): <strong>Qwen2.5-Coder</strong> (1.5B–7B), <strong>DeepSeek-Coder</strong>,
+<strong>StarCoder2</strong>, <strong>CodeGemma</strong>.</p>
+<blockquote data-source-start="62" data-source-end="63">
+<p data-source-start="62" data-source-end="63">На практике часто ставят две модели: маленькую FIM - для автодополнения, и
+большую Instruct - отдельно для чата и объяснений.</p>
+</blockquote>
+<hr data-source-start="65" data-source-end="65">
+<p data-source-start="67" data-source-end="67"><strong>Степень доработки</strong></p>
+<ul data-source-start="69" data-source-end="73">
+<li data-source-start="69" data-source-end="69"><strong>SFT</strong> - дообучена на примерах (supervised fine-tuning).</li>
+<li data-source-start="70" data-source-end="71"><strong>RLHF / DPO</strong> - дообучена с учётом человеческих оценок, чтобы отвечать «как
+надо».</li>
+<li data-source-start="72" data-source-end="73"><strong>Distill / Distilled</strong> - «сжатая» версия большой модели: легче и быстрее,
+чуть менее точная.</li>
+</ul>
+<hr data-source-start="75" data-source-end="75">
+<p data-source-start="77" data-source-end="77"><strong>Архитектура: Dense vs MoE</strong></p>
+<ul data-source-start="79" data-source-end="84">
+<li data-source-start="79" data-source-end="81"><strong>Dense (плотная)</strong> - обычная модель, где при ответе работают все нейроны
+сразу. Проще и предсказуемее. Если про MoE ничего не сказано - скорее всего
+dense.</li>
+<li data-source-start="82" data-source-end="84"><strong>MoE (Mixture of Experts, «смесь экспертов»)</strong> - часть слоёв модели поделена
+на группы-«эксперты», и на каждое слово включаются только несколько из них,
+остальные простаивают.</li>
+</ul>
+<p data-source-start="86" data-source-end="89"><strong>Как это работает.</strong> Делится не вся сеть, а определённые её слои: там, где в
+dense просто шли все нейроны, в MoE стоит «развилка». <strong>Диспетчер (router)</strong> на
+каждое слово выбирает несколько подходящих экспертов (например, 8 из 256), их
+ответы смешиваются. Остальная часть модели общая и работает всегда.</p>
+<p data-source-start="91" data-source-end="95"><strong>Важно: эксперты - не человеческие категории.</strong> Заманчиво думать «один эксперт
+для кода, другой для поэзии», но это не так. Эксперты формируются сами в ходе
+обучения, и за что отвечает конкретный - обычно словами не описать (один
+срабатывает на пунктуацию, другой на какой-то паттерн). Деление есть, но не по
+понятным нам темам.</p>
+<p data-source-start="97" data-source-end="100"><strong>За счёт чего экономия.</strong> Идея - расцепить <em>«сколько модель знает»</em> и
+<em>«сколько считает на каждом шаге»</em>. В dense это связано жёстко: больше знаний =
+больше вычислений. В MoE знания держат огромными, а вычислений на слово мало.
+Итог: скорость как у маленькой модели, эрудиция как у большой.</p>
+<p data-source-start="102" data-source-end="105"><strong>Оговорка - память не экономится!</strong> Все эксперты всё равно лежат в памяти
+целиком (заранее неизвестно, кто понадобится). Поэтому <code>A3B</code> быстрая, но памяти
+ей надо как на полные 35B. Частая ловушка: видишь маленькое активное число -
+думаешь «лёгкая», а по памяти она тяжёлая.</p>
+<p data-source-start="107" data-source-end="109"><strong>Как это читается в названии - пометка <code>A…</code>:</strong> в <strong>35B-A3B</strong> первое число
+(35B) = сколько модель весит / сколько надо памяти, число после <strong>A</strong> (3B,
+<strong>A</strong>ctive) = насколько быстро она считает.</p>
+<p data-source-start="111" data-source-end="112"><em>Пример:</em> в <code>Qwen3.6-35B-A3B</code> всего 256 экспертов, на каждое слово включаются
+~8 - отсюда из 35B активны только ~3B.</p>
+<hr data-source-start="114" data-source-end="114">
+<p data-source-start="116" data-source-end="116"><strong>«Рассуждающие» модели (Reasoning / Thinking)</strong></p>
+<p data-source-start="118" data-source-end="119">Модель сначала «думает» - пишет себе черновик рассуждений, и только потом
+отвечает. Лучше в математике, логике и коде, но отвечает медленнее.</p>
+<p data-source-start="121" data-source-end="121">Пометки: <strong>thinking, reasoning, -R, R1</strong>.</p>
+<hr data-source-start="123" data-source-end="123">
+<p data-source-start="125" data-source-end="125"><strong>Квантизация (важно для запуска на своём компьютере)</strong></p>
+<p data-source-start="127" data-source-end="127">Когда качаешь модель себе, видишь пометки степени «сжатия»:</p>
+<ul data-source-start="129" data-source-end="133">
+<li data-source-start="129" data-source-end="129"><strong>Q8 / 8-bit</strong> - почти без потери качества, но тяжелее.</li>
+<li data-source-start="130" data-source-end="130"><strong>Q5</strong> - золотая середина.</li>
+<li data-source-start="131" data-source-end="131"><strong>Q4 / 4-bit</strong> - сильно легче, влезает на слабое железо, но чуть «глупее».</li>
+<li data-source-start="132" data-source-end="133"><strong>FP8, fp16, bf16, fp32</strong> - точность вычислений; fp32 точнее и тяжелее,
+остальные легче.</li>
+</ul>
+<p data-source-start="135" data-source-end="135"><strong>Правило:</strong> бери максимальный Q, который влезает в твою память.</p>
+<hr data-source-start="137" data-source-end="137">
+<p data-source-start="139" data-source-end="139"><strong>Формат файла и движок (где запускать)</strong></p>
+<p data-source-start="141" data-source-end="143">Отдельное от квантизации измерение: не «насколько сжата», а в каком формате
+лежит файл и каким движком запускается. Обычно стоит суффиксом в имени
+(<code>...-GGUF-Q4</code>).</p>
+<ul data-source-start="145" data-source-end="152">
+<li data-source-start="145" data-source-end="147"><strong>GGUF</strong> - самый ходовой формат для локального запуска через llama.cpp
+(движок внутри Ollama и LM Studio). Кросс-платформенный: крутит модель на CPU
+и почти любом GPU, работает на Windows, Linux и Mac.</li>
+<li data-source-start="148" data-source-end="150"><strong>MLX</strong> - формат и фреймворк от Apple под Apple Silicon (чипы M1/M2/M3 и
+новее). Использует unified memory и заточен под Mac: там обычно быстрее GGUF,
+но на другом железе не работает.</li>
+<li data-source-start="151" data-source-end="152"><strong>GPTQ, AWQ</strong> - форматы квантованных моделей под запуск на GPU (через vLLM,
+TGI и т.п.).</li>
+</ul>
+<hr data-source-start="154" data-source-end="154">
+<p data-source-start="156" data-source-end="156"><strong>Контекст (context length)</strong></p>
+<p data-source-start="158" data-source-end="159">Сколько текста модель «держит в голове» за раз - твой вопрос, документ, история
+диалога.</p>
+<ul data-source-start="161" data-source-end="164">
+<li data-source-start="161" data-source-end="161">Обозначается как <strong>8K, 32K, 128K, 262K, 1M</strong> и т.д.</li>
+<li data-source-start="162" data-source-end="163">Чем больше - тем длиннее документ или проект можно дать, но тем больше памяти
+ест.</li>
+<li data-source-start="164" data-source-end="164">Например, 262K - это уже целые книги или большой проект с кодом.</li>
+</ul>
+<hr data-source-start="166" data-source-end="166">
+<p data-source-start="168" data-source-end="168"><strong>Примеры: разбираем названия по частям</strong></p>
+<p data-source-start="170" data-source-end="170"><em>Base и Instruct рядом - на примере Qwen</em></p>
+<p data-source-start="172" data-source-end="173">В каталогах (Hugging Face, LM Studio) модели часто лежат «парой»: сырая и
+дообученная. Видно прямо по названию:</p>
+<ul data-source-start="175" data-source-end="178">
+<li data-source-start="175" data-source-end="176"><strong><code>Qwen3-8B</code></strong> - base. Та самая «сырая» модель: просто продолжает текст,
+командам не следует. Это «холст» для дообучения.</li>
+<li data-source-start="177" data-source-end="178"><strong><code>Qwen3-8B-Instruct</code></strong> - та же модель 8B, но дообученная под диалог и
+инструкции. <strong>Вот её и берёшь</strong> для обычного использования.</li>
+</ul>
+<p data-source-start="180" data-source-end="181">Разница в названии - всего одно слово <code>Instruct</code>. Нет его (или <code>Chat</code>) → перед
+тобой, скорее всего, base.</p>
+<p data-source-start="183" data-source-end="183"><em><code>Qwen3.6-35B-A3B</code></em></p>
+<ul data-source-start="185" data-source-end="191">
+<li data-source-start="185" data-source-end="185"><strong>Qwen</strong> - семейство (от Alibaba).</li>
+<li data-source-start="186" data-source-end="186"><strong>3.6</strong> - поколение.</li>
+<li data-source-start="187" data-source-end="188"><strong>35B</strong> - всего 35 миллиардов параметров (столько весит, столько надо
+памяти).</li>
+<li data-source-start="189" data-source-end="190"><strong>A3B</strong> - но активны только ~3 миллиарда → значит это <strong>MoE</strong>, быстрая при
+большом размере.</li>
+<li data-source-start="191" data-source-end="191">→ Итог: большая, но шустрая «смесь экспертов» нового поколения.</li>
+</ul>
+<p data-source-start="193" data-source-end="193"><em><code>Llama-3-8B-Instruct</code></em></p>
+<ul data-source-start="195" data-source-end="199">
+<li data-source-start="195" data-source-end="195"><strong>Llama</strong> - семейство (от Meta).</li>
+<li data-source-start="196" data-source-end="196"><strong>3</strong> - поколение.</li>
+<li data-source-start="197" data-source-end="197"><strong>8B</strong> - 8 миллиардов параметров, dense (про MoE не сказано).</li>
+<li data-source-start="198" data-source-end="198"><strong>Instruct</strong> - умеет выполнять команды, годится для диалога.</li>
+<li data-source-start="199" data-source-end="199">→ Итог: небольшая обычная модель, готовая к общению и задачам.</li>
+</ul>
+<p data-source-start="201" data-source-end="201"><em><code>Qwen2.5-Coder-32B-Instruct-GGUF-Q4</code></em></p>
+<ul data-source-start="203" data-source-end="210">
+<li data-source-start="203" data-source-end="203"><strong>Qwen 2.5</strong> - семейство и поколение.</li>
+<li data-source-start="204" data-source-end="204"><strong>Coder</strong> - заточена под программирование.</li>
+<li data-source-start="205" data-source-end="205"><strong>32B</strong> - 32 миллиарда параметров, dense.</li>
+<li data-source-start="206" data-source-end="206"><strong>Instruct</strong> - выполняет инструкции.</li>
+<li data-source-start="207" data-source-end="207"><strong>GGUF</strong> - формат для локального запуска.</li>
+<li data-source-start="208" data-source-end="208"><strong>Q4</strong> - сжата до 4-bit, чтобы влезть на слабое железо.</li>
+<li data-source-start="209" data-source-end="210">→ Итог: модель для кода среднего размера, подготовленная для запуска дома на
+ограниченной памяти.</li>
+</ul>
+<p data-source-start="212" data-source-end="212"><em><code>DeepSeek-R1-Distill-7B</code></em></p>
+<ul data-source-start="214" data-source-end="218">
+<li data-source-start="214" data-source-end="214"><strong>DeepSeek</strong> - семейство.</li>
+<li data-source-start="215" data-source-end="215"><strong>R1</strong> - «рассуждающая» модель (сначала думает, потом отвечает).</li>
+<li data-source-start="216" data-source-end="216"><strong>Distill</strong> - сжатая (дистиллированная) версия большой модели.</li>
+<li data-source-start="217" data-source-end="217"><strong>7B</strong> - 7 миллиардов параметров, dense.</li>
+<li data-source-start="218" data-source-end="218">→ Итог: компактная рассуждающая модель, «выжимка» из большой.</li>
+</ul>
+
+</article>
+</main>
+</body>
+</html>

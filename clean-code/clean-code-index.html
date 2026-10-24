@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+<meta name="color-scheme" content="light dark">
+<meta name="generator" content="scrawl">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#191919" media="(prefers-color-scheme: dark)">
+<title>Чистый код</title>
+<link rel="icon" href="../scrawl/favicon.svg" type="image/svg+xml">
+<script src="../scrawl/boot.js"></script>
+<link rel="stylesheet" href="../scrawl/chroma.css">
+<link rel="stylesheet" href="../scrawl/site.css">
+<script defer src="../scrawl/tree.js"></script>
+<script defer src="../scrawl/site.js"></script>
+</head>
+<body>
+<script type="application/json" data-scrawl="page">{"route":"/doc/clean-code/clean-code-index.md","root":"../","answer":{"path":"clean-code/clean-code-index.md","kind":"document","title":"Чистый код","html":"\u003ch1 id=\"чистый-код\" data-source-start=\"1\" data-source-end=\"1\"\u003eЧистый код\u003c/h1\u003e\n\u003ch1 id=\"оглавление\" data-source-start=\"3\" data-source-end=\"3\"\u003eОглавление\u003c/h1\u003e\n\u003col data-source-start=\"5\" data-source-end=\"10\"\u003e\n\u003cli data-source-start=\"5\" data-source-end=\"6\"\u003e\n\u003cp data-source-start=\"5\" data-source-end=\"5\"\u003e\u003ca href=\"#%D0%BF%D1%80%D0%B8%D0%BD%D1%86%D0%B8%D0%BF%D1%8B\"\u003eПринципы проектирования\u003c/a\u003e\u003c/p\u003e\n\u003cul data-source-start=\"6\" data-source-end=\"6\"\u003e\n\u003cli data-source-start=\"6\" data-source-end=\"6\"\u003e\u003ca href=\"#solid\"\u003eSOLID\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"8\" data-source-end=\"10\"\u003e\n\u003cp data-source-start=\"8\" data-source-end=\"8\"\u003e\u003ca href=\"#%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D0%BA%D0%BE%D0%B4%D0%BE%D0%BC\"\u003eРабота с кодом\u003c/a\u003e\u003c/p\u003e\n\u003cul data-source-start=\"9\" data-source-end=\"10\"\u003e\n\u003cli data-source-start=\"9\" data-source-end=\"9\"\u003e\u003ca href=\"#%D0%B2%D0%B5%D1%80%D1%81%D0%B8%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA-%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC-%D0%B8-%D1%82-%D0%B4\"\u003eВерсионирование (библиотек, программ и т д)\u003c/a\u003e\u003c/li\u003e\n\u003cli data-source-start=\"10\" data-source-end=\"10\"\u003e\u003ca href=\"#%D0%BB%D0%BE%D0%B3%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5\"\u003eЛогирование\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch2 id=\"принципы\" data-source-start=\"12\" data-source-end=\"12\"\u003eПринципы\u003c/h2\u003e\n\u003ch3 id=\"solid\" data-source-start=\"14\" data-source-end=\"14\"\u003eSOLID\u003c/h3\u003e\n\u003cp data-source-start=\"16\" data-source-end=\"18\"\u003eSOLID (сокр. от англ. single responsibility, open-closed, Liskov substitution,\ninterface segregation и dependency inversion) — мнемонический акроним, пяти\nпринципов объектно-ориентированного программирования и проектирования.\u003c/p\u003e\n\u003col data-source-start=\"20\" data-source-end=\"197\"\u003e\n\u003cli data-source-start=\"20\" data-source-end=\"39\"\u003e\n\u003cp data-source-start=\"20\" data-source-end=\"21\"\u003e\u003cstrong\u003eSingle Responsibility Principle\u003c/strong\u003e (Принцип персональной ответственности) -\nдолжна существовать лишь одна причина, приводящая к изменению класса.\u003c/p\u003e\n\u003cp data-source-start=\"23\" data-source-end=\"25\"\u003eТо есть каждый класс должен отвечать только за одну конкретную вещь (он не\nдолжен быть швейцарским ножом, он должен быть обычным ножом умеющим только\nрезать).\u003c/p\u003e\n\u003cp data-source-start=\"27\" data-source-end=\"27\"\u003eПрименяется если:\u003c/p\u003e\n\u003cul data-source-start=\"28\" data-source-end=\"33\"\u003e\n\u003cli data-source-start=\"28\" data-source-end=\"28\"\u003eкод нужно сделать гибким и легко изменяемым\u003c/li\u003e\n\u003cli data-source-start=\"29\" data-source-end=\"30\"\u003eзаранее сложно определить какие изменения в проекте будут делаться в\nдальнейшем\u003c/li\u003e\n\u003cli data-source-start=\"31\" data-source-end=\"33\"\u003eдекомпозировать задачу с самого начала проще, чем потом разделять на\nнесколько частей одну большую систему, по этому лучше с самого начала\nуделять внимание декомпозиции.\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp data-source-start=\"35\" data-source-end=\"35\"\u003eНе стоит применять, когда:\u003c/p\u003e\n\u003cul data-source-start=\"36\" data-source-end=\"39\"\u003e\n\u003cli data-source-start=\"36\" data-source-end=\"36\"\u003eзаранее известно о неизменяемости кода в конкретном месте\u003c/li\u003e\n\u003cli data-source-start=\"37\" data-source-end=\"37\"\u003eрешение сильно усложняет разработку и поддержку кода\u003c/li\u003e\n\u003cli data-source-start=\"38\" data-source-end=\"39\"\u003eархитектурные решения, которые предопределяют реализацию, несмотря на\nканоны и принципы\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"41\" data-source-end=\"106\"\u003e\n\u003cp data-source-start=\"41\" data-source-end=\"42\"\u003e\u003cstrong\u003eThe Open Closed Principle\u003c/strong\u003e (Принцип открытости/закрытости) - программные\nсущности должны быть открыты для расширения, но закрыты для модификации.\u003c/p\u003e\n\u003cp data-source-start=\"44\" data-source-end=\"44\"\u003eЦель принципа:\u003c/p\u003e\n\u003cul data-source-start=\"45\" data-source-end=\"47\"\u003e\n\u003cli data-source-start=\"45\" data-source-end=\"45\"\u003eразработчик всегда пишет новый код, а не переписывает старый\u003c/li\u003e\n\u003cli data-source-start=\"46\" data-source-end=\"46\"\u003eтестирование кода происходит единожды\u003c/li\u003e\n\u003cli data-source-start=\"47\" data-source-end=\"47\"\u003eпрактически не нужно тратить время на частый рефакторинг\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp data-source-start=\"49\" data-source-end=\"50\"\u003eПри добавлении новой логики мы не должны переписывать старый код (на пример\nкласс), мы должны его только расширять, на пример при помощи наследования.\u003c/p\u003e\n\u003cp data-source-start=\"52\" data-source-end=\"52\"\u003eПример\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"54\" data-source-end=\"64\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003e// Проблемный код\nclass Order {\n\n    func getTotalPrice() {\n        // получает все товары из корзины\n        // получает скидки пользователя\n        // расчитывает итоговую цену\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"66\" data-source-end=\"93\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003e// Правильное решение\nabstract class BaseOrderAlgoritm {\n    func getTotalPrice() {\n        products = this.getProducts()\n        discount = this.getDiscount()\n        return calculate(products, discount);\n    }\n\n    func calculate(products, discount) {\n        // Расчитывает итоговую цену\n    }\n\n    abstract func getProducts() {}\n\n    abstract func getDiscount() {}\n}\n\nclass SomeOrderStraegy extends BaseOrderAlgoritm {\n    func getProducts() {\n        // Получает все товары из корзины\n    }\n\n    func getDiscount() {\n        // Вычисляет скидки для конкретного пользователя\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003cp data-source-start=\"95\" data-source-end=\"97\"\u003eКак видно из примера для того, чтобы изменить логику подсчета стоимости\nтовара, не нужно переписывать старый код, нужно всего лишь наследоваться от\nбазового класса и переопределять необходимые методы.\u003c/p\u003e\n\u003cp data-source-start=\"99\" data-source-end=\"100\"\u003eТакже, чтобы решить проблему описанную выше, можно применить принцип\nинверсии зависимостей.\u003c/p\u003e\n\u003cp data-source-start=\"102\" data-source-end=\"102\"\u003eСледует использовать:\u003c/p\u003e\n\u003cul data-source-start=\"103\" data-source-end=\"106\"\u003e\n\u003cli data-source-start=\"103\" data-source-end=\"103\"\u003eв местах часто подвергаемых изменениям\u003c/li\u003e\n\u003cli data-source-start=\"104\" data-source-end=\"105\"\u003eесли в коде используются условия, то это служит сигналом к тому, что\nвероятнее всего в этих местах стоит использовать данный принцип\u003c/li\u003e\n\u003cli data-source-start=\"106\" data-source-end=\"106\"\u003eневозможно придумать универсальную абстракцию\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"108\" data-source-end=\"151\"\u003e\n\u003cp data-source-start=\"108\" data-source-end=\"109\"\u003e\u003cstrong\u003eThe Liskov Substitution Principle\u003c/strong\u003e (Принцип подстановки Барбары Лисков) -\nнаследующий класс должен дополнять, а не изменять базовый класс.\u003c/p\u003e\n\u003cp data-source-start=\"111\" data-source-end=\"111\"\u003eЦель принципа - помогает реализовать правильное наследование классов.\u003c/p\u003e\n\u003cp data-source-start=\"113\" data-source-end=\"114\"\u003eДанный принцип говорит о том, что не всегда можно наследоваться от какого-то\nкласса.\u003c/p\u003e\n\u003cp data-source-start=\"116\" data-source-end=\"116\"\u003eПример описывающий проблему:\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"118\" data-source-end=\"144\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003e// Описывает 2d доску\nclass Board {\n    integer x, y, tile\n\n    func getTile(x, y) {}\n\n    func addUnit(x, y) {}\n\n    func removeUnits(x, y) {}\n\n    func getUnits(x, y) {}\n}\n\n// Описывает 3d доску\nclass Board3D extends Board {\n    integer z, tile3d\n\n    func getTile3d(x, y, z) {}\n\n    func addUnit3d(x, y, z) {}\n\n    func removeUnits3d(x, y, z) {}\n\n    func getUnits3d(x, y, z) {}\n}\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003cp data-source-start=\"146\" data-source-end=\"149\"\u003eПроблема данного кода в том, что наследующий класс не заменяет классы\nродителя, а дополняет и в итоге полученный класс имеет конфликтующие друг с\nдругом методы. Это может привести к не правильному использованию класса и\nкак следствие к ошибкам.\u003c/p\u003e\n\u003cp data-source-start=\"151\" data-source-end=\"151\"\u003eРешается проблема просто. Нужно разделить классы и сделать их независимыми.\u003c/p\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"153\" data-source-end=\"165\"\u003e\n\u003cp data-source-start=\"153\" data-source-end=\"155\"\u003e\u003cstrong\u003eThe Interface Segregation Principle\u003c/strong\u003e (Принцип разделения интерфейса) -\nклиенты не должны попадать в зависимость от методов, которыми они не\nпользуются.\u003c/p\u003e\n\u003cp data-source-start=\"157\" data-source-end=\"159\"\u003eДругая формулировка выглядит следующим образом: Много интерфейсов,\nспециально предназначенных для клиентов, лучше, чем один интерфейс общего\nназначения.\u003c/p\u003e\n\u003cp data-source-start=\"161\" data-source-end=\"161\"\u003eЦели принципа:\u003c/p\u003e\n\u003cul data-source-start=\"162\" data-source-end=\"165\"\u003e\n\u003cli data-source-start=\"162\" data-source-end=\"162\"\u003eпринцип борется с \u0026#34;толстыми\u0026#34; интерфейсами\u003c/li\u003e\n\u003cli data-source-start=\"163\" data-source-end=\"163\"\u003eпо сути это принцип персональной ответственности, но для интерфейсов\u003c/li\u003e\n\u003cli data-source-start=\"164\" data-source-end=\"165\"\u003eинтерфейс должен быть абстрактным (иметь универсальное имя и ни кому не\nпринадлежать)\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"167\" data-source-end=\"197\"\u003e\n\u003cp data-source-start=\"167\" data-source-end=\"170\"\u003e\u003cstrong\u003eThe Dependency Inversion Principle\u003c/strong\u003e (Принцип инверсии зависимостей) -\nмодули высокого уровня не должны зависеть от модулей низкого уровня. Оба\nтипа модулей должны зависеть от абстракций. Абстракции не должны зависеть от\nподробностей. Подробностям следует зависеть абстракций.\u003c/p\u003e\n\u003cp data-source-start=\"172\" data-source-end=\"172\"\u003eПример\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"174\" data-source-end=\"193\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003e// Правильное решение проблемы\nclass Order {\n    func Order(IProduct product, IDiscount discount) {\n        this.product = product\n        this.discount = discount\n    }\n\n    func getTotalPrice() {\n        products = this.product.getProducts()\n        discount = this.discount.getDiscount()\n\n        return calculate(products, discount)\n    }\n\n    func calculate(products, discount) {\n        // расчитывает итоговую цену\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003cp data-source-start=\"195\" data-source-end=\"197\"\u003eДанный код хороший и гибкий, потому что product и discount создаются не в\nсамом классе, а где-то вне. Следовательно, если нам нужно будет поменять\nлогику работы программы, не нужно трогать реализацию класса Order.\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003cblockquote data-source-start=\"199\" data-source-end=\"200\"\u003e\n\u003cp data-source-start=\"199\" data-source-end=\"200\"\u003eДанная заметка основана\n\u003ca href=\"https://www.youtube.com/watch?v=59tq5Fcgn7A\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003eна видеоуроке\u003c/a\u003e.\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp data-source-start=\"202\" data-source-end=\"202\"\u003eПолезные ссылки:\u003c/p\u003e\n\u003cul data-source-start=\"204\" data-source-end=\"206\"\u003e\n\u003cli data-source-start=\"204\" data-source-end=\"204\"\u003e\u003ca href=\"https://github.com/heykarimoff/solid.python\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003eSOLID Principles explained in Python with examples\u003c/a\u003e\u003c/li\u003e\n\u003cli data-source-start=\"205\" data-source-end=\"205\"\u003e\u003ca href=\"https://m.habr.com/company/ruvds/blog/426413/\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003eПринципы SOLID, о которых должен знать каждый разработчик | habr\u003c/a\u003e\u003c/li\u003e\n\u003cli data-source-start=\"206\" data-source-end=\"206\"\u003e\u003ca href=\"https://www.youtube.com/watch?v=8Eo6bf-bPes\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003eАлександр Бармин - Практическое применение принципов SOLID\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"работа-с-кодом\" data-source-start=\"208\" data-source-end=\"208\"\u003eРабота с кодом\u003c/h2\u003e\n\u003ch3 id=\"версионирование-библиотек-программ-и-т-д\" data-source-start=\"210\" data-source-end=\"210\"\u003eВерсионирование (библиотек, программ и т д)\u003c/h3\u003e\n\u003cp data-source-start=\"212\" data-source-end=\"212\"\u003eУчитывая номер версии МАЖОРНАЯ.МИНОРНАЯ.ПАТЧ, следует увеличивать:\u003c/p\u003e\n\u003cul data-source-start=\"214\" data-source-end=\"217\"\u003e\n\u003cli data-source-start=\"214\" data-source-end=\"214\"\u003eМАЖОРНУЮ версию, когда сделаны обратно несовместимые изменения API.\u003c/li\u003e\n\u003cli data-source-start=\"215\" data-source-end=\"216\"\u003eМИНОРНУЮ версию, когда вы добавляете новую функциональность, не нарушая\nобратной совместимости.\u003c/li\u003e\n\u003cli data-source-start=\"217\" data-source-end=\"217\"\u003eПАТЧ-версию, когда вы делаете обратно совместимые исправления.\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp data-source-start=\"219\" data-source-end=\"220\"\u003eДополнительные обозначения для предрелизных и билд-метаданных возможны как\nдополнения к МАЖОРНАЯ.МИНОРНАЯ.ПАТЧ формату.\u003c/p\u003e\n\u003cp data-source-start=\"222\" data-source-end=\"222\"\u003eНачинать разработку нужно с версии 0.1.0.\u003c/p\u003e\n\u003cp data-source-start=\"224\" data-source-end=\"226\"\u003e\u003ca href=\"https://semver.org/lang/ru/\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003eСемантическое Версионирование 2.0.0\u003c/a\u003e - перейдя по\nданной ссылке можно прочитать подробное описание того как необходимо работать с\nверсиями.\u003c/p\u003e\n\u003ch3 id=\"логирование\" data-source-start=\"228\" data-source-end=\"228\"\u003eЛогирование\u003c/h3\u003e\n\u003cp data-source-start=\"230\" data-source-end=\"233\"\u003eЛоги это мощный инструмент, который при правильном использовании позволяет\nрасследовать происшествия, а так же получать различные метрики. В данной\nзаметке будут описаны рекомендации, которые позволят получить максимум пользы\nот собранных логов.\u003c/p\u003e\n\u003cp data-source-start=\"235\" data-source-end=\"235\"\u003e\u003cstrong\u003eВыбор уровня логирования\u003c/strong\u003e\u003c/p\u003e\n\u003cp data-source-start=\"237\" data-source-end=\"240\"\u003ePython предоставляет следующие уровни: debug, info, warning, error, critical.\nНиже будут описаны рекомендации по использованию каждого из уровней. Если\nследовать им, то при помощи логов можно будет легко понять в каком состоянии\nнаходится система и есть ли в ней серьезные проблемы.\u003c/p\u003e\n\u003cul data-source-start=\"242\" data-source-end=\"263\"\u003e\n\u003cli data-source-start=\"242\" data-source-end=\"243\"\u003e\n\u003cp data-source-start=\"242\" data-source-end=\"243\"\u003eCRITICAL - Если такое случилось, то вполне можно разбудить кого-нибудь ночью,\nчтобы устранить проблему. Возможна потеря, порча данных, к примеру.\u003c/p\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"245\" data-source-end=\"249\"\u003e\n\u003cp data-source-start=\"245\" data-source-end=\"246\"\u003eERROR - Нечто критичное для ОПЕРАЦИИ, но не для системы в целом. Такие ошибки\nтребуют привлечения специалиста, т.к. должны решаться в ручном режиме.\u003c/p\u003e\n\u003cp data-source-start=\"248\" data-source-end=\"249\"\u003eПример: при мерже возникает неизвестное нам исключение, операция фейлится,\nповтор мержа не имеет смысла, решить можно только в ручном режиме.\u003c/p\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"251\" data-source-end=\"256\"\u003e\n\u003cp data-source-start=\"251\" data-source-end=\"252\"\u003eWARNING - Проблема для которой есть автоматическое решение. Например\nавтоматическая повторная попытка запроса.\u003c/p\u003e\n\u003cp data-source-start=\"254\" data-source-end=\"256\"\u003eПример: протухла одна из прокси необходимых для работы системы, но проблему\nможет решить повторный запрос или автоматическая смена прокси. Ручных\nдействий не требуется.\u003c/p\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"258\" data-source-end=\"263\"\u003e\n\u003cp data-source-start=\"258\" data-source-end=\"259\"\u003eINFO - Полезно для понимания происходящего в системе, не требует\nвмешательства.\u003c/p\u003e\n\u003cp data-source-start=\"261\" data-source-end=\"263\"\u003eПример: в систему пришёл запрос обновлении информации в бд. Очень полезно\nзалогировать этот момент, чтобы понимать, что происходит в системе и из-за\nчего, но никакой проблемы в этом нет, решать нечего.\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n","toc":[{"level":2,"text":"Принципы","id":"принципы"},{"level":3,"text":"SOLID","id":"solid"},{"level":2,"text":"Работа с кодом","id":"работа-с-кодом"},{"level":3,"text":"Версионирование (библиотек, программ и т д)","id":"версионирование-библиотек-программ-и-т-д"},{"level":3,"text":"Логирование","id":"логирование"}],"show_toc":true,"rev":"sha256:a83cd897d3042be8a31151e06a74335d721f7b0eaabc386db1b04af3e4da4f66","mod_time":"2026-10-24T11:37:57.7687406Z","breadcrumbs":[{"name":"Home","url":"/"},{"name":"clean-code","url":"/doc/clean-code/"},{"name":"clean-code-index.md","url":""}],"edit_url":"/edit/clean-code/clean-code-index.md","missing":false,"can_create":false}}</script>
+<div id="scrawl-app-root"></div>
+
+<main data-scrawl-static>
+<nav aria-label="Path"><ol class="scrawl-static-crumbs"><li><a href="../index.html">Home</a></li><li><a href="../clean-code/index.html">clean-code</a></li><li>clean-code-index.md</li></ol></nav>
+<article class="markdown-document">
+<h1 id="чистый-код" data-source-start="1" data-source-end="1">Чистый код</h1>
+<h1 id="оглавление" data-source-start="3" data-source-end="3">Оглавление</h1>
+<ol data-source-start="5" data-source-end="10">
+<li data-source-start="5" data-source-end="6">
+<p data-source-start="5" data-source-end="5"><a href="#%D0%BF%D1%80%D0%B8%D0%BD%D1%86%D0%B8%D0%BF%D1%8B">Принципы проектирования</a></p>
+<ul data-source-start="6" data-source-end="6">
+<li data-source-start="6" data-source-end="6"><a href="#solid">SOLID</a></li>
+</ul>
+</li>
+<li data-source-start="8" data-source-end="10">
+<p data-source-start="8" data-source-end="8"><a href="#%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D0%BA%D0%BE%D0%B4%D0%BE%D0%BC">Работа с кодом</a></p>
+<ul data-source-start="9" data-source-end="10">
+<li data-source-start="9" data-source-end="9"><a href="#%D0%B2%D0%B5%D1%80%D1%81%D0%B8%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA-%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC-%D0%B8-%D1%82-%D0%B4">Версионирование (библиотек, программ и т д)</a></li>
+<li data-source-start="10" data-source-end="10"><a href="#%D0%BB%D0%BE%D0%B3%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5">Логирование</a></li>
+</ul>
+</li>
+</ol>
+<h2 id="принципы" data-source-start="12" data-source-end="12">Принципы</h2>
+<h3 id="solid" data-source-start="14" data-source-end="14">SOLID</h3>
+<p data-source-start="16" data-source-end="18">SOLID (сокр. от англ. single responsibility, open-closed, Liskov substitution,
+interface segregation и dependency inversion) — мнемонический акроним, пяти
+принципов объектно-ориентированного программирования и проектирования.</p>
+<ol data-source-start="20" data-source-end="197">
+<li data-source-start="20" data-source-end="39">
+<p data-source-start="20" data-source-end="21"><strong>Single Responsibility Principle</strong> (Принцип персональной ответственности) -
+должна существовать лишь одна причина, приводящая к изменению класса.</p>
+<p data-source-start="23" data-source-end="25">То есть каждый класс должен отвечать только за одну конкретную вещь (он не
+должен быть швейцарским ножом, он должен быть обычным ножом умеющим только
+резать).</p>
+<p data-source-start="27" data-source-end="27">Применяется если:</p>
+<ul data-source-start="28" data-source-end="33">
+<li data-source-start="28" data-source-end="28">код нужно сделать гибким и легко изменяемым</li>
+<li data-source-start="29" data-source-end="30">заранее сложно определить какие изменения в проекте будут делаться в
+дальнейшем</li>
+<li data-source-start="31" data-source-end="33">декомпозировать задачу с самого начала проще, чем потом разделять на
+несколько частей одну большую систему, по этому лучше с самого начала
+уделять внимание декомпозиции.</li>
+</ul>
+<p data-source-start="35" data-source-end="35">Не стоит применять, когда:</p>
+<ul data-source-start="36" data-source-end="39">
+<li data-source-start="36" data-source-end="36">заранее известно о неизменяемости кода в конкретном месте</li>
+<li data-source-start="37" data-source-end="37">решение сильно усложняет разработку и поддержку кода</li>
+<li data-source-start="38" data-source-end="39">архитектурные решения, которые предопределяют реализацию, несмотря на
+каноны и принципы</li>
+</ul>
+</li>
+<li data-source-start="41" data-source-end="106">
+<p data-source-start="41" data-source-end="42"><strong>The Open Closed Principle</strong> (Принцип открытости/закрытости) - программные
+сущности должны быть открыты для расширения, но закрыты для модификации.</p>
+<p data-source-start="44" data-source-end="44">Цель принципа:</p>
+<ul data-source-start="45" data-source-end="47">
+<li data-source-start="45" data-source-end="45">разработчик всегда пишет новый код, а не переписывает старый</li>
+<li data-source-start="46" data-source-end="46">тестирование кода происходит единожды</li>
+<li data-source-start="47" data-source-end="47">практически не нужно тратить время на частый рефакторинг</li>
+</ul>
+<p data-source-start="49" data-source-end="50">При добавлении новой логики мы не должны переписывать старый код (на пример
+класс), мы должны его только расширять, на пример при помощи наследования.</p>
+<p data-source-start="52" data-source-end="52">Пример</p>
+<div class="code-block" data-source-start="54" data-source-end="64"><pre tabindex="0" class="chroma"><code>// Проблемный код
+class Order {
+
+    func getTotalPrice() {
+        // получает все товары из корзины
+        // получает скидки пользователя
+        // расчитывает итоговую цену
+    }
+}
+</code></pre></div>
+<div class="code-block" data-source-start="66" data-source-end="93"><pre tabindex="0" class="chroma"><code>// Правильное решение
+abstract class BaseOrderAlgoritm {
+    func getTotalPrice() {
+        products = this.getProducts()
+        discount = this.getDiscount()
+        return calculate(products, discount);
+    }
+
+    func calculate(products, discount) {
+        // Расчитывает итоговую цену
+    }
+
+    abstract func getProducts() {}
+
+    abstract func getDiscount() {}
+}
+
+class SomeOrderStraegy extends BaseOrderAlgoritm {
+    func getProducts() {
+        // Получает все товары из корзины
+    }
+
+    func getDiscount() {
+        // Вычисляет скидки для конкретного пользователя
+    }
+}
+</code></pre></div>
+<p data-source-start="95" data-source-end="97">Как видно из примера для того, чтобы изменить логику подсчета стоимости
+товара, не нужно переписывать старый код, нужно всего лишь наследоваться от
+базового класса и переопределять необходимые методы.</p>
+<p data-source-start="99" data-source-end="100">Также, чтобы решить проблему описанную выше, можно применить принцип
+инверсии зависимостей.</p>
+<p data-source-start="102" data-source-end="102">Следует использовать:</p>
+<ul data-source-start="103" data-source-end="106">
+<li data-source-start="103" data-source-end="103">в местах часто подвергаемых изменениям</li>
+<li data-source-start="104" data-source-end="105">если в коде используются условия, то это служит сигналом к тому, что
+вероятнее всего в этих местах стоит использовать данный принцип</li>
+<li data-source-start="106" data-source-end="106">невозможно придумать универсальную абстракцию</li>
+</ul>
+</li>
+<li data-source-start="108" data-source-end="151">
+<p data-source-start="108" data-source-end="109"><strong>The Liskov Substitution Principle</strong> (Принцип подстановки Барбары Лисков) -
+наследующий класс должен дополнять, а не изменять базовый класс.</p>
+<p data-source-start="111" data-source-end="111">Цель принципа - помогает реализовать правильное наследование классов.</p>
+<p data-source-start="113" data-source-end="114">Данный принцип говорит о том, что не всегда можно наследоваться от какого-то
+класса.</p>
+<p data-source-start="116" data-source-end="116">Пример описывающий проблему:</p>
+<div class="code-block" data-source-start="118" data-source-end="144"><pre tabindex="0" class="chroma"><code>// Описывает 2d доску
+class Board {
+    integer x, y, tile
+
+    func getTile(x, y) {}
+
+    func addUnit(x, y) {}
+
+    func removeUnits(x, y) {}
+
+    func getUnits(x, y) {}
+}
+
+// Описывает 3d доску
+class Board3D extends Board {
+    integer z, tile3d
+
+    func getTile3d(x, y, z) {}
+
+    func addUnit3d(x, y, z) {}
+
+    func removeUnits3d(x, y, z) {}
+
+    func getUnits3d(x, y, z) {}
+}
+</code></pre></div>
+<p data-source-start="146" data-source-end="149">Проблема данного кода в том, что наследующий класс не заменяет классы
+родителя, а дополняет и в итоге полученный класс имеет конфликтующие друг с
+другом методы. Это может привести к не правильному использованию класса и
+как следствие к ошибкам.</p>
+<p data-source-start="151" data-source-end="151">Решается проблема просто. Нужно разделить классы и сделать их независимыми.</p>
+</li>
+<li data-source-start="153" data-source-end="165">
+<p data-source-start="153" data-source-end="155"><strong>The Interface Segregation Principle</strong> (Принцип разделения интерфейса) -
+клиенты не должны попадать в зависимость от методов, которыми они не
+пользуются.</p>
+<p data-source-start="157" data-source-end="159">Другая формулировка выглядит следующим образом: Много интерфейсов,
+специально предназначенных для клиентов, лучше, чем один интерфейс общего
+назначения.</p>
+<p data-source-start="161" data-source-end="161">Цели принципа:</p>
+<ul data-source-start="162" data-source-end="165">
+<li data-source-start="162" data-source-end="162">принцип борется с &#34;толстыми&#34; интерфейсами</li>
+<li data-source-start="163" data-source-end="163">по сути это принцип персональной ответственности, но для интерфейсов</li>
+<li data-source-start="164" data-source-end="165">интерфейс должен быть абстрактным (иметь универсальное имя и ни кому не
+принадлежать)</li>
+</ul>
+</li>
+<li data-source-start="167" data-source-end="197">
+<p data-source-start="167" data-source-end="170"><strong>The Dependency Inversion Principle</strong> (Принцип инверсии зависимостей) -
+модули высокого уровня не должны зависеть от модулей низкого уровня. Оба
+типа модулей должны зависеть от абстракций. Абстракции не должны зависеть от
+подробностей. Подробностям следует зависеть абстракций.</p>
+<p data-source-start="172" data-source-end="172">Пример</p>
+<div class="code-block" data-source-start="174" data-source-end="193"><pre tabindex="0" class="chroma"><code>// Правильное решение проблемы
+class Order {
+    func Order(IProduct product, IDiscount discount) {
+        this.product = product
+        this.discount = discount
+    }
+
+    func getTotalPrice() {
+        products = this.product.getProducts()
+        discount = this.discount.getDiscount()
+
+        return calculate(products, discount)
+    }
+
+    func calculate(products, discount) {
+        // расчитывает итоговую цену
+    }
+}
+</code></pre></div>
+<p data-source-start="195" data-source-end="197">Данный код хороший и гибкий, потому что product и discount создаются не в
+самом классе, а где-то вне. Следовательно, если нам нужно будет поменять
+логику работы программы, не нужно трогать реализацию класса Order.</p>
+</li>
+</ol>
+<blockquote data-source-start="199" data-source-end="200">
+<p data-source-start="199" data-source-end="200">Данная заметка основана
+<a href="https://www.youtube.com/watch?v=59tq5Fcgn7A" target="_blank" rel="noopener noreferrer nofollow">на видеоуроке</a>.</p>
+</blockquote>
+<p data-source-start="202" data-source-end="202">Полезные ссылки:</p>
+<ul data-source-start="204" data-source-end="206">
+<li data-source-start="204" data-source-end="204"><a href="https://github.com/heykarimoff/solid.python" target="_blank" rel="noopener noreferrer nofollow">SOLID Principles explained in Python with examples</a></li>
+<li data-source-start="205" data-source-end="205"><a href="https://m.habr.com/company/ruvds/blog/426413/" target="_blank" rel="noopener noreferrer nofollow">Принципы SOLID, о которых должен знать каждый разработчик | habr</a></li>
+<li data-source-start="206" data-source-end="206"><a href="https://www.youtube.com/watch?v=8Eo6bf-bPes" target="_blank" rel="noopener noreferrer nofollow">Александр Бармин - Практическое применение принципов SOLID</a></li>
+</ul>
+<h2 id="работа-с-кодом" data-source-start="208" data-source-end="208">Работа с кодом</h2>
+<h3 id="версионирование-библиотек-программ-и-т-д" data-source-start="210" data-source-end="210">Версионирование (библиотек, программ и т д)</h3>
+<p data-source-start="212" data-source-end="212">Учитывая номер версии МАЖОРНАЯ.МИНОРНАЯ.ПАТЧ, следует увеличивать:</p>
+<ul data-source-start="214" data-source-end="217">
+<li data-source-start="214" data-source-end="214">МАЖОРНУЮ версию, когда сделаны обратно несовместимые изменения API.</li>
+<li data-source-start="215" data-source-end="216">МИНОРНУЮ версию, когда вы добавляете новую функциональность, не нарушая
+обратной совместимости.</li>
+<li data-source-start="217" data-source-end="217">ПАТЧ-версию, когда вы делаете обратно совместимые исправления.</li>
+</ul>
+<p data-source-start="219" data-source-end="220">Дополнительные обозначения для предрелизных и билд-метаданных возможны как
+дополнения к МАЖОРНАЯ.МИНОРНАЯ.ПАТЧ формату.</p>
+<p data-source-start="222" data-source-end="222">Начинать разработку нужно с версии 0.1.0.</p>
+<p data-source-start="224" data-source-end="226"><a href="https://semver.org/lang/ru/" target="_blank" rel="noopener noreferrer nofollow">Семантическое Версионирование 2.0.0</a> - перейдя по
+данной ссылке можно прочитать подробное описание того как необходимо работать с
+версиями.</p>
+<h3 id="логирование" data-source-start="228" data-source-end="228">Логирование</h3>
+<p data-source-start="230" data-source-end="233">Логи это мощный инструмент, который при правильном использовании позволяет
+расследовать происшествия, а так же получать различные метрики. В данной
+заметке будут описаны рекомендации, которые позволят получить максимум пользы
+от собранных логов.</p>
+<p data-source-start="235" data-source-end="235"><strong>Выбор уровня логирования</strong></p>
+<p data-source-start="237" data-source-end="240">Python предоставляет следующие уровни: debug, info, warning, error, critical.
+Ниже будут описаны рекомендации по использованию каждого из уровней. Если
+следовать им, то при помощи логов можно будет легко понять в каком состоянии
+находится система и есть ли в ней серьезные проблемы.</p>
+<ul data-source-start="242" data-source-end="263">
+<li data-source-start="242" data-source-end="243">
+<p data-source-start="242" data-source-end="243">CRITICAL - Если такое случилось, то вполне можно разбудить кого-нибудь ночью,
+чтобы устранить проблему. Возможна потеря, порча данных, к примеру.</p>
+</li>
+<li data-source-start="245" data-source-end="249">
+<p data-source-start="245" data-source-end="246">ERROR - Нечто критичное для ОПЕРАЦИИ, но не для системы в целом. Такие ошибки
+требуют привлечения специалиста, т.к. должны решаться в ручном режиме.</p>
+<p data-source-start="248" data-source-end="249">Пример: при мерже возникает неизвестное нам исключение, операция фейлится,
+повтор мержа не имеет смысла, решить можно только в ручном режиме.</p>
+</li>
+<li data-source-start="251" data-source-end="256">
+<p data-source-start="251" data-source-end="252">WARNING - Проблема для которой есть автоматическое решение. Например
+автоматическая повторная попытка запроса.</p>
+<p data-source-start="254" data-source-end="256">Пример: протухла одна из прокси необходимых для работы системы, но проблему
+может решить повторный запрос или автоматическая смена прокси. Ручных
+действий не требуется.</p>
+</li>
+<li data-source-start="258" data-source-end="263">
+<p data-source-start="258" data-source-end="259">INFO - Полезно для понимания происходящего в системе, не требует
+вмешательства.</p>
+<p data-source-start="261" data-source-end="263">Пример: в систему пришёл запрос обновлении информации в бд. Очень полезно
+залогировать этот момент, чтобы понимать, что происходит в системе и из-за
+чего, но никакой проблемы в этом нет, решать нечего.</p>
+</li>
+</ul>
+
+</article>
+</main>
+</body>
+</html>

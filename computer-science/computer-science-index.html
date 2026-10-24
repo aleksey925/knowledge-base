@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+<meta name="color-scheme" content="light dark">
+<meta name="generator" content="scrawl">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#191919" media="(prefers-color-scheme: dark)">
+<title>Computer Science</title>
+<link rel="icon" href="../scrawl/favicon.svg" type="image/svg+xml">
+<script src="../scrawl/boot.js"></script>
+<link rel="stylesheet" href="../scrawl/chroma.css">
+<link rel="stylesheet" href="../scrawl/site.css">
+<script defer src="../scrawl/tree.js"></script>
+<script defer src="../scrawl/site.js"></script>
+</head>
+<body>
+<script type="application/json" data-scrawl="page">{"route":"/doc/computer-science/computer-science-index.md","root":"../","answer":{"path":"computer-science/computer-science-index.md","kind":"document","title":"Computer Science","html":"\u003ch1 id=\"computer-science\" data-source-start=\"1\" data-source-end=\"1\"\u003eComputer Science\u003c/h1\u003e\n\u003ch1 id=\"оглавление\" data-source-start=\"3\" data-source-end=\"3\"\u003eОглавление\u003c/h1\u003e\n\u003cul data-source-start=\"5\" data-source-end=\"6\"\u003e\n\u003cli data-source-start=\"5\" data-source-end=\"5\"\u003e\u003ca href=\"#%D0%BF%D0%BE%D1%87%D0%B5%D0%BC%D1%83-%D0%B4%D0%BE%D1%81%D1%82%D1%83%D0%BF-%D0%BF%D0%BE-%D0%B8%D0%BD%D0%B4%D0%B5%D0%BA%D1%81%D1%83-%D0%BA-%D0%BB%D1%8E%D0%B1%D0%BE%D0%BC%D1%83-%D1%8D%D0%BB%D0%B5%D0%BC%D0%B5%D0%BD%D1%82%D1%83-%D0%BC%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D0%B0-%D0%BF%D1%80%D0%BE%D0%B8%D1%81%D1%85%D0%BE%D0%B4%D0%B8%D1%82-%D0%B7%D0%B0-o1\"\u003eПочему доступ по индексу к любому элементу массива происходит за O(1)\u003c/a\u003e\u003c/li\u003e\n\u003cli data-source-start=\"6\" data-source-end=\"6\"\u003e\u003ca href=\"#%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D0%B4%D0%B0%D1%82%D0%BE%D0%B9-%D0%B8-%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%B5%D0%BC\"\u003eРабота с датой и временем\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"почему-доступ-по-индексу-к-любому-элементу-массива-происходит-за-o1\" data-source-start=\"8\" data-source-end=\"8\"\u003eПочему доступ по индексу к любому элементу массива происходит за O(1)\u003c/h3\u003e\n\u003cp data-source-start=\"10\" data-source-end=\"11\"\u003eДоступ по индексу к любому элементу массива за константное время обеспечивается\nнесколькими особенностями массива:\u003c/p\u003e\n\u003cul data-source-start=\"13\" data-source-end=\"15\"\u003e\n\u003cli data-source-start=\"13\" data-source-end=\"13\"\u003eмассив это непрерывная область памяти;\u003c/li\u003e\n\u003cli data-source-start=\"14\" data-source-end=\"14\"\u003eмассив хранит данные одного типа;\u003c/li\u003e\n\u003cli data-source-start=\"15\" data-source-end=\"15\"\u003eмассив имеет фиксированный размер.\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp data-source-start=\"17\" data-source-end=\"19\"\u003eЗа счет этих особенностей мы знаем размер каждого элемента массива и можем\nобратиться к любому из них при помощи смещения (offset), которое вычисляется по\nформуле \u003ccode\u003eразмер элемента * индекс\u003c/code\u003e.\u003c/p\u003e\n\u003ch3 id=\"работа-с-датой-и-временем\" data-source-start=\"21\" data-source-end=\"21\"\u003eРабота с датой и временем\u003c/h3\u003e\n\u003cul data-source-start=\"23\" data-source-end=\"24\"\u003e\n\u003cli data-source-start=\"23\" data-source-end=\"23\"\u003e\u003ca href=\"https://habr.com/ru/post/278527/\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003eПравильная работа с датой и временем - habr\u003c/a\u003e\u003c/li\u003e\n\u003cli data-source-start=\"24\" data-source-end=\"24\"\u003e\u003ca href=\"https://habr.com/ru/post/123461/\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003eЧто должен знать о времени каждый программист - habr\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n","toc":[{"level":3,"text":"Почему доступ по индексу к любому элементу массива происходит за O(1)","id":"почему-доступ-по-индексу-к-любому-элементу-массива-происходит-за-o1"},{"level":3,"text":"Работа с датой и временем","id":"работа-с-датой-и-временем"}],"show_toc":false,"rev":"sha256:0110a081702358264a5d4e6839111320cf8a92da50ff24fc79ab303320c4458a","mod_time":"2026-10-24T11:37:57.7687406Z","breadcrumbs":[{"name":"Home","url":"/"},{"name":"computer-science","url":"/doc/computer-science/"},{"name":"computer-science-index.md","url":""}],"edit_url":"/edit/computer-science/computer-science-index.md","missing":false,"can_create":false}}</script>
+<div id="scrawl-app-root"></div>
+
+<main data-scrawl-static>
+<nav aria-label="Path"><ol class="scrawl-static-crumbs"><li><a href="../index.html">Home</a></li><li><a href="../computer-science/index.html">computer-science</a></li><li>computer-science-index.md</li></ol></nav>
+<article class="markdown-document">
+<h1 id="computer-science" data-source-start="1" data-source-end="1">Computer Science</h1>
+<h1 id="оглавление" data-source-start="3" data-source-end="3">Оглавление</h1>
+<ul data-source-start="5" data-source-end="6">
+<li data-source-start="5" data-source-end="5"><a href="#%D0%BF%D0%BE%D1%87%D0%B5%D0%BC%D1%83-%D0%B4%D0%BE%D1%81%D1%82%D1%83%D0%BF-%D0%BF%D0%BE-%D0%B8%D0%BD%D0%B4%D0%B5%D0%BA%D1%81%D1%83-%D0%BA-%D0%BB%D1%8E%D0%B1%D0%BE%D0%BC%D1%83-%D1%8D%D0%BB%D0%B5%D0%BC%D0%B5%D0%BD%D1%82%D1%83-%D0%BC%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D0%B0-%D0%BF%D1%80%D0%BE%D0%B8%D1%81%D1%85%D0%BE%D0%B4%D0%B8%D1%82-%D0%B7%D0%B0-o1">Почему доступ по индексу к любому элементу массива происходит за O(1)</a></li>
+<li data-source-start="6" data-source-end="6"><a href="#%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D0%B4%D0%B0%D1%82%D0%BE%D0%B9-%D0%B8-%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%B5%D0%BC">Работа с датой и временем</a></li>
+</ul>
+<h3 id="почему-доступ-по-индексу-к-любому-элементу-массива-происходит-за-o1" data-source-start="8" data-source-end="8">Почему доступ по индексу к любому элементу массива происходит за O(1)</h3>
+<p data-source-start="10" data-source-end="11">Доступ по индексу к любому элементу массива за константное время обеспечивается
+несколькими особенностями массива:</p>
+<ul data-source-start="13" data-source-end="15">
+<li data-source-start="13" data-source-end="13">массив это непрерывная область памяти;</li>
+<li data-source-start="14" data-source-end="14">массив хранит данные одного типа;</li>
+<li data-source-start="15" data-source-end="15">массив имеет фиксированный размер.</li>
+</ul>
+<p data-source-start="17" data-source-end="19">За счет этих особенностей мы знаем размер каждого элемента массива и можем
+обратиться к любому из них при помощи смещения (offset), которое вычисляется по
+формуле <code>размер элемента * индекс</code>.</p>
+<h3 id="работа-с-датой-и-временем" data-source-start="21" data-source-end="21">Работа с датой и временем</h3>
+<ul data-source-start="23" data-source-end="24">
+<li data-source-start="23" data-source-end="23"><a href="https://habr.com/ru/post/278527/" target="_blank" rel="noopener noreferrer nofollow">Правильная работа с датой и временем - habr</a></li>
+<li data-source-start="24" data-source-end="24"><a href="https://habr.com/ru/post/123461/" target="_blank" rel="noopener noreferrer nofollow">Что должен знать о времени каждый программист - habr</a></li>
+</ul>
+
+</article>
+</main>
+</body>
+</html>

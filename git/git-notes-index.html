@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+<meta name="color-scheme" content="light dark">
+<meta name="generator" content="scrawl">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#191919" media="(prefers-color-scheme: dark)">
+<title>Git</title>
+<link rel="icon" href="../scrawl/favicon.svg" type="image/svg+xml">
+<script src="../scrawl/boot.js"></script>
+<link rel="stylesheet" href="../scrawl/chroma.css">
+<link rel="stylesheet" href="../scrawl/site.css">
+<script defer src="../scrawl/tree.js"></script>
+<script defer src="../scrawl/site.js"></script>
+</head>
+<body>
+<script type="application/json" data-scrawl="page">{"route":"/doc/git/git-notes-index.md","root":"../","answer":{"path":"git/git-notes-index.md","kind":"document","title":"Git","html":"\u003ch1 id=\"git\" data-source-start=\"1\" data-source-end=\"1\"\u003eGit\u003c/h1\u003e\n\u003ch1 id=\"оглавление\" data-source-start=\"3\" data-source-end=\"3\"\u003eОглавление\u003c/h1\u003e\n\u003col data-source-start=\"5\" data-source-end=\"22\"\u003e\n\u003cli data-source-start=\"5\" data-source-end=\"7\"\u003e\n\u003cp data-source-start=\"5\" data-source-end=\"5\"\u003e\u003ca href=\"#%D1%82%D0%B5%D0%BE%D1%80%D0%B8%D1%8F\"\u003eТеория\u003c/a\u003e\u003c/p\u003e\n\u003cul data-source-start=\"6\" data-source-end=\"7\"\u003e\n\u003cli data-source-start=\"6\" data-source-end=\"6\"\u003e\u003ca href=\"#%D1%82%D0%B5%D1%80%D0%BC%D0%B8%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%8F\"\u003eТерминология\u003c/a\u003e\u003c/li\u003e\n\u003cli data-source-start=\"7\" data-source-end=\"7\"\u003e\u003ca href=\"#%D0%BE%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5\"\u003eОбучение\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"9\" data-source-end=\"16\"\u003e\n\u003cp data-source-start=\"9\" data-source-end=\"9\"\u003e\u003ca href=\"#%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0\"\u003eНастройка\u003c/a\u003e\u003c/p\u003e\n\u003cul data-source-start=\"10\" data-source-end=\"16\"\u003e\n\u003cli data-source-start=\"10\" data-source-end=\"12\"\u003e\n\u003cp data-source-start=\"10\" data-source-end=\"10\"\u003e\u003ca href=\"#%D0%BE%D0%B1%D1%89%D0%B0%D1%8F-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0\"\u003eОбщая настройка\u003c/a\u003e\u003c/p\u003e\n\u003cul data-source-start=\"11\" data-source-end=\"12\"\u003e\n\u003cli data-source-start=\"11\" data-source-end=\"11\"\u003e\u003ca href=\"#%D0%BD%D0%B0%D1%87%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0\"\u003eНачальная настройка\u003c/a\u003e\u003c/li\u003e\n\u003cli data-source-start=\"12\" data-source-end=\"12\"\u003e\u003ca href=\"#%D0%B0%D0%B2%D1%82%D0%BE%D0%B4%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B2-macos\"\u003eАвтодополнение в MacOS\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"14\" data-source-end=\"16\"\u003e\n\u003cp data-source-start=\"14\" data-source-end=\"14\"\u003e\u003ca href=\"#%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D1%80%D0%BE%D0%B1%D0%BB%D0%B5%D0%BC\"\u003eРешение проблем\u003c/a\u003e\u003c/p\u003e\n\u003cul data-source-start=\"15\" data-source-end=\"16\"\u003e\n\u003cli data-source-start=\"15\" data-source-end=\"15\"\u003e\u003ca href=\"#ssl-certificate-problem-unable-to-get-local-issuer-certificate\"\u003eSSL Certificate problem: unable to get local issuer certificate\u003c/a\u003e\u003c/li\u003e\n\u003cli data-source-start=\"16\" data-source-end=\"16\"\u003e\u003ca href=\"#%D0%BD%D0%B5-%D1%81%D0%BE%D1%85%D1%80%D0%B0%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F-%D0%BB%D0%BE%D0%B3%D0%B8%D0%BD%D0%BF%D0%B0%D1%80%D0%BE%D0%BB%D1%8C\"\u003eНе сохраняется логин/пароль\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"18\" data-source-end=\"22\"\u003e\n\u003cp data-source-start=\"18\" data-source-end=\"18\"\u003e\u003ca href=\"#%D0%BB%D0%BE%D0%BA%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D1%80%D0%B5%D0%BF%D0%BE%D0%B7%D0%B8%D1%82%D0%BE%D1%80%D0%B8%D0%B8\"\u003eЛокальные репозитории\u003c/a\u003e\u003c/p\u003e\n\u003cul data-source-start=\"19\" data-source-end=\"22\"\u003e\n\u003cli data-source-start=\"19\" data-source-end=\"19\"\u003e\u003ca href=\"#%D0%BE%D0%B1%D1%89%D0%B5%D0%B5\"\u003eОбщее\u003c/a\u003e\u003c/li\u003e\n\u003cli data-source-start=\"20\" data-source-end=\"20\"\u003e\u003ca href=\"#%D0%BF%D0%B5%D1%80%D0%B5%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D1%8C-%D0%B8%D1%81%D1%82%D0%BE%D1%80%D0%B8%D0%B8\"\u003eПерезапись истории\u003c/a\u003e\u003c/li\u003e\n\u003cli data-source-start=\"21\" data-source-end=\"21\"\u003e\u003ca href=\"#%D0%BB%D0%BE%D0%BA%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9-gitignore\"\u003eЛокальный gitignore\u003c/a\u003e\u003c/li\u003e\n\u003cli data-source-start=\"22\" data-source-end=\"22\"\u003e\u003ca href=\"#%D0%B0%D0%B2%D1%82%D0%BE%D1%80%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-%D0%BF%D1%80%D0%B8-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D0%B8-%D1%82%D0%BE%D0%BA%D0%B5%D0%BD%D0%B0\"\u003eАвторизация при помощи токена\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch2 id=\"теория\" data-source-start=\"24\" data-source-end=\"24\"\u003eТеория\u003c/h2\u003e\n\u003ch3 id=\"терминология\" data-source-start=\"26\" data-source-end=\"26\"\u003eТерминология\u003c/h3\u003e\n\u003cp data-source-start=\"28\" data-source-end=\"32\"\u003eИндекс и область подготовленных файлов - это синонимы. Самый быстрый способ\nувидеть что индексе, можно с помощью команды \u003ccode\u003egit status\u003c/code\u003e. Когда вы выполните\nкоманду \u003ccode\u003egit status\u003c/code\u003e, то увидите какие файлы попали в индекс, какие\nмодифицированы, но не в индексе и какие в данный момент вообще не отслеживаются\ngit.\u003c/p\u003e\n\u003ch3 id=\"обучение\" data-source-start=\"34\" data-source-end=\"34\"\u003eОбучение\u003c/h3\u003e\n\u003cp data-source-start=\"36\" data-source-end=\"37\"\u003e\u003ca href=\"https://learngitbranching.js.org/?demo\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003ehttps://learngitbranching.js.org/?demo\u003c/a\u003e - сервис, который позволяет\nвизуализировать действие тех или иных команд git.\u003c/p\u003e\n\u003ch2 id=\"настройка\" data-source-start=\"39\" data-source-end=\"39\"\u003eНастройка\u003c/h2\u003e\n\u003ch3 id=\"общая-настройка\" data-source-start=\"41\" data-source-end=\"41\"\u003eОбщая настройка\u003c/h3\u003e\n\u003ch4 id=\"начальная-настройка\" data-source-start=\"43\" data-source-end=\"43\"\u003eНачальная настройка\u003c/h4\u003e\n\u003cp data-source-start=\"45\" data-source-end=\"46\"\u003eНастройки для git которые нужные выполнить после установки git и на linux и\nwindows.\u003c/p\u003e\n\u003cul data-source-start=\"48\" data-source-end=\"51\"\u003e\n\u003cli data-source-start=\"48\" data-source-end=\"48\"\u003e\u003ccode\u003egit config --global user.name \u0026#34;Aleksey Petrunnik\u0026#34;\u003c/code\u003e - задаем имя пользователя\u003c/li\u003e\n\u003cli data-source-start=\"49\" data-source-end=\"49\"\u003e\u003ccode\u003egit config --global user.email my_mail@mail.ru\u003c/code\u003e - задаем email пользователя\u003c/li\u003e\n\u003cli data-source-start=\"50\" data-source-end=\"50\"\u003e\u003ccode\u003egit config --global core.editor nano\u003c/code\u003e - задаём редактор по умолчанию\u003c/li\u003e\n\u003cli data-source-start=\"51\" data-source-end=\"51\"\u003e\u003ccode\u003egit config --list\u003c/code\u003e - выводит список установленных настроек\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp data-source-start=\"53\" data-source-end=\"53\"\u003eВ windows ещё нужно выполнить:\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-lang=\"bash\" data-source-start=\"55\" data-source-end=\"58\"\u003e\u003cpre class=\"chroma\"\u003e\u003ccode\u003e\u003cspan class=\"line\"\u003e\u003cspan class=\"cl\"\u003egit config --global core.autocrlf \u003cspan class=\"nb\"\u003etrue\u003c/span\u003e\n\u003c/span\u003e\u003c/span\u003e\u003cspan class=\"line\"\u003e\u003cspan class=\"cl\"\u003egit config --global core.safecrlf \u003cspan class=\"nb\"\u003etrue\u003c/span\u003e\n\u003c/span\u003e\u003c/span\u003e\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003cp data-source-start=\"60\" data-source-end=\"61\"\u003eДля корректного отображения киррилицы в nano, необходимо создать следующую\nпеременную окружения:\u003c/p\u003e\n\u003cul data-source-start=\"63\" data-source-end=\"63\"\u003e\n\u003cli data-source-start=\"63\" data-source-end=\"63\"\u003e\u003ccode\u003eLANG: ru_RU.UTF8\u003c/code\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch4 id=\"автодополнение-в-macos\" data-source-start=\"65\" data-source-end=\"65\"\u003eАвтодополнение в MacOS\u003c/h4\u003e\n\u003cp data-source-start=\"67\" data-source-end=\"67\"\u003e\u003cstrong\u003ebash\u003c/strong\u003e\u003c/p\u003e\n\u003cp data-source-start=\"69\" data-source-end=\"70\"\u003eПо умолчанию в терминале MacOS для git отключено автодоплнение. Исправить это\nможно следующим образом:\u003c/p\u003e\n\u003cul data-source-start=\"72\" data-source-end=\"90\"\u003e\n\u003cli data-source-start=\"72\" data-source-end=\"83\"\u003e\n\u003cp data-source-start=\"72\" data-source-end=\"72\"\u003eвыполнить поиск в системе скрипта \u003ccode\u003egit-completion.bash\u003c/code\u003e\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-lang=\"bash\" data-source-start=\"74\" data-source-end=\"76\"\u003e\u003cpre class=\"chroma\"\u003e\u003ccode\u003e\u003cspan class=\"line\"\u003e\u003cspan class=\"cl\"\u003esudo find / -type f -name \u003cspan class=\"s2\"\u003e\u0026#34;git-completion.bash\u0026#34;\u003c/span\u003e\n\u003c/span\u003e\u003c/span\u003e\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003cp data-source-start=\"78\" data-source-end=\"78\"\u003eРезультат выполнения команды будет примерно такой:\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"80\" data-source-end=\"83\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003eMBP-Aleksej:~ aleksey$ sudo find / -type f -name \u0026#34;git-completion.bash\u0026#34;\n/Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"85\" data-source-end=\"90\"\u003e\n\u003cp data-source-start=\"85\" data-source-end=\"86\"\u003eпосле того как путь к скрипту найден необходимо скопировать его в папку\n\u003ccode\u003e/usr/local/etc/bash_completion.d/git-completion.bash\u003c/code\u003e.\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"88\" data-source-end=\"90\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003esudo cp /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash /usr/local/etc/bash_completion.d/git-completion.bash\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp data-source-start=\"92\" data-source-end=\"93\"\u003eТеперь если открыть новое окно терминала, то там будет доступно автодополнение\nпри вводе команд для git.\u003c/p\u003e\n\u003cp data-source-start=\"95\" data-source-end=\"95\"\u003e\u003cstrong\u003ezsh\u003c/strong\u003e\u003c/p\u003e\n\u003cul data-source-start=\"97\" data-source-end=\"127\"\u003e\n\u003cli data-source-start=\"97\" data-source-end=\"101\"\u003e\n\u003cp data-source-start=\"97\" data-source-end=\"97\"\u003eустанавливаем bash-completion\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"99\" data-source-end=\"101\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003ebrew install bash-completion\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"103\" data-source-end=\"110\"\u003e\n\u003cp data-source-start=\"103\" data-source-end=\"103\"\u003eскачиваем необходимые скрипты\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"105\" data-source-end=\"110\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003emkdir -p ~/.zsh \u0026amp;\u0026amp; cd ~/.zsh\n\ncurl -o git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash\ncurl -o _git https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.zsh\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"112\" data-source-end=\"121\"\u003e\n\u003cp data-source-start=\"112\" data-source-end=\"113\"\u003eвключаем использование скриптов. Для этого открываем файл \u003ccode\u003e~/.zshrc\u003c/code\u003e и\nвставляем туда\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"115\" data-source-end=\"121\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003e# Load Git completion\nzstyle \u0026#39;:completion:*:*:git:*\u0026#39; script ~/.zsh/git-completion.bash\nfpath=(~/.zsh $fpath)\n\nautoload -Uz compinit \u0026amp;\u0026amp; compinit\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"123\" data-source-end=\"127\"\u003e\n\u003cp data-source-start=\"123\" data-source-end=\"123\"\u003eочищаем cache\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"125\" data-source-end=\"127\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003erm ~/.zcompdump\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp data-source-start=\"129\" data-source-end=\"129\"\u003eПолезные ссылки:\u003c/p\u003e\n\u003cul data-source-start=\"131\" data-source-end=\"131\"\u003e\n\u003cli data-source-start=\"131\" data-source-end=\"131\"\u003e\u003ca href=\"https://oliverspryn.medium.com/adding-git-completion-to-zsh-60f3b0e7ffbc\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003eAdding Git Completion to Zsh\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"решение-проблем\" data-source-start=\"133\" data-source-end=\"133\"\u003eРешение проблем\u003c/h3\u003e\n\u003ch4 id=\"ssl-certificate-problem-unable-to-get-local-issuer-certificate\" data-source-start=\"135\" data-source-end=\"135\"\u003eSSL Certificate problem: unable to get local issuer certificate\u003c/h4\u003e\n\u003cp data-source-start=\"137\" data-source-end=\"140\"\u003eПри клонировании репозитория (возможно не только при клонировании) может\nвозникнуть ошибка\n\u003ccode\u003eSSL Certificate problem: unable to get local issuer certificate\u003c/code\u003e. Устранить ее\nможно просто отключив проверку SSL сертификата.\u003c/p\u003e\n\u003cp data-source-start=\"142\" data-source-end=\"142\"\u003eСделать это можно 2 способами:\u003c/p\u003e\n\u003cul data-source-start=\"144\" data-source-end=\"145\"\u003e\n\u003cli data-source-start=\"144\" data-source-end=\"144\"\u003e\u003ccode\u003eexport GIT_SSL_NO_VERIFY=1\u003c/code\u003e\u003c/li\u003e\n\u003cli data-source-start=\"145\" data-source-end=\"145\"\u003e\u003ccode\u003egit config --global http.sslVerify false\u003c/code\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp data-source-start=\"147\" data-source-end=\"148\"\u003eОтвет нашел\n\u003ca href=\"https://confluence.atlassian.com/bitbucketserverkb/ssl-certificate-problem-unable-to-get-local-issuer-certificate-816521128.html\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003eтут\u003c/a\u003e\u003c/p\u003e\n\u003ch4 id=\"не-сохраняется-логинпароль\" data-source-start=\"150\" data-source-end=\"150\"\u003eНе сохраняется логин/пароль\u003c/h4\u003e\n\u003cp data-source-start=\"152\" data-source-end=\"152\"\u003eДля включения возможности сохранять credential необходимо выполнить\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"154\" data-source-end=\"156\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003egit config --global credential.helper store\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003cp data-source-start=\"158\" data-source-end=\"158\"\u003eПолезные ссылки:\u003c/p\u003e\n\u003cul data-source-start=\"160\" data-source-end=\"160\"\u003e\n\u003cli data-source-start=\"160\" data-source-end=\"160\"\u003e\u003ca href=\"https://stackoverflow.com/questions/35942754/how-to-save-username-and-password-in-git-gitextension\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003eHow to save username and password in GIT [GitExtension]?\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"локальные-репозитории\" data-source-start=\"162\" data-source-end=\"162\"\u003eЛокальные репозитории\u003c/h2\u003e\n\u003ch3 id=\"общее\" data-source-start=\"164\" data-source-end=\"164\"\u003eОбщее\u003c/h3\u003e\n\u003cp data-source-start=\"166\" data-source-end=\"166\"\u003e\u003cstrong\u003eСоздание репозитория с проектом\u003c/strong\u003e\u003c/p\u003e\n\u003cp data-source-start=\"168\" data-source-end=\"168\"\u003e\u003ccode\u003egit init\u003c/code\u003e - создаёт репозиторий в текущей папке\u003c/p\u003e\n\u003cp data-source-start=\"170\" data-source-end=\"170\"\u003e\u003cstrong\u003eДобавление (удаление) новых или изменённых файлов в репозиторий\u003c/strong\u003e\u003c/p\u003e\n\u003cp data-source-start=\"172\" data-source-end=\"177\"\u003eДля того, чтобы добавить файлы под версионный контроль нужно воспользоваться\nкомандой \u003ccode\u003eadd \u0026lt;имя файла\u0026gt;\u003c/code\u003e, после этого будет зафиксировано текущее состояние\nфайла и когда будет выполнен комит, в репозитории будет отравлен файл в том\nсостоянии в котором он находится во время выполнения команды \u003ccode\u003eadd\u003c/code\u003e. После\nвнесения изменений файл, если их нужно отправить в репозиторий, то нужно опять\nповторить действия с командой add.\u003c/p\u003e\n\u003cul data-source-start=\"179\" data-source-end=\"191\"\u003e\n\u003cli data-source-start=\"179\" data-source-end=\"179\"\u003e\n\u003cp data-source-start=\"179\" data-source-end=\"179\"\u003e\u003ccode\u003egit add *.py\u003c/code\u003e - добавить все файлы с расширеним py под версионный контроль\u003c/p\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"180\" data-source-end=\"181\"\u003e\n\u003cp data-source-start=\"180\" data-source-end=\"181\"\u003e\u003ccode\u003egit add .\u003c/code\u003e - добавить все файлы и подпапки текущей папки под версионный\nконтроль\u003c/p\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"182\" data-source-end=\"182\"\u003e\n\u003cp data-source-start=\"182\" data-source-end=\"182\"\u003e\u003ccode\u003egit add phone.txt\u003c/code\u003e - добавить файл phone.txt под версионный контроль\u003c/p\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"184\" data-source-end=\"186\"\u003e\n\u003cp data-source-start=\"184\" data-source-end=\"186\"\u003e\u003ccode\u003egit commit -m \u0026#39;init version project\u0026#39;\u003c/code\u003e - отправляет в репозиторий все файлы\nдобавленные под версионный контроль. С помощью ключа -m указывается\nкомментарий к комиту.\u003c/p\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"188\" data-source-end=\"189\"\u003e\n\u003cp data-source-start=\"188\" data-source-end=\"189\"\u003e\u003ccode\u003egit rm \u0026lt;файл\u0026gt;\u003c/code\u003e - удаляет файл из рабочей директории, области подготовленных\nфайлов, а после выполения commit файл будет удалён и из репозитория\u003c/p\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"190\" data-source-end=\"191\"\u003e\n\u003cp data-source-start=\"190\" data-source-end=\"191\"\u003e\u003ccode\u003egit rm \u0026lt;файл\u0026gt; --cached\u003c/code\u003e - удаляет файл из области подготовленных файлов, но\nоставляет его в рабочей директории\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp data-source-start=\"193\" data-source-end=\"193\"\u003e\u003cstrong\u003eПросмотр информации\u003c/strong\u003e\u003c/p\u003e\n\u003cul data-source-start=\"195\" data-source-end=\"200\"\u003e\n\u003cli data-source-start=\"195\" data-source-end=\"197\"\u003e\n\u003cp data-source-start=\"195\" data-source-end=\"197\"\u003e\u003ccode\u003egit status\u003c/code\u003e - показывает статус репозитория (какие файлы изменились, какие\nновые, какие были добавлены в индекс (было выполнено \u003ccode\u003egit add\u003c/code\u003e, но commit не\nсовершался))\u003c/p\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"199\" data-source-end=\"199\"\u003e\n\u003cp data-source-start=\"199\" data-source-end=\"199\"\u003e\u003ccode\u003egit log\u003c/code\u003e - истории коммитов (автор, емеил, хэш, комментарий)\u003c/p\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"200\" data-source-end=\"200\"\u003e\n\u003cp data-source-start=\"200\" data-source-end=\"200\"\u003e\u003ccode\u003egit log --max-count 2\u003c/code\u003e - информация о 2 последних коммитах\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp data-source-start=\"202\" data-source-end=\"202\"\u003e\u003cstrong\u003eВозвращение рабочего каталога к предыдущему состоянию\u003c/strong\u003e\u003c/p\u003e\n\u003cp data-source-start=\"204\" data-source-end=\"205\"\u003eИспользуется для получения предыдущих версий файлов или просто для переключения\nна другую рабочую ветку.\u003c/p\u003e\n\u003cul data-source-start=\"207\" data-source-end=\"213\"\u003e\n\u003cli data-source-start=\"207\" data-source-end=\"208\"\u003e\n\u003cp data-source-start=\"207\" data-source-end=\"208\"\u003e\u003ccode\u003egit checkout \u0026lt;hash\u0026gt;\u003c/code\u003e - выгружает из репозитория предыдущую версию файла,\nкоторая зафиксирована в коммите с заданным \u003ccode\u003e\u0026lt;hash\u0026gt;\u003c/code\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"210\" data-source-end=\"211\"\u003e\n\u003cp data-source-start=\"210\" data-source-end=\"211\"\u003e\u003ccode\u003egit checkout \u0026lt;file name\u0026gt;\u003c/code\u003e - загрузит в рабочую директорию последнею версию\nфайла с именем \u003ccode\u003e\u0026lt;file name\u0026gt;\u003c/code\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"213\" data-source-end=\"213\"\u003e\n\u003cp data-source-start=\"213\" data-source-end=\"213\"\u003e\u003ccode\u003egit checkout master\u003c/code\u003e - получаем файлы последней версии из ветки master\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"перезапись-истории\" data-source-start=\"215\" data-source-end=\"215\"\u003eПерезапись истории\u003c/h3\u003e\n\u003cp data-source-start=\"217\" data-source-end=\"217\"\u003e\u003cstrong\u003eИзменение последнего комита\u003c/strong\u003e\u003c/p\u003e\n\u003cp data-source-start=\"219\" data-source-end=\"219\"\u003e\u003ccode\u003egit commit —amend\u003c/code\u003e - изменение последнего комита\u003c/p\u003e\n\u003cp data-source-start=\"221\" data-source-end=\"223\"\u003eЭта команда полезна в том случае, если нужно изменить последний коммит\n(исправить описание коммита, добавить забытый файл, исправить пару забытых\nопечаток и т д).\u003c/p\u003e\n\u003cp data-source-start=\"225\" data-source-end=\"229\"\u003eЕсли нужно только изменить описание, то выполняем коммит с ключом \u003ccode\u003e--amend\u003c/code\u003e,\nоткроется редактор описания последнего коммита, там вносим правки и сохраняем\nизменения (после закрытия редактора, будет выполнен коммит). Если же нужно\nизменить файлы, то меняем их, добавляем их в индекс \u003ccode\u003egit add .\u003c/code\u003e и выполняем\nкоммит с ключом \u003ccode\u003e--amend\u003c/code\u003e.\u003c/p\u003e\n\u003cp data-source-start=\"231\" data-source-end=\"231\"\u003e\u003cstrong\u003eОбъединение нескольких коммитов в один\u003c/strong\u003e\u003c/p\u003e\n\u003cp data-source-start=\"233\" data-source-end=\"233\"\u003e\u003cstrong\u003eСпособ 1\u003c/strong\u003e\u003c/p\u003e\n\u003cp data-source-start=\"235\" data-source-end=\"235\"\u003eОбъединение всех коммитов в ветке в один.\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"237\" data-source-end=\"239\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003egit rebase --root -i\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003cp data-source-start=\"241\" data-source-end=\"242\"\u003eВ открывшемся окне редактора для всех коммитов кроме первого меняем \u003ccode\u003epick\u003c/code\u003e на\n\u003ccode\u003esquash\u003c/code\u003e, сохраняем изменения и закрываем файл.\u003c/p\u003e\n\u003cp data-source-start=\"244\" data-source-end=\"245\"\u003eТакие настройки говорят гиту использовать первый коммит как основной, а все\nостальные приклеить к нему.\u003c/p\u003e\n\u003cp data-source-start=\"247\" data-source-end=\"247\"\u003e\u003cstrong\u003eСпособ 2\u003c/strong\u003e\u003c/p\u003e\n\u003cp data-source-start=\"249\" data-source-end=\"249\"\u003eОбъединение 2 последних коммитов в 1\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"251\" data-source-end=\"253\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003egit rebase -i HEAD~2\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003cp data-source-start=\"255\" data-source-end=\"256\"\u003eВ открывшемся окне редактора для всех коммитов кроме первого меняем \u003ccode\u003epick\u003c/code\u003e на\n\u003ccode\u003esquash\u003c/code\u003e, сохраняем изменения и закрываем файл.\u003c/p\u003e\n\u003cp data-source-start=\"258\" data-source-end=\"258\"\u003e\u003cstrong\u003eСпособ 3\u003c/strong\u003e\u003c/p\u003e\n\u003cp data-source-start=\"260\" data-source-end=\"260\"\u003eОбъединение коммитов в середине истории.\u003c/p\u003e\n\u003cp data-source-start=\"262\" data-source-end=\"263\"\u003eВместо HEAD указываем хэш нужного коммита и через тильду указываем сколько\nкоммитов нужно склеить.\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"265\" data-source-end=\"267\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003egit rebase -i ae88544~3\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003cp data-source-start=\"269\" data-source-end=\"269\"\u003eПолезные ссылки:\u003c/p\u003e\n\u003cul data-source-start=\"271\" data-source-end=\"273\"\u003e\n\u003cli data-source-start=\"271\" data-source-end=\"271\"\u003e\u003ca href=\"https://stackoverflow.com/questions/1657017/how-to-squash-all-git-commits-into-one\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003ehttps://stackoverflow.com/questions/1657017/how-to-squash-all-git-commits-into-one\u003c/a\u003e\u003c/li\u003e\n\u003cli data-source-start=\"272\" data-source-end=\"272\"\u003e\u003ca href=\"https://pingvinus.ru/git/1591#:~:text=%D0%9E%D0%B1%D1%8A%D0%B5%D0%B4%D0%B8%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5%20%D0%BA%D0%BE%D0%BC%D0%BC%D0%B8%D1%82%D0%BE%D0%B2%20(%D1%81%20%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5%D0%BC%20git,-i%20(%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%B2%D0%BD%D1%8B%D0%B9%20%D1%80%D0%B5%D0%B6%D0%B8%D0%BC).\u0026amp;text=%D0%9E%D1%82%D0%BA%D1%80%D0%BE%D0%B5%D1%82%D1%81%D1%8F%20%D1%82%D0%B5%D0%BA%D1%81%D1%82%D0%BE%D0%B2%D1%8B%D0%B9%20%D1%80%D0%B5%D0%B4%D0%B0%D0%BA%D1%82%D0%BE%D1%80%2C%20%D0%B2%20%D0%BA%D0%BE%D1%82%D0%BE%D1%80%D0%BE%D0%BC,pick%20ab37583%20Added%20feature%201\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003ehttps://pingvinus.ru/git/1591#:~:text=Объединение%20коммитов%20(с%20использованием%20git,-i%20(интерактивный%20режим).\u0026amp;text=Откроется%20текстовый%20редактор%2C%20в%20котором,pick%20ab37583%20Added%20feature%201\u003c/a\u003e\u003c/li\u003e\n\u003cli data-source-start=\"273\" data-source-end=\"273\"\u003e\u003ca href=\"https://htmlacademy.ru/blog/27-how-to-squash-commits-and-why-it-is-needed\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003ehttps://htmlacademy.ru/blog/27-how-to-squash-commits-and-why-it-is-needed\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp data-source-start=\"275\" data-source-end=\"275\"\u003e\u003cstrong\u003eУдаление файла из всех коммитов в репозитории\u003c/strong\u003e\u003c/p\u003e\n\u003cp data-source-start=\"277\" data-source-end=\"279\"\u003eДанные команды производят удаление из всех коммитов папки \u003ccode\u003ebin\u003c/code\u003e. Если\nнеобходимо удалить не папку, а файл, то из первой команды нужно убрать ключ\n\u003ccode\u003e--force\u003c/code\u003e.\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-lang=\"bash\" data-source-start=\"281\" data-source-end=\"286\"\u003e\u003cpre class=\"chroma\"\u003e\u003ccode\u003e\u003cspan class=\"line\"\u003e\u003cspan class=\"cl\"\u003egit filter-branch --force --index-filter \u003cspan class=\"s1\"\u003e\u0026#39;git rm -r --cached --ignore-unmatch bin\u0026#39;\u003c/span\u003e --prune-empty --tag-name-filter cat -- --all\n\u003c/span\u003e\u003c/span\u003e\u003cspan class=\"line\"\u003e\u003cspan class=\"cl\"\u003e\n\u003c/span\u003e\u003c/span\u003e\u003cspan class=\"line\"\u003e\u003cspan class=\"cl\"\u003erm -rf .git/refs/original \u003cspan class=\"o\"\u003e\u0026amp;\u0026amp;\u003c/span\u003e git gc --aggressive\n\u003c/span\u003e\u003c/span\u003e\u003cspan class=\"line\"\u003e\u003cspan class=\"cl\"\u003egit reflog expire --expire\u003cspan class=\"o\"\u003e=\u003c/span\u003enow --all \u003cspan class=\"o\"\u003e\u0026amp;\u0026amp;\u003c/span\u003e git gc --prune\u003cspan class=\"o\"\u003e=\u003c/span\u003enow\n\u003c/span\u003e\u003c/span\u003e\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003cp data-source-start=\"288\" data-source-end=\"288\"\u003eМатериалы по теме:\u003c/p\u003e\n\u003cul data-source-start=\"290\" data-source-end=\"293\"\u003e\n\u003cli data-source-start=\"290\" data-source-end=\"290\"\u003e\u003ca href=\"http://onedev.net/post/191\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003ehttp://onedev.net/post/191\u003c/a\u003e\u003c/li\u003e\n\u003cli data-source-start=\"291\" data-source-end=\"291\"\u003e\u003ca href=\"https://blog.truecrux.org/post/ix\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003ehttps://blog.truecrux.org/post/ix\u003c/a\u003e\u003c/li\u003e\n\u003cli data-source-start=\"292\" data-source-end=\"293\"\u003e\u003ca href=\"http://unixforum.org/index.php?showtopic=140254\u0026amp;st=0\u0026amp;gopid=1287903\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003ehttp://unixforum.org/index.php?showtopic=140254\u0026amp;st=0\u0026amp;gopid=1287903\u003c/a\u003e - здесь\nмне помогли найти ответ на данный вопрос\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp data-source-start=\"295\" data-source-end=\"295\"\u003e\u003cstrong\u003eОтправка на сервер измененного репозитория\u003c/strong\u003e\u003c/p\u003e\n\u003cp data-source-start=\"297\" data-source-end=\"299\"\u003eВ случае если производилось изменение истории коммитов (коммиты объединялись\nпри помощи \u003ccode\u003ereset hard\u003c/code\u003e или выполнялся \u003ccode\u003ecommit --amend\u003c/code\u003e), то загрузить\nизмененную историю на сервер простым \u003ccode\u003epush\u003c/code\u003e не получится. Необходимо выполнять:\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-lang=\"bash\" data-source-start=\"301\" data-source-end=\"303\"\u003e\u003cpre class=\"chroma\"\u003e\u003ccode\u003e\u003cspan class=\"line\"\u003e\u003cspan class=\"cl\"\u003egit push -f origin master\n\u003c/span\u003e\u003c/span\u003e\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003cp data-source-start=\"305\" data-source-end=\"305\"\u003eОтвет нашел \u003ca href=\"https://habrahabr.ru/post/138590/\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003eтут\u003c/a\u003e\u003c/p\u003e\n\u003ch3 id=\"локальный-gitignore\" data-source-start=\"307\" data-source-end=\"307\"\u003eЛокальный gitignore\u003c/h3\u003e\n\u003cp data-source-start=\"309\" data-source-end=\"311\"\u003eБывают ситуации, когда в папке с проектом нужно хранить файлы, которые не\nдолжны попасть под версионный контроль, но и файл \u003ccode\u003e.gitignore\u003c/code\u003e расположенный в\nкорне проекта использовать нельзя.\u003c/p\u003e\n\u003cp data-source-start=\"313\" data-source-end=\"314\"\u003eВ этом случае можно использовать файл \u003ccode\u003e.git/info/exclude\u003c/code\u003e. Он имеет тот же\nформат, что и \u003ccode\u003e.gitignore\u003c/code\u003e.\u003c/p\u003e\n\u003ch3 id=\"авторизация-при-помощи-токена\" data-source-start=\"316\" data-source-end=\"316\"\u003eАвторизация при помощи токена\u003c/h3\u003e\n\u003cp data-source-start=\"318\" data-source-end=\"318\"\u003e\u003ca href=\"https://stackoverflow.com/questions/52445475/git-pull-with-access-token-git-push-with-username-password\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003egit pull with access token, git push with username / password\u003c/a\u003e\u003c/p\u003e\n","toc":[{"level":2,"text":"Теория","id":"теория"},{"level":3,"text":"Терминология","id":"терминология"},{"level":3,"text":"Обучение","id":"обучение"},{"level":2,"text":"Настройка","id":"настройка"},{"level":3,"text":"Общая настройка","id":"общая-настройка"},{"level":3,"text":"Решение проблем","id":"решение-проблем"},{"level":2,"text":"Локальные репозитории","id":"локальные-репозитории"},{"level":3,"text":"Общее","id":"общее"},{"level":3,"text":"Перезапись истории","id":"перезапись-истории"},{"level":3,"text":"Локальный gitignore","id":"локальный-gitignore"},{"level":3,"text":"Авторизация при помощи токена","id":"авторизация-при-помощи-токена"}],"show_toc":true,"rev":"sha256:4ccadc0338f5247cdb114851a66a370175542325bb8b9a4e4212c9cb8dbb8ce2","mod_time":"2026-10-24T11:37:57.770474466Z","breadcrumbs":[{"name":"Home","url":"/"},{"name":"git","url":"/doc/git/"},{"name":"git-notes-index.md","url":""}],"edit_url":"/edit/git/git-notes-index.md","missing":false,"can_create":false}}</script>
+<div id="scrawl-app-root"></div>
+
+<main data-scrawl-static>
+<nav aria-label="Path"><ol class="scrawl-static-crumbs"><li><a href="../index.html">Home</a></li><li><a href="../git/index.html">git</a></li><li>git-notes-index.md</li></ol></nav>
+<article class="markdown-document">
+<h1 id="git" data-source-start="1" data-source-end="1">Git</h1>
+<h1 id="оглавление" data-source-start="3" data-source-end="3">Оглавление</h1>
+<ol data-source-start="5" data-source-end="22">
+<li data-source-start="5" data-source-end="7">
+<p data-source-start="5" data-source-end="5"><a href="#%D1%82%D0%B5%D0%BE%D1%80%D0%B8%D1%8F">Теория</a></p>
+<ul data-source-start="6" data-source-end="7">
+<li data-source-start="6" data-source-end="6"><a href="#%D1%82%D0%B5%D1%80%D0%BC%D0%B8%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%8F">Терминология</a></li>
+<li data-source-start="7" data-source-end="7"><a href="#%D0%BE%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5">Обучение</a></li>
+</ul>
+</li>
+<li data-source-start="9" data-source-end="16">
+<p data-source-start="9" data-source-end="9"><a href="#%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0">Настройка</a></p>
+<ul data-source-start="10" data-source-end="16">
+<li data-source-start="10" data-source-end="12">
+<p data-source-start="10" data-source-end="10"><a href="#%D0%BE%D0%B1%D1%89%D0%B0%D1%8F-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0">Общая настройка</a></p>
+<ul data-source-start="11" data-source-end="12">
+<li data-source-start="11" data-source-end="11"><a href="#%D0%BD%D0%B0%D1%87%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0">Начальная настройка</a></li>
+<li data-source-start="12" data-source-end="12"><a href="#%D0%B0%D0%B2%D1%82%D0%BE%D0%B4%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B2-macos">Автодополнение в MacOS</a></li>
+</ul>
+</li>
+<li data-source-start="14" data-source-end="16">
+<p data-source-start="14" data-source-end="14"><a href="#%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D1%80%D0%BE%D0%B1%D0%BB%D0%B5%D0%BC">Решение проблем</a></p>
+<ul data-source-start="15" data-source-end="16">
+<li data-source-start="15" data-source-end="15"><a href="#ssl-certificate-problem-unable-to-get-local-issuer-certificate">SSL Certificate problem: unable to get local issuer certificate</a></li>
+<li data-source-start="16" data-source-end="16"><a href="#%D0%BD%D0%B5-%D1%81%D0%BE%D1%85%D1%80%D0%B0%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F-%D0%BB%D0%BE%D0%B3%D0%B8%D0%BD%D0%BF%D0%B0%D1%80%D0%BE%D0%BB%D1%8C">Не сохраняется логин/пароль</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li data-source-start="18" data-source-end="22">
+<p data-source-start="18" data-source-end="18"><a href="#%D0%BB%D0%BE%D0%BA%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D1%80%D0%B5%D0%BF%D0%BE%D0%B7%D0%B8%D1%82%D0%BE%D1%80%D0%B8%D0%B8">Локальные репозитории</a></p>
+<ul data-source-start="19" data-source-end="22">
+<li data-source-start="19" data-source-end="19"><a href="#%D0%BE%D0%B1%D1%89%D0%B5%D0%B5">Общее</a></li>
+<li data-source-start="20" data-source-end="20"><a href="#%D0%BF%D0%B5%D1%80%D0%B5%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D1%8C-%D0%B8%D1%81%D1%82%D0%BE%D1%80%D0%B8%D0%B8">Перезапись истории</a></li>
+<li data-source-start="21" data-source-end="21"><a href="#%D0%BB%D0%BE%D0%BA%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9-gitignore">Локальный gitignore</a></li>
+<li data-source-start="22" data-source-end="22"><a href="#%D0%B0%D0%B2%D1%82%D0%BE%D1%80%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-%D0%BF%D1%80%D0%B8-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D0%B8-%D1%82%D0%BE%D0%BA%D0%B5%D0%BD%D0%B0">Авторизация при помощи токена</a></li>
+</ul>
+</li>
+</ol>
+<h2 id="теория" data-source-start="24" data-source-end="24">Теория</h2>
+<h3 id="терминология" data-source-start="26" data-source-end="26">Терминология</h3>
+<p data-source-start="28" data-source-end="32">Индекс и область подготовленных файлов - это синонимы. Самый быстрый способ
+увидеть что индексе, можно с помощью команды <code>git status</code>. Когда вы выполните
+команду <code>git status</code>, то увидите какие файлы попали в индекс, какие
+модифицированы, но не в индексе и какие в данный момент вообще не отслеживаются
+git.</p>
+<h3 id="обучение" data-source-start="34" data-source-end="34">Обучение</h3>
+<p data-source-start="36" data-source-end="37"><a href="https://learngitbranching.js.org/?demo" target="_blank" rel="noopener noreferrer nofollow">https://learngitbranching.js.org/?demo</a> - сервис, который позволяет
+визуализировать действие тех или иных команд git.</p>
+<h2 id="настройка" data-source-start="39" data-source-end="39">Настройка</h2>
+<h3 id="общая-настройка" data-source-start="41" data-source-end="41">Общая настройка</h3>
+<h4 id="начальная-настройка" data-source-start="43" data-source-end="43">Начальная настройка</h4>
+<p data-source-start="45" data-source-end="46">Настройки для git которые нужные выполнить после установки git и на linux и
+windows.</p>
+<ul data-source-start="48" data-source-end="51">
+<li data-source-start="48" data-source-end="48"><code>git config --global user.name &#34;Aleksey Petrunnik&#34;</code> - задаем имя пользователя</li>
+<li data-source-start="49" data-source-end="49"><code>git config --global user.email my_mail@mail.ru</code> - задаем email пользователя</li>
+<li data-source-start="50" data-source-end="50"><code>git config --global core.editor nano</code> - задаём редактор по умолчанию</li>
+<li data-source-start="51" data-source-end="51"><code>git config --list</code> - выводит список установленных настроек</li>
+</ul>
+<p data-source-start="53" data-source-end="53">В windows ещё нужно выполнить:</p>
+<div class="code-block" data-lang="bash" data-source-start="55" data-source-end="58"><pre class="chroma"><code><span class="line"><span class="cl">git config --global core.autocrlf <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">git config --global core.safecrlf <span class="nb">true</span>
+</span></span></code></pre></div>
+<p data-source-start="60" data-source-end="61">Для корректного отображения киррилицы в nano, необходимо создать следующую
+переменную окружения:</p>
+<ul data-source-start="63" data-source-end="63">
+<li data-source-start="63" data-source-end="63"><code>LANG: ru_RU.UTF8</code></li>
+</ul>
+<h4 id="автодополнение-в-macos" data-source-start="65" data-source-end="65">Автодополнение в MacOS</h4>
+<p data-source-start="67" data-source-end="67"><strong>bash</strong></p>
+<p data-source-start="69" data-source-end="70">По умолчанию в терминале MacOS для git отключено автодоплнение. Исправить это
+можно следующим образом:</p>
+<ul data-source-start="72" data-source-end="90">
+<li data-source-start="72" data-source-end="83">
+<p data-source-start="72" data-source-end="72">выполнить поиск в системе скрипта <code>git-completion.bash</code></p>
+<div class="code-block" data-lang="bash" data-source-start="74" data-source-end="76"><pre class="chroma"><code><span class="line"><span class="cl">sudo find / -type f -name <span class="s2">&#34;git-completion.bash&#34;</span>
+</span></span></code></pre></div>
+<p data-source-start="78" data-source-end="78">Результат выполнения команды будет примерно такой:</p>
+<div class="code-block" data-source-start="80" data-source-end="83"><pre tabindex="0" class="chroma"><code>MBP-Aleksej:~ aleksey$ sudo find / -type f -name &#34;git-completion.bash&#34;
+/Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash
+</code></pre></div>
+</li>
+<li data-source-start="85" data-source-end="90">
+<p data-source-start="85" data-source-end="86">после того как путь к скрипту найден необходимо скопировать его в папку
+<code>/usr/local/etc/bash_completion.d/git-completion.bash</code>.</p>
+<div class="code-block" data-source-start="88" data-source-end="90"><pre tabindex="0" class="chroma"><code>sudo cp /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash /usr/local/etc/bash_completion.d/git-completion.bash
+</code></pre></div>
+</li>
+</ul>
+<p data-source-start="92" data-source-end="93">Теперь если открыть новое окно терминала, то там будет доступно автодополнение
+при вводе команд для git.</p>
+<p data-source-start="95" data-source-end="95"><strong>zsh</strong></p>
+<ul data-source-start="97" data-source-end="127">
+<li data-source-start="97" data-source-end="101">
+<p data-source-start="97" data-source-end="97">устанавливаем bash-completion</p>
+<div class="code-block" data-source-start="99" data-source-end="101"><pre tabindex="0" class="chroma"><code>brew install bash-completion
+</code></pre></div>
+</li>
+<li data-source-start="103" data-source-end="110">
+<p data-source-start="103" data-source-end="103">скачиваем необходимые скрипты</p>
+<div class="code-block" data-source-start="105" data-source-end="110"><pre tabindex="0" class="chroma"><code>mkdir -p ~/.zsh &amp;&amp; cd ~/.zsh
+
+curl -o git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+curl -o _git https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.zsh
+</code></pre></div>
+</li>
+<li data-source-start="112" data-source-end="121">
+<p data-source-start="112" data-source-end="113">включаем использование скриптов. Для этого открываем файл <code>~/.zshrc</code> и
+вставляем туда</p>
+<div class="code-block" data-source-start="115" data-source-end="121"><pre tabindex="0" class="chroma"><code># Load Git completion
+zstyle &#39;:completion:*:*:git:*&#39; script ~/.zsh/git-completion.bash
+fpath=(~/.zsh $fpath)
+
+autoload -Uz compinit &amp;&amp; compinit
+</code></pre></div>
+</li>
+<li data-source-start="123" data-source-end="127">
+<p data-source-start="123" data-source-end="123">очищаем cache</p>
+<div class="code-block" data-source-start="125" data-source-end="127"><pre tabindex="0" class="chroma"><code>rm ~/.zcompdump
+</code></pre></div>
+</li>
+</ul>
+<p data-source-start="129" data-source-end="129">Полезные ссылки:</p>
+<ul data-source-start="131" data-source-end="131">
+<li data-source-start="131" data-source-end="131"><a href="https://oliverspryn.medium.com/adding-git-completion-to-zsh-60f3b0e7ffbc" target="_blank" rel="noopener noreferrer nofollow">Adding Git Completion to Zsh</a></li>
+</ul>
+<h3 id="решение-проблем" data-source-start="133" data-source-end="133">Решение проблем</h3>
+<h4 id="ssl-certificate-problem-unable-to-get-local-issuer-certificate" data-source-start="135" data-source-end="135">SSL Certificate problem: unable to get local issuer certificate</h4>
+<p data-source-start="137" data-source-end="140">При клонировании репозитория (возможно не только при клонировании) может
+возникнуть ошибка
+<code>SSL Certificate problem: unable to get local issuer certificate</code>. Устранить ее
+можно просто отключив проверку SSL сертификата.</p>
+<p data-source-start="142" data-source-end="142">Сделать это можно 2 способами:</p>
+<ul data-source-start="144" data-source-end="145">
+<li data-source-start="144" data-source-end="144"><code>export GIT_SSL_NO_VERIFY=1</code></li>
+<li data-source-start="145" data-source-end="145"><code>git config --global http.sslVerify false</code></li>
+</ul>
+<p data-source-start="147" data-source-end="148">Ответ нашел
+<a href="https://confluence.atlassian.com/bitbucketserverkb/ssl-certificate-problem-unable-to-get-local-issuer-certificate-816521128.html" target="_blank" rel="noopener noreferrer nofollow">тут</a></p>
+<h4 id="не-сохраняется-логинпароль" data-source-start="150" data-source-end="150">Не сохраняется логин/пароль</h4>
+<p data-source-start="152" data-source-end="152">Для включения возможности сохранять credential необходимо выполнить</p>
+<div class="code-block" data-source-start="154" data-source-end="156"><pre tabindex="0" class="chroma"><code>git config --global credential.helper store
+</code></pre></div>
+<p data-source-start="158" data-source-end="158">Полезные ссылки:</p>
+<ul data-source-start="160" data-source-end="160">
+<li data-source-start="160" data-source-end="160"><a href="https://stackoverflow.com/questions/35942754/how-to-save-username-and-password-in-git-gitextension" target="_blank" rel="noopener noreferrer nofollow">How to save username and password in GIT [GitExtension]?</a></li>
+</ul>
+<h2 id="локальные-репозитории" data-source-start="162" data-source-end="162">Локальные репозитории</h2>
+<h3 id="общее" data-source-start="164" data-source-end="164">Общее</h3>
+<p data-source-start="166" data-source-end="166"><strong>Создание репозитория с проектом</strong></p>
+<p data-source-start="168" data-source-end="168"><code>git init</code> - создаёт репозиторий в текущей папке</p>
+<p data-source-start="170" data-source-end="170"><strong>Добавление (удаление) новых или изменённых файлов в репозиторий</strong></p>
+<p data-source-start="172" data-source-end="177">Для того, чтобы добавить файлы под версионный контроль нужно воспользоваться
+командой <code>add &lt;имя файла&gt;</code>, после этого будет зафиксировано текущее состояние
+файла и когда будет выполнен комит, в репозитории будет отравлен файл в том
+состоянии в котором он находится во время выполнения команды <code>add</code>. После
+внесения изменений файл, если их нужно отправить в репозиторий, то нужно опять
+повторить действия с командой add.</p>
+<ul data-source-start="179" data-source-end="191">
+<li data-source-start="179" data-source-end="179">
+<p data-source-start="179" data-source-end="179"><code>git add *.py</code> - добавить все файлы с расширеним py под версионный контроль</p>
+</li>
+<li data-source-start="180" data-source-end="181">
+<p data-source-start="180" data-source-end="181"><code>git add .</code> - добавить все файлы и подпапки текущей папки под версионный
+контроль</p>
+</li>
+<li data-source-start="182" data-source-end="182">
+<p data-source-start="182" data-source-end="182"><code>git add phone.txt</code> - добавить файл phone.txt под версионный контроль</p>
+</li>
+<li data-source-start="184" data-source-end="186">
+<p data-source-start="184" data-source-end="186"><code>git commit -m &#39;init version project&#39;</code> - отправляет в репозиторий все файлы
+добавленные под версионный контроль. С помощью ключа -m указывается
+комментарий к комиту.</p>
+</li>
+<li data-source-start="188" data-source-end="189">
+<p data-source-start="188" data-source-end="189"><code>git rm &lt;файл&gt;</code> - удаляет файл из рабочей директории, области подготовленных
+файлов, а после выполения commit файл будет удалён и из репозитория</p>
+</li>
+<li data-source-start="190" data-source-end="191">
+<p data-source-start="190" data-source-end="191"><code>git rm &lt;файл&gt; --cached</code> - удаляет файл из области подготовленных файлов, но
+оставляет его в рабочей директории</p>
+</li>
+</ul>
+<p data-source-start="193" data-source-end="193"><strong>Просмотр информации</strong></p>
+<ul data-source-start="195" data-source-end="200">
+<li data-source-start="195" data-source-end="197">
+<p data-source-start="195" data-source-end="197"><code>git status</code> - показывает статус репозитория (какие файлы изменились, какие
+новые, какие были добавлены в индекс (было выполнено <code>git add</code>, но commit не
+совершался))</p>
+</li>
+<li data-source-start="199" data-source-end="199">
+<p data-source-start="199" data-source-end="199"><code>git log</code> - истории коммитов (автор, емеил, хэш, комментарий)</p>
+</li>
+<li data-source-start="200" data-source-end="200">
+<p data-source-start="200" data-source-end="200"><code>git log --max-count 2</code> - информация о 2 последних коммитах</p>
+</li>
+</ul>
+<p data-source-start="202" data-source-end="202"><strong>Возвращение рабочего каталога к предыдущему состоянию</strong></p>
+<p data-source-start="204" data-source-end="205">Используется для получения предыдущих версий файлов или просто для переключения
+на другую рабочую ветку.</p>
+<ul data-source-start="207" data-source-end="213">
+<li data-source-start="207" data-source-end="208">
+<p data-source-start="207" data-source-end="208"><code>git checkout &lt;hash&gt;</code> - выгружает из репозитория предыдущую версию файла,
+которая зафиксирована в коммите с заданным <code>&lt;hash&gt;</code></p>
+</li>
+<li data-source-start="210" data-source-end="211">
+<p data-source-start="210" data-source-end="211"><code>git checkout &lt;file name&gt;</code> - загрузит в рабочую директорию последнею версию
+файла с именем <code>&lt;file name&gt;</code></p>
+</li>
+<li data-source-start="213" data-source-end="213">
+<p data-source-start="213" data-source-end="213"><code>git checkout master</code> - получаем файлы последней версии из ветки master</p>
+</li>
+</ul>
+<h3 id="перезапись-истории" data-source-start="215" data-source-end="215">Перезапись истории</h3>
+<p data-source-start="217" data-source-end="217"><strong>Изменение последнего комита</strong></p>
+<p data-source-start="219" data-source-end="219"><code>git commit —amend</code> - изменение последнего комита</p>
+<p data-source-start="221" data-source-end="223">Эта команда полезна в том случае, если нужно изменить последний коммит
+(исправить описание коммита, добавить забытый файл, исправить пару забытых
+опечаток и т д).</p>
+<p data-source-start="225" data-source-end="229">Если нужно только изменить описание, то выполняем коммит с ключом <code>--amend</code>,
+откроется редактор описания последнего коммита, там вносим правки и сохраняем
+изменения (после закрытия редактора, будет выполнен коммит). Если же нужно
+изменить файлы, то меняем их, добавляем их в индекс <code>git add .</code> и выполняем
+коммит с ключом <code>--amend</code>.</p>
+<p data-source-start="231" data-source-end="231"><strong>Объединение нескольких коммитов в один</strong></p>
+<p data-source-start="233" data-source-end="233"><strong>Способ 1</strong></p>
+<p data-source-start="235" data-source-end="235">Объединение всех коммитов в ветке в один.</p>
+<div class="code-block" data-source-start="237" data-source-end="239"><pre tabindex="0" class="chroma"><code>git rebase --root -i
+</code></pre></div>
+<p data-source-start="241" data-source-end="242">В открывшемся окне редактора для всех коммитов кроме первого меняем <code>pick</code> на
+<code>squash</code>, сохраняем изменения и закрываем файл.</p>
+<p data-source-start="244" data-source-end="245">Такие настройки говорят гиту использовать первый коммит как основной, а все
+остальные приклеить к нему.</p>
+<p data-source-start="247" data-source-end="247"><strong>Способ 2</strong></p>
+<p data-source-start="249" data-source-end="249">Объединение 2 последних коммитов в 1</p>
+<div class="code-block" data-source-start="251" data-source-end="253"><pre tabindex="0" class="chroma"><code>git rebase -i HEAD~2
+</code></pre></div>
+<p data-source-start="255" data-source-end="256">В открывшемся окне редактора для всех коммитов кроме первого меняем <code>pick</code> на
+<code>squash</code>, сохраняем изменения и закрываем файл.</p>
+<p data-source-start="258" data-source-end="258"><strong>Способ 3</strong></p>
+<p data-source-start="260" data-source-end="260">Объединение коммитов в середине истории.</p>
+<p data-source-start="262" data-source-end="263">Вместо HEAD указываем хэш нужного коммита и через тильду указываем сколько
+коммитов нужно склеить.</p>
+<div class="code-block" data-source-start="265" data-source-end="267"><pre tabindex="0" class="chroma"><code>git rebase -i ae88544~3
+</code></pre></div>
+<p data-source-start="269" data-source-end="269">Полезные ссылки:</p>
+<ul data-source-start="271" data-source-end="273">
+<li data-source-start="271" data-source-end="271"><a href="https://stackoverflow.com/questions/1657017/how-to-squash-all-git-commits-into-one" target="_blank" rel="noopener noreferrer nofollow">https://stackoverflow.com/questions/1657017/how-to-squash-all-git-commits-into-one</a></li>
+<li data-source-start="272" data-source-end="272"><a href="https://pingvinus.ru/git/1591#:~:text=%D0%9E%D0%B1%D1%8A%D0%B5%D0%B4%D0%B8%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5%20%D0%BA%D0%BE%D0%BC%D0%BC%D0%B8%D1%82%D0%BE%D0%B2%20(%D1%81%20%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5%D0%BC%20git,-i%20(%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%B2%D0%BD%D1%8B%D0%B9%20%D1%80%D0%B5%D0%B6%D0%B8%D0%BC).&amp;text=%D0%9E%D1%82%D0%BA%D1%80%D0%BE%D0%B5%D1%82%D1%81%D1%8F%20%D1%82%D0%B5%D0%BA%D1%81%D1%82%D0%BE%D0%B2%D1%8B%D0%B9%20%D1%80%D0%B5%D0%B4%D0%B0%D0%BA%D1%82%D0%BE%D1%80%2C%20%D0%B2%20%D0%BA%D0%BE%D1%82%D0%BE%D1%80%D0%BE%D0%BC,pick%20ab37583%20Added%20feature%201" target="_blank" rel="noopener noreferrer nofollow">https://pingvinus.ru/git/1591#:~:text=Объединение%20коммитов%20(с%20использованием%20git,-i%20(интерактивный%20режим).&amp;text=Откроется%20текстовый%20редактор%2C%20в%20котором,pick%20ab37583%20Added%20feature%201</a></li>
+<li data-source-start="273" data-source-end="273"><a href="https://htmlacademy.ru/blog/27-how-to-squash-commits-and-why-it-is-needed" target="_blank" rel="noopener noreferrer nofollow">https://htmlacademy.ru/blog/27-how-to-squash-commits-and-why-it-is-needed</a></li>
+</ul>
+<p data-source-start="275" data-source-end="275"><strong>Удаление файла из всех коммитов в репозитории</strong></p>
+<p data-source-start="277" data-source-end="279">Данные команды производят удаление из всех коммитов папки <code>bin</code>. Если
+необходимо удалить не папку, а файл, то из первой команды нужно убрать ключ
+<code>--force</code>.</p>
+<div class="code-block" data-lang="bash" data-source-start="281" data-source-end="286"><pre class="chroma"><code><span class="line"><span class="cl">git filter-branch --force --index-filter <span class="s1">&#39;git rm -r --cached --ignore-unmatch bin&#39;</span> --prune-empty --tag-name-filter cat -- --all
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">rm -rf .git/refs/original <span class="o">&amp;&amp;</span> git gc --aggressive
+</span></span><span class="line"><span class="cl">git reflog expire --expire<span class="o">=</span>now --all <span class="o">&amp;&amp;</span> git gc --prune<span class="o">=</span>now
+</span></span></code></pre></div>
+<p data-source-start="288" data-source-end="288">Материалы по теме:</p>
+<ul data-source-start="290" data-source-end="293">
+<li data-source-start="290" data-source-end="290"><a href="http://onedev.net/post/191" target="_blank" rel="noopener noreferrer nofollow">http://onedev.net/post/191</a></li>
+<li data-source-start="291" data-source-end="291"><a href="https://blog.truecrux.org/post/ix" target="_blank" rel="noopener noreferrer nofollow">https://blog.truecrux.org/post/ix</a></li>
+<li data-source-start="292" data-source-end="293"><a href="http://unixforum.org/index.php?showtopic=140254&amp;st=0&amp;gopid=1287903" target="_blank" rel="noopener noreferrer nofollow">http://unixforum.org/index.php?showtopic=140254&amp;st=0&amp;gopid=1287903</a> - здесь
+мне помогли найти ответ на данный вопрос</li>
+</ul>
+<p data-source-start="295" data-source-end="295"><strong>Отправка на сервер измененного репозитория</strong></p>
+<p data-source-start="297" data-source-end="299">В случае если производилось изменение истории коммитов (коммиты объединялись
+при помощи <code>reset hard</code> или выполнялся <code>commit --amend</code>), то загрузить
+измененную историю на сервер простым <code>push</code> не получится. Необходимо выполнять:</p>
+<div class="code-block" data-lang="bash" data-source-start="301" data-source-end="303"><pre class="chroma"><code><span class="line"><span class="cl">git push -f origin master
+</span></span></code></pre></div>
+<p data-source-start="305" data-source-end="305">Ответ нашел <a href="https://habrahabr.ru/post/138590/" target="_blank" rel="noopener noreferrer nofollow">тут</a></p>
+<h3 id="локальный-gitignore" data-source-start="307" data-source-end="307">Локальный gitignore</h3>
+<p data-source-start="309" data-source-end="311">Бывают ситуации, когда в папке с проектом нужно хранить файлы, которые не
+должны попасть под версионный контроль, но и файл <code>.gitignore</code> расположенный в
+корне проекта использовать нельзя.</p>
+<p data-source-start="313" data-source-end="314">В этом случае можно использовать файл <code>.git/info/exclude</code>. Он имеет тот же
+формат, что и <code>.gitignore</code>.</p>
+<h3 id="авторизация-при-помощи-токена" data-source-start="316" data-source-end="316">Авторизация при помощи токена</h3>
+<p data-source-start="318" data-source-end="318"><a href="https://stackoverflow.com/questions/52445475/git-pull-with-access-token-git-push-with-username-password" target="_blank" rel="noopener noreferrer nofollow">git pull with access token, git push with username / password</a></p>
+
+</article>
+</main>
+</body>
+</html>

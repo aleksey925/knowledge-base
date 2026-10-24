@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+<meta name="color-scheme" content="light dark">
+<meta name="generator" content="scrawl">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#191919" media="(prefers-color-scheme: dark)">
+<title>Информационная безопасность</title>
+<link rel="icon" href="../scrawl/favicon.svg" type="image/svg+xml">
+<script src="../scrawl/boot.js"></script>
+<link rel="stylesheet" href="../scrawl/chroma.css">
+<link rel="stylesheet" href="../scrawl/site.css">
+<script defer src="../scrawl/tree.js"></script>
+<script defer src="../scrawl/site.js"></script>
+</head>
+<body>
+<script type="application/json" data-scrawl="page">{"route":"/doc/info-security/info-security-notes.md","root":"../","answer":{"path":"info-security/info-security-notes.md","kind":"document","title":"Информационная безопасность","html":"\u003ch1 id=\"информационная-безопасность\" data-source-start=\"1\" data-source-end=\"1\"\u003eИнформационная безопасность\u003c/h1\u003e\n\u003ch1 id=\"оглавление\" data-source-start=\"3\" data-source-end=\"3\"\u003eОглавление\u003c/h1\u003e\n\u003cul data-source-start=\"5\" data-source-end=\"6\"\u003e\n\u003cli data-source-start=\"5\" data-source-end=\"5\"\u003e\u003ca href=\"#%D0%BF%D0%BE%D0%B8%D1%81%D0%BA-%D1%87%D1%83%D0%B2%D1%81%D1%82%D0%B2%D0%B8%D0%B5%D1%82%D0%BB%D1%8C%D0%BD%D0%BE%D0%B9-%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D0%B8-%D0%B2-git-%D1%80%D0%B5%D0%BF%D0%BF%D0%BE%D0%B7%D0%B8%D1%82%D0%BE%D1%80%D0%B8%D0%B8\"\u003eПоиск чувствиетльной информации в git реппозитории\u003c/a\u003e\u003c/li\u003e\n\u003cli data-source-start=\"6\" data-source-end=\"6\"\u003e\u003ca href=\"#%D1%83%D1%8F%D0%B7%D0%B2%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D0%B8-python-%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9\"\u003eУязвимости python приложений\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"поиск-чувствиетльной-информации-в-git-реппозитории\" data-source-start=\"8\" data-source-end=\"8\"\u003eПоиск чувствиетльной информации в git реппозитории\u003c/h3\u003e\n\u003cp data-source-start=\"10\" data-source-end=\"14\"\u003eОчень часто разработчики проекта допускают ошибку и добавляют под версионный\nконтроль файлы, которые содержат различную чувствительную информацию (пароли,\nтокены, сертификаты и т д). В дальнейшем, в лучшем случае, они удаляют в своих\nпоследних коммитах эту информацию, но это не решает проблему, так как в истории\nданная информация все так же остается.\u003c/p\u003e\n\u003cp data-source-start=\"16\" data-source-end=\"20\"\u003eТак как эта проблема серьезная и ей подвержены многие проекты, специалисты в\nсфере информационной безопасности разработали утилиту\n\u003ca href=\"https://github.com/kootenpv/gittyleaks\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003egittyleaks\u003c/a\u003e, которая помогает\nпроизвести анализ исходного кода проекта на предмет нахождения там\nчувствительной информации.\u003c/p\u003e\n\u003cp data-source-start=\"22\" data-source-end=\"23\"\u003eВот так, при помощи простой команды gittyleaks \u003ccode\u003egittyleaks --find-anything\u003c/code\u003e\nможно выполнить в проекте поиск всех подозрительных вещей.\u003c/p\u003e\n\u003cp data-source-start=\"25\" data-source-end=\"27\"\u003eКроме этого, можно воспользоваться возможностями git и посмотреть какие файлы\nудалялись \u003ccode\u003egit log --diff-filter=D --summary\u003c/code\u003e. В удаленных файлах могут найтись\nсертификаты, которые могут использоваться для подключения и многое другое.\u003c/p\u003e\n\u003cp data-source-start=\"29\" data-source-end=\"29\"\u003eПолезные ссылки:\u003c/p\u003e\n\u003cul data-source-start=\"31\" data-source-end=\"31\"\u003e\n\u003cli data-source-start=\"31\" data-source-end=\"31\"\u003e\u003ca href=\"https://habr.com/ru/post/459552/\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003eКак потерять доступ в лайв систему, просто пошарив исходный код\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"уязвимости-python-приложений\" data-source-start=\"33\" data-source-end=\"33\"\u003eУязвимости python приложений\u003c/h3\u003e\n\u003cp data-source-start=\"35\" data-source-end=\"36\"\u003e\u003ca href=\"https://youtu.be/zvSgTBg_nac\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003eИван Цыганов - «(Без)опасные зависимости» (Positive Technologies)\u003c/a\u003e,\n\u003ca href=\"https://cloud.mail.ru/public/49es/WVUbAcUde\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003eкопия\u003c/a\u003e\u003c/p\u003e\n","toc":[{"level":3,"text":"Поиск чувствиетльной информации в git реппозитории","id":"поиск-чувствиетльной-информации-в-git-реппозитории"},{"level":3,"text":"Уязвимости python приложений","id":"уязвимости-python-приложений"}],"show_toc":false,"rev":"sha256:4807a949871a6f40b2935f81dea4058bb038c26025f33f8c06a05bfff9336ecc","mod_time":"2026-10-24T11:37:57.770474466Z","breadcrumbs":[{"name":"Home","url":"/"},{"name":"info-security","url":"/doc/info-security/"},{"name":"info-security-notes.md","url":""}],"edit_url":"/edit/info-security/info-security-notes.md","missing":false,"can_create":false}}</script>
+<div id="scrawl-app-root"></div>
+
+<main data-scrawl-static>
+<nav aria-label="Path"><ol class="scrawl-static-crumbs"><li><a href="../index.html">Home</a></li><li><a href="../info-security/index.html">info-security</a></li><li>info-security-notes.md</li></ol></nav>
+<article class="markdown-document">
+<h1 id="информационная-безопасность" data-source-start="1" data-source-end="1">Информационная безопасность</h1>
+<h1 id="оглавление" data-source-start="3" data-source-end="3">Оглавление</h1>
+<ul data-source-start="5" data-source-end="6">
+<li data-source-start="5" data-source-end="5"><a href="#%D0%BF%D0%BE%D0%B8%D1%81%D0%BA-%D1%87%D1%83%D0%B2%D1%81%D1%82%D0%B2%D0%B8%D0%B5%D1%82%D0%BB%D1%8C%D0%BD%D0%BE%D0%B9-%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D0%B8-%D0%B2-git-%D1%80%D0%B5%D0%BF%D0%BF%D0%BE%D0%B7%D0%B8%D1%82%D0%BE%D1%80%D0%B8%D0%B8">Поиск чувствиетльной информации в git реппозитории</a></li>
+<li data-source-start="6" data-source-end="6"><a href="#%D1%83%D1%8F%D0%B7%D0%B2%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D0%B8-python-%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9">Уязвимости python приложений</a></li>
+</ul>
+<h3 id="поиск-чувствиетльной-информации-в-git-реппозитории" data-source-start="8" data-source-end="8">Поиск чувствиетльной информации в git реппозитории</h3>
+<p data-source-start="10" data-source-end="14">Очень часто разработчики проекта допускают ошибку и добавляют под версионный
+контроль файлы, которые содержат различную чувствительную информацию (пароли,
+токены, сертификаты и т д). В дальнейшем, в лучшем случае, они удаляют в своих
+последних коммитах эту информацию, но это не решает проблему, так как в истории
+данная информация все так же остается.</p>
+<p data-source-start="16" data-source-end="20">Так как эта проблема серьезная и ей подвержены многие проекты, специалисты в
+сфере информационной безопасности разработали утилиту
+<a href="https://github.com/kootenpv/gittyleaks" target="_blank" rel="noopener noreferrer nofollow">gittyleaks</a>, которая помогает
+произвести анализ исходного кода проекта на предмет нахождения там
+чувствительной информации.</p>
+<p data-source-start="22" data-source-end="23">Вот так, при помощи простой команды gittyleaks <code>gittyleaks --find-anything</code>
+можно выполнить в проекте поиск всех подозрительных вещей.</p>
+<p data-source-start="25" data-source-end="27">Кроме этого, можно воспользоваться возможностями git и посмотреть какие файлы
+удалялись <code>git log --diff-filter=D --summary</code>. В удаленных файлах могут найтись
+сертификаты, которые могут использоваться для подключения и многое другое.</p>
+<p data-source-start="29" data-source-end="29">Полезные ссылки:</p>
+<ul data-source-start="31" data-source-end="31">
+<li data-source-start="31" data-source-end="31"><a href="https://habr.com/ru/post/459552/" target="_blank" rel="noopener noreferrer nofollow">Как потерять доступ в лайв систему, просто пошарив исходный код</a></li>
+</ul>
+<h3 id="уязвимости-python-приложений" data-source-start="33" data-source-end="33">Уязвимости python приложений</h3>
+<p data-source-start="35" data-source-end="36"><a href="https://youtu.be/zvSgTBg_nac" target="_blank" rel="noopener noreferrer nofollow">Иван Цыганов - «(Без)опасные зависимости» (Positive Technologies)</a>,
+<a href="https://cloud.mail.ru/public/49es/WVUbAcUde" target="_blank" rel="noopener noreferrer nofollow">копия</a></p>
+
+</article>
+</main>
+</body>
+</html>

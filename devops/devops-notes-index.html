@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+<meta name="color-scheme" content="light dark">
+<meta name="generator" content="scrawl">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#191919" media="(prefers-color-scheme: dark)">
+<title>Заметки о devops</title>
+<link rel="icon" href="../scrawl/favicon.svg" type="image/svg+xml">
+<script src="../scrawl/boot.js"></script>
+<link rel="stylesheet" href="../scrawl/chroma.css">
+<link rel="stylesheet" href="../scrawl/site.css">
+<script defer src="../scrawl/tree.js"></script>
+<script defer src="../scrawl/site.js"></script>
+</head>
+<body>
+<script type="application/json" data-scrawl="page">{"route":"/doc/devops/devops-notes-index.md","root":"../","answer":{"path":"devops/devops-notes-index.md","kind":"document","title":"Заметки о devops","html":"\u003ch1 id=\"заметки-о-devops\" data-source-start=\"1\" data-source-end=\"1\"\u003eЗаметки о devops\u003c/h1\u003e\n\u003ch1 id=\"оглавление\" data-source-start=\"3\" data-source-end=\"3\"\u003eОглавление\u003c/h1\u003e\n\u003col data-source-start=\"5\" data-source-end=\"6\"\u003e\n\u003cli data-source-start=\"5\" data-source-end=\"6\"\u003e\u003ca href=\"#gitlab-ci\"\u003eGitLab CI\u003c/a\u003e\n\u003cul data-source-start=\"6\" data-source-end=\"6\"\u003e\n\u003cli data-source-start=\"6\" data-source-end=\"6\"\u003e\u003ca href=\"#%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B2-ci-%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B3%D0%B5-docker-%D0%BE%D0%B1%D1%80%D0%B0%D0%B7-%D0%B8%D0%B7-%D0%BF%D1%80%D0%B8%D0%B2%D0%B0%D1%82%D0%BD%D0%BE%D0%B3%D0%BE-docker-hub\"\u003eИспользование в CI конфиге docker образ из приватного docker-hub\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch2 id=\"gitlab-ci\" data-source-start=\"8\" data-source-end=\"8\"\u003eGitLab CI\u003c/h2\u003e\n\u003ch3 id=\"использование-в-ci-конфиге-docker-образ-из-приватного-docker-hub\" data-source-start=\"10\" data-source-end=\"10\"\u003eИспользование в CI конфиге docker образ из приватного docker-hub\u003c/h3\u003e\n\u003cp data-source-start=\"12\" data-source-end=\"13\"\u003eДля того, чтобы иметь возможность использовать свой собственный docker образ из\nприватного репозитория docker-hub, необходимо:\u003c/p\u003e\n\u003cul data-source-start=\"15\" data-source-end=\"26\"\u003e\n\u003cli data-source-start=\"15\" data-source-end=\"19\"\u003eв \u003ccode\u003e.gitlab-ci.yml\u003c/code\u003e указать какой образ вы хотите использовать. В общем виде\nэто выглядит так:\n\u003cdiv class=\"code-block\" data-source-start=\"17\" data-source-end=\"19\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003eimage: registry.hub.docker.com/\u0026lt;username\u0026gt;/\u0026lt;repo-name\u0026gt;:\u0026lt;tag\u0026gt;\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"20\" data-source-end=\"22\"\u003eпосле этого необходимо по \u003ca href=\"#%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D0%B0%D0%B2%D1%82%D0%BE%D1%80%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8-%D0%B2-docker-hub\"\u003eинструкции\u003c/a\u003e\nсформировать настроки для docker, которые будут использоваться gitlab runner\nдля доступа к приватному docker-hub\u003c/li\u003e\n\u003cli data-source-start=\"23\" data-source-end=\"26\"\u003eтеперь, когда настройки были сформированы, необходимо в gitlab открыть\n\u003ccode\u003eSettings\u003c/code\u003e -\u0026gt; \u003ccode\u003eCI / CD\u003c/code\u003e -\u0026gt; \u003ccode\u003eVariables\u003c/code\u003e, создать переменную\n\u003ccode\u003eDOCKER_AUTH_CONFIG\u003c/code\u003e и поместить в нее настройки, которые были сгенерированны\nна предыдущем шаге (флажки \u003ccode\u003eProtected\u003c/code\u003e и \u003ccode\u003eMasked\u003c/code\u003e активировать не нужно).\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch4 id=\"настройка-авторизации-в-docker-hub\" data-source-start=\"28\" data-source-end=\"28\"\u003eНастройка авторизации в docker hub\u003c/h4\u003e\n\u003cp data-source-start=\"30\" data-source-end=\"35\"\u003eОбычно для подключения к docker hub используется логин и пароль, но так делать\nне безопасно, когда речь заходить про настройку доступа к реппозиторию из CI/CD\nсистем. Для того, чтобы сделать авторизацию более безопасной, docker hub дает\nвозможность сгенерировать специальный токен, который можно будет использовать\nвместо пароля. Для того, чтобы его сненерировать, необходимо перейти по\n\u003ca href=\"https://hub.docker.com/settings/security\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003eссылке\u003c/a\u003e.\u003c/p\u003e\n\u003cp data-source-start=\"37\" data-source-end=\"39\"\u003eПосле того как токен был сгенерирован, можно приступать к написанию конфига для\ndocker, где будет описано при помощи каких credentials будет происходить\nавтризация.\u003c/p\u003e\n\u003cp data-source-start=\"41\" data-source-end=\"41\"\u003eПеред созданием конфига необходимо выполнить команду:\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-lang=\"bash\" data-source-start=\"43\" data-source-end=\"45\"\u003e\u003cpre class=\"chroma\"\u003e\u003ccode\u003e\u003cspan class=\"line\"\u003e\u003cspan class=\"cl\"\u003e\u003cspan class=\"nb\"\u003eecho\u003c/span\u003e -n \u003cspan class=\"s2\"\u003e\u0026#34;\u0026lt;docker-hub-login\u0026gt;:\u0026lt;docker-hub-pass-or-token\u0026gt;\u0026#34;\u003c/span\u003e \u003cspan class=\"p\"\u003e|\u003c/span\u003e base64\n\u003c/span\u003e\u003c/span\u003e\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003cblockquote data-source-start=\"47\" data-source-end=\"48\"\u003e\n\u003cp data-source-start=\"47\" data-source-end=\"48\"\u003e\u003ccode\u003e\u0026lt;docker-hub-login\u0026gt;\u003c/code\u003e логин к вашему docker hub аккаунту\n\u003ccode\u003e\u0026lt;docker-hub-pass-or-token\u0026gt;\u003c/code\u003e пароль или токен для доступа к docker hub\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp data-source-start=\"50\" data-source-end=\"50\"\u003eИ подставить результат в следеющую структуру:\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"52\" data-source-end=\"60\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003e{\n    \u0026#34;auths\u0026#34;: {\n        \u0026#34;registry.hub.docker.com\u0026#34;: {\n            \u0026#34;auth\u0026#34;: \u0026#34;\u0026lt;generated-string\u0026gt;\u0026#34;\n        }\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003cp data-source-start=\"62\" data-source-end=\"62\"\u003eВ результате получится примерно вот такой конфиг:\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"64\" data-source-end=\"72\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003e{\n    \u0026#34;auths\u0026#34;: {\n        \u0026#34;registry.hub.docker.com\u0026#34;: {\n            \u0026#34;auth\u0026#34;: \u0026#34;PGRvY2tlci1odWItbG9naW4+Ojxkb2NrZXItaHViLXBhc3Mtb3ItdG9rZW4+\u0026#34;\n        }\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003cp data-source-start=\"74\" data-source-end=\"74\"\u003eПолезные ссылки:\u003c/p\u003e\n\u003cul data-source-start=\"76\" data-source-end=\"77\"\u003e\n\u003cli data-source-start=\"76\" data-source-end=\"76\"\u003e\u003ca href=\"https://docs.gitlab.com/ee/ci/docker/using_docker_images.html#define-an-image-from-a-private-container-registry\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003eDefine an image from a private Container Registry - gitlab doc\u003c/a\u003e\u003c/li\u003e\n\u003cli data-source-start=\"77\" data-source-end=\"77\"\u003e\u003ca href=\"https://stackoverflow.com/questions/51580858/cant-access-private-mysql-docker-image-from-gitlab-ci\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003eCan\u0026#39;t Access Private MySQL Docker Image From Gitlab CI - stackoverflow\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n","toc":[{"level":2,"text":"GitLab CI","id":"gitlab-ci"},{"level":3,"text":"Использование в CI конфиге docker образ из приватного docker-hub","id":"использование-в-ci-конфиге-docker-образ-из-приватного-docker-hub"}],"show_toc":false,"rev":"sha256:01ab59689376715436c7ef8fee5e0e57cd89565bf367bff76636e82b781d2450","mod_time":"2026-10-24T11:37:57.770474466Z","breadcrumbs":[{"name":"Home","url":"/"},{"name":"devops","url":"/doc/devops/"},{"name":"devops-notes-index.md","url":""}],"edit_url":"/edit/devops/devops-notes-index.md","missing":false,"can_create":false}}</script>
+<div id="scrawl-app-root"></div>
+
+<main data-scrawl-static>
+<nav aria-label="Path"><ol class="scrawl-static-crumbs"><li><a href="../index.html">Home</a></li><li><a href="../devops/index.html">devops</a></li><li>devops-notes-index.md</li></ol></nav>
+<article class="markdown-document">
+<h1 id="заметки-о-devops" data-source-start="1" data-source-end="1">Заметки о devops</h1>
+<h1 id="оглавление" data-source-start="3" data-source-end="3">Оглавление</h1>
+<ol data-source-start="5" data-source-end="6">
+<li data-source-start="5" data-source-end="6"><a href="#gitlab-ci">GitLab CI</a>
+<ul data-source-start="6" data-source-end="6">
+<li data-source-start="6" data-source-end="6"><a href="#%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B2-ci-%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B3%D0%B5-docker-%D0%BE%D0%B1%D1%80%D0%B0%D0%B7-%D0%B8%D0%B7-%D0%BF%D1%80%D0%B8%D0%B2%D0%B0%D1%82%D0%BD%D0%BE%D0%B3%D0%BE-docker-hub">Использование в CI конфиге docker образ из приватного docker-hub</a></li>
+</ul>
+</li>
+</ol>
+<h2 id="gitlab-ci" data-source-start="8" data-source-end="8">GitLab CI</h2>
+<h3 id="использование-в-ci-конфиге-docker-образ-из-приватного-docker-hub" data-source-start="10" data-source-end="10">Использование в CI конфиге docker образ из приватного docker-hub</h3>
+<p data-source-start="12" data-source-end="13">Для того, чтобы иметь возможность использовать свой собственный docker образ из
+приватного репозитория docker-hub, необходимо:</p>
+<ul data-source-start="15" data-source-end="26">
+<li data-source-start="15" data-source-end="19">в <code>.gitlab-ci.yml</code> указать какой образ вы хотите использовать. В общем виде
+это выглядит так:
+<div class="code-block" data-source-start="17" data-source-end="19"><pre tabindex="0" class="chroma"><code>image: registry.hub.docker.com/&lt;username&gt;/&lt;repo-name&gt;:&lt;tag&gt;
+</code></pre></div>
+</li>
+<li data-source-start="20" data-source-end="22">после этого необходимо по <a href="#%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D0%B0%D0%B2%D1%82%D0%BE%D1%80%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8-%D0%B2-docker-hub">инструкции</a>
+сформировать настроки для docker, которые будут использоваться gitlab runner
+для доступа к приватному docker-hub</li>
+<li data-source-start="23" data-source-end="26">теперь, когда настройки были сформированы, необходимо в gitlab открыть
+<code>Settings</code> -&gt; <code>CI / CD</code> -&gt; <code>Variables</code>, создать переменную
+<code>DOCKER_AUTH_CONFIG</code> и поместить в нее настройки, которые были сгенерированны
+на предыдущем шаге (флажки <code>Protected</code> и <code>Masked</code> активировать не нужно).</li>
+</ul>
+<h4 id="настройка-авторизации-в-docker-hub" data-source-start="28" data-source-end="28">Настройка авторизации в docker hub</h4>
+<p data-source-start="30" data-source-end="35">Обычно для подключения к docker hub используется логин и пароль, но так делать
+не безопасно, когда речь заходить про настройку доступа к реппозиторию из CI/CD
+систем. Для того, чтобы сделать авторизацию более безопасной, docker hub дает
+возможность сгенерировать специальный токен, который можно будет использовать
+вместо пароля. Для того, чтобы его сненерировать, необходимо перейти по
+<a href="https://hub.docker.com/settings/security" target="_blank" rel="noopener noreferrer nofollow">ссылке</a>.</p>
+<p data-source-start="37" data-source-end="39">После того как токен был сгенерирован, можно приступать к написанию конфига для
+docker, где будет описано при помощи каких credentials будет происходить
+автризация.</p>
+<p data-source-start="41" data-source-end="41">Перед созданием конфига необходимо выполнить команду:</p>
+<div class="code-block" data-lang="bash" data-source-start="43" data-source-end="45"><pre class="chroma"><code><span class="line"><span class="cl"><span class="nb">echo</span> -n <span class="s2">&#34;&lt;docker-hub-login&gt;:&lt;docker-hub-pass-or-token&gt;&#34;</span> <span class="p">|</span> base64
+</span></span></code></pre></div>
+<blockquote data-source-start="47" data-source-end="48">
+<p data-source-start="47" data-source-end="48"><code>&lt;docker-hub-login&gt;</code> логин к вашему docker hub аккаунту
+<code>&lt;docker-hub-pass-or-token&gt;</code> пароль или токен для доступа к docker hub</p>
+</blockquote>
+<p data-source-start="50" data-source-end="50">И подставить результат в следеющую структуру:</p>
+<div class="code-block" data-source-start="52" data-source-end="60"><pre tabindex="0" class="chroma"><code>{
+    &#34;auths&#34;: {
+        &#34;registry.hub.docker.com&#34;: {
+            &#34;auth&#34;: &#34;&lt;generated-string&gt;&#34;
+        }
+    }
+}
+</code></pre></div>
+<p data-source-start="62" data-source-end="62">В результате получится примерно вот такой конфиг:</p>
+<div class="code-block" data-source-start="64" data-source-end="72"><pre tabindex="0" class="chroma"><code>{
+    &#34;auths&#34;: {
+        &#34;registry.hub.docker.com&#34;: {
+            &#34;auth&#34;: &#34;PGRvY2tlci1odWItbG9naW4+Ojxkb2NrZXItaHViLXBhc3Mtb3ItdG9rZW4+&#34;
+        }
+    }
+}
+</code></pre></div>
+<p data-source-start="74" data-source-end="74">Полезные ссылки:</p>
+<ul data-source-start="76" data-source-end="77">
+<li data-source-start="76" data-source-end="76"><a href="https://docs.gitlab.com/ee/ci/docker/using_docker_images.html#define-an-image-from-a-private-container-registry" target="_blank" rel="noopener noreferrer nofollow">Define an image from a private Container Registry - gitlab doc</a></li>
+<li data-source-start="77" data-source-end="77"><a href="https://stackoverflow.com/questions/51580858/cant-access-private-mysql-docker-image-from-gitlab-ci" target="_blank" rel="noopener noreferrer nofollow">Can&#39;t Access Private MySQL Docker Image From Gitlab CI - stackoverflow</a></li>
+</ul>
+
+</article>
+</main>
+</body>
+</html>

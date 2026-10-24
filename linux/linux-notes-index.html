@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+<meta name="color-scheme" content="light dark">
+<meta name="generator" content="scrawl">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#191919" media="(prefers-color-scheme: dark)">
+<title>Заметки о работе с Linux</title>
+<link rel="icon" href="../scrawl/favicon.svg" type="image/svg+xml">
+<script src="../scrawl/boot.js"></script>
+<link rel="stylesheet" href="../scrawl/chroma.css">
+<link rel="stylesheet" href="../scrawl/site.css">
+<script defer src="../scrawl/tree.js"></script>
+<script defer src="../scrawl/site.js"></script>
+</head>
+<body>
+<script type="application/json" data-scrawl="page">{"route":"/doc/linux/linux-notes-index.md","root":"../","answer":{"path":"linux/linux-notes-index.md","kind":"document","title":"Заметки о работе с Linux","html":"\u003ch1 id=\"заметки-о-работе-с-linux\" data-source-start=\"1\" data-source-end=\"1\"\u003eЗаметки о работе с Linux\u003c/h1\u003e\n\u003ch1 id=\"оглавление\" data-source-start=\"3\" data-source-end=\"3\"\u003eОглавление\u003c/h1\u003e\n\u003col data-source-start=\"5\" data-source-end=\"18\"\u003e\n\u003cli data-source-start=\"5\" data-source-end=\"6\"\u003e\n\u003cp data-source-start=\"5\" data-source-end=\"5\"\u003e\u003ca href=\"#%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D1%84%D0%B0%D0%B9%D0%BB%D0%BE%D0%B2%D0%BE%D0%B9-%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D0%BE%D0%B9\"\u003eРабота с файловой системой\u003c/a\u003e\u003c/p\u003e\n\u003cul data-source-start=\"6\" data-source-end=\"6\"\u003e\n\u003cli data-source-start=\"6\" data-source-end=\"6\"\u003e\u003ca href=\"#%D0%BC%D0%BE%D0%BD%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B4%D0%B8%D1%81%D0%BA%D0%BE%D0%B2\"\u003eМонтирование дисков\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"8\" data-source-end=\"15\"\u003e\n\u003cp data-source-start=\"8\" data-source-end=\"8\"\u003e\u003ca href=\"#%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B\"\u003eНастройка системы\u003c/a\u003e\u003c/p\u003e\n\u003cul data-source-start=\"9\" data-source-end=\"15\"\u003e\n\u003cli data-source-start=\"9\" data-source-end=\"9\"\u003e\u003ca href=\"#%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B0-%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B-%D0%B8%D0%B7-%D0%BE%D0%B1%D0%BE%D0%BB%D0%BE%D1%87%D0%BA%D0%B8-grub\"\u003eЗагрузка системы из оболочки GRUB\u003c/a\u003e\u003c/li\u003e\n\u003cli data-source-start=\"10\" data-source-end=\"10\"\u003e\u003ca href=\"#%D0%BF%D0%B5%D1%80%D0%B5%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0%D0%B2%D0%BE%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D1%87%D0%B8%D0%BA%D0%B0-grub\"\u003eПереустановка/восстановление загрузчика grub\u003c/a\u003e\u003c/li\u003e\n\u003cli data-source-start=\"11\" data-source-end=\"11\"\u003e\u003ca href=\"#%D0%B0%D0%BA%D1%82%D0%B8%D0%B2%D0%B0%D1%86%D0%B8%D1%8F-quick-search-%D0%B2-synaptic\"\u003eАктивация \u0026#34;Quick Search\u0026#34; в synaptic\u003c/a\u003e\u003c/li\u003e\n\u003cli data-source-start=\"12\" data-source-end=\"12\"\u003e\u003ca href=\"#%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D1%80%D0%B0%D0%B7%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2%D1%82%D0%BE%D1%80%D0%BE%D0%B3%D0%BE-%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80%D0%B0\"\u003eНастройка разрешения второго монитора\u003c/a\u003e\u003c/li\u003e\n\u003cli data-source-start=\"13\" data-source-end=\"13\"\u003e\u003ca href=\"#%D0%B2%D0%BE%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-xorgconf\"\u003eВосстановление xorg.conf\u003c/a\u003e\u003c/li\u003e\n\u003cli data-source-start=\"14\" data-source-end=\"14\"\u003e\u003ca href=\"#%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-51-%D0%B7%D0%B2%D1%83%D0%BA%D0%B0-%D0%B2-pulseaudio\"\u003eНастройка 5.1 звука в PulseAudio\u003c/a\u003e\u003c/li\u003e\n\u003cli data-source-start=\"15\" data-source-end=\"15\"\u003e\u003ca href=\"#%D1%80%D1%83%D1%87%D0%BD%D0%BE%D0%B5-%D1%83%D0%BA%D0%B0%D0%B7%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B4%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D1%85-dns-%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D0%BE%D0%B2\"\u003eРучное указание дополнительных DNS серверов\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"17\" data-source-end=\"18\"\u003e\n\u003cp data-source-start=\"17\" data-source-end=\"17\"\u003e\u003ca href=\"#%D0%B8%D1%81%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BE%D1%88%D0%B8%D0%B1%D0%BE%D0%BA\"\u003eИсправление ошибок\u003c/a\u003e\u003c/p\u003e\n\u003cul data-source-start=\"18\" data-source-end=\"18\"\u003e\n\u003cli data-source-start=\"18\" data-source-end=\"18\"\u003e\u003ca href=\"#fix-%D0%BD%D0%B5%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BE%D1%82%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B8%D0%BA%D0%BE%D0%BD%D0%BA%D0%B8-skype-%D0%B2-tray\"\u003eFix неправильного отображения иконки skype в tray\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch2 id=\"работа-с-файловой-системой\" data-source-start=\"20\" data-source-end=\"20\"\u003eРабота с файловой системой\u003c/h2\u003e\n\u003ch3 id=\"монтирование-дисков\" data-source-start=\"22\" data-source-end=\"22\"\u003eМонтирование дисков\u003c/h3\u003e\n\u003cp data-source-start=\"24\" data-source-end=\"25\"\u003eДля того, чтобы примонтировать нужный диск из консоли, нужно выполнить 2\nпростых действия:\u003c/p\u003e\n\u003cul data-source-start=\"27\" data-source-end=\"42\"\u003e\n\u003cli data-source-start=\"27\" data-source-end=\"32\"\u003e\n\u003cp data-source-start=\"27\" data-source-end=\"28\"\u003eПосмотреть как ОС определила жесткий диск. Это можно сделать при помощи\nкоманды\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-lang=\"bash\" data-source-start=\"30\" data-source-end=\"32\"\u003e\u003cpre class=\"chroma\"\u003e\u003ccode\u003e\u003cspan class=\"line\"\u003e\u003cspan class=\"cl\"\u003esudo fdisk -l\n\u003c/span\u003e\u003c/span\u003e\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"34\" data-source-end=\"42\"\u003e\n\u003cp data-source-start=\"34\" data-source-end=\"35\"\u003eТеперь, увидев, какое имя присвоила ОС диску, его можно примонтировать к\nнужной дирректории\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-lang=\"bash\" data-source-start=\"37\" data-source-end=\"39\"\u003e\u003cpre class=\"chroma\"\u003e\u003ccode\u003e\u003cspan class=\"line\"\u003e\u003cspan class=\"cl\"\u003esudo mount -t ntfs /dev/sdb1 /media\n\u003c/span\u003e\u003c/span\u003e\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003cp data-source-start=\"41\" data-source-end=\"42\"\u003eДанная команда примонтирует раздел диска c именем \u003ccode\u003esdb1\u003c/code\u003e и файловой системой\n\u003ccode\u003entfs\u003c/code\u003e к папке \u003ccode\u003e/media\u003c/code\u003e.\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp data-source-start=\"44\" data-source-end=\"45\"\u003eОтвет нашел\n\u003ca href=\"https://askubuntu.com/questions/177825/how-to-mount-an-external-hdd\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003eздесь\u003c/a\u003e\u003c/p\u003e\n\u003ch2 id=\"настройка-системы\" data-source-start=\"47\" data-source-end=\"47\"\u003eНастройка системы\u003c/h2\u003e\n\u003ch3 id=\"загрузка-системы-из-оболочки-grub\" data-source-start=\"49\" data-source-end=\"49\"\u003eЗагрузка системы из оболочки GRUB\u003c/h3\u003e\n\u003cp data-source-start=\"51\" data-source-end=\"51\"\u003eДля того, чтобы загрузить систему из оболочки GRUB необходимо:\u003c/p\u003e\n\u003cul data-source-start=\"53\" data-source-end=\"80\"\u003e\n\u003cli data-source-start=\"53\" data-source-end=\"57\"\u003e\n\u003cp data-source-start=\"53\" data-source-end=\"57\"\u003eНайти раздел на котором расположены файлы \u003ccode\u003evmlinuz\u003c/code\u003e или \u003ccode\u003elinux\u003c/code\u003e, и\n\u003ccode\u003einitrd.img\u003c/code\u003e. Посмотреть список файлов можно при помощи \u003ccode\u003els (hd0,1)/\u003c/code\u003e. Если\nна разделе \u003ccode\u003ehd0,1\u003c/code\u003e нет необходимых файлов, то продолжайте поиск на других\nразделах. Для этого увеличивайте цифру расположенную после запятой на единицу\nдо тех пор пока не найдете нужный раздел.\u003c/p\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"58\" data-source-end=\"80\"\u003e\n\u003cp data-source-start=\"58\" data-source-end=\"58\"\u003eПосле того как файлы найдены необходимо выполнить\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"60\" data-source-end=\"65\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003e# Загружаем ядро\nlinux (hd0,1)/vmlinuz root=/dev/sda1\nили\nlinux (hd0,1)/linux root=/dev/sda1\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"67\" data-source-end=\"71\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003e# Загружаем initrd-образ\ninitrd (hd0,1)/initrd.img\nboot\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003cp data-source-start=\"73\" data-source-end=\"74\"\u003eP.S. если вы нашли файлы не в \u003ccode\u003ehd0,1\u003c/code\u003e, то укажите в командах актуальный для\nвас раздел. Например если вы нашли файлы в \u003ccode\u003ehd0,2\u003c/code\u003e, то вам нужно выполнять:\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"76\" data-source-end=\"80\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003elinux (hd0,2)/vmlinuz root=/dev/sda2\ninitrd (hd0,2)/initrd.img\nboot\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp data-source-start=\"82\" data-source-end=\"82\"\u003eПолезные ссылки:\u003c/p\u003e\n\u003cul data-source-start=\"84\" data-source-end=\"85\"\u003e\n\u003cli data-source-start=\"84\" data-source-end=\"84\"\u003e\u003ca href=\"https://askubuntu.com/questions/929833/how-do-i-boot-my-pc-from-grub\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003eHow do I boot my PC from GRUB?\u003c/a\u003e\u003c/li\u003e\n\u003cli data-source-start=\"85\" data-source-end=\"85\"\u003e\u003ca href=\"https://help.ubuntu.ru/wiki/grub\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003eGRUB - загрузчик системы\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"переустановкавосстановление-загрузчика-grub\" data-source-start=\"87\" data-source-end=\"87\"\u003eПереустановка/восстановление загрузчика grub\u003c/h3\u003e\n\u003cp data-source-start=\"89\" data-source-end=\"90\"\u003eИногда бывает, что после установки системы компьютер не загружается, а на экане\nкрасуется окно загрузчика grub.\u003c/p\u003e\n\u003cp data-source-start=\"92\" data-source-end=\"92\"\u003e\u003cimg src=\"linux-notes-index/reinstall-restore-grub-loader/grub-recovery-window.png\" alt=\"\"\u003e\u003c/p\u003e\n\u003cp data-source-start=\"94\" data-source-end=\"94\"\u003eЕсть 2 основных способа исправить данную ситуацию:\u003c/p\u003e\n\u003cul data-source-start=\"96\" data-source-end=\"97\"\u003e\n\u003cli data-source-start=\"96\" data-source-end=\"96\"\u003eвосстановление Grub в rescue mode\u003c/li\u003e\n\u003cli data-source-start=\"97\" data-source-end=\"97\"\u003eвосстановление Grub с помощью утилиты Boot repair\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp data-source-start=\"99\" data-source-end=\"99\"\u003e\u003cstrong\u003eВосстановление Grub в rescue mode\u003c/strong\u003e\u003c/p\u003e\n\u003cp data-source-start=\"101\" data-source-end=\"103\"\u003eЕсли по каким-то причинам у вас нет доступа к LiveCD/USB-носителю, а также к\nкомпьютеру, с помощью которого этот самый носитель можно было бы сделать, то\nэтот способ для вас.\u003c/p\u003e\n\u003cp data-source-start=\"105\" data-source-end=\"107\"\u003eСамо восстановление проходит таким образом: сначала мы подгружаем все модули,\nчтобы открыть доступ ко всей функциональной части Grub, после чего запуститься\nс нужного раздела. Надо понимать, что Grub состоит из двух частей:\u003c/p\u003e\n\u003cp data-source-start=\"109\" data-source-end=\"110\"\u003eОдна из этих частей (первая) записана в MBR диска. В ней присутствует базовый\nфункционал и ничего больше (консоль в rescue mode).\u003c/p\u003e\n\u003cp data-source-start=\"112\" data-source-end=\"115\"\u003eСтало быть, нам нужно определить, в каком разделе находится вторая часть Grub\n(находится в каталоге /boot/grub), и после чего подгрузить все недостающие\nмодули. А вот уже после этого мы сможем запустить загрузчик с нужного раздела.\nВ rescue mode есть всего четыре команды:\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"117\" data-source-end=\"122\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003els\nset\nunset\ninsmod\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003cp data-source-start=\"124\" data-source-end=\"124\"\u003eДля начала вводим следующую команду:\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-lang=\"python\" data-source-start=\"126\" data-source-end=\"128\"\u003e\u003cpre class=\"chroma\"\u003e\u003ccode\u003e\u003cspan class=\"line\"\u003e\u003cspan class=\"cl\"\u003e\u003cspan class=\"n\"\u003els\u003c/span\u003e\n\u003c/span\u003e\u003c/span\u003e\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003cp data-source-start=\"130\" data-source-end=\"130\"\u003eВ выводе будет что-то подобное:\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"132\" data-source-end=\"134\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003e(hd0) (hd0,msdos3) (hd0,msdos2) (hd0,msdos1) (hd1) (hd1,msdos2) (hd1,msdos1)\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003cp data-source-start=\"136\" data-source-end=\"141\"\u003eВ некоторых случаях Grub неправильно опеределяет файловые системы находящиеся\nна разделах дисков. В данном примере загрузчик показывает их как msdos. Мы\nдолжны попытаться угадать диски, которые видим. В примере доступно два диска.\nДиск с индексом 0 содержащий три раздела, и диск с индексом 1 содержащий два\nраздела. Если вы знаете структуру своих дисков, определить нужный труда не\nсоставит.\u003c/p\u003e\n\u003cp data-source-start=\"143\" data-source-end=\"147\"\u003eВ загрузчике Grub разделы нумеруются в обратном исчислении. Не очень ясно какой\nименно из разделов назван, к примеру (hd0,msdos3). Чтобы было более понятно,\nможно использовать вид (hd0,1). Если в грабе отсчет дисков идет с 0, а разделов\nс 1, то можно определить, что операционная система установлена в первый раздел\nпервого раздела - (hd0,1). Используем следующую команду:\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"149\" data-source-end=\"152\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003eset prefix=(hd0,1)/boot/grub\nset root=(hd0,1)\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003cp data-source-start=\"154\" data-source-end=\"157\"\u003eС помощью этих команд мы приказываем системе использовать какой-то конкретный\nдиск, для выполнения всех остальных операций (в нашем случае, это диск\n(hd0,1)). Чтобы проверить есть ли на данном диске загрузчик, введем эту\nкоманду:\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"159\" data-source-end=\"161\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003els /boot/grub\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003cp data-source-start=\"163\" data-source-end=\"164\"\u003eЕсли в выводе будет список файлов и папок, значит мы все сделали правильно.\nТеперь можно загрузить все необходимые модули. Для этого выполним команды:\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"166\" data-source-end=\"170\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003einsmod ext2\ninsmod normal\nnormal\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003cp data-source-start=\"172\" data-source-end=\"174\"\u003eПосле выполнения команд Grub загрузится в полнофункциональном режиме. Будут\nнайдены все операционные системы, которые установлены на компьютере, после чего\nбудет показано стандартное меню загрузки.\u003c/p\u003e\n\u003cp data-source-start=\"176\" data-source-end=\"178\"\u003eЧтобы закрепить результат (и не проделывать все то же самое после перезапуска\nПК), нужно зайти в терминал своего дистрибутива Linux, где с root правами\nвыполнить следующую команду:\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-lang=\"bash\" data-source-start=\"180\" data-source-end=\"182\"\u003e\u003cpre class=\"chroma\"\u003e\u003ccode\u003e\u003cspan class=\"line\"\u003e\u003cspan class=\"cl\"\u003egrub-install /dev/sdX\n\u003c/span\u003e\u003c/span\u003e\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003cp data-source-start=\"184\" data-source-end=\"187\"\u003esdX - диск, на который должен быть установлен Grub. Так же стоит заметить, что\nданная команда не всегда помогает исправить ситуацию. В этом случае необходимо\nприбегнуть к помощи утилиты Boot repair, которая описывается в этой заметке\nотдельно.\u003c/p\u003e\n\u003cp data-source-start=\"189\" data-source-end=\"190\"\u003eЕсли операционная система расположена на разделе с файловой системой btrfs, то\nнам необходимо выполнить следующие команды:\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"192\" data-source-end=\"195\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003eset prefix=(hd0,1)/@/boot/grub\nset root=(hd0,1)\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003cp data-source-start=\"197\" data-source-end=\"197\"\u003eИ подгрузить модули:\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"199\" data-source-end=\"202\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003einsmod btrfs\ninsmod normal\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003cp data-source-start=\"204\" data-source-end=\"204\"\u003eНу и теперь запустить GRUB:\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"206\" data-source-end=\"208\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003enormal\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003cp data-source-start=\"210\" data-source-end=\"210\"\u003e\u003cstrong\u003eВосстановление Grub с помощью утилиты Boot repair\u003c/strong\u003e\u003c/p\u003e\n\u003cp data-source-start=\"212\" data-source-end=\"214\"\u003eС помощью этой замечательной утилиты вы сможете восстановить загрузчик всего в\nпару кликов. Утилита имеет собственный GUI, ее использование не вызовет\nтрудностей.\u003c/p\u003e\n\u003cp data-source-start=\"216\" data-source-end=\"217\"\u003eЧтобы установить boot repair, вы можете воспользоваться одним из приведенных\nспособов:\u003c/p\u003e\n\u003cul data-source-start=\"219\" data-source-end=\"223\"\u003e\n\u003cli data-source-start=\"219\" data-source-end=\"221\"\u003eЗапись и установка специального\n\u003ca href=\"http://sourceforge.net/projects/boot-repair-cd/files/\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003eобраза диска Boot Repair\u003c/a\u003e\n(и дальнейшая загрузка с него)\u003c/li\u003e\n\u003cli data-source-start=\"222\" data-source-end=\"223\"\u003eУстановка Boot repair из PPA-репозитория в LiveCD/USB дистрибутиве или в\nсистеме загруженной вручную из GRUB rescue mode\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp data-source-start=\"225\" data-source-end=\"227\"\u003eЕсли с первым способом все понятно: нужно просто скачать и записать образ с\nпомощью соответствующих инструментов. То во втором уже нужно знать конкретные\nкоманды, которые выглядят следующим образом:\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-lang=\"bash\" data-source-start=\"229\" data-source-end=\"232\"\u003e\u003cpre class=\"chroma\"\u003e\u003ccode\u003e\u003cspan class=\"line\"\u003e\u003cspan class=\"cl\"\u003esudo add-apt-repository ppa:yannubuntu/boot-repair\n\u003c/span\u003e\u003c/span\u003e\u003cspan class=\"line\"\u003e\u003cspan class=\"cl\"\u003esudo apt-get update \u003cspan class=\"o\"\u003e\u0026amp;\u0026amp;\u003c/span\u003e sudo apt-get install -y boot-repair\n\u003c/span\u003e\u003c/span\u003e\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003cp data-source-start=\"234\" data-source-end=\"234\"\u003eВ утилите будет доступно два варианта на выбор:\u003c/p\u003e\n\u003cp data-source-start=\"236\" data-source-end=\"237\"\u003e\u003cem\u003eRecommended repair\u003c/em\u003e исправляет большую часть известных ошибок, которые могли\nбы возникнуть при запуске. С его помощью вы сможете пофиксить и загрузчик Grub.\u003c/p\u003e\n\u003cp data-source-start=\"239\" data-source-end=\"240\"\u003e\u003cem\u003eCreate a BootInfo summary\u003c/em\u003e создает Boot-Info-Script – скрипт, который\nпозволяет диагностировать большинство проблем при загрузке.\u003c/p\u003e\n\u003cp data-source-start=\"242\" data-source-end=\"245\"\u003eЗдесь же есть и \u003cem\u003eAdvanced options\u003c/em\u003e. Он включает в себя варианты для\nвосстановления и настройки загрузчика Grub2 (загрузка по-умолчанию, опции\nзагрузки ядра, отображение или скрытие GRUB при загрузке, удаление GRUB). С\nпомощью этих же инструментов, вы можете восстановить MBR и т.д.\u003c/p\u003e\n\u003cp data-source-start=\"247\" data-source-end=\"251\"\u003eВам обязательно стоит заглянуть на\n\u003ca href=\"http://sourceforge.net/p/boot-repair/home/Home/\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003eофициальный сайт\u003c/a\u003e Boot\nRepair. Там вы сможете найти более подробную информацию обо всех возможностях и\nособенностях программы. Там же будет доступна информация о выходе новых версий:\nфиксах и улучшениях самой утилиты, а также многом и многом другом.\u003c/p\u003e\n\u003cp data-source-start=\"253\" data-source-end=\"253\"\u003e\u003ca href=\"https://omgubuntu.ru/nie-zaghruzhaietsia-linux-chinim-zaghruzchik-grub/\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003eОригинальная статья\u003c/a\u003e\u003c/p\u003e\n\u003ch3 id=\"активация-quick-search-в-synaptic\" data-source-start=\"255\" data-source-end=\"255\"\u003eАктивация \u0026#34;Quick Search\u0026#34; в synaptic\u003c/h3\u003e\n\u003cp data-source-start=\"257\" data-source-end=\"259\"\u003eИногда бывает, что по умолчанию \u0026#34;quick search\u0026#34; не активирован в synaptic и это\nочень неудобно. Для того, чтобы исправить это, нужно выполнить следующие\nкоманды:\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-lang=\"bash\" data-source-start=\"261\" data-source-end=\"264\"\u003e\u003cpre class=\"chroma\"\u003e\u003ccode\u003e\u003cspan class=\"line\"\u003e\u003cspan class=\"cl\"\u003esudo apt-get install apt-xapian-index\n\u003c/span\u003e\u003c/span\u003e\u003cspan class=\"line\"\u003e\u003cspan class=\"cl\"\u003esudo update-apt-xapian-index -vf\n\u003c/span\u003e\u003c/span\u003e\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003ch3 id=\"настройка-разрешения-второго-монитора\" data-source-start=\"266\" data-source-end=\"266\"\u003eНастройка разрешения второго монитора\u003c/h3\u003e\n\u003cp data-source-start=\"268\" data-source-end=\"271\"\u003eПри подключении 2 монитора я к несчастью обнаружил, что у него выставлено\nслишком маленькое разрешение и выставить максимально доступное невозможно. Ниже\nя опишу как я ставил систему и как решил эту проблему. Эта проблема возникла\nсразу после установки системы, по этому описывать буду с самого начала.\u003c/p\u003e\n\u003col data-source-start=\"273\" data-source-end=\"359\"\u003e\n\u003cli data-source-start=\"273\" data-source-end=\"273\"\u003e\n\u003cp data-source-start=\"273\" data-source-end=\"273\"\u003eУстановил систему.\u003c/p\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"274\" data-source-end=\"276\"\u003e\n\u003cp data-source-start=\"274\" data-source-end=\"276\"\u003eУстановил через менеджер драйверов последний доступный драйвер для своей\nвидеокарты (на момент написания статьи это был nvidia-331) и перезагрузил\nсистему.\u003c/p\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"277\" data-source-end=\"277\"\u003e\n\u003cp data-source-start=\"277\" data-source-end=\"277\"\u003eПодключил второй монитор.\u003c/p\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"278\" data-source-end=\"278\"\u003e\n\u003cp data-source-start=\"278\" data-source-end=\"278\"\u003eСоздал \u003ccode\u003exorg.conf\u003c/code\u003e с помощью автоконфигуратора \u003ccode\u003esudo nvidia-xconfig\u003c/code\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"279\" data-source-end=\"285\"\u003e\n\u003cp data-source-start=\"279\" data-source-end=\"280\"\u003eОткрыл созданный файл \u003ccode\u003esudo nano /etc/X11/xorg.conf\u003c/code\u003e и в секции \u003ccode\u003eMonitor\u003c/code\u003e\nизменил значения \u003ccode\u003eHorizSync\u003c/code\u003e и \u003ccode\u003eVertRefresh\u003c/code\u003e на такие:\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"282\" data-source-end=\"285\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003eHorizSync       31.0 - 81.0\nVertRefresh     56.0 - 76.0\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"287\" data-source-end=\"287\"\u003e\n\u003cp data-source-start=\"287\" data-source-end=\"287\"\u003eПерезагрузил X Server.\u003c/p\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"288\" data-source-end=\"359\"\u003e\n\u003cp data-source-start=\"288\" data-source-end=\"294\"\u003eОткрыл \u003ccode\u003envidia-settings\u003c/code\u003e и перешёл в раздел\n\u003ccode\u003eX Server Display Configuration\u003c/code\u003e. Здесь после внесенных изменений у второго\nмонитора стало возможно выбрать нужное разрешение экрана. После это можно\nвыбрать нужное расположение мониторов, выбрать главный применить эти\nизмения, а после сохранить их нажав \u003ccode\u003eSave to X Configuration file\u003c/code\u003e. После\nвсех выше перечисленных действий должно все работать как надо. Вот\nсодержимое файла \u003ccode\u003exorg.conf\u003c/code\u003e, после всех действий над ним:\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"296\" data-source-end=\"359\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003eSection \u0026#34;ServerLayout\u0026#34;\n    Identifier     \u0026#34;Layout0\u0026#34;\n    Screen      0  \u0026#34;Screen0\u0026#34; 0 0\n    InputDevice    \u0026#34;Keyboard0\u0026#34; \u0026#34;CoreKeyboard\u0026#34;\n    InputDevice    \u0026#34;Mouse0\u0026#34; \u0026#34;CorePointer\u0026#34;\n    Option         \u0026#34;Xinerama\u0026#34; \u0026#34;0\u0026#34;\nEndSection\n\nSection \u0026#34;Files\u0026#34;\nEndSection\n\nSection \u0026#34;InputDevice\u0026#34;\n\n    # generated from default\n    Identifier     \u0026#34;Mouse0\u0026#34;\n    Driver         \u0026#34;mouse\u0026#34;\n    Option         \u0026#34;Protocol\u0026#34; \u0026#34;auto\u0026#34;\n    Option         \u0026#34;Device\u0026#34; \u0026#34;/dev/psaux\u0026#34;\n    Option         \u0026#34;Emulate3Buttons\u0026#34; \u0026#34;no\u0026#34;\n    Option         \u0026#34;ZAxisMapping\u0026#34; \u0026#34;4 5\u0026#34;\nEndSection\n\nSection \u0026#34;InputDevice\u0026#34;\n\n    # generated from default\n    Identifier     \u0026#34;Keyboard0\u0026#34;\n    Driver         \u0026#34;kbd\u0026#34;\nEndSection\n\nSection \u0026#34;Monitor\u0026#34;\n    Identifier     \u0026#34;Monitor0\u0026#34;\n    VendorName     \u0026#34;Unknown\u0026#34;\n    ModelName      \u0026#34;CRT-0\u0026#34;\n    HorizSync       31.0 - 81.0\n    VertRefresh     56.0 - 76.0\n    Option         \u0026#34;DPMS\u0026#34;\nEndSection\n\nSection \u0026#34;Device\u0026#34;\n    Identifier     \u0026#34;Device0\u0026#34;\n    Driver         \u0026#34;nvidia\u0026#34;\n    VendorName     \u0026#34;NVIDIA Corporation\u0026#34;\n    BoardName      \u0026#34;GeForce GTX 560\u0026#34;\nEndSection\n\nSection \u0026#34;Screen\u0026#34;\n\n# Removed Option \u0026#34;metamodes\u0026#34; \u0026#34;DVI-I-0: nvidia-auto-select +1920+156, HDMI-0: nvidia-auto-select +0+0\u0026#34;\n    Identifier     \u0026#34;Screen0\u0026#34;\n    Device         \u0026#34;Device0\u0026#34;\n    Monitor        \u0026#34;Monitor0\u0026#34;\n    DefaultDepth    24\n    Option         \u0026#34;Stereo\u0026#34; \u0026#34;0\u0026#34;\n    Option         \u0026#34;nvidiaXineramaInfoOrder\u0026#34; \u0026#34;DFP-1\u0026#34;\n    Option         \u0026#34;metamodes\u0026#34; \u0026#34;DVI-I-0: 1280x1024 +1920+28, HDMI-0: nvidia-auto-select +0+0\u0026#34;\n    Option         \u0026#34;SLI\u0026#34; \u0026#34;Off\u0026#34;\n    Option         \u0026#34;MultiGPU\u0026#34; \u0026#34;Off\u0026#34;\n    Option         \u0026#34;BaseMosaic\u0026#34; \u0026#34;off\u0026#34;\n    SubSection     \u0026#34;Display\u0026#34;\n        Depth       24\n    EndSubSection\nEndSection\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp data-source-start=\"361\" data-source-end=\"361\"\u003e\u003cstrong\u003eСтатьи которые помогли в нахождении решения:\u003c/strong\u003e\u003c/p\u003e\n\u003cp data-source-start=\"363\" data-source-end=\"363\"\u003eubuntu nvidia after reboot monitor off\u003c/p\u003e\n\u003cul data-source-start=\"365\" data-source-end=\"366\"\u003e\n\u003cli data-source-start=\"365\" data-source-end=\"365\"\u003e\u003ca href=\"http://askubuntu.com/questions/421730/xorg-conf-changes-from-nvidia-setting-have-no-effect-after-reboot\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003ehttp://askubuntu.com/questions/421730/xorg-conf-changes-from-nvidia-setting-have-no-effect-after-reboot\u003c/a\u003e\u003c/li\u003e\n\u003cli data-source-start=\"366\" data-source-end=\"366\"\u003e\u003ca href=\"http://askubuntu.com/questions/456470/cant-save-nvidia-settings-for-screens-after-reboot\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003ehttp://askubuntu.com/questions/456470/cant-save-nvidia-settings-for-screens-after-reboot\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp data-source-start=\"368\" data-source-end=\"368\"\u003eНастройка 2 мониторов\u003c/p\u003e\n\u003cul data-source-start=\"370\" data-source-end=\"370\"\u003e\n\u003cli data-source-start=\"370\" data-source-end=\"370\"\u003e\u003ca href=\"http://unixforum.org/index.php?showtopic=90226\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003ehttp://unixforum.org/index.php?showtopic=90226\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp data-source-start=\"372\" data-source-end=\"372\"\u003e1280x1024 HorizSync и VertRefresh\u003c/p\u003e\n\u003cul data-source-start=\"374\" data-source-end=\"375\"\u003e\n\u003cli data-source-start=\"374\" data-source-end=\"374\"\u003e\u003ca href=\"http://www.blackmoreops.com/2014/08/29/fix-linux-display-issue-find-horizsync-vertrefresh-rates/\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003ehttp://www.blackmoreops.com/2014/08/29/fix-linux-display-issue-find-horizsync-vertrefresh-rates/\u003c/a\u003e\u003c/li\u003e\n\u003cli data-source-start=\"375\" data-source-end=\"375\"\u003e\u003ca href=\"http://askubuntu.com/questions/60939/how-to-get-1280x1024-with-a-benq-t905\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003ehttp://askubuntu.com/questions/60939/how-to-get-1280x1024-with-a-benq-t905\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp data-source-start=\"377\" data-source-end=\"377\"\u003eubuntu модель монитора\u003c/p\u003e\n\u003cul data-source-start=\"379\" data-source-end=\"380\"\u003e\n\u003cli data-source-start=\"379\" data-source-end=\"379\"\u003e\u003ca href=\"http://igorka.com.ua/2010-03-15/ubuntu-ne-opredelyaet-model-monitora/\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003ehttp://igorka.com.ua/2010-03-15/ubuntu-ne-opredelyaet-model-monitora/\u003c/a\u003e\u003c/li\u003e\n\u003cli data-source-start=\"380\" data-source-end=\"380\"\u003e\u003ca href=\"http://igorka.com.ua/2010-02-22/x-server-v-linux/\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003ehttp://igorka.com.ua/2010-02-22/x-server-v-linux/\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp data-source-start=\"382\" data-source-end=\"382\"\u003eИзменить разрешение монитора в ubuntu\u003c/p\u003e\n\u003cul data-source-start=\"384\" data-source-end=\"385\"\u003e\n\u003cli data-source-start=\"384\" data-source-end=\"384\"\u003e\u003ca href=\"http://forums.overclockers.ru/viewtopic.php?t=112768\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003ehttp://forums.overclockers.ru/viewtopic.php?t=112768\u003c/a\u003e\u003c/li\u003e\n\u003cli data-source-start=\"385\" data-source-end=\"385\"\u003e\u003ca href=\"http://help.ubuntu.ru/wiki/%D0%B4%D1%80%D0%B0%D0%B9%D0%B2%D0%B5%D1%80_%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%D0%BA%D0%B0%D1%80%D1%82_nvidia#%D0%BD%D0%B5%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE_%D0%BE%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D1%8F%D1%8E%D1%82%D1%81%D1%8F_%D1%80%D0%B0%D0%B7%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5_%D0%B8_%D1%87%D0%B0%D1%81%D1%82%D0%BE%D1%82%D0%B0_%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80%D0%B0\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003ehttp://help.ubuntu.ru/wiki/драйвер_видеокарт_nvidia#неправильно_определяются_разрешение_и_частота_монитора\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"восстановление-xorgconf\" data-source-start=\"387\" data-source-end=\"387\"\u003eВосстановление xorg.conf\u003c/h3\u003e\n\u003cp data-source-start=\"389\" data-source-end=\"391\"\u003eБывают случаи, что в результате редактирования файла \u003ccode\u003exorg.conf\u003c/code\u003e, Xserver не\nзапускается, а резервная копия файла не была сделана. В этом случае можно\nсгенерировать новый файл с помощью утилиты для настройки Xserver:\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"393\" data-source-end=\"395\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003esudo X -configure\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003cp data-source-start=\"397\" data-source-end=\"398\"\u003eПосле этого в домашней директории появится файл xorg.conf.new. Попробовать\nзагрузиться использовав настройки этого файла можно вот так:\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"400\" data-source-end=\"402\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003esudo X -config /root/xorg.conf.new\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003cp data-source-start=\"404\" data-source-end=\"407\"\u003eЕсли загрузка Xserver прошла успешно, то можно заменить нерабочий файл этим.\nСтоит заметить если у вас используются проприетарные драйвера от Nvidia, то\nлучше используйте утилиту от Nvidia. Она сама заменит не работающий файл новым\nи вам нужно будет только попробовать перезапустить графический сеанс:\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"409\" data-source-end=\"411\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003esudo nvidia-xconfig\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003ch3 id=\"настройка-51-звука-в-pulseaudio\" data-source-start=\"413\" data-source-end=\"413\"\u003eНастройка 5.1 звука в PulseAudio\u003c/h3\u003e\n\u003cp data-source-start=\"415\" data-source-end=\"416\"\u003eНастройки PulseAudio находятся в \u003ccode\u003e/etc/pulse/daemon.conf\u003c/code\u003e. Нужно немного\nизменить содержание данного файла. Разкоментируем строку:\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"418\" data-source-end=\"420\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003e; default-sample-channels = 2\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003cp data-source-start=\"422\" data-source-end=\"425\"\u003eВ этом файле знаком комментария служит \u0026#34;;\u0026#34;. Вместо двойки в этой строке, нужно\nуказать сколько каналов небходимо использовать. Например если у вас система\n5.1, нужно поставить 6, если система 7.1, то соответственно 8. Далее находим\nстроку:\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"427\" data-source-end=\"429\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003e; enable-lfe-remixing = no\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003cp data-source-start=\"431\" data-source-end=\"433\"\u003eразкоментируем её и устанавливаем значение не \u0026#34;no\u0026#34;, а \u0026#34;yes\u0026#34;. Эта строка\nотвечает за включение саббуфера. Lfe (low-frequency effects, перевод:\nнизкочастотные эффекты). Находим строку:\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"435\" data-source-end=\"437\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003e; enable-remixing = yes\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003cp data-source-start=\"439\" data-source-end=\"443\"\u003eи разкоментируем её. На одном из форумов объясняется этот параметр так: «Любой\nзвук меньше 5.1 будет растягиваться до 5.1. Настоящий 5.1 будет выводиться\nнормально, главное чтоб в плеере был указан вывод 5.1 (vlc, smplayer), а то\nсперва произойдет даунмикс плеером до стерео (дефолтная настройка), а потом\nпульс растянет до 5.1.»\u003c/p\u003e\n\u003cp data-source-start=\"445\" data-source-end=\"446\"\u003eДополнительные параметры звукового драйвера ALSA доступны через консольную\nутилиту \u003ccode\u003ealsamixer\u003c/code\u003e (чтобы запустить, нужно ввести эту команду в терминале).\u003c/p\u003e\n\u003ch3 id=\"ручное-указание-дополнительных-dns-серверов\" data-source-start=\"448\" data-source-end=\"448\"\u003eРучное указание дополнительных DNS серверов\u003c/h3\u003e\n\u003cp data-source-start=\"450\" data-source-end=\"451\"\u003eДля того, чтобы иметь возможность вручную указать дополнительные dns севера,\nнеобходимо:\u003c/p\u003e\n\u003cul data-source-start=\"453\" data-source-end=\"467\"\u003e\n\u003cli data-source-start=\"453\" data-source-end=\"457\"\u003e\n\u003cp data-source-start=\"453\" data-source-end=\"453\"\u003eустановить resolvconf\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-lang=\"bash\" data-source-start=\"455\" data-source-end=\"457\"\u003e\u003cpre class=\"chroma\"\u003e\u003ccode\u003e\u003cspan class=\"line\"\u003e\u003cspan class=\"cl\"\u003esudo apt-get install resolvconf\n\u003c/span\u003e\u003c/span\u003e\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"459\" data-source-end=\"465\"\u003e\n\u003cp data-source-start=\"459\" data-source-end=\"460\"\u003eоткрыть файл \u003ccode\u003e/etc/resolvconf/resolv.conf.d/head\u003c/code\u003e и добавить в конец адреса\nнужных dns серверов.\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"462\" data-source-end=\"465\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003enameserver 8.8.8.8\nnameserver 8.8.4.4\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"467\" data-source-end=\"467\"\u003e\n\u003cp data-source-start=\"467\" data-source-end=\"467\"\u003eвыполнить в консоли \u003ccode\u003esudo resolvconf -u\u003c/code\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp data-source-start=\"469\" data-source-end=\"469\"\u003eИспользованные материалы:\u003c/p\u003e\n\u003cul data-source-start=\"471\" data-source-end=\"471\"\u003e\n\u003cli data-source-start=\"471\" data-source-end=\"471\"\u003e\u003ca href=\"https://unix.stackexchange.com/questions/128220/how-do-i-set-my-dns-when-resolv-conf-is-being-overwritten\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003eHow do I set my DNS when resolv.conf is being overwritten?\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"исправление-ошибок\" data-source-start=\"473\" data-source-end=\"473\"\u003eИсправление ошибок\u003c/h2\u003e\n\u003ch3 id=\"fix-неправильного-отображения-иконки-skype-в-tray\" data-source-start=\"475\" data-source-end=\"475\"\u003eFix неправильного отображения иконки skype в tray\u003c/h3\u003e\n\u003cp data-source-start=\"477\" data-source-end=\"478\"\u003eВ некоторых оболочках значек skype в tray отображается как полтора маленьких\nзначка. Для того, чтобы это исправить, нужно:\u003c/p\u003e\n\u003cul data-source-start=\"480\" data-source-end=\"493\"\u003e\n\u003cli data-source-start=\"480\" data-source-end=\"480\"\u003e\n\u003cp data-source-start=\"480\" data-source-end=\"480\"\u003eоткрыть файл \u003ccode\u003e/usr/bin/skypeforlinux\u003c/code\u003e в текстовом редакторе\u003c/p\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"481\" data-source-end=\"485\"\u003e\n\u003cp data-source-start=\"481\" data-source-end=\"481\"\u003eнайти в нем строку\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"483\" data-source-end=\"485\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003enohup \u0026#34;$SKYPE_PATH\u0026#34; --executed-from=\u0026#34;$(pwd)\u0026#34; --pid=$$ \u0026#34;$@\u0026#34; \u0026gt; \u0026#34;$SKYPE_LOGS/skype-startup.log\u0026#34; 2\u0026gt;\u0026amp;1 \u0026amp;\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003c/li\u003e\n\u003cli data-source-start=\"487\" data-source-end=\"493\"\u003e\n\u003cp data-source-start=\"487\" data-source-end=\"487\"\u003eпревести ее к следующему виду\u003c/p\u003e\n\u003cdiv class=\"code-block\" data-source-start=\"489\" data-source-end=\"493\"\u003e\u003cpre tabindex=\"0\" class=\"chroma\"\u003e\u003ccode\u003eXDG_CURRENT_DESKTOP=Unity\nnohup \u0026#34;$SKYPE_PATH\u0026#34; --executed-from=\u0026#34;$(pwd)\u0026#34; --pid=$$ \u0026#34;$@\u0026#34; \u0026gt; \u0026#34;$SKYPE_LOGS/skype-startup.log\u0026#34; 2\u0026gt;\u0026amp;1 \u0026amp;\nXDG_CURRENT_DESKTOP=MATE\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp data-source-start=\"495\" data-source-end=\"495\"\u003eОтвет нашел \u003ca href=\"https://github.com/mate-desktop/mate-panel/issues/793\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"\u003eздесь\u003c/a\u003e\u003c/p\u003e\n","toc":[{"level":2,"text":"Работа с файловой системой","id":"работа-с-файловой-системой"},{"level":3,"text":"Монтирование дисков","id":"монтирование-дисков"},{"level":2,"text":"Настройка системы","id":"настройка-системы"},{"level":3,"text":"Загрузка системы из оболочки GRUB","id":"загрузка-системы-из-оболочки-grub"},{"level":3,"text":"Переустановка/восстановление загрузчика grub","id":"переустановкавосстановление-загрузчика-grub"},{"level":3,"text":"Активация \"Quick Search\" в synaptic","id":"активация-quick-search-в-synaptic"},{"level":3,"text":"Настройка разрешения второго монитора","id":"настройка-разрешения-второго-монитора"},{"level":3,"text":"Восстановление xorg.conf","id":"восстановление-xorgconf"},{"level":3,"text":"Настройка 5.1 звука в PulseAudio","id":"настройка-51-звука-в-pulseaudio"},{"level":3,"text":"Ручное указание дополнительных DNS серверов","id":"ручное-указание-дополнительных-dns-серверов"},{"level":2,"text":"Исправление ошибок","id":"исправление-ошибок"},{"level":3,"text":"Fix неправильного отображения иконки skype в tray","id":"fix-неправильного-отображения-иконки-skype-в-tray"}],"show_toc":true,"rev":"sha256:72585afd3ded767528cc329452e9defdbc8ef8960510823c4c48c47b36251ddd","mod_time":"2026-10-24T11:37:57.770474466Z","breadcrumbs":[{"name":"Home","url":"/"},{"name":"linux","url":"/doc/linux/"},{"name":"linux-notes-index.md","url":""}],"edit_url":"/edit/linux/linux-notes-index.md","missing":false,"can_create":false}}</script>
+<div id="scrawl-app-root"></div>
+
+<main data-scrawl-static>
+<nav aria-label="Path"><ol class="scrawl-static-crumbs"><li><a href="../index.html">Home</a></li><li><a href="../linux/index.html">linux</a></li><li>linux-notes-index.md</li></ol></nav>
+<article class="markdown-document">
+<h1 id="заметки-о-работе-с-linux" data-source-start="1" data-source-end="1">Заметки о работе с Linux</h1>
+<h1 id="оглавление" data-source-start="3" data-source-end="3">Оглавление</h1>
+<ol data-source-start="5" data-source-end="18">
+<li data-source-start="5" data-source-end="6">
+<p data-source-start="5" data-source-end="5"><a href="#%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D1%84%D0%B0%D0%B9%D0%BB%D0%BE%D0%B2%D0%BE%D0%B9-%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D0%BE%D0%B9">Работа с файловой системой</a></p>
+<ul data-source-start="6" data-source-end="6">
+<li data-source-start="6" data-source-end="6"><a href="#%D0%BC%D0%BE%D0%BD%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B4%D0%B8%D1%81%D0%BA%D0%BE%D0%B2">Монтирование дисков</a></li>
+</ul>
+</li>
+<li data-source-start="8" data-source-end="15">
+<p data-source-start="8" data-source-end="8"><a href="#%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B">Настройка системы</a></p>
+<ul data-source-start="9" data-source-end="15">
+<li data-source-start="9" data-source-end="9"><a href="#%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B0-%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B-%D0%B8%D0%B7-%D0%BE%D0%B1%D0%BE%D0%BB%D0%BE%D1%87%D0%BA%D0%B8-grub">Загрузка системы из оболочки GRUB</a></li>
+<li data-source-start="10" data-source-end="10"><a href="#%D0%BF%D0%B5%D1%80%D0%B5%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0%D0%B2%D0%BE%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D1%87%D0%B8%D0%BA%D0%B0-grub">Переустановка/восстановление загрузчика grub</a></li>
+<li data-source-start="11" data-source-end="11"><a href="#%D0%B0%D0%BA%D1%82%D0%B8%D0%B2%D0%B0%D1%86%D0%B8%D1%8F-quick-search-%D0%B2-synaptic">Активация &#34;Quick Search&#34; в synaptic</a></li>
+<li data-source-start="12" data-source-end="12"><a href="#%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D1%80%D0%B0%D0%B7%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2%D1%82%D0%BE%D1%80%D0%BE%D0%B3%D0%BE-%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80%D0%B0">Настройка разрешения второго монитора</a></li>
+<li data-source-start="13" data-source-end="13"><a href="#%D0%B2%D0%BE%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-xorgconf">Восстановление xorg.conf</a></li>
+<li data-source-start="14" data-source-end="14"><a href="#%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-51-%D0%B7%D0%B2%D1%83%D0%BA%D0%B0-%D0%B2-pulseaudio">Настройка 5.1 звука в PulseAudio</a></li>
+<li data-source-start="15" data-source-end="15"><a href="#%D1%80%D1%83%D1%87%D0%BD%D0%BE%D0%B5-%D1%83%D0%BA%D0%B0%D0%B7%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B4%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D1%85-dns-%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D0%BE%D0%B2">Ручное указание дополнительных DNS серверов</a></li>
+</ul>
+</li>
+<li data-source-start="17" data-source-end="18">
+<p data-source-start="17" data-source-end="17"><a href="#%D0%B8%D1%81%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BE%D1%88%D0%B8%D0%B1%D0%BE%D0%BA">Исправление ошибок</a></p>
+<ul data-source-start="18" data-source-end="18">
+<li data-source-start="18" data-source-end="18"><a href="#fix-%D0%BD%D0%B5%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BE%D1%82%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B8%D0%BA%D0%BE%D0%BD%D0%BA%D0%B8-skype-%D0%B2-tray">Fix неправильного отображения иконки skype в tray</a></li>
+</ul>
+</li>
+</ol>
+<h2 id="работа-с-файловой-системой" data-source-start="20" data-source-end="20">Работа с файловой системой</h2>
+<h3 id="монтирование-дисков" data-source-start="22" data-source-end="22">Монтирование дисков</h3>
+<p data-source-start="24" data-source-end="25">Для того, чтобы примонтировать нужный диск из консоли, нужно выполнить 2
+простых действия:</p>
+<ul data-source-start="27" data-source-end="42">
+<li data-source-start="27" data-source-end="32">
+<p data-source-start="27" data-source-end="28">Посмотреть как ОС определила жесткий диск. Это можно сделать при помощи
+команды</p>
+<div class="code-block" data-lang="bash" data-source-start="30" data-source-end="32"><pre class="chroma"><code><span class="line"><span class="cl">sudo fdisk -l
+</span></span></code></pre></div>
+</li>
+<li data-source-start="34" data-source-end="42">
+<p data-source-start="34" data-source-end="35">Теперь, увидев, какое имя присвоила ОС диску, его можно примонтировать к
+нужной дирректории</p>
+<div class="code-block" data-lang="bash" data-source-start="37" data-source-end="39"><pre class="chroma"><code><span class="line"><span class="cl">sudo mount -t ntfs /dev/sdb1 /media
+</span></span></code></pre></div>
+<p data-source-start="41" data-source-end="42">Данная команда примонтирует раздел диска c именем <code>sdb1</code> и файловой системой
+<code>ntfs</code> к папке <code>/media</code>.</p>
+</li>
+</ul>
+<p data-source-start="44" data-source-end="45">Ответ нашел
+<a href="https://askubuntu.com/questions/177825/how-to-mount-an-external-hdd" target="_blank" rel="noopener noreferrer nofollow">здесь</a></p>
+<h2 id="настройка-системы" data-source-start="47" data-source-end="47">Настройка системы</h2>
+<h3 id="загрузка-системы-из-оболочки-grub" data-source-start="49" data-source-end="49">Загрузка системы из оболочки GRUB</h3>
+<p data-source-start="51" data-source-end="51">Для того, чтобы загрузить систему из оболочки GRUB необходимо:</p>
+<ul data-source-start="53" data-source-end="80">
+<li data-source-start="53" data-source-end="57">
+<p data-source-start="53" data-source-end="57">Найти раздел на котором расположены файлы <code>vmlinuz</code> или <code>linux</code>, и
+<code>initrd.img</code>. Посмотреть список файлов можно при помощи <code>ls (hd0,1)/</code>. Если
+на разделе <code>hd0,1</code> нет необходимых файлов, то продолжайте поиск на других
+разделах. Для этого увеличивайте цифру расположенную после запятой на единицу
+до тех пор пока не найдете нужный раздел.</p>
+</li>
+<li data-source-start="58" data-source-end="80">
+<p data-source-start="58" data-source-end="58">После того как файлы найдены необходимо выполнить</p>
+<div class="code-block" data-source-start="60" data-source-end="65"><pre tabindex="0" class="chroma"><code># Загружаем ядро
+linux (hd0,1)/vmlinuz root=/dev/sda1
+или
+linux (hd0,1)/linux root=/dev/sda1
+</code></pre></div>
+<div class="code-block" data-source-start="67" data-source-end="71"><pre tabindex="0" class="chroma"><code># Загружаем initrd-образ
+initrd (hd0,1)/initrd.img
+boot
+</code></pre></div>
+<p data-source-start="73" data-source-end="74">P.S. если вы нашли файлы не в <code>hd0,1</code>, то укажите в командах актуальный для
+вас раздел. Например если вы нашли файлы в <code>hd0,2</code>, то вам нужно выполнять:</p>
+<div class="code-block" data-source-start="76" data-source-end="80"><pre tabindex="0" class="chroma"><code>linux (hd0,2)/vmlinuz root=/dev/sda2
+initrd (hd0,2)/initrd.img
+boot
+</code></pre></div>
+</li>
+</ul>
+<p data-source-start="82" data-source-end="82">Полезные ссылки:</p>
+<ul data-source-start="84" data-source-end="85">
+<li data-source-start="84" data-source-end="84"><a href="https://askubuntu.com/questions/929833/how-do-i-boot-my-pc-from-grub" target="_blank" rel="noopener noreferrer nofollow">How do I boot my PC from GRUB?</a></li>
+<li data-source-start="85" data-source-end="85"><a href="https://help.ubuntu.ru/wiki/grub" target="_blank" rel="noopener noreferrer nofollow">GRUB - загрузчик системы</a></li>
+</ul>
+<h3 id="переустановкавосстановление-загрузчика-grub" data-source-start="87" data-source-end="87">Переустановка/восстановление загрузчика grub</h3>
+<p data-source-start="89" data-source-end="90">Иногда бывает, что после установки системы компьютер не загружается, а на экане
+красуется окно загрузчика grub.</p>
+<p data-source-start="92" data-source-end="92"><img src="linux-notes-index/reinstall-restore-grub-loader/grub-recovery-window.png" alt=""></p>
+<p data-source-start="94" data-source-end="94">Есть 2 основных способа исправить данную ситуацию:</p>
+<ul data-source-start="96" data-source-end="97">
+<li data-source-start="96" data-source-end="96">восстановление Grub в rescue mode</li>
+<li data-source-start="97" data-source-end="97">восстановление Grub с помощью утилиты Boot repair</li>
+</ul>
+<p data-source-start="99" data-source-end="99"><strong>Восстановление Grub в rescue mode</strong></p>
+<p data-source-start="101" data-source-end="103">Если по каким-то причинам у вас нет доступа к LiveCD/USB-носителю, а также к
+компьютеру, с помощью которого этот самый носитель можно было бы сделать, то
+этот способ для вас.</p>
+<p data-source-start="105" data-source-end="107">Само восстановление проходит таким образом: сначала мы подгружаем все модули,
+чтобы открыть доступ ко всей функциональной части Grub, после чего запуститься
+с нужного раздела. Надо понимать, что Grub состоит из двух частей:</p>
+<p data-source-start="109" data-source-end="110">Одна из этих частей (первая) записана в MBR диска. В ней присутствует базовый
+функционал и ничего больше (консоль в rescue mode).</p>
+<p data-source-start="112" data-source-end="115">Стало быть, нам нужно определить, в каком разделе находится вторая часть Grub
+(находится в каталоге /boot/grub), и после чего подгрузить все недостающие
+модули. А вот уже после этого мы сможем запустить загрузчик с нужного раздела.
+В rescue mode есть всего четыре команды:</p>
+<div class="code-block" data-source-start="117" data-source-end="122"><pre tabindex="0" class="chroma"><code>ls
+set
+unset
+insmod
+</code></pre></div>
+<p data-source-start="124" data-source-end="124">Для начала вводим следующую команду:</p>
+<div class="code-block" data-lang="python" data-source-start="126" data-source-end="128"><pre class="chroma"><code><span class="line"><span class="cl"><span class="n">ls</span>
+</span></span></code></pre></div>
+<p data-source-start="130" data-source-end="130">В выводе будет что-то подобное:</p>
+<div class="code-block" data-source-start="132" data-source-end="134"><pre tabindex="0" class="chroma"><code>(hd0) (hd0,msdos3) (hd0,msdos2) (hd0,msdos1) (hd1) (hd1,msdos2) (hd1,msdos1)
+</code></pre></div>
+<p data-source-start="136" data-source-end="141">В некоторых случаях Grub неправильно опеределяет файловые системы находящиеся
+на разделах дисков. В данном примере загрузчик показывает их как msdos. Мы
+должны попытаться угадать диски, которые видим. В примере доступно два диска.
+Диск с индексом 0 содержащий три раздела, и диск с индексом 1 содержащий два
+раздела. Если вы знаете структуру своих дисков, определить нужный труда не
+составит.</p>
+<p data-source-start="143" data-source-end="147">В загрузчике Grub разделы нумеруются в обратном исчислении. Не очень ясно какой
+именно из разделов назван, к примеру (hd0,msdos3). Чтобы было более понятно,
+можно использовать вид (hd0,1). Если в грабе отсчет дисков идет с 0, а разделов
+с 1, то можно определить, что операционная система установлена в первый раздел
+первого раздела - (hd0,1). Используем следующую команду:</p>
+<div class="code-block" data-source-start="149" data-source-end="152"><pre tabindex="0" class="chroma"><code>set prefix=(hd0,1)/boot/grub
+set root=(hd0,1)
+</code></pre></div>
+<p data-source-start="154" data-source-end="157">С помощью этих команд мы приказываем системе использовать какой-то конкретный
+диск, для выполнения всех остальных операций (в нашем случае, это диск
+(hd0,1)). Чтобы проверить есть ли на данном диске загрузчик, введем эту
+команду:</p>
+<div class="code-block" data-source-start="159" data-source-end="161"><pre tabindex="0" class="chroma"><code>ls /boot/grub
+</code></pre></div>
+<p data-source-start="163" data-source-end="164">Если в выводе будет список файлов и папок, значит мы все сделали правильно.
+Теперь можно загрузить все необходимые модули. Для этого выполним команды:</p>
+<div class="code-block" data-source-start="166" data-source-end="170"><pre tabindex="0" class="chroma"><code>insmod ext2
+insmod normal
+normal
+</code></pre></div>
+<p data-source-start="172" data-source-end="174">После выполнения команд Grub загрузится в полнофункциональном режиме. Будут
+найдены все операционные системы, которые установлены на компьютере, после чего
+будет показано стандартное меню загрузки.</p>
+<p data-source-start="176" data-source-end="178">Чтобы закрепить результат (и не проделывать все то же самое после перезапуска
+ПК), нужно зайти в терминал своего дистрибутива Linux, где с root правами
+выполнить следующую команду:</p>
+<div class="code-block" data-lang="bash" data-source-start="180" data-source-end="182"><pre class="chroma"><code><span class="line"><span class="cl">grub-install /dev/sdX
+</span></span></code></pre></div>
+<p data-source-start="184" data-source-end="187">sdX - диск, на который должен быть установлен Grub. Так же стоит заметить, что
+данная команда не всегда помогает исправить ситуацию. В этом случае необходимо
+прибегнуть к помощи утилиты Boot repair, которая описывается в этой заметке
+отдельно.</p>
+<p data-source-start="189" data-source-end="190">Если операционная система расположена на разделе с файловой системой btrfs, то
+нам необходимо выполнить следующие команды:</p>
+<div class="code-block" data-source-start="192" data-source-end="195"><pre tabindex="0" class="chroma"><code>set prefix=(hd0,1)/@/boot/grub
+set root=(hd0,1)
+</code></pre></div>
+<p data-source-start="197" data-source-end="197">И подгрузить модули:</p>
+<div class="code-block" data-source-start="199" data-source-end="202"><pre tabindex="0" class="chroma"><code>insmod btrfs
+insmod normal
+</code></pre></div>
+<p data-source-start="204" data-source-end="204">Ну и теперь запустить GRUB:</p>
+<div class="code-block" data-source-start="206" data-source-end="208"><pre tabindex="0" class="chroma"><code>normal
+</code></pre></div>
+<p data-source-start="210" data-source-end="210"><strong>Восстановление Grub с помощью утилиты Boot repair</strong></p>
+<p data-source-start="212" data-source-end="214">С помощью этой замечательной утилиты вы сможете восстановить загрузчик всего в
+пару кликов. Утилита имеет собственный GUI, ее использование не вызовет
+трудностей.</p>
+<p data-source-start="216" data-source-end="217">Чтобы установить boot repair, вы можете воспользоваться одним из приведенных
+способов:</p>
+<ul data-source-start="219" data-source-end="223">
+<li data-source-start="219" data-source-end="221">Запись и установка специального
+<a href="http://sourceforge.net/projects/boot-repair-cd/files/" target="_blank" rel="noopener noreferrer nofollow">образа диска Boot Repair</a>
+(и дальнейшая загрузка с него)</li>
+<li data-source-start="222" data-source-end="223">Установка Boot repair из PPA-репозитория в LiveCD/USB дистрибутиве или в
+системе загруженной вручную из GRUB rescue mode</li>
+</ul>
+<p data-source-start="225" data-source-end="227">Если с первым способом все понятно: нужно просто скачать и записать образ с
+помощью соответствующих инструментов. То во втором уже нужно знать конкретные
+команды, которые выглядят следующим образом:</p>
+<div class="code-block" data-lang="bash" data-source-start="229" data-source-end="232"><pre class="chroma"><code><span class="line"><span class="cl">sudo add-apt-repository ppa:yannubuntu/boot-repair
+</span></span><span class="line"><span class="cl">sudo apt-get update <span class="o">&amp;&amp;</span> sudo apt-get install -y boot-repair
+</span></span></code></pre></div>
+<p data-source-start="234" data-source-end="234">В утилите будет доступно два варианта на выбор:</p>
+<p data-source-start="236" data-source-end="237"><em>Recommended repair</em> исправляет большую часть известных ошибок, которые могли
+бы возникнуть при запуске. С его помощью вы сможете пофиксить и загрузчик Grub.</p>
+<p data-source-start="239" data-source-end="240"><em>Create a BootInfo summary</em> создает Boot-Info-Script – скрипт, который
+позволяет диагностировать большинство проблем при загрузке.</p>
+<p data-source-start="242" data-source-end="245">Здесь же есть и <em>Advanced options</em>. Он включает в себя варианты для
+восстановления и настройки загрузчика Grub2 (загрузка по-умолчанию, опции
+загрузки ядра, отображение или скрытие GRUB при загрузке, удаление GRUB). С
+помощью этих же инструментов, вы можете восстановить MBR и т.д.</p>
+<p data-source-start="247" data-source-end="251">Вам обязательно стоит заглянуть на
+<a href="http://sourceforge.net/p/boot-repair/home/Home/" target="_blank" rel="noopener noreferrer nofollow">официальный сайт</a> Boot
+Repair. Там вы сможете найти более подробную информацию обо всех возможностях и
+особенностях программы. Там же будет доступна информация о выходе новых версий:
+фиксах и улучшениях самой утилиты, а также многом и многом другом.</p>
+<p data-source-start="253" data-source-end="253"><a href="https://omgubuntu.ru/nie-zaghruzhaietsia-linux-chinim-zaghruzchik-grub/" target="_blank" rel="noopener noreferrer nofollow">Оригинальная статья</a></p>
+<h3 id="активация-quick-search-в-synaptic" data-source-start="255" data-source-end="255">Активация &#34;Quick Search&#34; в synaptic</h3>
+<p data-source-start="257" data-source-end="259">Иногда бывает, что по умолчанию &#34;quick search&#34; не активирован в synaptic и это
+очень неудобно. Для того, чтобы исправить это, нужно выполнить следующие
+команды:</p>
+<div class="code-block" data-lang="bash" data-source-start="261" data-source-end="264"><pre class="chroma"><code><span class="line"><span class="cl">sudo apt-get install apt-xapian-index
+</span></span><span class="line"><span class="cl">sudo update-apt-xapian-index -vf
+</span></span></code></pre></div>
+<h3 id="настройка-разрешения-второго-монитора" data-source-start="266" data-source-end="266">Настройка разрешения второго монитора</h3>
+<p data-source-start="268" data-source-end="271">При подключении 2 монитора я к несчастью обнаружил, что у него выставлено
+слишком маленькое разрешение и выставить максимально доступное невозможно. Ниже
+я опишу как я ставил систему и как решил эту проблему. Эта проблема возникла
+сразу после установки системы, по этому описывать буду с самого начала.</p>
+<ol data-source-start="273" data-source-end="359">
+<li data-source-start="273" data-source-end="273">
+<p data-source-start="273" data-source-end="273">Установил систему.</p>
+</li>
+<li data-source-start="274" data-source-end="276">
+<p data-source-start="274" data-source-end="276">Установил через менеджер драйверов последний доступный драйвер для своей
+видеокарты (на момент написания статьи это был nvidia-331) и перезагрузил
+систему.</p>
+</li>
+<li data-source-start="277" data-source-end="277">
+<p data-source-start="277" data-source-end="277">Подключил второй монитор.</p>
+</li>
+<li data-source-start="278" data-source-end="278">
+<p data-source-start="278" data-source-end="278">Создал <code>xorg.conf</code> с помощью автоконфигуратора <code>sudo nvidia-xconfig</code></p>
+</li>
+<li data-source-start="279" data-source-end="285">
+<p data-source-start="279" data-source-end="280">Открыл созданный файл <code>sudo nano /etc/X11/xorg.conf</code> и в секции <code>Monitor</code>
+изменил значения <code>HorizSync</code> и <code>VertRefresh</code> на такие:</p>
+<div class="code-block" data-source-start="282" data-source-end="285"><pre tabindex="0" class="chroma"><code>HorizSync       31.0 - 81.0
+VertRefresh     56.0 - 76.0
+</code></pre></div>
+</li>
+<li data-source-start="287" data-source-end="287">
+<p data-source-start="287" data-source-end="287">Перезагрузил X Server.</p>
+</li>
+<li data-source-start="288" data-source-end="359">
+<p data-source-start="288" data-source-end="294">Открыл <code>nvidia-settings</code> и перешёл в раздел
+<code>X Server Display Configuration</code>. Здесь после внесенных изменений у второго
+монитора стало возможно выбрать нужное разрешение экрана. После это можно
+выбрать нужное расположение мониторов, выбрать главный применить эти
+измения, а после сохранить их нажав <code>Save to X Configuration file</code>. После
+всех выше перечисленных действий должно все работать как надо. Вот
+содержимое файла <code>xorg.conf</code>, после всех действий над ним:</p>
+<div class="code-block" data-source-start="296" data-source-end="359"><pre tabindex="0" class="chroma"><code>Section &#34;ServerLayout&#34;
+    Identifier     &#34;Layout0&#34;
+    Screen      0  &#34;Screen0&#34; 0 0
+    InputDevice    &#34;Keyboard0&#34; &#34;CoreKeyboard&#34;
+    InputDevice    &#34;Mouse0&#34; &#34;CorePointer&#34;
+    Option         &#34;Xinerama&#34; &#34;0&#34;
+EndSection
+
+Section &#34;Files&#34;
+EndSection
+
+Section &#34;InputDevice&#34;
+
+    # generated from default
+    Identifier     &#34;Mouse0&#34;
+    Driver         &#34;mouse&#34;
+    Option         &#34;Protocol&#34; &#34;auto&#34;
+    Option         &#34;Device&#34; &#34;/dev/psaux&#34;
+    Option         &#34;Emulate3Buttons&#34; &#34;no&#34;
+    Option         &#34;ZAxisMapping&#34; &#34;4 5&#34;
+EndSection
+
+Section &#34;InputDevice&#34;
+
+    # generated from default
+    Identifier     &#34;Keyboard0&#34;
+    Driver         &#34;kbd&#34;
+EndSection
+
+Section &#34;Monitor&#34;
+    Identifier     &#34;Monitor0&#34;
+    VendorName     &#34;Unknown&#34;
+    ModelName      &#34;CRT-0&#34;
+    HorizSync       31.0 - 81.0
+    VertRefresh     56.0 - 76.0
+    Option         &#34;DPMS&#34;
+EndSection
+
+Section &#34;Device&#34;
+    Identifier     &#34;Device0&#34;
+    Driver         &#34;nvidia&#34;
+    VendorName     &#34;NVIDIA Corporation&#34;
+    BoardName      &#34;GeForce GTX 560&#34;
+EndSection
+
+Section &#34;Screen&#34;
+
+# Removed Option &#34;metamodes&#34; &#34;DVI-I-0: nvidia-auto-select +1920+156, HDMI-0: nvidia-auto-select +0+0&#34;
+    Identifier     &#34;Screen0&#34;
+    Device         &#34;Device0&#34;
+    Monitor        &#34;Monitor0&#34;
+    DefaultDepth    24
+    Option         &#34;Stereo&#34; &#34;0&#34;
+    Option         &#34;nvidiaXineramaInfoOrder&#34; &#34;DFP-1&#34;
+    Option         &#34;metamodes&#34; &#34;DVI-I-0: 1280x1024 +1920+28, HDMI-0: nvidia-auto-select +0+0&#34;
+    Option         &#34;SLI&#34; &#34;Off&#34;
+    Option         &#34;MultiGPU&#34; &#34;Off&#34;
+    Option         &#34;BaseMosaic&#34; &#34;off&#34;
+    SubSection     &#34;Display&#34;
+        Depth       24
+    EndSubSection
+EndSection
+</code></pre></div>
+</li>
+</ol>
+<p data-source-start="361" data-source-end="361"><strong>Статьи которые помогли в нахождении решения:</strong></p>
+<p data-source-start="363" data-source-end="363">ubuntu nvidia after reboot monitor off</p>
+<ul data-source-start="365" data-source-end="366">
+<li data-source-start="365" data-source-end="365"><a href="http://askubuntu.com/questions/421730/xorg-conf-changes-from-nvidia-setting-have-no-effect-after-reboot" target="_blank" rel="noopener noreferrer nofollow">http://askubuntu.com/questions/421730/xorg-conf-changes-from-nvidia-setting-have-no-effect-after-reboot</a></li>
+<li data-source-start="366" data-source-end="366"><a href="http://askubuntu.com/questions/456470/cant-save-nvidia-settings-for-screens-after-reboot" target="_blank" rel="noopener noreferrer nofollow">http://askubuntu.com/questions/456470/cant-save-nvidia-settings-for-screens-after-reboot</a></li>
+</ul>
+<p data-source-start="368" data-source-end="368">Настройка 2 мониторов</p>
+<ul data-source-start="370" data-source-end="370">
+<li data-source-start="370" data-source-end="370"><a href="http://unixforum.org/index.php?showtopic=90226" target="_blank" rel="noopener noreferrer nofollow">http://unixforum.org/index.php?showtopic=90226</a></li>
+</ul>
+<p data-source-start="372" data-source-end="372">1280x1024 HorizSync и VertRefresh</p>
+<ul data-source-start="374" data-source-end="375">
+<li data-source-start="374" data-source-end="374"><a href="http://www.blackmoreops.com/2014/08/29/fix-linux-display-issue-find-horizsync-vertrefresh-rates/" target="_blank" rel="noopener noreferrer nofollow">http://www.blackmoreops.com/2014/08/29/fix-linux-display-issue-find-horizsync-vertrefresh-rates/</a></li>
+<li data-source-start="375" data-source-end="375"><a href="http://askubuntu.com/questions/60939/how-to-get-1280x1024-with-a-benq-t905" target="_blank" rel="noopener noreferrer nofollow">http://askubuntu.com/questions/60939/how-to-get-1280x1024-with-a-benq-t905</a></li>
+</ul>
+<p data-source-start="377" data-source-end="377">ubuntu модель монитора</p>
+<ul data-source-start="379" data-source-end="380">
+<li data-source-start="379" data-source-end="379"><a href="http://igorka.com.ua/2010-03-15/ubuntu-ne-opredelyaet-model-monitora/" target="_blank" rel="noopener noreferrer nofollow">http://igorka.com.ua/2010-03-15/ubuntu-ne-opredelyaet-model-monitora/</a></li>
+<li data-source-start="380" data-source-end="380"><a href="http://igorka.com.ua/2010-02-22/x-server-v-linux/" target="_blank" rel="noopener noreferrer nofollow">http://igorka.com.ua/2010-02-22/x-server-v-linux/</a></li>
+</ul>
+<p data-source-start="382" data-source-end="382">Изменить разрешение монитора в ubuntu</p>
+<ul data-source-start="384" data-source-end="385">
+<li data-source-start="384" data-source-end="384"><a href="http://forums.overclockers.ru/viewtopic.php?t=112768" target="_blank" rel="noopener noreferrer nofollow">http://forums.overclockers.ru/viewtopic.php?t=112768</a></li>
+<li data-source-start="385" data-source-end="385"><a href="http://help.ubuntu.ru/wiki/%D0%B4%D1%80%D0%B0%D0%B9%D0%B2%D0%B5%D1%80_%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%D0%BA%D0%B0%D1%80%D1%82_nvidia#%D0%BD%D0%B5%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE_%D0%BE%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D1%8F%D1%8E%D1%82%D1%81%D1%8F_%D1%80%D0%B0%D0%B7%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5_%D0%B8_%D1%87%D0%B0%D1%81%D1%82%D0%BE%D1%82%D0%B0_%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80%D0%B0" target="_blank" rel="noopener noreferrer nofollow">http://help.ubuntu.ru/wiki/драйвер_видеокарт_nvidia#неправильно_определяются_разрешение_и_частота_монитора</a></li>
+</ul>
+<h3 id="восстановление-xorgconf" data-source-start="387" data-source-end="387">Восстановление xorg.conf</h3>
+<p data-source-start="389" data-source-end="391">Бывают случаи, что в результате редактирования файла <code>xorg.conf</code>, Xserver не
+запускается, а резервная копия файла не была сделана. В этом случае можно
+сгенерировать новый файл с помощью утилиты для настройки Xserver:</p>
+<div class="code-block" data-source-start="393" data-source-end="395"><pre tabindex="0" class="chroma"><code>sudo X -configure
+</code></pre></div>
+<p data-source-start="397" data-source-end="398">После этого в домашней директории появится файл xorg.conf.new. Попробовать
+загрузиться использовав настройки этого файла можно вот так:</p>
+<div class="code-block" data-source-start="400" data-source-end="402"><pre tabindex="0" class="chroma"><code>sudo X -config /root/xorg.conf.new
+</code></pre></div>
+<p data-source-start="404" data-source-end="407">Если загрузка Xserver прошла успешно, то можно заменить нерабочий файл этим.
+Стоит заметить если у вас используются проприетарные драйвера от Nvidia, то
+лучше используйте утилиту от Nvidia. Она сама заменит не работающий файл новым
+и вам нужно будет только попробовать перезапустить графический сеанс:</p>
+<div class="code-block" data-source-start="409" data-source-end="411"><pre tabindex="0" class="chroma"><code>sudo nvidia-xconfig
+</code></pre></div>
+<h3 id="настройка-51-звука-в-pulseaudio" data-source-start="413" data-source-end="413">Настройка 5.1 звука в PulseAudio</h3>
+<p data-source-start="415" data-source-end="416">Настройки PulseAudio находятся в <code>/etc/pulse/daemon.conf</code>. Нужно немного
+изменить содержание данного файла. Разкоментируем строку:</p>
+<div class="code-block" data-source-start="418" data-source-end="420"><pre tabindex="0" class="chroma"><code>; default-sample-channels = 2
+</code></pre></div>
+<p data-source-start="422" data-source-end="425">В этом файле знаком комментария служит &#34;;&#34;. Вместо двойки в этой строке, нужно
+указать сколько каналов небходимо использовать. Например если у вас система
+5.1, нужно поставить 6, если система 7.1, то соответственно 8. Далее находим
+строку:</p>
+<div class="code-block" data-source-start="427" data-source-end="429"><pre tabindex="0" class="chroma"><code>; enable-lfe-remixing = no
+</code></pre></div>
+<p data-source-start="431" data-source-end="433">разкоментируем её и устанавливаем значение не &#34;no&#34;, а &#34;yes&#34;. Эта строка
+отвечает за включение саббуфера. Lfe (low-frequency effects, перевод:
+низкочастотные эффекты). Находим строку:</p>
+<div class="code-block" data-source-start="435" data-source-end="437"><pre tabindex="0" class="chroma"><code>; enable-remixing = yes
+</code></pre></div>
+<p data-source-start="439" data-source-end="443">и разкоментируем её. На одном из форумов объясняется этот параметр так: «Любой
+звук меньше 5.1 будет растягиваться до 5.1. Настоящий 5.1 будет выводиться
+нормально, главное чтоб в плеере был указан вывод 5.1 (vlc, smplayer), а то
+сперва произойдет даунмикс плеером до стерео (дефолтная настройка), а потом
+пульс растянет до 5.1.»</p>
+<p data-source-start="445" data-source-end="446">Дополнительные параметры звукового драйвера ALSA доступны через консольную
+утилиту <code>alsamixer</code> (чтобы запустить, нужно ввести эту команду в терминале).</p>
+<h3 id="ручное-указание-дополнительных-dns-серверов" data-source-start="448" data-source-end="448">Ручное указание дополнительных DNS серверов</h3>
+<p data-source-start="450" data-source-end="451">Для того, чтобы иметь возможность вручную указать дополнительные dns севера,
+необходимо:</p>
+<ul data-source-start="453" data-source-end="467">
+<li data-source-start="453" data-source-end="457">
+<p data-source-start="453" data-source-end="453">установить resolvconf</p>
+<div class="code-block" data-lang="bash" data-source-start="455" data-source-end="457"><pre class="chroma"><code><span class="line"><span class="cl">sudo apt-get install resolvconf
+</span></span></code></pre></div>
+</li>
+<li data-source-start="459" data-source-end="465">
+<p data-source-start="459" data-source-end="460">открыть файл <code>/etc/resolvconf/resolv.conf.d/head</code> и добавить в конец адреса
+нужных dns серверов.</p>
+<div class="code-block" data-source-start="462" data-source-end="465"><pre tabindex="0" class="chroma"><code>nameserver 8.8.8.8
+nameserver 8.8.4.4
+</code></pre></div>
+</li>
+<li data-source-start="467" data-source-end="467">
+<p data-source-start="467" data-source-end="467">выполнить в консоли <code>sudo resolvconf -u</code></p>
+</li>
+</ul>
+<p data-source-start="469" data-source-end="469">Использованные материалы:</p>
+<ul data-source-start="471" data-source-end="471">
+<li data-source-start="471" data-source-end="471"><a href="https://unix.stackexchange.com/questions/128220/how-do-i-set-my-dns-when-resolv-conf-is-being-overwritten" target="_blank" rel="noopener noreferrer nofollow">How do I set my DNS when resolv.conf is being overwritten?</a></li>
+</ul>
+<h2 id="исправление-ошибок" data-source-start="473" data-source-end="473">Исправление ошибок</h2>
+<h3 id="fix-неправильного-отображения-иконки-skype-в-tray" data-source-start="475" data-source-end="475">Fix неправильного отображения иконки skype в tray</h3>
+<p data-source-start="477" data-source-end="478">В некоторых оболочках значек skype в tray отображается как полтора маленьких
+значка. Для того, чтобы это исправить, нужно:</p>
+<ul data-source-start="480" data-source-end="493">
+<li data-source-start="480" data-source-end="480">
+<p data-source-start="480" data-source-end="480">открыть файл <code>/usr/bin/skypeforlinux</code> в текстовом редакторе</p>
+</li>
+<li data-source-start="481" data-source-end="485">
+<p data-source-start="481" data-source-end="481">найти в нем строку</p>
+<div class="code-block" data-source-start="483" data-source-end="485"><pre tabindex="0" class="chroma"><code>nohup &#34;$SKYPE_PATH&#34; --executed-from=&#34;$(pwd)&#34; --pid=$$ &#34;$@&#34; &gt; &#34;$SKYPE_LOGS/skype-startup.log&#34; 2&gt;&amp;1 &amp;
+</code></pre></div>
+</li>
+<li data-source-start="487" data-source-end="493">
+<p data-source-start="487" data-source-end="487">превести ее к следующему виду</p>
+<div class="code-block" data-source-start="489" data-source-end="493"><pre tabindex="0" class="chroma"><code>XDG_CURRENT_DESKTOP=Unity
+nohup &#34;$SKYPE_PATH&#34; --executed-from=&#34;$(pwd)&#34; --pid=$$ &#34;$@&#34; &gt; &#34;$SKYPE_LOGS/skype-startup.log&#34; 2&gt;&amp;1 &amp;
+XDG_CURRENT_DESKTOP=MATE
+</code></pre></div>
+</li>
+</ul>
+<p data-source-start="495" data-source-end="495">Ответ нашел <a href="https://github.com/mate-desktop/mate-panel/issues/793" target="_blank" rel="noopener noreferrer nofollow">здесь</a></p>
+
+</article>
+</main>
+</body>
+</html>
